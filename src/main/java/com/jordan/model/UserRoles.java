@@ -16,8 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="UserRoles")
 public class UserRoles {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id @GeneratedValue
 	private int userId;
 	private String roleId;
-	Roles roles;
 }

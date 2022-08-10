@@ -14,17 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Users")
+@Table(name="users")
 public class User {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id 
+	@GeneratedValue
 	private int userId;
-	private String email;
+	private String username;
 	private String password;
 	private String firstName;
 	private String lastName;
 	private String phone;
-	Address address;
-	Orders order;
-	UserRoles userRole;
-	Payment payment;
+	private String role;
 }
