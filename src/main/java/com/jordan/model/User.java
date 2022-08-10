@@ -1,5 +1,30 @@
 package com.jordan.model;
 
-public class User {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name="Users")
+public class User {
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int userId;
+	private String email;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private String phone;
+	Address address;
+	Orders order;
+	UserRoles userRole;
+	Payment payment;
 }
