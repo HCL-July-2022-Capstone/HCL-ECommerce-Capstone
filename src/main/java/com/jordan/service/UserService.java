@@ -56,10 +56,6 @@ public class UserService implements UserDetailsService, UserDetails {
 		repo.deleteById(id);
 	}
 
-	public void addUser(User emp) {
-		repo.save(emp);
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

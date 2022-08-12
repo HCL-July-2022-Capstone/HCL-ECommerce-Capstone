@@ -2,7 +2,6 @@ package com.jordan.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,5 +17,5 @@ import lombok.NoArgsConstructor;
 public class UserRoles {
 	@Id @GeneratedValue
 	private int userId;
-	private String roleId;
+	private int roleId;
 }

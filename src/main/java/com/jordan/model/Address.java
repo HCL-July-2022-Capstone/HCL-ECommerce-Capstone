@@ -13,9 +13,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="roles")
-public class Roles {
-	@Id @GeneratedValue
-	private int roleId;
-	private String roleName;
+@Table(name="address")
+public class Address {
+	@Id 
+	@GeneratedValue
+	private int addressId;
+	private int userId;
+	private String street;
+	private String unit;
+	private String city;
+	private String state;
+	private String zipcode;
+	private String country;
 }
