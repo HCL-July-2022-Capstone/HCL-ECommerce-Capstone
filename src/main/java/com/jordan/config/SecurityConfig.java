@@ -2,6 +2,7 @@ package com.jordan.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.jordan.service.UserService;
 
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
@@ -32,13 +34,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //		.antMatchers("/user").hasAnyRole("ADMIN", "USER")
 //		.and().formLogin();
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/user/join").permitAll().and().authorizeRequests();
-	//	.antMatchers("/user/**", "/post/**").authenticated().and().httpBasic();
+//		http.authorizeRequests().antMatchers("/user/join").permitAll().and().authorizeRequests()
+//		.antMatchers("/user/**", "/post/**").authenticated().and().httpBasic();
+//		
+		http.authorizeRequests().antMatchers("/user/getAll").hasRole("ADMIN").and().formLogin();
 		
-		http.authorizeRequests().antMatchers("/user/getAll").permitAll().and().authorizeRequests();
+//		.defaultSuccessUrl("/user/getAll");
+//		
+//		http.authorizeRequests().antMatchers("/user/get/{id}").permitAll().and().authorizeRequests();
 		
-		http.authorizeRequests().antMatchers("/user/get/{id}").permitAll().and().authorizeRequests();
-		
+//		http.authorizeRequests()//.antMatchers("/user/getAll")
+//		.antMatchers("/user/getAll","/user/join","/user/get/{id}").permitAll();
+//		
+//		 http.authorizeRequests().antMatchers("/user/join").permitAll().and().authorizeRequests()
+//         .antMatchers("/user/**").authenticated().and().httpBasic().and().formLogin();
 	}
 	
 	@Bean

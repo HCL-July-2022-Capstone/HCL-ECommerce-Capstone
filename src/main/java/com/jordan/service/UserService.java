@@ -24,6 +24,7 @@ public class UserService implements UserDetailsService, UserDetails {
 	UserRepository repo;
 	private String username;
 	private String password;
+	private String role;
 	private List<GrantedAuthority> authorities;
 	
 	public UserService() {
@@ -33,6 +34,7 @@ public class UserService implements UserDetailsService, UserDetails {
 	public UserService(User user) {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
+		this.role = user.getRole();
 		this.authorities = Arrays.stream(user.getRole().split(","))
 				.map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 	}
@@ -59,7 +61,7 @@ public class UserService implements UserDetailsService, UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return authorities;
 	}
 
 	@Override
@@ -77,24 +79,24 @@ public class UserService implements UserDetailsService, UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

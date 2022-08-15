@@ -6,20 +6,20 @@ import java.util.Optional;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jordan.common.UserConstants;
 import com.jordan.model.User;
-import com.jordan.model.UserRoles;
 import com.jordan.repository.UserRepository;
 import com.jordan.service.UserService;
 
@@ -35,52 +35,32 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 public class UserController {
 	@Autowired
 	private UserRepository repo;
-	
+
 	@Autowired
 	private UserService service;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
-    private JavaMailSender javaMailSender;
-	
-	
-	
-//	@GetMapping("/")
-//	public String Home() {
-//		return "Home";
-//	}
+	private JavaMailSender javaMailSender;
+
 	@PostMapping("/join")
 	public String join(@RequestBody User user) {
-		//user.setRole("ADMIN");
+		user.setRole(UserConstants.ADMIN_ACCESS);
 		String encryptedPass = passwordEncoder.encode(user.getPassword());
-		
+
 		user.setPassword(encryptedPass);
-		
+
 		repo.save(user);
-		
+
 		emailSent(user.getUsername());
 		return "Hi " + user.getFirstName() + " Welcome to Group!";
 	}
-	
-	@PostMapping("/login")
-	public String login(@RequestBody User user) {
-		//user.setRole("ADMIN");
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();  
-		
-		Optional<User> temp = repo.findByUsername(user.getUsername());
-		
-		if(temp.isPresent()) {
-				
-		}
-		
-		encoder.matches(service.getPassword(), user.getPassword()); 
-		repo.save(user);
-		return "Hi " + user.getFirstName() + " Welcome to Group!";
-	}
-	
+
 	@GetMapping("/getAll")
+	@Secured("ROLE_ADMIN")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public List<User> listallusers() {
 		return service.getAllUsers();
 	}
@@ -90,22 +70,16 @@ public class UserController {
 		Optional<User> user = service.getUserById(id);
 		return service.getUserById(id);
 	}
-	
-//	@PutMapping("/users/{id}")
-//	public void updateUser(@PathVariable Integer id) {
-//		Optional<User> user = service.getUserById(id);
-//		repo.save(user);
-//	}
-	
+
+
 	@DeleteMapping("/get/{id}")
 	public void deleteUser(@PathVariable Integer id) {
 		service.deleteUser(id);
 	}
-	
-	
-    public void emailSent(String args) {
 
-        System.out.println("Sending Email...");
+	public void emailSent(String args) {
+
+		System.out.println("Sending Email...");
 
 //        try {
 //            sendEmail();
@@ -116,53 +90,53 @@ public class UserController {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        
-        sendEmail(args);
 
-        System.out.println("Done");
+		sendEmail(args);
 
-    }
+		System.out.println("Done");
 
-    void sendEmail(String args) {
+	}
 
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(args);
+	void sendEmail(String args) {
 
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo(args);
 
-        javaMailSender.send(msg);
+		msg.setSubject("Testing from Spring Boot");
+		msg.setText("Hello World \n Spring Boot Email");
 
-    }
+		javaMailSender.send(msg);
 
-    void sendEmailWithAttachment() throws MessagingException, IOException {
+	}
 
-        MimeMessage msg = javaMailSender.createMimeMessage();
+	void sendEmailWithAttachment() throws MessagingException, IOException {
 
-        // true = multipart message
-        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-        helper.setTo("1@gmail.com");
+		MimeMessage msg = javaMailSender.createMimeMessage();
 
-        helper.setSubject("Testing from Spring Boot");
+		// true = multipart message
+		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+		helper.setTo("1@gmail.com");
 
-        // default = text/plain
-        //helper.setText("Check attachment for image!");
+		helper.setSubject("Testing from Spring Boot");
 
-        // true = text/html
-        helper.setText("<h1>Check attachment for image!</h1>", true);
+		// default = text/plain
+		// helper.setText("Check attachment for image!");
 
-        //FileSystemResource file = new FileSystemResource(new File("classpath:android.png"));
+		// true = text/html
+		helper.setText("<h1>Check attachment for image!</h1>", true);
 
-        //Resource resource = new ClassPathResource("android.png");
-        //InputStream input = resource.getInputStream();
+		// FileSystemResource file = new FileSystemResource(new
+		// File("classpath:android.png"));
 
-        //ResourceUtils.getFile("classpath:android.png");
+		// Resource resource = new ClassPathResource("android.png");
+		// InputStream input = resource.getInputStream();
 
-        helper.addAttachment("my_photo.png", new ClassPathResource("ms1.png"));
+		// ResourceUtils.getFile("classpath:android.png");
 
-        javaMailSender.send(msg);
+		helper.addAttachment("my_photo.png", new ClassPathResource("ms1.png"));
 
-    }
+		javaMailSender.send(msg);
 
+	}
 
 }
