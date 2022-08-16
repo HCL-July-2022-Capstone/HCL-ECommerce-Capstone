@@ -45,7 +45,7 @@ public class UserController {
 	private JavaMailSender javaMailSender;
 
 	@PostMapping("/join")
-	public String join(@RequestBody User user) {
+	public String add(@RequestBody User user) {
 		user.setRole(UserConstants.ADMIN_ACCESS);
 		String encryptedPass = passwordEncoder.encode(user.getPassword());
 
@@ -57,10 +57,10 @@ public class UserController {
 		return "Hi " + user.getFirstName() + " Welcome to Group!";
 	}
 
-	@GetMapping("/getAll")
+	@GetMapping("/getAllUsers")
 	@Secured("ROLE_ADMIN")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-	public List<User> listallusers() {
+	public List<User> getAllUsers() {
 		return service.getAllUsers();
 	}
 

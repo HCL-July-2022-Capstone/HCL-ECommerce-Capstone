@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jordan.model.Cart;
 import com.jordan.model.Product;
 import com.jordan.model.ProductCategory;
-import com.jordan.model.User;
 import com.jordan.repository.CategoryRepository;
 import com.jordan.repository.ProductRepository;
 import com.jordan.service.ProductService;
@@ -34,7 +34,7 @@ public class ProductController {
 	@Autowired
 	private CategoryRepository catRepo;
 	
-	@GetMapping("/getAll")
+	@GetMapping("/getAllProducts")
 //	@Secured("ROLE_ADMIN")
 //	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public List<Product> listallproducts() {
@@ -50,13 +50,13 @@ public class ProductController {
 	
 	@GetMapping("/get/{id}")
 	public Optional<Product> getProductId(@PathVariable Integer id) {
-		Optional<Product> prod = service.getProductById(id);
+		//Optional<Product> prod = service.getProductById(id);
 		return service.getProductById(id);
 	}
 	
 	@PutMapping("/get/{id}")
-	public void UpdateProductId(@RequestBody Product product, @PathVariable Integer id) {
-		Optional<Product> prod = service.getProductById(id);
+	public void UpdateProductById(@RequestBody Product product, @PathVariable Integer id) {
+		//Optional<Product> prod = service.getProductById(id);
 		repo.save(product);
 	}
 	
@@ -73,4 +73,17 @@ public class ProductController {
 
 		return productCategory.getCategoryName() + " added to Categories!";
 	}
+	
+	@GetMapping("/category/{id}")
+	public Optional<ProductCategory> getProductCategoryById(@PathVariable Integer id) {
+		//Optional<ProductCategory> prod = service.getCategoryById(id);
+		return service.getCategoryById(id);
+	}
+	
+	@PutMapping("/category/{id}")
+	public void UpdateCategoryById(@RequestBody ProductCategory productCategory, @PathVariable Integer id) {
+		//Optional<ProductCategory> cat = service.getCategoryById(id);
+		catRepo.save(productCategory);
+	}
+	
 }
