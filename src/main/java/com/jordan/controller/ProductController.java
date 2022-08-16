@@ -56,8 +56,8 @@ public class ProductController {
 	
 	@PutMapping("/get/{id}")
 	public void UpdateProductId(@RequestBody Product product, @PathVariable Integer id) {
-//		Optional<Product> prod = service.getProductById(id);
-//		repo.save(prod);
+		Optional<Product> prod = service.getProductById(id);
+		repo.save(product);
 	}
 	
 	@GetMapping("/getAllCategories")
