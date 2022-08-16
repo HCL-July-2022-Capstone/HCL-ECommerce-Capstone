@@ -8,7 +8,6 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,7 +65,7 @@ public class UserController {
 	}
 
 	@GetMapping("/get/{id}")
-	public Optional<User> getEmpId(@PathVariable Integer id) {
+	public Optional<User> getUserId(@PathVariable Integer id) {
 		Optional<User> user = service.getUserById(id);
 		return service.getUserById(id);
 	}

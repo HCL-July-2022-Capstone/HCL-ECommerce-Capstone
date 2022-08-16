@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService, UserDetails {
 	public UserService(User user) {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
-		this.role = user.getRole();
+		this.setRole(user.getRole());
 		this.authorities = Arrays.stream(user.getRole().split(","))
 				.map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 	}
@@ -98,5 +98,13 @@ public class UserService implements UserDetailsService, UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }
