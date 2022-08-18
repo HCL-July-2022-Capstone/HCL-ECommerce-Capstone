@@ -1,8 +1,11 @@
 package com.jordan.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,4 +21,7 @@ public class Roles {
 	@Id @GeneratedValue
 	private int roleId;
 	private String roleName;
+	
+	@ManyToMany(mappedBy = "roles")
+	Set<User> user;
 }

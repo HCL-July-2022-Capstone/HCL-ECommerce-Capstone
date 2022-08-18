@@ -25,7 +25,6 @@ public class CartController {
 		return cart.getProducts();
 	}
 	
-
 	@PostMapping("/add")
 	public void addToCart(@RequestBody Product product) {
 		cart.addToCart(product);

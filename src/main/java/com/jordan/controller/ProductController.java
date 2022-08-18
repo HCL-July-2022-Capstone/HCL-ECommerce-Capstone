@@ -2,6 +2,7 @@ package com.jordan.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jordan.model.Cart;
 import com.jordan.model.Product;
 import com.jordan.model.ProductCategory;
 import com.jordan.repository.CategoryRepository;
@@ -43,7 +43,14 @@ public class ProductController {
 	
 	@PostMapping("/addProduct")
 	public String addProduct(@RequestBody Product product) {
-		repo.save(product);
+		
+		List<ProductCategory> allCategory = catRepo.findAll();
+				
+		ProductCategory category = catRepo.getReferenceById(79);
+		
+		product.setCategory(category);
+
+		product = repo.save(product);
 
 		return product.getProductName()+ " added to Inventory!";
 	}
@@ -67,10 +74,11 @@ public class ProductController {
 		return service.getAllCategories() ;
 	}
 	
+//	@Secured("ROLE_ADMIN")
+//	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@PostMapping("/addCategory")
 	public String addCategory(@RequestBody ProductCategory productCategory) {
 		catRepo.save(productCategory);
-
 		return productCategory.getCategoryName() + " added to Categories!";
 	}
 	
