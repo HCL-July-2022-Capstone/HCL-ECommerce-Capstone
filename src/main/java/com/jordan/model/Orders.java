@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -21,14 +23,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 @Entity
 @Table(name="orders")
 public class Orders {
 	@Id 
 	@GeneratedValue
 	private int orderId;
-	private int productId;
-//	private String orderNumber;
+//	private int productId;
+	private String orderNumber;
 	private float totalPrice;
 	private int totalQuantity;
 //	//private int userId;
@@ -38,7 +41,7 @@ public class Orders {
 	// one to many unidirectional mapping
     // default fetch type for OneToMany: LAZY
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId", referencedColumnName = "orderId")
+    @JoinColumn(name = "orderNumber", referencedColumnName = "orderId")
     private List<Product> product;
 	
     

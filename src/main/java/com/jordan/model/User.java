@@ -40,5 +40,9 @@ public class User {
 
 	@OneToMany(mappedBy = "userOrder")
 	private Set<Orders> order;
+	
+	public void addRole(Roles role) {
+		this.roles.add(role);
+	}
 
 }

@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordan.common.UserConstants;
+import com.jordan.model.Roles;
 import com.jordan.model.User;
+import com.jordan.repository.RoleRepository;
 import com.jordan.repository.UserRepository;
 import com.jordan.service.UserService;
 
@@ -37,6 +39,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 public class UserController {
 	@Autowired
 	private UserRepository repo;
+	private RoleRepository roleRepo;
 
 	@Autowired
 	private UserService service;
@@ -46,10 +49,20 @@ public class UserController {
 
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	Roles role;
 
 	@PostMapping("/join")
 	public String add(@RequestBody User user) {
 		user.setRole(UserConstants.ADMIN_ACCESS);
+		
+		role.setRoleName(UserConstants.ADMIN_ACCESS);
+		
+		roleRepo.save(role);
+		
+		user.addRole(role);
+		
 		String encryptedPass = passwordEncoder.encode(user.getPassword());
 
 		user.setPassword(encryptedPass);
@@ -87,7 +100,7 @@ public class UserController {
 	public void deleteUser(@PathVariable Integer id) {
 		service.deleteUser(id);
 	}
-
+	
 	public void emailSent(String args) {
 
 		System.out.println("Sending Email...");

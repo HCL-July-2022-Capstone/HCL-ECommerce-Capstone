@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordan.model.Cart;
+import com.jordan.model.Orders;
 import com.jordan.model.Product;
 
 @RestController
@@ -19,6 +20,9 @@ public class CartController {
 	
 	@Autowired
 	Cart cart;
+	
+	@Autowired
+	Orders order;
 	
 	@GetMapping("/view")
 	public List<Product> viewCart() {
@@ -33,5 +37,10 @@ public class CartController {
 	@DeleteMapping("/remove")
 	public void removeFromCart(@RequestBody Product product) {
 		cart.removeFromCart(product);
+	}
+	
+	@PostMapping("/checkout")
+	public void checkout() {
+		order.setProduct(cart.getProducts());
 	}
 }
