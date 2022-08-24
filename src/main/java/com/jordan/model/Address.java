@@ -1,6 +1,5 @@
 package com.jordan.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -33,10 +32,5 @@ public class Address {
 	@ManyToOne
     @JoinColumn(name="userId", nullable=false)
 	private User users;
-	
-	@ManyToOne
-    @JoinColumn(name="orderId", nullable=false)
-	private Orders order;
-	
-	
+		
 }

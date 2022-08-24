@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.jordan.model.User;
 import com.jordan.repository.UserRepository;
 
+@SuppressWarnings("serial")
 @Service
 public class UserService implements UserDetailsService, UserDetails {
 

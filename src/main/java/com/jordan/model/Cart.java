@@ -23,5 +23,17 @@ public class Cart {
 	public void removeFromCart(Product product) {
 		this.products.remove(product);
 	}
+	
+	public void emptyCart() {
+		this.products.clear();
+	}
+	
+	public boolean IsEmpty() {
+		return this.products.isEmpty();
+	}
+	
+	public List<Product> getCart() {
+		return this.products;
+	}
 
 }

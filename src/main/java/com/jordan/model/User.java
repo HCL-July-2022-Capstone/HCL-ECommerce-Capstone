@@ -19,9 +19,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
-	@Id 
+	@Id
 	@GeneratedValue
 	private int userId;
 	private String username;
@@ -30,20 +30,15 @@ public class User {
 	private String lastName;
 	private String phone;
 	private String role;
-	
+
 	@ManyToMany
-	@JoinTable(
-	  name = "users_roles", 
-	  joinColumns = @JoinColumn(name = "userId"), 
-	  inverseJoinColumns = @JoinColumn(name = "roleId"))
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
 	Set<Roles> roles;
-	
-	 @OneToMany(mappedBy="users")
-	    private Set<Address> address;
-	 
-	 @OneToMany(mappedBy="userOrder")
-	    private Set<Orders> order;
-	 
-	 @OneToMany(mappedBy="userPayment")
-	    private Set<Payment> payment;
+
+	@OneToMany(mappedBy = "users")
+	private Set<Address> address;
+
+	@OneToMany(mappedBy = "userOrder")
+	private Set<Orders> order;
+
 }

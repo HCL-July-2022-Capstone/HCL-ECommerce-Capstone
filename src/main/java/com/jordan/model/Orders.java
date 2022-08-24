@@ -1,8 +1,6 @@
 package com.jordan.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,10 +8,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,11 +41,10 @@ public class Orders {
     @JoinColumn(name = "productId", referencedColumnName = "orderId")
     private List<Product> product;
 	
+    
 	@ManyToOne
     @JoinColumn(name="userId", nullable=false)
+	@JsonIgnore
 	private User userOrder;
 	
-	@ManyToOne
-    @JoinColumn(name="addressId", nullable=false)
-	private Address address;
 }

@@ -55,15 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //		.antMatchers("/user").hasAnyRole("ADMIN", "USER")
 //		.and().formLogin();
 		http.csrf().disable();
-//		http.authorizeRequests().antMatchers("/user/join").permitAll().and().authorizeRequests()
-//		.antMatchers("/user/**", "/post/**").authenticated().and().httpBasic();
-//		
-		http.authorizeRequests().antMatchers("/user/getAll").hasRole("ADMIN").and().formLogin();
 		
-//		.defaultSuccessUrl("/user/getAll");
-//		
-//		http.authorizeRequests().antMatchers("/user/get/{id}").permitAll().and().authorizeRequests();
-		
+		http.authorizeRequests().antMatchers("/user/getAllUsers").hasRole("ADMIN")
+		.and().formLogin().defaultSuccessUrl("/create-new-session");
+				
 //		http.authorizeRequests()//.antMatchers("/user/getAll")
 //		.antMatchers("/user/getAll","/user/join","/user/get/{id}").permitAll();
 //		
