@@ -56,13 +56,7 @@ public class UserController {
 	@PostMapping("/join")
 	public String add(@RequestBody User user) {
 		user.setRole(UserConstants.ADMIN_ACCESS);
-		
-		role.setRoleName(UserConstants.ADMIN_ACCESS);
-		
-		roleRepo.save(role);
-		
-		user.addRole(role);
-		
+				
 		String encryptedPass = passwordEncoder.encode(user.getPassword());
 
 		user.setPassword(encryptedPass);
@@ -75,8 +69,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/getAllUsers")
-//	@Secured("ROLE_ADMIN")
-//	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	@Secured("ROLE_ADMIN")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public List<User> getAllUsers() {
 		return service.getAllUsers();
 	}
