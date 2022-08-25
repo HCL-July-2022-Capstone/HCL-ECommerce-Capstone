@@ -25,7 +25,6 @@ public class Product {
 	private String color;
 	private Float productPrice;
 	private int quantityOnHand;
-//	private int categoryId;
 		
 	@ManyToOne
     @JoinColumn(name="categoryId")

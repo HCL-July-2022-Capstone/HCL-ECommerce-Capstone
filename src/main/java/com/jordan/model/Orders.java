@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -25,29 +26,33 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Component
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 public class Orders {
-	@Id 
+	@Id
 	@GeneratedValue
 	private int orderId;
-//	private int productId;
 	private String orderNumber;
 	private float totalPrice;
 	private int totalQuantity;
-//	//private int userId;
-//	private int addressId;
 	private String orderStatus;
-	
+
 	// one to many unidirectional mapping
-    // default fetch type for OneToMany: LAZY
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderNumber", referencedColumnName = "orderId")
-    private List<Product> product;
-	
-    
+	// default fetch type for OneToMany: LAZY
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "orderNumber", referencedColumnName = "orderId")
+	private List<Product> product;
+
 	@ManyToOne
-    @JoinColumn(name="userId", nullable=false)
+	@JoinColumn(name = "userId")
 	@JsonIgnore
 	private User userOrder;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "shippingAddressId", referencedColumnName = "addressId")
+	private Address shippingAddress;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "billingAddressId", referencedColumnName = "addressId")
+	private Address billingAddress;
+
 }

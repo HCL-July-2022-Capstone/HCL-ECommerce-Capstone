@@ -35,9 +35,6 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
 	Set<Roles> roles;
 
-	@OneToMany(mappedBy = "users")
-	private Set<Address> address;
-
 	@OneToMany(mappedBy = "userOrder")
 	private Set<Orders> order;
 	

@@ -82,10 +82,8 @@ public class UserController {
 	
 	@PutMapping("/update/{id}")
 	public void UpdateProductById(@RequestBody User user, @PathVariable Integer id) {
-		
-		System.out.println(user);
+		user.setRole(UserConstants.ADMIN_ACCESS);
 		String encryptedPass = passwordEncoder.encode(user.getPassword());
-
 		user.setPassword(encryptedPass);
 		repo.save(user);
 	}
