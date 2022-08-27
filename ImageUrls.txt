@@ -13,3 +13,5 @@ https://res.cloudinary.com/jrdnlx/image/upload/v1661558223/products/apple_iphone
 https://res.cloudinary.com/jrdnlx/image/upload/v1661558306/products/laptop-xps-9520-t-black-gallery-5_jsngkh.png
 
 https://res.cloudinary.com/jrdnlx/image/upload/v1661558308/products/158791-laptops-review-razer-blade-14-review-image7-bdmxrnihng_wqqqn1.jpg
+
+https://res.cloudinary.com/jrdnlx/image/upload/v1661559190/products/ddr5-xpg-lancer-rgb_a1m6x2.png
