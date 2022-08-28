@@ -21,14 +21,9 @@ import lombok.NoArgsConstructor;
 public class Product {
 	@Id @GeneratedValue
 	private int productId;
+	private String categoryName;
+    	private String categoryId;
 	private String productName;
-	private String color;
-	private Float productPrice;
-	private int quantityOnHand;
-		
-	@ManyToOne
-    @JoinColumn(name="categoryId")
-	@JsonIgnore
-	private ProductCategory category;
-	
+	private float productPrice;
+	private int quantityOnHand;	
 }

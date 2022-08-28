@@ -33,23 +33,23 @@ public class ProductController {
 	@Autowired
 	private CategoryRepository catRepo;
 	
-	@GetMapping("/getAllProducts")
+	@PostMapping("/addProduct")
+	private String addProduct(@RequestBody Product product) {
+
+        product.setProductId(product.getProductId());
+        product.setCategoryId(product.getCategoryId());
+        product.setCategoryName(product.getCategoryName());
+        product.setProductName(product.getProductName());
+        product.setProductPrice(product.getProductPrice());
+        product.setQuantityOnHand(product.getQuantityOnHand());
+        repo.save(product);
+
+        return product.getProductName() + " has been added to inventory!";
+    }
+	
+	@PostMapping("/getAllProducts")
 	public List<Product> listallproducts() {
 		return service.getAllProducts();
-	}
-	
-	@PostMapping("/addProduct")
-	public String addProduct(@RequestBody Product product) {
-				
-		ProductCategory category = catRepo.getReferenceById(79);
-		
-		category.addProduct(product);
-		
-		product.setCategory(category);
-
-		product = repo.save(product);
-
-		return product.getProductName()+ " added to Inventory!";
 	}
 	
 	@GetMapping("/get/{id}")
@@ -58,9 +58,37 @@ public class ProductController {
 	}
 	
 	@PutMapping("/get/{id}")
-	public void UpdateProductById(@RequestBody Product product, @PathVariable Integer id) {
-		repo.save(product);
-	}
+	private ResponseEntity<Product> updateProductById(@PathVariable Integer id,
+                                                      @RequestBody Product product) {
+        Optional<Product> idOfProduct = repo.findById(id);
+
+        if (idOfProduct.isPresent()) { //if product id is in db
+
+            Product updateProduct = idOfProduct.get();
+
+            updateProduct.setCategoryId(product.getCategoryId());
+            updateProduct.setCategoryName(product.getCategoryName());
+            updateProduct.setProductName(product.getProductName());
+            updateProduct.setProductPrice(product.getProductPrice());
+            updateProduct.setQuantityOnHand(product.getQuantityOnHand());
+
+            return new ResponseEntity<>(repo.save(updateProduct),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+	//delete a product
+    @DeleteMapping("/deleteproduct/{id}")
+    private ResponseEntity<HttpStatus> delete(@PathVariable Integer id) {
+
+        try {
+            repo.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 	
 	@GetMapping("/getAllCategories")
 	public List<ProductCategory> listallCategories() {
