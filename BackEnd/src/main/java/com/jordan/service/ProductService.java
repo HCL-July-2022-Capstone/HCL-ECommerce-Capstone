@@ -44,5 +44,9 @@ public class ProductService {
 		CatRepo.deleteById(id);
 	}
 	
+	public void save(Product product) {
+		repo.save(product);
+	}
+	
 	
 }

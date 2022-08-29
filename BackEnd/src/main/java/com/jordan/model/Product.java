@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="product")
+@Table(name="products")
 public class Product {
 	@Id @GeneratedValue
 	private int productId;
@@ -28,7 +28,13 @@ public class Product {
 		
 	@ManyToOne
     @JoinColumn(name="categoryId")
-	@JsonIgnore
 	private ProductCategory category;
+	
+	public void decreaseStock(int n) {
+		this.quantityOnHand -= n;
+	}
+	public void decreaseStock() {
+		this.quantityOnHand -= 1;
+	}
 	
 }
