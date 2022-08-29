@@ -15,23 +15,23 @@ import lombok.NoArgsConstructor;
 @Component
 public class Cart {
 	private List<Product> products = new ArrayList<>();
-	
+
 	public void addToCart(Product product) {
 		this.products.add(product);
 	}
-	
+
 	public void removeFromCart(Product product) {
 		this.products.remove(product);
 	}
-	
+
 	public void emptyCart() {
 		this.products.clear();
 	}
-	
+
 	public boolean IsEmpty() {
 		return this.products.isEmpty();
 	}
-	
+
 	public List<Product> getCart() {
 		return this.products;
 	}

@@ -17,30 +17,30 @@ import com.jordan.model.Product;
 @RestController
 @RequestMapping("/cart")
 public class CartController {
-	
+
 	@Autowired
 	Cart cart;
-	
+
 	@Autowired
 	Orders order;
-	
+
 	@GetMapping("/view")
 	public List<Product> viewCart() {
 		return cart.getProducts();
 	}
-	
+
 	@PostMapping("/add")
 	public void addToCart(@RequestBody Product product) {
 		cart.addToCart(product);
 	}
-	
+
 	@DeleteMapping("/remove")
 	public void removeFromCart(@RequestBody Product product) {
 		cart.removeFromCart(product);
 	}
-	
-	@PostMapping("/checkout")
-	public void checkout() {
-		order.setProduct(cart.getProducts());
-	}
+
+//	@PostMapping("/checkout")
+//	public void checkout() {
+//		order.setProduct(cart.getProducts());
+//	}
 }

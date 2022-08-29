@@ -1,39 +1,28 @@
 package com.jordan.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import java.io.IOException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.jordan.common.UserConstants;
 import com.jordan.model.Roles;
 import com.jordan.model.User;
 import com.jordan.repository.RoleRepository;
 import com.jordan.repository.UserRepository;
 import com.jordan.service.UserService;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -72,14 +61,16 @@ public class UserController {
 	@Secured("ROLE_ADMIN")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public List<User> getAllUsers() {
+
 		return service.getAllUsers();
 	}
 	
 	@GetMapping("/get/{id}")
 	public Optional<User> getUserId(@PathVariable Integer id) {
+
 		return service.getUserById(id);
 	}
-	
+
 	@PutMapping("/update/{id}")
 	public void UpdateProductById(@RequestBody User user, @PathVariable Integer id) {
 		user.setRole(UserConstants.ADMIN_ACCESS);
@@ -90,9 +81,10 @@ public class UserController {
 
 	@DeleteMapping("/get/{id}")
 	public void deleteUser(@PathVariable Integer id) {
+
 		service.deleteUser(id);
 	}
-	
+
 	public void emailSent(String args) {
 
 		System.out.println("Sending Email...");
@@ -101,9 +93,7 @@ public class UserController {
 //            sendEmail();
 //          //  sendEmailWithAttachment();
 //
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
+//        } catch (MessagingException | IOException e) {
 //            e.printStackTrace();
 //        }
 
@@ -114,6 +104,7 @@ public class UserController {
 	}
 
 	void sendEmail(String args) {
+//		JavaMailSender javaMailSender = new JavaMailSender();
 
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(args);
@@ -126,6 +117,7 @@ public class UserController {
 	}
 
 	void sendEmailWithAttachment() throws MessagingException, IOException {
+//		JavaMailSender javaMailSender = new JavaMailSender();
 
 		MimeMessage msg = javaMailSender.createMimeMessage();
 

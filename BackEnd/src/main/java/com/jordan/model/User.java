@@ -1,25 +1,17 @@
 package com.jordan.model;
 
-import java.util.Set;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "inventory")
 public class User {
 	@Id
 	@GeneratedValue
@@ -35,8 +27,8 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
 	Set<Roles> roles;
 
-	@OneToMany(mappedBy = "userOrder")
-	private Set<Orders> order;
+//	@OneToMany(mappedBy = "userOrder")
+//	private Set<Orders> order;
 	
 	public void addRole(Roles role) {
 		this.roles.add(role);

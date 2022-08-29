@@ -1,21 +1,16 @@
 package com.jordan.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="address")
+@Table(name="address", schema = "inventory")
 public class Address {
 	@Id 
 	@GeneratedValue
@@ -27,8 +22,8 @@ public class Address {
 	private String zipcode;
 	private String country;
 	
-	@OneToOne
-    @PrimaryKeyJoinColumn
-    private Orders order;
+//	@OneToOne
+//    @PrimaryKeyJoinColumn
+//    private Orders order;
 		
 }

@@ -11,18 +11,18 @@ import com.jordan.repository.OrdersRepository;
 
 @Service
 public class OrdersService {
-	
+
 	@Autowired
 	private OrdersRepository repo;
-	
+
 	public List<Orders> getOrders(){
 		return repo.findAll();
 	}
-	
+
 	public Optional<Orders> getOrderById(int id){
 		return repo.findById(id);
 	}
-	
+
 	public void deleteOrder(int id) {
 		repo.deleteById(id);
 	}
