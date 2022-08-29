@@ -1,5 +1,6 @@
 package com.jordan.model;
 
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,21 +18,26 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import org.springframework.stereotype.Component;
+
 import lombok.Setter;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
 @Entity
+
 @Table(name = "orders")
 @Getter
 @Setter
+
 public class Orders {
 	@Id
 	@GeneratedValue
@@ -44,9 +50,9 @@ public class Orders {
 
 	// one to many unidirectional mapping
 	// default fetch type for OneToMany: LAZY
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "orderNumber", referencedColumnName = "orderId")
-	private List<Product> product;
+//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "orderNumber", referencedColumnName = "orderId")
+//	private List<Product> product;
 
 	@ManyToOne
 	@JoinColumn(name = "userId")

@@ -22,33 +22,33 @@ import com.jordan.service.CartService;
 @RestController
 @RequestMapping("/cart")
 public class CartController {
-	
+
 	@Autowired
 	Cart cart;
-	
+
 	@Autowired
 	Orders order;
-	
 	@Autowired
 	CartService cartService;
-	
 	@GetMapping("/view")
 	public List<Product> viewCart() {
 		return cart.getProducts();
 	}
-	
+
 	@PostMapping("/add")
 	public void addToCart(@RequestBody Product product) {
 		cart.addToCart(product);
 	}
-	
+
 	@DeleteMapping("/remove")
 	public void removeFromCart(@RequestBody Product product) {
 		cart.removeFromCart(product);
 	}
+
 	
 	@PostMapping("/checkout")
 	public void checkout(@AuthenticationPrincipal User principal) {
 		cartService.checkout(principal);
 	}
+
 }
