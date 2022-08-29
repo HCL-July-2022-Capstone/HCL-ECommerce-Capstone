@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,10 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordan.common.UserConstants;
+import com.jordan.model.Address;
 import com.jordan.model.Roles;
 import com.jordan.model.User;
+import com.jordan.repository.AddressRepository;
 import com.jordan.repository.RoleRepository;
 import com.jordan.repository.UserRepository;
+import com.jordan.service.EmailService;
 import com.jordan.service.UserService;
 
 import javax.mail.MessagingException;
@@ -39,33 +43,42 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 public class UserController {
 	@Autowired
 	private UserRepository repo;
+	
+	@Autowired
+	private AddressRepository addressRepo;
 	private RoleRepository roleRepo;
 
 	@Autowired
 	private UserService service;
 
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	private JavaMailSender javaMailSender;
+	private EmailService emailService;
 	
 	@Autowired
 	Roles role;
 
 	@PostMapping("/join")
-	public String add(@RequestBody User user) {
-		user.setRole(UserConstants.ADMIN_ACCESS);
-				
+	public String add(@RequestBody User user) {				
 		String encryptedPass = passwordEncoder.encode(user.getPassword());
-
 		user.setPassword(encryptedPass);
-
-		repo.save(user);
-
-		emailSent(user.getUsername());
 		
-		return "Hi " + user.getFirstName() + " Welcome to Group!";
+		repo.save(user);
+		emailService.sendRegistrationEmail(user);
+		
+		return "Hi " + user.getFirstName() + ", Welcome to Group!";
+	}
+	
+	@PostMapping("/addAddress")
+	public String addAddress(@RequestBody Address address, @AuthenticationPrincipal User principal) {	
+		//this works by getting an incomplete Address (one without a user attached)
+		//and attaching a user. idk if thats the right way to do things
+		address.setUser(principal);
+		addressRepo.save(address);
+		return "Added new address to user "+principal.getUsername();
 	}
 	
 	@GetMapping("/getAllUsers")
@@ -81,78 +94,33 @@ public class UserController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public void UpdateProductById(@RequestBody User user, @PathVariable Integer id) {
-		user.setRole(UserConstants.ADMIN_ACCESS);
-		String encryptedPass = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encryptedPass);
-		repo.save(user);
-	}
+	 public String updateUser(@PathVariable int id, @RequestBody User user) {
+		User toUpdate = service.getUserById(id).get();
+		if(toUpdate == null) {
+			return "User doesn't exist!";
+		}
+		else {
+			if(user.getUsername() != null) toUpdate.setUsername(user.getUsername());
+			if(user.getFirstName() != null) toUpdate.setFirstName(user.getFirstName());
+			if(user.getLastName()!= null) toUpdate.setLastName(user.getLastName());
+			if(user.getPhone()!= null)toUpdate.setPhone(user.getPhone());
+			if(user.getPassword()!= null) {
+				String encryptedPass = passwordEncoder.encode(user.getPassword());
+				toUpdate.setPassword(encryptedPass);
+			}
+			if(user.getRoles() != null) toUpdate.setRoles(user.getRoles());
+			repo.save(toUpdate);
+			return "Updated user "+user.getUsername();
+		}
+		
+	 }
 
 	@DeleteMapping("/get/{id}")
 	public void deleteUser(@PathVariable Integer id) {
 		service.deleteUser(id);
 	}
 	
-	public void emailSent(String args) {
 
-		System.out.println("Sending Email...");
-
-//        try {
-//            sendEmail();
-//          //  sendEmailWithAttachment();
-//
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-		sendEmail(args);
-
-		System.out.println("Done");
-
-	}
-
-	void sendEmail(String args) {
-
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(args);
-
-		msg.setSubject("Testing from Spring Boot");
-		msg.setText("Hello World \n Spring Boot Email");
-
-		javaMailSender.send(msg);
-
-	}
-
-	void sendEmailWithAttachment() throws MessagingException, IOException {
-
-		MimeMessage msg = javaMailSender.createMimeMessage();
-
-		// true = multipart message
-		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-		helper.setTo("1@gmail.com");
-
-		helper.setSubject("Testing from Spring Boot");
-
-		// default = text/plain
-		// helper.setText("Check attachment for image!");
-
-		// true = text/html
-		helper.setText("<h1>Check attachment for image!</h1>", true);
-
-		// FileSystemResource file = new FileSystemResource(new
-		// File("classpath:android.png"));
-
-		// Resource resource = new ClassPathResource("android.png");
-		// InputStream input = resource.getInputStream();
-
-		// ResourceUtils.getFile("classpath:android.png");
-
-		helper.addAttachment("my_photo.png", new ClassPathResource("ms1.png"));
-
-		javaMailSender.send(msg);
-
-	}
+	
 
 }

@@ -3,6 +3,7 @@ package com.jordan.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @NoArgsConstructor
@@ -27,9 +30,12 @@ import lombok.NoArgsConstructor;
 @Component
 @Entity
 @Table(name = "orders")
+@Getter
+@Setter
 public class Orders {
 	@Id
 	@GeneratedValue
+	@Column
 	private int orderId;
 	private String orderNumber;
 	private float totalPrice;

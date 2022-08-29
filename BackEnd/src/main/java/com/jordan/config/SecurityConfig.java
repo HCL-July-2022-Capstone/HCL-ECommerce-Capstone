@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import com.google.common.base.Predicates;
+import com.jordan.service.EmailService;
 import com.jordan.service.UserService;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -69,6 +70,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	@Bean
+	public EmailService emailService() {
+		return new EmailService();
 	}
 
 	

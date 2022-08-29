@@ -40,12 +40,12 @@ public class ProductController {
 	
 	@PostMapping("/addProduct")
 	public String addProduct(@RequestBody Product product) {
-				
-		ProductCategory category = catRepo.getReferenceById(79);
-		
-		category.addProduct(product);
-		
-		product.setCategory(category);
+//				
+//		ProductCategory category = catRepo.getReferenceById(79);
+//		
+//		category.addProduct(product);
+//		
+//		product.setCategory(category);
 
 		product = repo.save(product);
 
