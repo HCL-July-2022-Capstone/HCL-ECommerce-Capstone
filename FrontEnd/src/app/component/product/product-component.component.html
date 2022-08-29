@@ -1,0 +1,41 @@
+<h3 class="text-center">Products List</h3>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped table-bordered table-hover">
+            <!-- table header -->
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Category Id</th>
+                </tr>
+            </thead>
+            <!-- body -->
+            <tbody>
+                <!-- interpolate-->
+                <tr *ngFor="let productModel of productModel">
+                    <td>{{productModel.productId}}</td>
+                    <td>{{productModel.productName}}</td>
+                    <td>{{productModel.productDescription}}</td>
+                    <td>{{productModel.productPrice}}</td>
+                    <td>{{productModel.quantityOnHand}}</td>
+                    <td>{{productModel.categoryName}}</td>
+                    <td>{{productModel.categoryId}}</td>
+                </tr>
+<!--                 <tr *ngFor="let productModel of productModel; let i=index"> -->
+<!--                     <td>{{i+1}}</td> -->
+<!--                     <td> -->
+<!--                         <div *ngIf="productModel." -->
+<!--                     </td> -->
+<!--                 </tr> -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
