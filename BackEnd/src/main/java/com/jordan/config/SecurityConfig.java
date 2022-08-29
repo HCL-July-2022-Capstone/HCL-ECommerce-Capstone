@@ -12,8 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
-//
-//
+
+import com.google.common.base.Predicates;
+import com.jordan.service.EmailService;
+import com.jordan.service.UserService;
+
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @Configuration
 //@EnableSwagger2
 @EnableWebSecurity
@@ -63,6 +71,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	@Bean
+	public EmailService emailService() {
+		return new EmailService();
 	}
 
 	

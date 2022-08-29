@@ -20,8 +20,7 @@ public class ProductController {
     private ProductRepository repo;
     @Autowired
 	private ProductService service;
-//    @Autowired
-//	private CategoryRepository catRepo;
+
 
     //create new prouct
     @PostMapping("/addProduct")
@@ -93,4 +92,5 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

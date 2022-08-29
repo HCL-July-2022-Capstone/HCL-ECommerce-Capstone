@@ -13,6 +13,9 @@ import com.jordan.repository.OrdersRepository;
 public class OrdersService {
 
 	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
 	private OrdersRepository repo;
 
 	public List<Orders> getOrders(){
@@ -25,5 +28,10 @@ public class OrdersService {
 
 	public void deleteOrder(int id) {
 		repo.deleteById(id);
+	}
+	public int checkout(Orders order) {
+		repo.save(order);
+		emailService.sendConfirmationEmail(order);
+		return 0;
 	}
 }

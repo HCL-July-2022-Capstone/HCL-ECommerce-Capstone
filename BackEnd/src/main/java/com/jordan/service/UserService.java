@@ -1,7 +1,17 @@
 package com.jordan.service;
 
+
 import com.jordan.model.User;
 import com.jordan.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,23 +20,30 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-//@SuppressWarnings("serial")
+
+import com.jordan.model.Roles;
+import com.jordan.model.User;
+import com.jordan.repository.UserRepository;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@SuppressWarnings("serial")
+
 @Service
+@Getter
+@Setter
 public class UserService implements UserDetailsService, UserDetails {
 
 	@Autowired
 	UserRepository repo;
 	private String username;
 	private String password;
-	private String role;
-	private List<GrantedAuthority> authorities;
 
+	private Set<Roles> roles;
+	private List<SimpleGrantedAuthority> authorities;
+	
 	public UserService() {
 
 	}
@@ -34,9 +51,10 @@ public class UserService implements UserDetailsService, UserDetails {
 	public UserService(User user) {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
-		this.setRole(user.getRole());
-		this.authorities = Arrays.stream(user.getRole().split(","))
-				.map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+		this.setRoles(user.getRoles());
+		List<SimpleGrantedAuthority> getAuthorities = new ArrayList<SimpleGrantedAuthority>();
+		roles.stream().forEach(role -> getAuthorities.add(new SimpleGrantedAuthority(role.getRoleName())));
+		authorities = getAuthorities;
 	}
 
 	@Override
@@ -99,12 +117,10 @@ public class UserService implements UserDetailsService, UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
-	public String getRole() {
-		return role;
+	
+	public User findByUsername(String username) {
+		return repo.findByUsername(username).get();
 	}
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+
 }

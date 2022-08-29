@@ -11,7 +11,8 @@ import java.sql.Blob;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(schema = "inventory", name = "Product")
+
+@Table(schema = "inventory", name = "Products")
 public class Product {
 
     @Id
@@ -20,8 +21,6 @@ public class Product {
     private int productId;
     @Column(name = "CategoryName")
     private String categoryName;
-    @Column(name = "CategoryId")
-    private String categoryId;
     @Column(name = "ProductName")
     private String productName;
     @Column(name = "ProductPrice")
@@ -32,5 +31,13 @@ public class Product {
     private String productDescription;
     @Column(name = "Image")
     private String image;
+    
+    	public void decreaseStock(int n) {
+		this.quantityOnHand -= n;
+	}
+	public void decreaseStock() {
+		this.quantityOnHand -= 1;
+	}
+
 
 }
