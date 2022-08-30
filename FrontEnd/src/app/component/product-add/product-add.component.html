@@ -1,68 +1,77 @@
 <div>
     <div class="submit-form">
-        <!--         <div *ngIf="!added"> -->
-        <div class="form-group">
-
-            <!--         <label for="id">Id</label> -->
-            <!--         <input id="id" #id/> -->
-
-            <!--         <label for="nm">Name</label> -->
-            <!--         <input id="nm" #nm/> -->
-
-            <!--         <label for="desc">Id</label> -->
-            <!--         <input id="desc" #desc/> -->
-
-            <!--         <label for="pr">Id</label> -->
-            <!--         <input id="pr" #pr/> -->
-
-            <!--         <label for="q">Id</label> -->
-
-            <!--         <input id="q" #q/> -->
-
-            <!--         <label for="cn">Id</label> -->
-            <!--         <input id="cn" #cn/> -->
-
-            <!--         <label for="ci">Id</label> -->
-            <!--         <input id="ci" #ci/> -->
-            <!--         <button type="button" class="add" (click)="addProduct(id.valueAsNumber, nm.value, desc.value, -->
-            <!--                     pr.valueAsNumber, q.valueAsNumber, cn.value, ci.valueAsNumber); -->
-            <!--                     addProduct(0, '','',0, 0, '', 0)"> -->
-            <!--             Add New Product -->
-            <!--         </button> -->
-            <!--         </div> -->
-            <div class="form-group">
-                <label for="productName">Product Name</label>
-                <input type="text" class="form-control"
-                       id="productName" required [(ngModel)]="newProduct.productName"
-                       name="productName"/>
-            </div>
-            <div class="form-group">
-                <label for="productDescription">Product Description</label>
-                <input type="text" class="form-control"
-                       id="productDescription" required [(ngModel)]="newProduct.productDescription"
-                       name="productDescription"/>
-            </div>
-            <div class="form-group">
-                <label for="productPrice">Product Price</label>
-                <input type="text" class="form-control"
-                       id="productPrice" required [(ngModel)]="newProduct.productPrice"
-                       name="productPrice"/>
-            </div>
-            <div class="form-group">
-                <label for="quantityOnHand">Quantity</label>
-                <input type="text" class="form-control"
-                       id="quantityOnHand" required [(ngModel)]="newProduct.quantityOnHand"
-                       name="quantityOnHand"/>
-            </div>
-            <div class="form-group">
-                <label for="categoryName">Category Name</label>
-                <input type="text" class="form-control"
-                       id="categoryName" required [(ngModel)]="newProduct.categoryName"
-                       name="categoryName"/>
-            </div>
-            <!--         <div *ngIf="added"> -->
-<!--             <h4>Yosh!</h4> -->
+      <form class="form-group" onsubmit>
+        <div>
+          <label for="productId">Product Id</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productId"
+            required
+            [(ngModel)]="newProduct.productId"
+            name="productId"
+          />
         </div>
-        <button class="btn btn-success" (click)="newProductModel()">Add</button>
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productName"
+            required
+            [(ngModel)]="newProduct.productName"
+            name="productName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="productDescription">Product Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productDescription"
+            required
+            [(ngModel)]="newProduct.productDescription"
+            name="productDescription"
+          />
+        </div>
+        <div class="form-group">
+          <label for="productPrice">Product Price</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productPrice"
+            required
+            [(ngModel)]="newProduct.productPrice"
+            name="productPrice"
+          />
+        </div>
+        <div class="form-group">
+          <label for="quantityOnHand">Quantity</label>
+          <input
+            type="text"
+            class="form-control"
+            id="quantityOnHand"
+            required
+            [(ngModel)]="newProduct.quantityOnHand"
+            name="quantityOnHand"
+          />
+        </div>
+        <div class="form-group">
+          <label for="categoryName">Category Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="categoryName"
+            required
+            [(ngModel)]="newProduct.categoryName"
+            name="categoryName"
+          />
+        </div>
+        <!--         <div *ngIf="added"> -->
+        <!--             <h4>Yosh!</h4> -->
+      </form>
+      <button type="submit" (click)="onSubmit()" class="btn btn-success">
+        Add
+      </button>
     </div>
-</div>
+  </div>

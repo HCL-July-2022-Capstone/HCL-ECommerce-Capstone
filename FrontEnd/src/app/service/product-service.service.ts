@@ -27,13 +27,11 @@ export class ProductServiceService {
     }
 
     //Step 1 Post: add method //step 2 in component
-    addProduct(productModel: ProductModel): Observable<ProductModel> {
-        return this.http.post<ProductModel>(`${this.baseUrl}/products/addProduct`,
-            productModel, this.httpOptions).pipe(
-            tap((newProduct: ProductModel) =>
-                console.log(`added id=${newProduct.productId}`))
-        );
-    }
+    addProduct(productModel: ProductModel) {
+        this.http
+          .post<ProductModel>(`${this.baseUrl}/products/addProduct`, productModel)
+          .subscribe((response) => console.log(response));
+      } 
 
     //In progress: update
     updateProductById(productModel: ProductModel | undefined): Observable<any> {
