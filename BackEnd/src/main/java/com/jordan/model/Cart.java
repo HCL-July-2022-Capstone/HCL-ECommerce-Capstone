@@ -49,6 +49,7 @@ public class Cart {
 	joinColumns = @JoinColumn(name = "cartId"),
 	inverseJoinColumns = @JoinColumn(name = "productId")
 	)
+
 	private List<Product> products;
 	
 	public List<Product> getProducts(){
@@ -56,22 +57,23 @@ public class Cart {
 		logger.warn("Getting products from cart");
 		return products;
 	}
+
 	public void addToCart(Product product) {
 		this.products.add(product);
 	}
-	
+
 	public void removeFromCart(Product product) {
 		this.products.remove(product);
 	}
-	
+
 	public void emptyCart() {
 		this.products.clear();
 	}
-	
+
 	public boolean IsEmpty() {
 		return this.products.isEmpty();
 	}
-	
+
 	public List<Product> getCart() {
 		return this.products;
 	}

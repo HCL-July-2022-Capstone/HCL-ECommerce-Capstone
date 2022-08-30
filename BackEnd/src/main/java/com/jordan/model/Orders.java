@@ -1,6 +1,8 @@
 package com.jordan.model;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,22 +25,28 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jordan.service.CartService;
 
+import com.jordan.service.CartService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import org.springframework.stereotype.Component;
+
 import lombok.Setter;
+
 
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
 @Entity
+
 @Table(name = "orders")
 @Getter
 @Setter
+
 public class Orders {
 	@Id
 	@GeneratedValue
@@ -47,12 +55,14 @@ public class Orders {
 	private float totalPrice;
 	private String orderStatus;
 
+
 	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "orders_products",	
 	joinColumns = @JoinColumn(name = "orderId"),
 	inverseJoinColumns = @JoinColumn(name = "productId")
 	)
 	private List<Product> products;
+
 
 
 	@OneToOne(cascade = CascadeType.ALL)
