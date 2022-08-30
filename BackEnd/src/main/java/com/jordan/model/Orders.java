@@ -52,7 +52,7 @@ public class Orders {
 	joinColumns = @JoinColumn(name = "orderId"),
 	inverseJoinColumns = @JoinColumn(name = "productId")
 	)
-	private List<Product> products;
+	private List<Product> products = new ArrayList<Product>();
 
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -74,5 +74,9 @@ public class Orders {
 		Logger logger = LoggerFactory.getLogger(Orders.class);
 		this.products = products;
 		logger.warn("Set Products");
+	}
+	
+	public void addProduct(Product product) {
+		products.add(product);
 	}
 }
