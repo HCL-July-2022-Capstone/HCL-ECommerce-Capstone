@@ -21,7 +21,6 @@ public class ProductController {
     @Autowired
 	private ProductService service;
 
-
     //create new prouct
     @PostMapping("/addProduct")
     private String addProduct(@RequestBody Product product) {

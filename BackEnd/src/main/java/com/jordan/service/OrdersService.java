@@ -29,9 +29,10 @@ public class OrdersService {
 	public void deleteOrder(int id) {
 		repo.deleteById(id);
 	}
-	public int checkout(Orders order) {
+
+	public void save(Orders order) {
 		repo.save(order);
-		emailService.sendConfirmationEmail(order);
-		return 0;
+		
 	}
+
 }

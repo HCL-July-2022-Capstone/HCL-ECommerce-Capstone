@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jordan.model.User;
 
 import lombok.AllArgsConstructor;
@@ -59,6 +60,7 @@ public class Address {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
+	@JsonBackReference
 	private User user;
 		
 }
