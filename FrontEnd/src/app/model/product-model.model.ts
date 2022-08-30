@@ -5,7 +5,6 @@ export interface ProductModel {
   productPrice: number;
   quantityOnHand: number;
   categoryName: string;
-  categoryId: number;
   // image!: string;
 
   // constructor(productId: number, productName: string, productDescription: string,

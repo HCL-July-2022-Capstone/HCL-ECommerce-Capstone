@@ -23,12 +23,12 @@ export class ProductServiceService {
 
     //Step 1 Get: list method //step 2 in component
     listAllProducts(): Observable<ProductModel[]> { //return type observables
-        return this.http.get<ProductModel[]>(`${this.baseUrl}/products/getallproducts`); //returns array of products
+        return this.http.get<ProductModel[]>(`${this.baseUrl}/products/getAllProducts`); //returns array of products
     }
 
     //Step 1 Post: add method //step 2 in component
     addProduct(productModel: ProductModel): Observable<ProductModel> {
-        return this.http.post<ProductModel>(`${this.baseUrl}/products/addproduct`,
+        return this.http.post<ProductModel>(`${this.baseUrl}/products/addProduct`,
             productModel, this.httpOptions).pipe(
             tap((newProduct: ProductModel) =>
                 console.log(`added id=${newProduct.productId}`))

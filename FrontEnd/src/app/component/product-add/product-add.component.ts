@@ -18,7 +18,7 @@ export class ProductAddComponent implements OnInit {
         productPrice: 0,
         quantityOnHand: 0,
         categoryName: '',
-        categoryId: 0
+
     };
     added = false;
 
@@ -36,7 +36,6 @@ export class ProductAddComponent implements OnInit {
             productPrice: this.newProduct.productPrice,
             quantityOnHand: this.newProduct.quantityOnHand,
             categoryName: this.newProduct.categoryName,
-            categoryId: this.newProduct.categoryId
         };
 
         // addProduct(productId: number, productName: string, productDescription: string,
@@ -67,7 +66,6 @@ export class ProductAddComponent implements OnInit {
             productPrice: 0,
             quantityOnHand: 0,
             categoryName: '',
-            categoryId: 0
         }
     }
 }

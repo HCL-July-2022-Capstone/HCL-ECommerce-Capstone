@@ -26,9 +26,10 @@ public class Product {
 	@Id @GeneratedValue
 	private int productId;
 	private String productName;
-	private String color;
+	private String productDescription;
 	private Float productPrice;
 	private int quantityOnHand;
+	private String categoryName;
 		
 	@ManyToOne
     @JoinColumn(name="categoryId")
