@@ -1,9 +1,5 @@
 package com.jordan.service;
 
-
-import com.jordan.model.User;
-import com.jordan.repository.UserRepository;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,8 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
-
 import com.jordan.model.Roles;
 import com.jordan.model.User;
 import com.jordan.repository.UserRepository;
@@ -30,7 +24,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @SuppressWarnings("serial")
-
 @Service
 @Getter
 @Setter
@@ -40,14 +33,14 @@ public class UserService implements UserDetailsService, UserDetails {
 	UserRepository repo;
 	private String username;
 	private String password;
-
 	private Set<Roles> roles;
 	private List<SimpleGrantedAuthority> authorities;
+
 	
 	public UserService() {
-
+		
 	}
-
+	
 	public UserService(User user) {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
@@ -56,20 +49,28 @@ public class UserService implements UserDetailsService, UserDetails {
 		roles.stream().forEach(role -> getAuthorities.add(new SimpleGrantedAuthority(role.getRoleName())));
 		authorities = getAuthorities;
 	}
+	
+	public void save(User user) {
+		repo.save(user);
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 		Optional<User> user = repo.findByUsername(username);
 		return user.map(UserService::new).orElseThrow(()-> new UsernameNotFoundException(username + "none"));
 	}
-
-
+	
+	
 	public List<User> getAllUsers() {
 		return repo.findAll();
 	}
 
 	public Optional<User> getUserById(int id) {
 		return repo.findById(id);
+	}
+	
+	public Optional<User> getUserByUsername(String username){
+		return repo.findByUsername(username);
 	}
 
 	public void deleteUser(int id) {

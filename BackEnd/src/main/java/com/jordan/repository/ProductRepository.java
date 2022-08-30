@@ -1,16 +1,12 @@
 package com.jordan.repository;
 
-import com.jordan.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import java.util.List;
-import java.util.Optional;
 
-@Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
-        //all products
-        List<Product> findAll();
+import com.jordan.model.Product;
 
-        Optional<Product> findByProductName(String productName);
-        Optional<Product> searchByProductName(String productName);
+public interface ProductRepository extends JpaRepository<Product, Integer>{
+	
+//	@Modifying
+//	@Query("update User u set u.firstname = ?1, u.lastname = ?2 where u.id = ?3")
+//	void setUserInfoById(String firstname, String lastname, Integer userId);
 }

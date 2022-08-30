@@ -1,6 +1,5 @@
 package com.jordan.controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -30,23 +29,15 @@ import com.jordan.repository.RoleRepository;
 import com.jordan.repository.UserRepository;
 import com.jordan.service.EmailService;
 import com.jordan.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -94,16 +85,14 @@ public class UserController {
 	@Secured("ROLE_ADMIN")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public List<User> getAllUsers() {
-
 		return service.getAllUsers();
 	}
 	
 	@GetMapping("/get/{id}")
 	public Optional<User> getUserId(@PathVariable Integer id) {
-
 		return service.getUserById(id);
 	}
-
+	
 	@PutMapping("/update/{id}")
 	 public String updateUser(@PathVariable int id, @RequestBody User user) {
 		User toUpdate = service.getUserById(id).get();
@@ -128,8 +117,10 @@ public class UserController {
 
 	@DeleteMapping("/get/{id}")
 	public void deleteUser(@PathVariable Integer id) {
-
 		service.deleteUser(id);
 	}
+	
+
+	
 
 }
