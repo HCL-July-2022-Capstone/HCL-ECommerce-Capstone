@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.NaturalId;
 
 import com.jordan.model.Cart;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jordan.model.Address;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -59,8 +60,9 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
 	Set<Roles> roles;
 
-	@OneToMany(mappedBy = "userOrder", cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-	private Set<Orders> order;
+	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+	@JsonManagedReference
+	private Set<Orders> orders;
 	
 	@OneToMany(mappedBy = "user",cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<Address> addresses = new HashSet<>();
@@ -71,6 +73,11 @@ public class User {
 	
 	public Cart getCart() {
 		return cart;
+	}
+	
+	public void addOrder(Orders order) {
+		order.setUser(this);
+		this.orders.add(order);
 	}
 	
 	

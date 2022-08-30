@@ -35,6 +35,7 @@ public class UserService implements UserDetailsService, UserDetails {
 	private String password;
 	private Set<Roles> roles;
 	private List<SimpleGrantedAuthority> authorities;
+
 	
 	public UserService() {
 		
@@ -47,6 +48,10 @@ public class UserService implements UserDetailsService, UserDetails {
 		List<SimpleGrantedAuthority> getAuthorities = new ArrayList<SimpleGrantedAuthority>();
 		roles.stream().forEach(role -> getAuthorities.add(new SimpleGrantedAuthority(role.getRoleName())));
 		authorities = getAuthorities;
+	}
+	
+	public void save(User user) {
+		repo.save(user);
 	}
 
 	@Override
@@ -62,6 +67,10 @@ public class UserService implements UserDetailsService, UserDetails {
 
 	public Optional<User> getUserById(int id) {
 		return repo.findById(id);
+	}
+	
+	public Optional<User> getUserByUsername(String username){
+		return repo.findByUsername(username);
 	}
 
 	public void deleteUser(int id) {

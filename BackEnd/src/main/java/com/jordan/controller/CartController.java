@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,31 +25,25 @@ import com.jordan.service.CartService;
 public class CartController {
 	
 	@Autowired
-	Cart cart;
-	
-	@Autowired
-	Orders order;
-	
-	@Autowired
 	CartService cartService;
 	
 	@GetMapping("/view")
-	public List<Product> viewCart() {
-		return cart.getProducts();
+	public List<Product> viewCart(Principal principal) {
+		return cartService.viewCart(principal.getName());
 	}
 	
-	@PostMapping("/add")
-	public void addToCart(@RequestBody Product product) {
-		cart.addToCart(product);
+	@PostMapping("/add/{id}")
+	public void addToCart(Principal principal, @PathVariable int id) {
+		cartService.addToCart(principal.getName(), id);
 	}
 	
-	@DeleteMapping("/remove")
-	public void removeFromCart(@RequestBody Product product) {
-		cart.removeFromCart(product);
+	@DeleteMapping("/remove/{id}")
+	public void removeFromCart(Principal principal, @PathVariable int id) {
+		cartService.removeFromCart(principal.getName(), id);
 	}
 	
 	@PostMapping("/checkout")
-	public void checkout(@AuthenticationPrincipal User principal) {
-		cartService.checkout(principal);
+	public void checkout(Principal principal) {
+		cartService.checkout(principal.getName());
 	}
 }

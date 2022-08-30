@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.jordan.model.Product;
@@ -33,8 +35,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
-@Getter
-@Setter
 @Entity
 @Table(name = "carts")
 public class Cart {
@@ -46,15 +46,16 @@ public class Cart {
 	
 	@ManyToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinTable(name = "carts_products",
-	joinColumns = @JoinColumn(name = "cart_id"),
-	inverseJoinColumns = @JoinColumn(name = "product_id")
+	joinColumns = @JoinColumn(name = "cartId"),
+	inverseJoinColumns = @JoinColumn(name = "productId")
 	)
-	private List<Product> products = new ArrayList<>();
+	private List<Product> products;
 	
-	@OneToOne(mappedBy = "cart")
-	private User user;
-	
-	
+	public List<Product> getProducts(){
+		Logger logger = LoggerFactory.getLogger(Cart.class);
+		logger.warn("Getting products from cart");
+		return products;
+	}
 	public void addToCart(Product product) {
 		this.products.add(product);
 	}
@@ -79,8 +80,6 @@ public class Cart {
 		return products.stream().map(i -> i.getProductPrice()).reduce((float)0, (a,b) -> a+b);
 	}
 	
-	public User getUser() {
-		return user;
-	}
+
 
 }

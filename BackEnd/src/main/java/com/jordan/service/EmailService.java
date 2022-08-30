@@ -45,9 +45,8 @@ public class EmailService {
 		mailSender.send(msg);
 	}
 	
-	void sendConfirmationEmail(Orders order) {
+	void sendConfirmationEmail(User user, Orders order) {
 		SimpleMailMessage msg = new SimpleMailMessage();
-		User user = order.getUserOrder();
 		msg.setTo(user.getUsername());
 		msg.setSubject("Order #"+order.getOrderId());
 		msg.setText("Your order has been placed. Total: "+order.getTotalPrice());
