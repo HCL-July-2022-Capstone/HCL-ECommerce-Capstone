@@ -8,7 +8,6 @@ import { ProductModel } from '../model/product-model.model';
   providedIn: 'root',
 })
 export class ProductServiceService {
-
   //to invoke as parameter inside get method
   private baseUrl = 'http://localhost:8080';
   httpOptions = {
@@ -21,7 +20,7 @@ export class ProductServiceService {
   listAllProducts(): Observable<ProductModel[]> {
     //return type observables
     return this.http.get<ProductModel[]>(
-      `${this.baseUrl}/products/getallproducts`
+      `${this.baseUrl}/products/getAllProducts`
     ); //returns array of products
   }
 
@@ -50,10 +49,9 @@ export class ProductServiceService {
   //delete
   deleteById(id: number): void {
     this.http
-      .delete<ProductModel>(`${this.baseUrl}/products/deleteproduct/${id}`)
+      .delete<ProductModel>(`${this.baseUrl}/products/delete/${id}`)
       .subscribe((response) => {
         console.log(response);
       });
   }
-
 }

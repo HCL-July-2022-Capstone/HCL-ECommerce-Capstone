@@ -32,6 +32,7 @@ public class Product {
 	private Float productPrice;
 	private int quantityOnHand;
 	private String categoryName;
+	private String image;
 		
 	@ManyToOne
     @JoinColumn(name="categoryId")
