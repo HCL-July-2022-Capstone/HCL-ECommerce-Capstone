@@ -17,7 +17,6 @@ export class ProductAddComponent implements OnInit {
     productPrice: 0,
     quantityOnHand: 0,
     categoryName: '',
-    // categoryId: 0,
     image: '',
   };
   added = false;
@@ -38,36 +37,7 @@ export class ProductAddComponent implements OnInit {
       image: this.newProduct.image,
     };
 
-    // addProduct(productId: number, productName: string, productDescription: string,
-    //            productPrice: number, quantityOnHand: number, categoryName: string,
-    //            categoryId: number)
-    // {
     console.log(data);
     this.productService.addProduct(data);
-    // .subscribe((productModel) => {
-    // // console.log(any);
-    //     this.productModel.push(this.newProduct);
-    //     this.added = true;
-    // return this.productService.addProduct({
-    //     productId, productName,
-    //     productDescription, productPrice, quantityOnHand, categoryName, categoryId
-    // } as ProductModel)
-    //     .subscribe((productModel) => {
-    //         this.productModel.push(productModel) //post methods need to be pushed
-    //     });
-  }
-
-  newProductModel(): void {
-    this.added = false;
-    this.newProduct = {
-      productId: 0,
-      productName: '',
-      productDescription: '',
-      productPrice: 0,
-      quantityOnHand: 0,
-      categoryName: '',
-      // categoryId: 0,
-      image: '',
-    };
   }
 }
