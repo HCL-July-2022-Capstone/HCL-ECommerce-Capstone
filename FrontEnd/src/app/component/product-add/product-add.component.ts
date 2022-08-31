@@ -1,23 +1,25 @@
-import { Component, OnInit } from "@angular/core";
-import { ProductModel } from "../../model/product-model.model";
-import { ProductServiceService } from "../../service/product-service.service";
+
+import { Component, OnInit } from '@angular/core';
+import { ProductModel } from '../../model/product-model.model';
+import { ProductServiceService } from '../../service/product-service.service';
 
 @Component({
-  selector: "app-product-add",
-  templateUrl: "./product-add.component.html",
-  styleUrls: ["./product-add.component.css"],
+  selector: 'app-product-add',
+  templateUrl: './product-add.component.html',
+  styleUrls: ['./product-add.component.css'],
 })
 export class ProductAddComponent implements OnInit {
   productModel: ProductModel[] = [];
   //for adding
   newProduct: ProductModel = {
     productId: 0,
-    productName: "",
-    productDescription: "",
+
+    productName: '',
+    productDescription: '',
     productPrice: 0,
     quantityOnHand: 0,
-    categoryName: "",
-
+    categoryName: '',
+    image: '',
   };
   added = false;
 
@@ -26,7 +28,7 @@ export class ProductAddComponent implements OnInit {
   ngOnInit(): void {}
 
   // //step 2: function add product from service //step 1 is in service
-  onSubmit(): void {
+  saveProduct(): void {
     const data = {
       productId: this.newProduct.productId,
       productName: this.newProduct.productName,
@@ -34,27 +36,11 @@ export class ProductAddComponent implements OnInit {
       productPrice: this.newProduct.productPrice,
       quantityOnHand: this.newProduct.quantityOnHand,
       categoryName: this.newProduct.categoryName,
-
+      image: this.newProduct.image,
     };
 
-    // addProduct(productId: number, productName: string, productDescription: string,
-    //            productPrice: number, quantityOnHand: number, categoryName: string,
-    //            categoryId: number)
-    // {
     console.log(data);
     this.productService.addProduct(data);
   }
-
-  newProductModel(): void {
-    this.added = false;
-    this.newProduct = {
-      productId: 0,
-      productName: "",
-      productDescription: "",
-      productPrice: 0,
-      quantityOnHand: 0,
-      categoryName: "",
-
-    };
-  }
 }
+

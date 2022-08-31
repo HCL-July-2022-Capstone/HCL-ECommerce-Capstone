@@ -23,7 +23,9 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.jordan.service.CartService;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,12 +49,14 @@ public class Orders {
 	private float totalPrice;
 	private String orderStatus;
 
+
 	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "orders_products",	
 	joinColumns = @JoinColumn(name = "orderId"),
 	inverseJoinColumns = @JoinColumn(name = "productId")
 	)
 	private List<Product> products = new ArrayList<Product>();
+
 
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -75,8 +79,9 @@ public class Orders {
 		this.products = products;
 		logger.warn("Set Products");
 	}
-	
+
 	public void addProduct(Product product) {
 		products.add(product);
 	}
+
 }

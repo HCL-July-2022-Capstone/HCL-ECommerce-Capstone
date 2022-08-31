@@ -19,9 +19,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 @Table(name="products")
 @Getter
 @Setter
+
 public class Product {
 	@Id @GeneratedValue
 	private int productId;

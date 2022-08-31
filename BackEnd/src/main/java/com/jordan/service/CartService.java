@@ -67,7 +67,9 @@ public class CartService {
 		Cart cart = user.getCart();
 		Orders order = new Orders();
 		//build order from cart
+
 		cart.getProducts().forEach(product -> order.addProduct(product));
+
 		logger.warn("Getting products "+cart.getProducts().get(0).getProductName());
 		logger.warn("Set products to "+order.getProducts().get(0).getProductName());
 		order.setTotalPrice(cart.getTotalPrice());

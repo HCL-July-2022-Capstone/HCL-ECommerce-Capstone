@@ -5,7 +5,10 @@ export interface ProductModel {
   productPrice: number;
   quantityOnHand: number;
   categoryName: string;
-  // image!: string;
+
+  // categoryId: number;
+  image: string;
+
 
   // constructor(productId: number, productName: string, productDescription: string,
   //             productPrice: number, quantityOnHand: number, categoryName: string,
