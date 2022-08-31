@@ -12,7 +12,8 @@
           <th>Price</th>
           <th>Quantity</th>
           <th>Category</th>
-          <th>Category Id</th>
+          <th>Image</th>
+          <th>Action</th>
         </tr>
       </thead>
       <!-- body -->
@@ -25,23 +26,13 @@
           <td>{{ productModel.productPrice }}</td>
           <td>{{ productModel.quantityOnHand }}</td>
           <td>{{ productModel.categoryName }}</td>
-          <td><img src="{{ productModel.image }}" alt="image" /></td>
+          <td><img src="{{ productModel.image }}" alt="image"/></td>
           <td>
-            <button
-              type="button"
-              class="delete"
-              (click)="deleteProductById(productModel)"
-            >
+            <button type="button" class="delete" (click)="deleteProductById(productModel)">
               Delete
             </button>
           </td>
         </tr>
-        <!--                 <tr *ngFor="let productModel of productModel; let i=index"> -->
-        <!--                     <td>{{i+1}}</td> -->
-        <!--                     <td> -->
-        <!--                         <div *ngIf="productModel." -->
-        <!--                     </td> -->
-        <!--                 </tr> -->
       </tbody>
     </table>
   </div>
