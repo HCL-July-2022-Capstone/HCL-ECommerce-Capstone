@@ -1,8 +1,6 @@
 package com.jordan.model;
 
-
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,26 +25,22 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.jordan.service.CartService;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import org.springframework.stereotype.Component;
-
 import lombok.Setter;
-
 
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
 @Entity
-
 @Table(name = "orders")
 @Getter
 @Setter
-
 public class Orders {
 	@Id
 	@GeneratedValue
@@ -61,7 +55,7 @@ public class Orders {
 	joinColumns = @JoinColumn(name = "orderId"),
 	inverseJoinColumns = @JoinColumn(name = "productId")
 	)
-	private List<Product> products;
+	private List<Product> products = new ArrayList<Product>();
 
 
 
@@ -85,4 +79,9 @@ public class Orders {
 		this.products = products;
 		logger.warn("Set Products");
 	}
+
+	public void addProduct(Product product) {
+		products.add(product);
+	}
+
 }

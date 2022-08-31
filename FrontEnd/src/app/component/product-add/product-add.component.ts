@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from '../../model/product-model.model';
 import { ProductServiceService } from '../../service/product-service.service';
@@ -12,6 +13,7 @@ export class ProductAddComponent implements OnInit {
   //for adding
   newProduct: ProductModel = {
     productId: 0,
+
     productName: '',
     productDescription: '',
     productPrice: 0,
@@ -41,3 +43,4 @@ export class ProductAddComponent implements OnInit {
     this.productService.addProduct(data);
   }
 }
+

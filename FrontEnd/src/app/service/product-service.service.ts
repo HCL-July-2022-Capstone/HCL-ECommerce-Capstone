@@ -8,6 +8,7 @@ import { ProductModel } from '../model/product-model.model';
   providedIn: 'root',
 })
 export class ProductServiceService {
+
   //to invoke as parameter inside get method
   private baseUrl = 'http://localhost:8080';
   httpOptions = {
@@ -54,4 +55,5 @@ export class ProductServiceService {
         console.log(response);
       });
   }
+
 }

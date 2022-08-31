@@ -2,6 +2,9 @@ package com.jordan.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.jordan.model.Cart;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
@@ -15,8 +18,8 @@ public class HttpSessionListenerConfig implements HttpSessionListener {
 
     private final AtomicInteger activeSessions;
     
-//    @Autowired
-//    Cart cart;
+    @Autowired
+    Cart cart;
 
     public HttpSessionListenerConfig() {
         super();
@@ -27,7 +30,7 @@ public class HttpSessionListenerConfig implements HttpSessionListener {
 
     /**
      * This method will be called when session created
-//     * @param sessionEvent
+     * @param sessionEvent
      */
     @Override
     public void sessionCreated(HttpSessionEvent sessionEvent) {
@@ -40,7 +43,7 @@ public class HttpSessionListenerConfig implements HttpSessionListener {
 
     /**
      * This method will be automatically called when session destroyed
-//     * @param sessionEvent
+     * @param sessionEvent
      */
     @Override
     public void sessionDestroyed(HttpSessionEvent sessionEvent) {

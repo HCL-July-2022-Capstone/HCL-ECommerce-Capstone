@@ -23,9 +23,9 @@ import com.jordan.service.CartService;
 @RestController
 @RequestMapping("/cart")
 public class CartController {
-
 	@Autowired
 	CartService cartService;
+	
 	@GetMapping("/view")
 	public List<Product> viewCart(Principal principal) {
 		return cartService.viewCart(principal.getName());
@@ -39,13 +39,10 @@ public class CartController {
 	@DeleteMapping("/remove/{id}")
 	public void removeFromCart(Principal principal, @PathVariable int id) {
 		cartService.removeFromCart(principal.getName(), id);
-
 	}
-
 	
 	@PostMapping("/checkout")
 	public void checkout(Principal principal) {
 		cartService.checkout(principal.getName());
 	}
-
 }

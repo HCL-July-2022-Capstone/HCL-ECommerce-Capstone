@@ -1,6 +1,5 @@
 package com.jordan.model;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,11 +32,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 @Getter
 @Setter
-
 public class User {
 	@Id
 	@GeneratedValue
@@ -67,7 +64,6 @@ public class User {
 	@JsonManagedReference
 	private Set<Orders> orders;
 
-	
 	@OneToMany(mappedBy = "user",cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<Address> addresses = new HashSet<>();
 	
