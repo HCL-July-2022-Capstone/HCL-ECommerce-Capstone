@@ -5,15 +5,9 @@ import { AuthState } from '@okta/okta-auth-js';
 
 @Component({
   selector: 'app-profile',
-  template: `
-    <div class="profile-card">
-      <div class="shield"></div>
-      <p *ngIf="name$ | async as name">Hello {{ name }}!</p>
-    </div>
-  `,
+  templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-
 export class ProfileComponent implements OnInit {
   public name$!: Observable<string>;
 

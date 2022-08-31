@@ -17,6 +17,7 @@ import {FormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { ProductAddComponent } from './component/product-add/product-add.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -30,7 +31,8 @@ const oktaAuth = new OktaAuth({
     ProfileComponent,
     ProductComponentComponent,
     ProductSearchComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    NavbarComponent
   ],
 
   imports: [

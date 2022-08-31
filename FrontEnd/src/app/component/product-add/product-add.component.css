@@ -1,26 +1,28 @@
 /* HeroDetailComponent's private CSS styles */
 label {
-    color: #435960;
-    font-weight: bold;
+  color: #435960;
+  font-weight: bold;
 }
 input {
-    font-size: 1em;
-    padding: .5rem;
+  font-size: 1em;
+  padding: 0.5rem;
 }
 button {
-    margin-top: 15px;
-    margin-right: .5rem;
-    background-color: -moz-buttonhovertext;
-    padding: 1rem;
-    border-radius: 4px;
-    font-size: 1rem;
+  margin-top: 15px;
+  margin-right: 0.5rem;
+  background-color: -moz-buttonhovertext;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 button:hover {
-    background-color: #435960;
+  background-color: #435960;
 }
 button:disabled {
-    background-color: #eee;
-    color: #435960;
-    cursor: auto;
+  background-color: #eee;
+  color: #435960;
+  cursor: auto;
 }
-
+.flex {
+  margin-left: 20%;
+}
