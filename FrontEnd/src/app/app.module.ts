@@ -14,10 +14,10 @@ import { AuthInterceptor } from './auth.interceptor';
 import { ProductComponentComponent } from './component/product/product-component.component';
 import { ProductSearchComponent } from './component/product-search/product-search.component';
 import {FormsModule} from "@angular/forms";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { ProductAddComponent } from './component/product-add/product-add.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -32,7 +32,8 @@ const oktaAuth = new OktaAuth({
     ProductComponentComponent,
     ProductSearchComponent,
     ProductAddComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent,
   ],
 
   imports: [
@@ -40,17 +41,15 @@ const oktaAuth = new OktaAuth({
     AppRoutingModule,
     OktaAuthModule,
     HttpClientModule,
-    FormsModule,
-    MatInputModule,
-    MatButtonToggleModule
-    ],
+    FormsModule
+  ],
 
   providers: [
     {
       provide: OKTA_CONFIG,
       useValue: { oktaAuth },
     },
-    { 
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor, multi: true
     },

@@ -32,21 +32,35 @@ export class ProductServiceService {
   }
 
   //In progress: update
-  updateProductById(productModel: ProductModel | undefined): Observable<any> {
-    return this.http.put(`${this.baseUrl}/updateproduct`, productModel);
+  // update(data: ProductModel): Observable<any>{
+  //   return this.http
+  //     .put(`${this.baseUrl}/products/updateproduct/${data.productId}`,
+  //   data).pipe(tap((data)=> console.log(data)));
+  // }
+  update(data: ProductModel){
+    return this.http
+      .put(`${this.baseUrl}/products/updateproduct/${data.productId}`,
+        data).pipe(tap((data)=> console.log(data)));
   }
 
+
   //In progress: search method//
-  searchByProductName(term: string): Observable<ProductModel[]> {
+  searchByProductName(term: any): Observable<ProductModel[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
     }
     return this.http.get<ProductModel[]>(
-      `${this.baseUrl}/products/getproduct/?productName=${term}`
+      `${this.baseUrl}/products/get/${term}`
     );
   }
-  //delete
+
+  //get by id
+  getById(id: any): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(`${this.baseUrl}/products/get/${id}`)
+  }
+
+  //delete product
   deleteById(id: number): void {
     this.http
       .delete<ProductModel>(`${this.baseUrl}/products/delete/${id}`)

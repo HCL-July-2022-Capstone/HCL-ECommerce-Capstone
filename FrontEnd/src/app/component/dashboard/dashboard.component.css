@@ -1,0 +1,25 @@
+
+
+/*
+ * Extra utilities
+ */
+body {
+  font-family: "Comic Sans MS" ,Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;;
+  margin-left: 20px;
+}
+
+img {
+  max-width: 25%;
+  height: auto;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .dds__container [class*=dds__col] {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+

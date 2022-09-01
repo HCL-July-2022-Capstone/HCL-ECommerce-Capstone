@@ -5,8 +5,6 @@ export interface ProductModel {
   productPrice: number;
   quantityOnHand: number;
   categoryName: string;
-
-  // categoryId: number;
   image: string;
 
 

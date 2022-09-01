@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 import {ProductComponentComponent} from "./component/product/product-component.component";
 import {ProductAddComponent} from "./component/product-add/product-add.component";
+import {DashboardComponent} from "./component/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: 'login/callback',
@@ -22,10 +23,11 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [OktaAuthGuard],
   },
-    {path:'', redirectTo: 'products/getallproducts', pathMatch:'full'},
+    {path:'', redirectTo: '/', pathMatch:'full'},
     {path:'getallproducts', component: ProductComponentComponent },
     {path:'updateproduct', component: ProductComponentComponent},
-    {path:'addproduct', component: ProductAddComponent}
+    {path:'addproduct', component: ProductAddComponent},
+    { path: '', component: DashboardComponent }
 ];
 
 @NgModule({

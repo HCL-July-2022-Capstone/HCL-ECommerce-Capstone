@@ -13,7 +13,6 @@ export class ProductAddComponent implements OnInit {
   //for adding
   newProduct: ProductModel = {
     productId: 0,
-
     productName: '',
     productDescription: '',
     productPrice: 0,
@@ -21,7 +20,6 @@ export class ProductAddComponent implements OnInit {
     categoryName: '',
     image: '',
   };
-  added = false;
 
   constructor(private productService: ProductServiceService) {}
 

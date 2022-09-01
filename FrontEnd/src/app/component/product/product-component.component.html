@@ -14,6 +14,7 @@
           <th>Category</th>
           <th>Image</th>
           <th>Action</th>
+          <th>Update</th>
         </tr>
       </thead>
       <!-- body -->
@@ -21,7 +22,13 @@
         <!-- interpolate-->
         <tr *ngFor="let productModel of productModel">
           <td>{{ productModel.productId }}</td>
-          <td>{{ productModel.productName }}</td>
+          <td>
+            <div *ngIf="productModel">
+<!--               {{productModel.productName}} -->
+              <input type="text" [(ngModel)]="productModel.productName">
+            </div>
+          </td>
+<!--           <td>{{ productModel.productName }}</td> -->
           <td>{{ productModel.productDescription }}</td>
           <td>{{ productModel.productPrice }}</td>
           <td>{{ productModel.quantityOnHand }}</td>
@@ -37,6 +44,14 @@
               Delete
             </button>
           </td>
+          <td>
+            <button
+            class="delete"
+            (click)="save()"
+            type="button"
+            class="btn btn-danger">
+            Update
+          </button></td>
         </tr>
       </tbody>
     </table>
