@@ -9,6 +9,7 @@ import { ProductServiceService } from '../../service/product-service.service';
   styleUrls: ['./product-add.component.css'],
 })
 export class ProductAddComponent implements OnInit {
+
   productModel: ProductModel[] = [];
   //for adding
   newProduct: ProductModel = {
@@ -20,12 +21,13 @@ export class ProductAddComponent implements OnInit {
     categoryName: '',
     image: '',
   };
+  added = false;
 
   constructor(private productService: ProductServiceService) {}
 
   ngOnInit(): void {}
 
-  // //step 2: function add product from service //step 1 is in service
+  //step 2: function add product from service //step 1 is in service
   saveProduct(): void {
     const data = {
       productId: this.newProduct.productId,

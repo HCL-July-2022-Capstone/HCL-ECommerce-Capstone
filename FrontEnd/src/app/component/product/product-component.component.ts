@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductServiceService} from '../../service/product-service.service';
 import {ProductModel} from '../../model/product-model.model';
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-product-component',
   templateUrl: './product-component.component.html',
   styleUrls: ['./product-component.component.css'],
 })
+//step 2 function: all products from service //step 1 is in service
 export class ProductComponentComponent implements OnInit {
 
   // @Input() viewMode = false;
@@ -26,27 +26,19 @@ export class ProductComponentComponent implements OnInit {
   data: ProductModel | undefined;
 
   constructor(
-    private productService: ProductServiceService,
-    private route: ActivatedRoute
-  ) {
-  }
+    private productService: ProductServiceService
+  ) { }
 
   ngOnInit(): void {
     this.listAllProducts(); //only for void methods
   }
 
-  //step 2 function: all products from service //step 1 is in service
+  //get all
   listAllProducts(): void {
-    this.productService.listAllProducts().subscribe((productModel) => {
+    this.productService.listAllProducts()
+      .subscribe((productModel) => {
       this.productModel = productModel;
     });
-  }
-
-  //get by id
-  getById(): void {
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.productService.getById(id)
-      .subscribe(data => this.productModel = data)
   }
 
   //delete
@@ -55,12 +47,10 @@ export class ProductComponentComponent implements OnInit {
     this.productService.deleteById(product.productId);
   }
 
-  //update
-  // goBack(): void {
-  //     this.location.reload();
-  // }
-
+  // save update
   save(): void {
+
+    //body
     const data = {
       productId: this.currentProduct.productId,
       productName: this.currentProduct.productName,
@@ -71,11 +61,7 @@ export class ProductComponentComponent implements OnInit {
       image: this.currentProduct.image
     }
 
-    // if(this.data) {
-      console.log(data);
-      this.productService.update(data);
-    // }
+    console.log(data);
+    this.productService.update(data);
   }
-
-  //step 2: function delete from service //step 1 is in service
 }

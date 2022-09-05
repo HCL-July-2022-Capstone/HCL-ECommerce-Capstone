@@ -11,12 +11,16 @@ import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 
+
 import { ProductComponentComponent } from './component/product/product-component.component';
 import { ProductSearchComponent } from './component/product-search/product-search.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { ProductAddComponent } from './component/product-add/product-add.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { UserComponentComponent } from './component/user-component/user-component.component';
+import { ProductDetailsComponent } from './component/product-details/product-details.component';
+import { ProductsListComponent } from './component/products-list/products-list.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 const oktaAuth = new OktaAuth({
@@ -33,7 +37,11 @@ const oktaAuth = new OktaAuth({
     ProductSearchComponent,
     ProductAddComponent,
     NavbarComponent,
-    DashboardComponent,
+    ProductSearchComponent,
+    UserComponentComponent,
+    ProductDetailsComponent,
+    ProductsListComponent,
+    PagenotfoundComponent
   ],
 
   imports: [
@@ -52,9 +60,8 @@ const oktaAuth = new OktaAuth({
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor, multi: true
-    },
+    }
   ],
-
   bootstrap: [AppComponent],
 })
 export class AppModule {}

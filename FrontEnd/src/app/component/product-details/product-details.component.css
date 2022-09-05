@@ -1,0 +1,58 @@
+body {
+  margin-left: 200px;
+  justify-content: center;
+}
+
+container {
+  display: flex;
+  justify-content: center;
+}
+
+h5 {
+  margin-bottom: 0;
+}
+
+#cart{
+  padding: 3px 5px;
+  border: 1px solid whitesmoke;
+  cursor: pointer;
+  box-shadow: 1px 1px 6px 6px  lightgray;
+  /*margin-top: 50px;*/
+  margin-left: 20px;
+  font-size: small;
+  color: #212529;
+}
+
+#cart:hover {
+  box-shadow: 1px 1px 10px 10px lightblue;
+}
+
+h6 {
+  margin-top: 30px;
+  font-size: medium;
+}
+
+caption {
+  font-size: small;
+  display: flex;
+}
+
+input{
+  width: 10%;
+  padding: 3px 5px;
+  border: 1px solid whitesmoke;
+  cursor: pointer;
+  box-shadow: 1px 1px 6px 6px  lightgray;
+  margin-top: 100px;
+  margin-left: 20px;
+  font-size: small;
+  color: #212529;
+}
+
+input:focus {
+  outline: none;
+}
+
+img:hover {
+  cursor: pointer;
+}

@@ -1,8 +1,7 @@
 <!-- cart icon -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
 
 <!-- navigation bar -->
 <header class="p-3 mb-3 border-bottom">
@@ -13,33 +12,31 @@
         <img width="75" alt="Okta logo"
              src="https://cdn.brandfolder.io/2VK5Y09C/at/c8nxgg3ptt6zmrggjt85hshg/Logo_Okta_Blue_RGB.png?width=117&height=40"/>
       </a>
-
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 flex">
-        <br />
-        <li><a routerLink="/" class="nav-link px-2 link-secondary">Home</a></li>
-        <!-- <li>
-          <a routerLink="/categories" class="nav-link px-2 link-dark"
-            >Categories</a
-          >
-        </li> -->
+        <br/>
         <li>
-          <a routerLink="/getallproducts" class="nav-link px-2 link-dark"
-            >Products</a>
+          <a routerLink="/" class="nav-link px-2 link-secondary">
+            Home</a>
         </li>
         <li>
-          <a routerLink="/addproduct" class="nav-link px-2 link-dark"
-            >Add Products</a>
+          <a routerLink="/getAllProducts" class="nav-link px-2 link-dark"
+          >Products Table</a>
         </li>
+        <li>
+          <a routerLink="/addProduct" class="nav-link px-2 link-dark"
+          >Add Products</a>
+        </li>
+        <li>
+          <a routerLink="/products" class="nav-link px-2 link-secondary">
+            Products</a>
+        </li>
+        <!--         search -->
+        <div class="search">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search">
+        </div>
       </ul>
 
-      <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-        <input
-          type="search"
-          class="form-control"
-          placeholder="Search..."
-          aria-label="Search"
-        />
-      </form> -->
       <div class="card-container">
         <ng-container
           *ngIf="(isAuthenticated$ | async) === false; else signout">
@@ -62,14 +59,11 @@
           </a>
         </ng-template>
 
-        <p class="design">
-          <!--         EDIT LINK TO VIEW CART LINK -->
-          <a href="http://localhost:4200">
-          <span class="glyphicon glyphicon-shopping-cart">
-        </span>
-          </a>
-        </p>
-
+        <div class="cart">
+          <h6><a href="#">
+            <i class="fas fa-cart-shopping"></i>
+          </a></h6>
+        </div>
       </div>
     </div>
   </div>

@@ -1,15 +1,18 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
-import { ProfileComponent } from './profile/profile.component';
+import {OktaAuthGuard, OktaCallbackComponent} from '@okta/okta-angular';
+import {ProfileComponent} from './profile/profile.component';
 
 import {ProductComponentComponent} from "./component/product/product-component.component";
 import {ProductAddComponent} from "./component/product-add/product-add.component";
-import {DashboardComponent} from "./component/dashboard/dashboard.component";
+import {PagenotfoundComponent} from "./pagenotfound/pagenotfound.component";
+import {ProductsListComponent} from "./component/products-list/products-list.component";
+import {ProductDetailsComponent} from "./component/product-details/product-details.component";
 
 const routes: Routes = [
-  { path: 'login/callback',
+  {
+    path: 'login/callback',
     component: OktaCallbackComponent
   },
   {
@@ -23,15 +26,18 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [OktaAuthGuard],
   },
-    {path:'', redirectTo: '/', pathMatch:'full'},
-    {path:'getallproducts', component: ProductComponentComponent },
-    {path:'updateproduct', component: ProductComponentComponent},
-    {path:'addproduct', component: ProductAddComponent},
-    { path: '', component: DashboardComponent }
+  {path: 'products/:id', component: ProductDetailsComponent},
+  {path: 'addProduct', component: ProductAddComponent}, //add in table
+  {path: 'getAllProducts', component: ProductComponentComponent}, //table
+  {path: 'products', component: ProductsListComponent}, //grid list
+  {path: '', redirectTo: '', pathMatch: 'full'}, //homepage
+  {path: '**', component: PagenotfoundComponent} //Wild Card Route for 404 request
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+
+export class AppRoutingModule {
+}

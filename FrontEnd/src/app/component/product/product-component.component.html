@@ -1,3 +1,4 @@
+<!-- <div *ngIf="Admin"> -->
 <h3 class="text-center">Products List</h3>
 
 <div class="container">
@@ -9,51 +10,48 @@
           <th>Id</th>
           <th>Name</th>
           <th>Description</th>
-          <th>Price ($)</th>
+          <th>Price($)</th>
           <th>Quantity</th>
           <th>Category</th>
           <th>Image</th>
-          <th>Action</th>
+          <th>Delete</th>
           <th>Update</th>
         </tr>
       </thead>
-      <!-- body -->
       <tbody>
         <!-- interpolate-->
         <tr *ngFor="let productModel of productModel">
           <td>{{ productModel.productId }}</td>
-          <td>
-            <div *ngIf="productModel">
-<!--               {{productModel.productName}} -->
-              <input type="text" [(ngModel)]="productModel.productName">
-            </div>
-          </td>
-<!--           <td>{{ productModel.productName }}</td> -->
+          <td>{{ productModel.productName }}</td>
           <td>{{ productModel.productDescription }}</td>
           <td>{{ productModel.productPrice }}</td>
           <td>{{ productModel.quantityOnHand }}</td>
           <td>{{ productModel.categoryName }}</td>
-          <td><img src="{{ productModel.image }}" alt="image" /></td>
+          <td><img src="{{ productModel.image }}" alt="image"/></td>
           <td>
-            <button
-              class="delete"
-              (click)="deleteProductById(productModel)"
-              type="button"
-              class="btn btn-danger"
-            >
-              Delete
-            </button>
+            <div *ngIf="productModel">
+              <a href="http://localhost:4200/getAllProducts">
+              <button class="delete"
+                      (click)="deleteProductById(productModel)"
+                      type="button"
+                      class="btn btn-danger">
+                Delete
+              </button>
+              </a>
+            </div>
           </td>
           <td>
-            <button
-            class="delete"
-            (click)="save()"
-            type="button"
-            class="btn btn-danger">
-            Update
-          </button></td>
+            <div *ngIf="productModel">
+              <a href="http://localhost:4200/getAllProducts">
+              <button class="update" (click)="save()" type="button">
+              Update
+              </button>
+              </a>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+<!-- </div> -->

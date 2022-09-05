@@ -1,4 +1,6 @@
+<!-- <div *ngIf="Admin"> -->
 <div class="container flex">
+
   <div class="col-md-5 col-lg-5">
     <h4 class="mb-3">Add Product</h4>
     <form class="needs-validation" onsubmit>
@@ -79,17 +81,15 @@
           />
         </div>
       </div>
-      <hr class="my-4" />
 
-      <a href="http://localhost:4200/getallproducts">
-        <button
+      <hr class="my-4" />
+        <button routerLink="/getAllProducts"
           class="w-100 btn btn-primary btn-lg"
           type="submit"
           (click)="saveProduct()"
-        >
-          Add Product
+        > Add Product
         </button>
-      </a>
     </form>
   </div>
 </div>
+<!-- </div> -->
