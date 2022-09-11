@@ -48,6 +48,9 @@ public class Orders {
 	private int orderId;
 	private float totalPrice;
 	private String orderStatus;
+	@Column(unique = true)
+	private String username;
+
 
 
 	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
@@ -66,11 +69,11 @@ public class Orders {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "billingAddressId", referencedColumnName = "addressId")
 	private Address billingAddress;
-	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	@JsonBackReference
-	private User user;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="user_id")
+//	@JsonBackReference
+//	private User user;
 	
 	
 
@@ -82,6 +85,10 @@ public class Orders {
 
 	public void addProduct(Product product) {
 		products.add(product);
+	}
+	
+	public void setUser(String username) {
+		this.username = username;
 	}
 
 }

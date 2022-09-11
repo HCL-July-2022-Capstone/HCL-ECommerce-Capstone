@@ -15,7 +15,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.jordan.model.Cart;
 import com.jordan.model.Orders;
-import com.jordan.model.User;
 
 public class EmailService {
 	
@@ -37,17 +36,17 @@ public class EmailService {
         
 	}
 
-	public void sendRegistrationEmail(User user) {
+	public void sendRegistrationEmail(String user) {
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(user.getUsername());
+		msg.setTo(user);
 		msg.setSubject("Welcome to our super cool ecommerce app!");
-		msg.setText("Hello "+user.getFirstName()+", welcome!");
+		msg.setText("Hello "+user+", welcome!");
 		mailSender.send(msg);
 	}
 	
-	void sendConfirmationEmail(User user, Orders order) {
+	void sendConfirmationEmail(String user, Orders order) {
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(user.getUsername());
+		msg.setTo(user);
 		msg.setSubject("Order #"+order.getOrderId());
 		msg.setText("Your order has been placed. Total: "+order.getTotalPrice());
 	}
@@ -78,6 +77,5 @@ public class EmailService {
 		helper.addAttachment("my_photo.png", new ClassPathResource("ms1.png"));
 
 		mailSender.send(msg);
-
 	}
 }

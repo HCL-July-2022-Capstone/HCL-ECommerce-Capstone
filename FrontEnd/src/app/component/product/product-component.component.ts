@@ -29,6 +29,12 @@ export class ProductComponentComponent implements OnInit {
     this.productService.deleteById(product.productId);
   }
 
+   //addToCart
+    addToCart(product: ProductModel): void {
+      this.productModel = this.productModel.filter((data) => data !== product);
+      this.productService.addToCart(product.productId, product);
+    }
+
   //update
   // goBack(): void {
   //     this.location.back();

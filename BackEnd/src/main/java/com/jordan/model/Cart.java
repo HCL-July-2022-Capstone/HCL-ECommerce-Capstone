@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.jordan.model.Product;
-import com.jordan.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,7 +48,10 @@ public class Cart {
 	joinColumns = @JoinColumn(name = "cartId"),
 	inverseJoinColumns = @JoinColumn(name = "productId")
 	)
-	private List<Product> products;
+	private List<Product> products = new ArrayList<Product>();
+	
+	@Column
+	private String username;
 	
 	public List<Product> getProducts(){
 		Logger logger = LoggerFactory.getLogger(Cart.class);

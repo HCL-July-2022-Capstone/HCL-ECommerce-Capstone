@@ -54,4 +54,12 @@ export class ProductServiceService {
         console.log(response);
       });
   }
+
+  addToCart(id: number, productModel: ProductModel): void {
+    this.http
+    .post<ProductModel>(`${this.baseUrl}/cart/add/${id}`, productModel)
+    .subscribe((response) => {
+      console.log(response);
+    })
+  }
 }
