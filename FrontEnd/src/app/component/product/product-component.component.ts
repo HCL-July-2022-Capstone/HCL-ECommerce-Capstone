@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ProductServiceService} from '../../service/product-service.service';
-import {ProductModel} from '../../model/product-model.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProductServiceService } from '../../service/product-service.service';
+import { ProductModel } from '../../model/product-model.model';
 
 @Component({
   selector: 'app-product-component',
@@ -9,26 +9,22 @@ import {ProductModel} from '../../model/product-model.model';
 })
 //step 2 function: all products from service //step 1 is in service
 export class ProductComponentComponent implements OnInit {
-
   // @Input() viewMode = false;
 
   @Input() currentProduct: ProductModel = {
-    categoryName: "",
-    image: "",
-    productDescription: "",
+    categoryName: '',
+    image: '',
+    productDescription: '',
     productId: 0,
-    productName: "",
+    productName: '',
     productPrice: 0,
-    quantityOnHand: 0
-  }
+    quantityOnHand: 0,
+  };
 
   productModel!: ProductModel[];
   data: ProductModel | undefined;
 
-  constructor(
-    private productService: ProductServiceService
-  ) {
-  }
+  constructor(private productService: ProductServiceService) {}
 
   ngOnInit(): void {
     this.listAllProducts(); //only for void methods
@@ -36,10 +32,9 @@ export class ProductComponentComponent implements OnInit {
 
   //get all
   listAllProducts(): void {
-    this.productService.listAllProducts()
-      .subscribe((productModel) => {
-        this.productModel = productModel;
-      });
+    this.productService.listAllProducts().subscribe((productModel) => {
+      this.productModel = productModel;
+    });
   }
 
   //delete
@@ -50,7 +45,6 @@ export class ProductComponentComponent implements OnInit {
 
   // save update
   save(): void {
-
     //body
     const data = {
       productId: this.currentProduct.productId,
@@ -59,8 +53,8 @@ export class ProductComponentComponent implements OnInit {
       productPrice: this.currentProduct.productPrice,
       categoryName: this.currentProduct.categoryName,
       quantityOnHand: this.currentProduct.quantityOnHand,
-      image: this.currentProduct.image
-    }
+      image: this.currentProduct.image,
+    };
 
     console.log(data);
     this.productService.update(data);

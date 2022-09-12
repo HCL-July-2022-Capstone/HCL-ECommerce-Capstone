@@ -1,22 +1,22 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {OktaAuthGuard, OktaCallbackComponent} from '@okta/okta-angular';
-import {ProfileComponent} from './profile/profile.component';
+import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
+import { ProfileComponent } from './profile/profile.component';
 
-import {ProductComponentComponent} from "./component/product/product-component.component";
-import {ProductAddComponent} from "./component/product-add/product-add.component";
-import {PagenotfoundComponent} from "./pagenotfound/pagenotfound.component";
-import {ProductsListComponent} from "./component/products-list/products-list.component";
-import {ProductDetailsComponent} from "./component/product-details/product-details.component";
-import {ProductSearchComponent} from "./component/product-search/product-search.component";
-import {CategoriesComponent} from "./component/categories/categories.component";
-import {HomepageComponent} from "./component/homepage/homepage.component";
+import { ProductComponentComponent } from './component/product/product-component.component';
+import { ProductAddComponent } from './component/product-add/product-add.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { ProductsListComponent } from './component/products-list/products-list.component';
+import { ProductDetailsComponent } from './component/product-details/product-details.component';
+import { ProductSearchComponent } from './component/product-search/product-search.component';
+import { CategoriesComponent } from './component/categories/categories.component';
+import { HomepageComponent } from './component/homepage/homepage.component';
 
 const routes: Routes = [
   {
     path: 'login/callback',
-    component: OktaCallbackComponent
+    component: OktaCallbackComponent,
   },
   {
     path: 'protected',
@@ -31,44 +31,46 @@ const routes: Routes = [
   },
   {
     path: 'products/:id',
-    component: ProductDetailsComponent
+    component: ProductDetailsComponent,
   },
   {
     path: 'category/:cat',
-    component: CategoriesComponent
+    component: CategoriesComponent,
   },
   {
     path: 'search/:term',
-    component: ProductSearchComponent
+    component: ProductSearchComponent,
   },
   {
     path: 'addProduct',
-    component: ProductAddComponent
+    component: ProductAddComponent,
+  },
+  {
+    path: 'update/:id',
+    component: ProductAddComponent,
   },
   {
     path: 'getAllProducts',
-    component: ProductComponentComponent //table
+    component: ProductComponentComponent, //table
   },
   {
     path: 'products',
-    component: ProductsListComponent //grid list
+    component: ProductsListComponent, //grid list
   },
   {
     path: '',
     redirectTo: '',
     pathMatch: 'full',
-    component: HomepageComponent
+    component: HomepageComponent,
   }, //homepage
   {
     path: '**',
-    component: PagenotfoundComponent //Wild Card Route for 404 request
-  }
+    component: PagenotfoundComponent, //Wild Card Route for 404 request
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
