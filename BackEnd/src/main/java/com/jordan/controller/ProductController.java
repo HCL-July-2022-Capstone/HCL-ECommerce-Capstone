@@ -1,6 +1,7 @@
 package com.jordan.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,16 @@ public class ProductController {
 	@PutMapping("/category/{id}")
 	public void UpdateCategoryById(@RequestBody ProductCategory productCategory, @PathVariable Integer id) {
 		catRepo.save(productCategory);
+	}
+	
+	@PutMapping("/restock/{id}/{quantity}")
+	public String restockProduct(@PathVariable Map<String, String> pathVariables) {
+		Integer id = Integer.valueOf(pathVariables.get("id"));
+		Integer quantity = Integer.valueOf(pathVariables.get("quantity"));
+		Product toChange = service.getProductById(id).get();
+		toChange.setQuantityOnHand(toChange.getQuantityOnHand() + quantity);
+		repo.save(toChange);
+		return "Product " + toChange.getProductName()+" restocked. Current stock: "+toChange.getQuantityOnHand();
 	}
 	
 
