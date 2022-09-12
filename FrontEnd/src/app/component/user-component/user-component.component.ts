@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserModel} from "../../model/user-model.model";
 import {UserServiceService} from "../../service/user-service.service";
 import {ActivatedRoute} from "@angular/router";
@@ -14,7 +14,8 @@ export class UserComponentComponent implements OnInit {
   data: UserModel | undefined;
 
   constructor(private userService: UserServiceService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.getAllUsers();

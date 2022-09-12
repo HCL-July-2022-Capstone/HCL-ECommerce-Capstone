@@ -1,6 +1,7 @@
 <div id="search-component">
   <label for="search-box">Search</label>
-  <input #searchBox type="text" id="search-box" (input)="search(searchBox.value)"/>
-
-
+  <!--   <a routerLink="/search/:term"> -->
+  <input #searchBox (input)="search(searchBox.value)" class="search-result" id="search-box" type="text"/>
+  <!--   </a> -->
+  <button (click)="searchBox.click()" type="submit"></button>
 </div>

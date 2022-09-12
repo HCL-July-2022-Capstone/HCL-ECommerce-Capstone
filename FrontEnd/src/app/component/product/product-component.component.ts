@@ -27,7 +27,8 @@ export class ProductComponentComponent implements OnInit {
 
   constructor(
     private productService: ProductServiceService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.listAllProducts(); //only for void methods
@@ -37,8 +38,8 @@ export class ProductComponentComponent implements OnInit {
   listAllProducts(): void {
     this.productService.listAllProducts()
       .subscribe((productModel) => {
-      this.productModel = productModel;
-    });
+        this.productModel = productModel;
+      });
   }
 
   //delete

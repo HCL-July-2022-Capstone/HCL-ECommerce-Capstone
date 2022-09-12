@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductServiceService} from "../../service/product-service.service";
 import {ActivatedRoute} from "@angular/router";
 import {ProductModel} from "../../model/product-model.model";
@@ -13,7 +13,8 @@ export class ProductDetailsComponent implements OnInit {
   productModel!: ProductModel;
 
   constructor(private productService: ProductServiceService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     // access the ActivatedRoute and track the id parameter
@@ -22,20 +23,9 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  productDetails(){
+  productDetails() {
     const id = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!, 10);
     this.productService.getById(id)
       .subscribe((product) => this.productModel = product);
   }
-
-  //go back
-  // setUpLocationChangeListener(): void {
-  // }
-  //
-  // go to product list
-  // goToProductsList() {
-  //   this.router.navigate(['id'], {
-  //     relativeTo: this.activedRoute
-  //   });
-  // }
 }

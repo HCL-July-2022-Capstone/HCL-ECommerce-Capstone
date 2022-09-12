@@ -1,7 +1,6 @@
-
-import { Component, OnInit } from '@angular/core';
-import { ProductModel } from '../../model/product-model.model';
-import { ProductServiceService } from '../../service/product-service.service';
+import {Component, OnInit} from '@angular/core';
+import {ProductModel} from '../../model/product-model.model';
+import {ProductServiceService} from '../../service/product-service.service';
 
 @Component({
   selector: 'app-product-add',
@@ -23,9 +22,11 @@ export class ProductAddComponent implements OnInit {
   };
   added = false;
 
-  constructor(private productService: ProductServiceService) {}
+  constructor(private productService: ProductServiceService) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   //step 2: function add product from service //step 1 is in service
   saveProduct(): void {

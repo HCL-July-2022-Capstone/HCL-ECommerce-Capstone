@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserModel} from "../model/user-model.model";
@@ -11,7 +11,8 @@ export class UserServiceService {
 
   private baseUrl = 'http://localhost:8080/user';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   //get all
   getAllUsers(): Observable<UserModel[]> {
@@ -38,9 +39,9 @@ export class UserServiceService {
   }
 
   //update
-  update(userModel: UserModel){
+  update(userModel: UserModel) {
     return this.http.put(`${this.baseUrl}/update/${userModel.id}`,
-        userModel);
+      userModel);
   }
 
   //delete
