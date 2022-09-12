@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {ProductModel} from "../../model/product-model.model";
-import {debounceTime, distinctUntilChanged, Observable, Subject, switchMap} from "rxjs";
-import {ProductServiceService} from "../../service/product-service.service";
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-product-search',
@@ -10,25 +9,15 @@ import {ProductServiceService} from "../../service/product-service.service";
 })
 export class ProductSearchComponent implements OnInit {
 
-  productModel$!: Observable<ProductModel[]>;
-  private searchTerms = new Subject<string>();
 
-  constructor(private productService: ProductServiceService) { }
-
-  // Push a search term into the observable stream.
-  search(term: string): void {
-    this.searchTerms.next(term);
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    this.productModel$ = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
-      debounceTime(300),
-      // ignore new term if same as previous term
-      distinctUntilChanged(),
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.productService.searchByProductName(term)),
-    );
   }
 
+  search(term: string) {
+    console.log(`value=${term}`);
+    // this.router.navigateByUrl(`/search/${term}`);
+  }
 }

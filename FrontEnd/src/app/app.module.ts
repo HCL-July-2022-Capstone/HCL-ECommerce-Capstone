@@ -1,23 +1,33 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
-import { OktaAuth } from '@okta/okta-auth-js';
+import {OKTA_CONFIG, OktaAuthModule} from '@okta/okta-angular';
+import {OktaAuth} from '@okta/okta-auth-js';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ProfileComponent } from './profile/profile.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {ProfileComponent} from './profile/profile.component';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './auth.interceptor';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from './auth.interceptor';
 
-import { ProductComponentComponent } from './component/product/product-component.component';
-import { ProductSearchComponent } from './component/product-search/product-search.component';
+
+import {ProductComponentComponent} from './component/product/product-component.component';
+import {ProductSearchComponent} from './component/product-search/product-search.component';
 import {FormsModule} from "@angular/forms";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { ProductAddComponent } from './component/product-add/product-add.component';
-import { NavbarComponent } from './component/navbar/navbar.component';
+import {ProductAddComponent} from './component/product-add/product-add.component';
+import {NavbarComponent} from './component/navbar/navbar.component';
+import {UserComponentComponent} from './component/user-component/user-component.component';
+import {ProductDetailsComponent} from './component/product-details/product-details.component';
+import {ProductsListComponent} from './component/products-list/products-list.component';
+import {PagenotfoundComponent} from './pagenotfound/pagenotfound.component';
+import {CategoriesComponent} from './component/categories/categories.component';
+import {HomepageComponent} from './component/homepage/homepage.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgxScrollTopModule} from "ngx-scrolltop";
+
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -32,7 +42,13 @@ const oktaAuth = new OktaAuth({
     ProductComponentComponent,
     ProductSearchComponent,
     ProductAddComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserComponentComponent,
+    ProductDetailsComponent,
+    ProductsListComponent,
+    PagenotfoundComponent,
+    CategoriesComponent,
+    HomepageComponent
   ],
 
   imports: [
@@ -41,21 +57,23 @@ const oktaAuth = new OktaAuth({
     OktaAuthModule,
     HttpClientModule,
     FormsModule,
-    MatInputModule,
-    MatButtonToggleModule
-    ],
+    MatIconModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    NgxScrollTopModule //to scroll up
+  ],
 
   providers: [
     {
       provide: OKTA_CONFIG,
-      useValue: { oktaAuth },
+      useValue: {oktaAuth},
     },
-    { 
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor, multi: true
-    },
+    }
   ],
-
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

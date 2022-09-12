@@ -1,10 +1,7 @@
 <div id="search-component">
   <label for="search-box">Search</label>
-  <input #searchBox id="search-box" (input)="search(searchBox.value)"/>
-
-  <ul class="search-result">
-    <li *ngFor="let productModel of productModel$ | async" >
-      <a routerLink="products/{{productModel.productName}}"></a>
-    </li>
-  </ul>
+  <!--   <a routerLink="/search/:term"> -->
+  <input #searchBox (input)="search(searchBox.value)" class="search-result" id="search-box" type="text"/>
+  <!--   </a> -->
+  <button (click)="searchBox.click()" type="submit"></button>
 </div>
