@@ -27,14 +27,16 @@
           <td>{{ productModel.productPrice }}</td>
           <td>{{ productModel.quantityOnHand }}</td>
           <td>{{ productModel.categoryName }}</td>
-          <td><img alt="image" src="{{ productModel.image }}"/></td>
+          <td><img alt="image" src="{{ productModel.image }}" /></td>
           <td>
             <div *ngIf="productModel">
               <a href="http://localhost:4200/getAllProducts">
-                <button (click)="deleteProductById(productModel)"
-                        class="delete"
-                        class="btn btn-danger"
-                        type="button">
+                <button
+                  (click)="deleteProductById(productModel)"
+                  class="delete"
+                  class="btn btn-danger"
+                  type="button"
+                >
                   Delete
                 </button>
               </a>
@@ -42,11 +44,14 @@
           </td>
           <td>
             <div *ngIf="productModel">
-              <a href="http://localhost:4200/getAllProducts">
-                <button (click)="save()" class="update" type="button">
-                  Update
-                </button>
-              </a>
+              <button
+                routerLink="/update/{{ productModel.productId }}"
+                class="update"
+                class="btn btn-success"
+                type="button"
+              >
+                Update
+              </button>
             </div>
           </td>
         </tr>

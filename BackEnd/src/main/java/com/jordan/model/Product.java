@@ -34,10 +34,6 @@ public class Product {
 	private String categoryName;
 	private String image;
 		
-	@ManyToOne
-    @JoinColumn(name="categoryId")
-	private ProductCategory category;
-	
 	public void decreaseStock(int n) {
 		this.quantityOnHand -= n;
 	}

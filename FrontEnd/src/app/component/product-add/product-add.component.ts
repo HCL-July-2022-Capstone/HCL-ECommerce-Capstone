@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ProductModel} from '../../model/product-model.model';
-import {ProductServiceService} from '../../service/product-service.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductModel } from '../../model/product-model.model';
+import { ProductServiceService } from '../../service/product-service.service';
 
 @Component({
   selector: 'app-product-add',
@@ -8,7 +9,6 @@ import {ProductServiceService} from '../../service/product-service.service';
   styleUrls: ['./product-add.component.css'],
 })
 export class ProductAddComponent implements OnInit {
-
   productModel: ProductModel[] = [];
   //for adding
   newProduct: ProductModel = {
@@ -22,10 +22,27 @@ export class ProductAddComponent implements OnInit {
   };
   added = false;
 
-  constructor(private productService: ProductServiceService) {
-  }
+  update = false;
+
+  constructor(
+    private productService: ProductServiceService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    var id = this.route.snapshot.params['id'];
+
+    if (id != null) {
+      this.productService
+        .getById(id)
+        .subscribe(
+          (response) => (
+            (this.newProduct = response),
+            console.log(response),
+            (this.update = true)
+          )
+        );
+    }
   }
 
   //step 2: function add product from service //step 1 is in service
@@ -44,4 +61,3 @@ export class ProductAddComponent implements OnInit {
     this.productService.addProduct(data);
   }
 }
-
