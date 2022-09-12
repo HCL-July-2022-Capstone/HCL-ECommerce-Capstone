@@ -1,12 +1,13 @@
-/* HeroDetailComponent's private CSS styles */
 label {
   color: #435960;
   font-weight: bold;
 }
+
 input {
   font-size: 1em;
   padding: 0.5rem;
 }
+
 button {
   margin-top: 15px;
   margin-right: 0.5rem;
@@ -15,14 +16,17 @@ button {
   border-radius: 4px;
   font-size: 1rem;
 }
+
 button:hover {
   background-color: #435960;
 }
+
 button:disabled {
   background-color: #eee;
   color: #435960;
   cursor: auto;
 }
+
 .flex {
   margin-left: 20%;
 }

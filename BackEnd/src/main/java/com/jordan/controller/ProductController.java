@@ -46,12 +46,12 @@ public class ProductController {
 		return product.getProductName()+ " added to Inventory!";
 	}
 	
-	@GetMapping("/get/{id}")
+	@GetMapping("/getProduct/{id}")
 	public Optional<Product> getProductId(@PathVariable Integer id) {
 		return service.getProductById(id);
 	}
 	
-	@PutMapping("/get/{id}")
+	@PutMapping("/updateProduct/{id}")
 	public void UpdateProductById(@RequestBody Product product, @PathVariable Integer id) {
 		repo.save(product);
 	}

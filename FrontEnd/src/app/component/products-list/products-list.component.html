@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="section-title text-center pb-40">
+      <div class="line m-auto"></div>
+      <h2 class="title">
+        ALL PRODUCTS </h2>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="prod-list-container">
+    <div class="prod-container">
+      <ng-container *ngFor="let products of productModel">
+        <div class="pro">
+          <div class="img-container">
+            <a routerLink="/products/{{products.productId}}">
+              <img alt="" src="{{products.image}}">
+            </a>
+          </div>
+          <div class="des">
+            <a routerLink="/products/{{products.productId}}">
+              <h5>{{products.productName}}</h5>
+            </a>
+
+            <h6>${{products.productPrice}}</h6>
+            <!--             cart icon -->
+            <!--         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" -->
+            <!--              viewBox="0 0 16 16"> -->
+            <!--           <path -->
+            <!--             d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/> -->
+            <!--         </svg> -->
+            <i class="fas fa-cart-shopping"></i>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</header>
