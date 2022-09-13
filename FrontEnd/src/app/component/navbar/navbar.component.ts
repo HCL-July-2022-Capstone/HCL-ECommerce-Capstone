@@ -36,4 +36,8 @@ export class NavbarComponent implements OnInit {
   public async signOut(): Promise<void> {
     await this._oktaAuth.signOut();
   }
+
+  public async checkout(): Promise<void>{
+    this._router.navigate(['/checkout']);
+  }
 }

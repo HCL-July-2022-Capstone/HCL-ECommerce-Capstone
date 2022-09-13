@@ -63,11 +63,13 @@ public class CartService {
 		cart.removeFromCart(productService.getProductById(id).get());
 		save(cart);
 	}
+	
 
-	public String checkout(Principal user) {
+	public void checkout(Principal user) {
 		Cart cart = getCart(user);
 		if(cart.getProducts().isEmpty()) {
-			return "Checkout failed: cart is empty!";
+			logger.error("Cart is empty, cannot check out");
+			return;
 		}
 		Orders order = new Orders();
 
@@ -78,12 +80,17 @@ public class CartService {
 		order.setTotalPrice(cart.getTotalPrice());
 		order.setOrderStatus("Order Placed");
 		// TODO let the user select their address on the front end
-		List<Address> userAddresses = addressService.getAddressesByUsername(user.getName());
-		if(userAddresses.isEmpty()) {
-			return "Checkout failed: user has no addresses";
+		//on the frontend, user should have input addresses on initial checkout page before hitting button
+		//and it should be saved in the addressService (and in the repository)
+		//frontend calls /setBillingAddress and /setCheckingAddress on a form in checkout to do this
+	
+		if(addressService.getBillingAddress() == null || addressService.getShippingAddress() == null) {
+			logger.error("User tried to check out without setting addresses");
+			return;
 		}
-		order.setBillingAddress(userAddresses.get(0));
-		order.setShippingAddress(userAddresses.get(0));
+		order.setBillingAddress(addressService.getBillingAddress());
+		order.setShippingAddress(addressService.getShippingAddress());
+
 		// lower stock of each item - works
 		order.getProducts().forEach(product -> {
 			product.decreaseStock();
@@ -95,7 +102,7 @@ public class CartService {
 		orderService.save(order);
 		save(cart);
 		emailService.sendConfirmationEmail(user.getName(), order);
-		return "Order placed!";
+		return;
 
 	}
 
@@ -108,4 +115,6 @@ public class CartService {
 		} else
 			return maybeCart.get();
 	}
+	
+	
 }

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 //import
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, of, tap } from 'rxjs';
@@ -8,6 +10,7 @@ import { ProductModel } from '../model/product-model.model';
   providedIn: 'root',
 })
 export class ProductServiceService {
+  items: ProductModel[] = [];
   //to invoke as parameter inside get method
   private baseUrl = 'http://localhost:8080';
   httpOptions = {
@@ -54,6 +57,7 @@ export class ProductServiceService {
         console.log(response);
       });
   }
+  //add items to cart
 
   addToCart(id: number, productModel: ProductModel): void {
     this.http
@@ -61,5 +65,19 @@ export class ProductServiceService {
     .subscribe((response) => {
       console.log(response);
     })
+  }
+
+  checkout(){
+    this.http.post(`${this.baseUrl}/cart/checkout`,"").subscribe((response) => {
+      console.log(response);
+    })
+  }
+  getItems() {
+    return this.items;
+  }
+
+  clearCart() {
+    this.items = [];
+    return this.items;
   }
 }

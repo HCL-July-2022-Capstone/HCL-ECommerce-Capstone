@@ -21,10 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jordan.model.Address;
 import com.jordan.model.Cart;
 import com.jordan.model.Orders;
 import com.jordan.model.Product;
-
+import com.jordan.service.AddressService;
 import com.jordan.service.CartService;
 import com.jordan.service.UserService;
 
@@ -36,8 +37,8 @@ public class CartController {
 	@Autowired
 	CartService cartService;
 	
-	@Autowired
-	UserService userService;
+	@Autowired 
+	AddressService addressService;
 	
 	@Autowired
 	private OAuth2AuthorizedClientService authorizedClientService;
@@ -62,5 +63,26 @@ public class CartController {
 	@PostMapping("/checkout")
 	public void checkout(Principal user) {
 		cartService.checkout(user);
+	}
+	
+	@PostMapping("/setBillingAddress")
+	public void setBillingAddress(@RequestBody Address address, Principal user) {
+		addressService.setBillingAddress(address, user.getName());
+	}
+	
+	@PostMapping("/setShippingAddress")
+	public void setShippingAddress(@RequestBody Address address, Principal user) {
+		addressService.setBillingAddress(address, user.getName());
+	}
+	
+	@PostMapping("/setAddress")
+	public void setAddress(@RequestBody Address address, Principal user) {
+		addressService.setShippingAddress(address, user.getName());
+		addressService.setBillingAddress(address, user.getName());
+	}
+	
+	@GetMapping("/getAddresses")
+	public List<Address> getAddresses(Principal user){
+		return addressService.getAddressesByUsername(user.getName());
 	}
 }

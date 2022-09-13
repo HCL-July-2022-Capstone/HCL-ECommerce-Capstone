@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { ProductServiceService } from '../../service/product-service.service';
 import { ProductModel } from '../../model/product-model.model';
 
@@ -11,7 +13,8 @@ export class ProductComponentComponent implements OnInit {
   productModel!: ProductModel[];
   data: ProductModel | undefined;
 
-  constructor(private productService: ProductServiceService) {}
+  constructor(private productService: ProductServiceService,
+  private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.listAllProducts(); //only for void methods
@@ -31,21 +34,10 @@ export class ProductComponentComponent implements OnInit {
 
    //addToCart
     addToCart(product: ProductModel): void {
-      this.productModel = this.productModel.filter((data) => data !== product);
       this.productService.addToCart(product.productId, product);
+      window.alert('product has been added to the cart!');
     }
+    
 
-  //update
-  // goBack(): void {
-  //     this.location.back();
-  // }
-  //
-  // save(): void {
-  //     if (this.productModel) {
-  //         this.productService.updateProductById(this.data)
-  //             .subscribe(() => this.goBack());
-  //     }
-  // }
 
-  //step 2: function delete from service //step 1 is in service
 }

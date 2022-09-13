@@ -62,11 +62,11 @@ public class Orders {
 
 
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "shippingAddressId", referencedColumnName = "addressId")
 	private Address shippingAddress;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "billingAddressId", referencedColumnName = "addressId")
 	private Address billingAddress;
 //	
