@@ -11,8 +11,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.springframework.security.oauth2.core.oidc.AddressStandardClaim;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.jordan.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,9 +38,6 @@ public class Address {
 	private String street;
 	
 	@Column
-	private String unit;
-	
-	@Column
 	private String city;
 	
 	@Column
@@ -51,12 +49,17 @@ public class Address {
 	@Column
 	private String country;
 	
-	@Column(name = "address_phone")
-	private String phone;
+	@Column
+	private String username;
 	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	@JsonBackReference
-	private User user;
+	public static final Address toCustomAddress(AddressStandardClaim standardAddress) {
+		Address newAddress = new Address();
+		newAddress.setStreet(standardAddress.getStreetAddress());
+		newAddress.setCity(standardAddress.getLocality());
+		newAddress.setState(standardAddress.getRegion());
+		newAddress.setZipcode(standardAddress.getPostalCode());
+		newAddress.setCountry(standardAddress.getCountry());
+		return newAddress;
+	}
 		
 }

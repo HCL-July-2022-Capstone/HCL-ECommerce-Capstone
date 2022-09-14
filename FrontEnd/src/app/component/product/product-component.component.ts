@@ -1,4 +1,7 @@
+
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { ProductServiceService } from '../../service/product-service.service';
 import { ProductModel } from '../../model/product-model.model';
 
@@ -24,7 +27,8 @@ export class ProductComponentComponent implements OnInit {
   productModel!: ProductModel[];
   data: ProductModel | undefined;
 
-  constructor(private productService: ProductServiceService) {}
+  constructor(private productService: ProductServiceService,
+  private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.listAllProducts(); //only for void methods
@@ -43,6 +47,7 @@ export class ProductComponentComponent implements OnInit {
     this.productService.deleteById(product.productId);
   }
 
+
   // save update
   save(): void {
     //body
@@ -60,3 +65,14 @@ export class ProductComponentComponent implements OnInit {
     this.productService.update(data);
   }
 }
+
+   //addToCart
+    addToCart(product: ProductModel): void {
+      this.productService.addToCart(product.productId, product);
+      window.alert('product has been added to the cart!');
+    }
+    
+
+
+}
+
