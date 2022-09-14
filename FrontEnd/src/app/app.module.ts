@@ -1,5 +1,8 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import {RouterModule} from '@angular/router';
+
 
 import {OKTA_CONFIG, OktaAuthModule} from '@okta/okta-angular';
 import {OktaAuth} from '@okta/okta-auth-js';
@@ -10,6 +13,7 @@ import {ProfileComponent} from './profile/profile.component';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth.interceptor';
+
 
 
 import {ProductComponentComponent} from './component/product/product-component.component';
@@ -27,6 +31,11 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxScrollTopModule} from "ngx-scrolltop";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { CheckoutComponent } from './component/checkout/checkout.component';
+import { AddressAddComponent } from './component/address/address-add.component';
+
 
 
 const oktaAuth = new OktaAuth({
@@ -49,6 +58,8 @@ const oktaAuth = new OktaAuth({
     PagenotfoundComponent,
     CategoriesComponent,
     HomepageComponent
+    CheckoutComponent,
+    AddressAddComponent
   ],
 
   imports: [
@@ -61,7 +72,16 @@ const oktaAuth = new OktaAuth({
     MatButtonModule,
     BrowserAnimationsModule,
     NgxScrollTopModule //to scroll up
-  ],
+    MatInputModule,
+    MatButtonToggleModule,
+    ReactiveFormsModule,
+        RouterModule.forRoot([
+          { path: '', component: ProductComponentComponent },
+          { path: 'product/:ProductModel', component: ProductComponentComponent },
+          { path: 'checkout', component: CheckoutComponent },
+          { path: 'addAddress', component: AddressAddComponent}
+        ])
+    ],
 
   providers: [
     {
@@ -74,6 +94,10 @@ const oktaAuth = new OktaAuth({
     }
   ],
   bootstrap: [AppComponent],
+
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule {
 }

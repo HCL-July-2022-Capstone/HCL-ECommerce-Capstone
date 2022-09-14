@@ -1,0 +1,13 @@
+<head></head>
+<div class="cart-item" *ngFor="let item of items">
+  <span>{{ item.productName }}</span>
+  <span>{{ item.productPrice | currency }}</span>
+</div>
+<app-address-add></app-address-add>
+<button
+          class="w-100 btn btn-primary btn-lg"
+          type="submit"
+          (click)="checkout()"
+        >
+          Checkout
+        </button>

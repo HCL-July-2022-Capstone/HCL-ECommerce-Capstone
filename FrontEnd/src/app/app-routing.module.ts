@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
 import { ProfileComponent } from './profile/profile.component';
 
+
 import { ProductComponentComponent } from './component/product/product-component.component';
 import { ProductAddComponent } from './component/product-add/product-add.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
@@ -12,6 +13,9 @@ import { ProductDetailsComponent } from './component/product-details/product-det
 import { ProductSearchComponent } from './component/product-search/product-search.component';
 import { CategoriesComponent } from './component/categories/categories.component';
 import { HomepageComponent } from './component/homepage/homepage.component';
+
+import { CheckoutComponent } from './component/checkout/checkout.component';
+
 
 const routes: Routes = [
   {
@@ -29,6 +33,7 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [OktaAuthGuard],
   },
+
   {
     path: 'products/:id',
     component: ProductDetailsComponent,
@@ -67,6 +72,10 @@ const routes: Routes = [
     path: '**',
     component: PagenotfoundComponent, //Wild Card Route for 404 request
   },
+
+
+    {path: 'checkout', component: CheckoutComponent}
+
 ];
 
 @NgModule({
