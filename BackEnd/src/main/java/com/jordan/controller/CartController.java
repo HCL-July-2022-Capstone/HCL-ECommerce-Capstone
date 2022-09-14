@@ -72,7 +72,7 @@ public class CartController {
 	
 	@PostMapping("/setShippingAddress")
 	public void setShippingAddress(@RequestBody Address address, Principal user) {
-		addressService.setBillingAddress(address, user.getName());
+		addressService.setShippingAddress(address, user.getName());
 	}
 	
 	@PostMapping("/setAddress")
