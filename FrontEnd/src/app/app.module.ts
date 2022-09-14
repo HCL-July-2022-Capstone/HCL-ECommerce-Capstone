@@ -35,6 +35,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { AddressAddComponent } from './component/address/address-add.component';
+import { AddressListComponent } from './component/address/address-list.component';
 
 
 
@@ -59,7 +60,8 @@ const oktaAuth = new OktaAuth({
     CategoriesComponent,
     HomepageComponent,
     CheckoutComponent,
-    AddressAddComponent
+    AddressAddComponent,
+    AddressListComponent
   ],
 
   imports: [
