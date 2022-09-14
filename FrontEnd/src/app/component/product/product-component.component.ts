@@ -64,7 +64,7 @@ export class ProductComponentComponent implements OnInit {
     console.log(data);
     this.productService.update(data);
   }
-}
+
 
    //addToCart
     addToCart(product: ProductModel): void {

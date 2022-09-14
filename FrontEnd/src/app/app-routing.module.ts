@@ -68,13 +68,14 @@ const routes: Routes = [
     pathMatch: 'full',
     component: HomepageComponent,
   }, //homepage
+  {path: 'checkout', component: CheckoutComponent},
   {
     path: '**',
     component: PagenotfoundComponent, //Wild Card Route for 404 request
   },
 
 
-    {path: 'checkout', component: CheckoutComponent}
+    
 
 ];
 

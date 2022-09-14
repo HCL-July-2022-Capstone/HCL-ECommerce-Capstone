@@ -18,7 +18,7 @@ import {AuthInterceptor} from './auth.interceptor';
 
 import {ProductComponentComponent} from './component/product/product-component.component';
 import {ProductSearchComponent} from './component/product-search/product-search.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductAddComponent} from './component/product-add/product-add.component';
 import {NavbarComponent} from './component/navbar/navbar.component';
 import {UserComponentComponent} from './component/user-component/user-component.component';
@@ -57,7 +57,7 @@ const oktaAuth = new OktaAuth({
     ProductsListComponent,
     PagenotfoundComponent,
     CategoriesComponent,
-    HomepageComponent
+    HomepageComponent,
     CheckoutComponent,
     AddressAddComponent
   ],
@@ -71,7 +71,7 @@ const oktaAuth = new OktaAuth({
     MatIconModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    NgxScrollTopModule //to scroll up
+    NgxScrollTopModule,
     MatInputModule,
     MatButtonToggleModule,
     ReactiveFormsModule,
