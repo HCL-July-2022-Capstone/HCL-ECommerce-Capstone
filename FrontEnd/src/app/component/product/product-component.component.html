@@ -1,3 +1,4 @@
+<!-- <div *ngIf="Admin"> -->
 <h3 class="text-center">Products List</h3>
 
 <div class="container">
@@ -9,14 +10,14 @@
           <th>Id</th>
           <th>Name</th>
           <th>Description</th>
-          <th>Price ($)</th>
+          <th>Price($)</th>
           <th>Quantity</th>
           <th>Category</th>
           <th>Image</th>
-          <th>Action</th>
+          <th>Delete</th>
+          <th>Update</th>
         </tr>
       </thead>
-      <!-- body -->
       <tbody>
         <!-- interpolate-->
         <tr *ngFor="let productModel of productModel">
@@ -26,16 +27,32 @@
           <td>{{ productModel.productPrice }}</td>
           <td>{{ productModel.quantityOnHand }}</td>
           <td>{{ productModel.categoryName }}</td>
-          <td><img src="{{ productModel.image }}" alt="image" /></td>
+          <td><img alt="image" src="{{ productModel.image }}" /></td>
           <td>
-            <button
-              class="delete"
-              (click)="deleteProductById(productModel)"
-              type="button"
-              class="btn btn-danger"
-            >
-              Delete
-            </button>
+            <div *ngIf="productModel">
+              <a href="http://localhost:4200/getAllProducts">
+                <button
+                  (click)="deleteProductById(productModel)"
+                  class="delete"
+                  class="btn btn-danger"
+                  type="button"
+                >
+                  Delete
+                </button>
+              </a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="productModel">
+              <button
+                routerLink="/update/{{ productModel.productId }}"
+                class="update"
+                class="btn btn-success"
+                type="button"
+              >
+                Update
+              </button>
+            </div>
           </td>
           <td>
 
@@ -52,4 +69,6 @@
       </tbody>
     </table>
   </div>
+
 </div>
+

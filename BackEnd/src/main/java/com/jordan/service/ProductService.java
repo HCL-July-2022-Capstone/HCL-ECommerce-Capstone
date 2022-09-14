@@ -48,5 +48,9 @@ public class ProductService {
 		repo.save(product);
 	}
 	
+	public List<Product> getCategory(String catName) {
+		return repo.getByCategoryName(catName);
+	}
+	
 	
 }

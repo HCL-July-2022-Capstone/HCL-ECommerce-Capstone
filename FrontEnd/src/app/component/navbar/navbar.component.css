@@ -1,6 +1,6 @@
 :host {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
   color: #333;
   box-sizing: border-box;
@@ -9,7 +9,7 @@
 }
 
 h2 {
-  margin: 24px 0;
+  /*margin: 24px 0;*/
 }
 
 p {
@@ -27,12 +27,12 @@ p {
 }
 
 .toolbar img {
-  margin: 0 16px;
+  /*margin: 0 16px;*/
 }
 
 .content {
   display: flex;
-  margin: 32px auto;
+  /*margin: 32px auto;*/
   padding: 0 16px;
   max-width: 960px;
   flex-direction: column;
@@ -62,7 +62,7 @@ svg.material-icons:not(:last-child) {
 .card {
   all: unset;
   border-radius: 4px;
-  border: 1px solid #eee;
+  /*border: 1px solid #eee;*/
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -78,15 +78,16 @@ svg.material-icons:not(:last-child) {
 .card.card-small {
   height: 20px;
   width: 100px;
-  margin: 0 8px 16px 20px;
+  /*margin: 0 8px 16px 20px;*/
   padding: 8px;
+  justify-content: center;
 }
 
 .card.card-resource {
   height: 40px;
   width: 200px;
-  margin: 0 8px 16px;
-  padding: 16px;
+  /*margin: 0 8px 16px;*/
+  /*padding: 16px;*/
   line-height: 24px;
 }
 
@@ -102,13 +103,44 @@ svg.material-icons:not(:last-child) {
 a,
 a:visited,
 a:hover {
-  color: #095661;
+  /*color: #095661;*/
+  color: whitesmoke;
   text-decoration: none;
 }
 
 a:hover {
   color: #2d8c9e;
 }
-.flex {
-  margin-left: 5%;
+
+.cart{
+  margin-top: 6px;
+}
+
+.navbar{
+  padding: 0!important;
+  margin: 0!important;
+  min-width: 100%!important;
+}
+
+.navbar-toggler{
+  outline: none;
+  border: none;
+  padding-left: 85%;
+  padding-right: 5%;
+  /*background-color: white;*/
+}
+
+.navbar-expand-lg {
+  display: inline-block!important;
+  /*background-color: white;*/
+  /*font-weight: 500;*/
+  /*text-align: center;*/
+  -webkit-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+  background: -webkit-gradient(linear, left top, right top, from(#33c8c1), color-stop(50%, #119bd2), to(#33c8c1));
+  background: linear-gradient(to right, #33c8c1 0%, #119bd2 50%, #33c8c1 100%);
+}
+
+.navbar-expand-lg:focus {
+  outline: none;
 }

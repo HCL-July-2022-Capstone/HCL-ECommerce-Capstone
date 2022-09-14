@@ -27,12 +27,5 @@ public class ProductCategory {
 	private int id;
 	private String categoryName;
 
-	@EqualsAndHashCode.Exclude
-	@ToString.Exclude
-	@OneToMany(mappedBy = "category")
-	private Set<Product> product;
 
-	public void addProduct(Product product) {
-		this.product.add(product);
-	}
 }
