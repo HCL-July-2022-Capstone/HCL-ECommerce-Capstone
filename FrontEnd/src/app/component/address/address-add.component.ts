@@ -66,5 +66,14 @@ export class AddressAddComponent implements OnInit {
     console.log(data);
     this.addressService.addBillingAddress(data);
   }
+
+  addAddresses(): void {
+    this.addShippingAddress();
+    this.addBillingAddress();
+  }
+
+  sameShippingAndBilling(): void{
+    this.newBillingAddress = this.newShippingAddress;
+  }
 }
 
