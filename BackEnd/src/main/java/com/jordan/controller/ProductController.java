@@ -71,15 +71,21 @@ public class ProductController {
 		return productCategory.getCategoryName() + " added to Categories!";
 	}
 	
-	@GetMapping("/category/{id}")
-	public Optional<ProductCategory> getProductCategoryById(@PathVariable Integer id) {
-		return service.getCategoryById(id);
-	}
+	//get product category
+        @GetMapping("/category/{catName}")
+        private List<Product> getCategory(@PathVariable String catName) {
+              return repo.getByCategoryName(catName);
+           }
 	
-	@PutMapping("/category/{id}")
-	public void UpdateCategoryById(@RequestBody ProductCategory productCategory, @PathVariable Integer id) {
-		catRepo.save(productCategory);
-	}
+// 	@GetMapping("/category/{id}")
+// 	public Optional<ProductCategory> getProductCategoryById(@PathVariable Integer id) {
+// 		return service.getCategoryById(id);
+// 	}
+	
+// 	@PutMapping("/category/{id}")
+// 	public void UpdateCategoryById(@RequestBody ProductCategory productCategory, @PathVariable Integer id) {
+// 		catRepo.save(productCategory);
+// 	}
 	
 
 }
