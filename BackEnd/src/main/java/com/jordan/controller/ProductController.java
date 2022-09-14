@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordan.model.Product;
-import com.jordan.model.ProductCategory;
-import com.jordan.repository.CategoryRepository;
+// import com.jordan.model.ProductCategory;
+// import com.jordan.repository.CategoryRepository;
 import com.jordan.repository.ProductRepository;
 import com.jordan.service.ProductService;
 
@@ -32,8 +32,8 @@ public class ProductController {
 	@Autowired
 	private ProductService service;
 	
-	@Autowired
-	private CategoryRepository catRepo;
+// 	@Autowired
+// 	private CategoryRepository catRepo;
 	
 	@GetMapping("/getAllProducts")
 	public List<Product> listallproducts() {
@@ -61,16 +61,16 @@ public class ProductController {
 	public void deleteById(@PathVariable Integer id) {
 		repo.deleteById(id);
 	}
-	@GetMapping("/getAllCategories")
-	public List<ProductCategory> listallCategories() {
-		return service.getAllCategories() ;
-	}
+// 	@GetMapping("/getAllCategories")
+// 	public List<ProductCategory> listallCategories() {
+// 		return service.getAllCategories() ;
+// 	}
 
-	@PostMapping("/addCategory")
-	public String addCategory(@RequestBody ProductCategory productCategory) {
-		catRepo.save(productCategory);
-		return productCategory.getCategoryName() + " added to Categories!";
-	}
+// 	@PostMapping("/addCategory")
+// 	public String addCategory(@RequestBody ProductCategory productCategory) {
+// 		catRepo.save(productCategory);
+// 		return productCategory.getCategoryName() + " added to Categories!";
+// 	}
 	
 	//get product category
         @GetMapping("/category/{catName}")
