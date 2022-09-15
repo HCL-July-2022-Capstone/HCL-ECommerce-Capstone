@@ -34,11 +34,19 @@ public class Product {
 	private String categoryName;
 	private String image;
 		
+	
 	public void decreaseStock(int n) {
 		this.quantityOnHand -= n;
 	}
 	public void decreaseStock() {
 		this.quantityOnHand -= 1;
+	}
+	
+	@Override
+	public String toString(){
+		return "Product [id =" +productId+", productName ="+productName+", productDescription="+productDescription+","
+				+ "productPrice=" +productPrice+", quantityOnHand="+quantityOnHand+", categoryName="+categoryName+", image="+image+"]";
+				
 	}
 	
 }
