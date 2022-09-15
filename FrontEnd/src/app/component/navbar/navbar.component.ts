@@ -4,6 +4,7 @@ import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
 import { AuthState, OktaAuth } from '@okta/okta-auth-js';
 import { filter, map, Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

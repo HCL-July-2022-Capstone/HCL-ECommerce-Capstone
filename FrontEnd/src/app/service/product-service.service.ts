@@ -9,10 +9,11 @@ import { ProductModel } from '../model/product-model.model';
 })
 export class ProductServiceService {
   //to invoke as parameter inside get method
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'http://localhost:8282';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
+
 
   constructor(private http: HttpClient) {} //inject
 
@@ -37,7 +38,7 @@ export class ProductServiceService {
   }
 
   //In progress: search method//
-  searchByProductName(term: string): Observable<ProductModel[]> {
+ /* searchByProductName(term: string): Observable<ProductModel[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
@@ -45,7 +46,7 @@ export class ProductServiceService {
     return this.http.get<ProductModel[]>(
       `${this.baseUrl}/products/getproduct/?productName=${term}`
     );
-  }
+  }*/
   //delete
   deleteById(id: number): void {
     this.http
@@ -54,4 +55,10 @@ export class ProductServiceService {
         console.log(response);
       });
   }
+
+  //search
+  findByName(name: any): Observable<ProductModel[]>{
+    return this.http.get<ProductModel[]>(`${this.baseUrl}/products/Search/${name}`);
+  }
+  
 }

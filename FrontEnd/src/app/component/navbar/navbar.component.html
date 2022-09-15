@@ -36,16 +36,21 @@
             >Add Products</a
           >
         </li>
+        <li>
+          <a routerLink="/Search" class="nav-link px-2 link-dark"
+          >Search Products</a>
+        </li>
       </ul>
 
-      <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+     <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
         <input
           type="search"
           class="form-control"
           placeholder="Search..."
           aria-label="Search"
         />
-      </form> -->
+      </form>-->
+
       <div class="card-container">
         <ng-container
           *ngIf="(isAuthenticated$ | async) === false; else signout"
@@ -86,3 +91,4 @@
     </div>
   </div>
 </header>
+

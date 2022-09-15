@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 import {ProductComponentComponent} from "./component/product/product-component.component";
 import {ProductAddComponent} from "./component/product-add/product-add.component";
+import { ProductSearchComponent } from './component/product-search/product-search.component';
 
 const routes: Routes = [
   { path: 'login/callback',
@@ -25,7 +26,8 @@ const routes: Routes = [
     {path:'', redirectTo: 'products/getallproducts', pathMatch:'full'},
     {path:'getallproducts', component: ProductComponentComponent },
     {path:'updateproduct', component: ProductComponentComponent},
-    {path:'addproduct', component: ProductAddComponent}
+    {path:'addproduct', component: ProductAddComponent},
+    {path:'Search', component: ProductSearchComponent}
 ];
 
 @NgModule({
