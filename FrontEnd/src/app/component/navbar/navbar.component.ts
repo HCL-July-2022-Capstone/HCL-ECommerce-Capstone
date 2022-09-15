@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
-import { AuthState, OktaAuth } from '@okta/okta-auth-js';
-import { filter, map, Observable } from 'rxjs';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {OKTA_AUTH, OktaAuthStateService} from '@okta/okta-angular';
+import {AuthState, OktaAuth} from '@okta/okta-auth-js';
+import {filter, map, Observable} from 'rxjs';
 
 
 @Component({
@@ -19,7 +19,8 @@ export class NavbarComponent implements OnInit {
     private _router: Router,
     private _oktaStateService: OktaAuthStateService,
     @Inject(OKTA_AUTH) private _oktaAuth: OktaAuth
-  ) {}
+  ) {
+  }
 
   public ngOnInit(): void {
     this.isAuthenticated$ = this._oktaStateService.authState$.pipe(
@@ -37,4 +38,9 @@ export class NavbarComponent implements OnInit {
   public async signOut(): Promise<void> {
     await this._oktaAuth.signOut();
   }
+
+  public async checkout(): Promise<void>{
+    this._router.navigate(['/checkout']);
+  }
 }
+

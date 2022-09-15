@@ -49,7 +49,7 @@ export class ProductSearchComponent implements OnInit {
       productPrice: 0,
       quantityOnHand: 0,
       categoryName: '',
-      image: '' 
+      image: ''
     }
     this.currentIndex = -1;
 
@@ -87,9 +87,12 @@ export class ProductSearchComponent implements OnInit {
     this.currentIndex = -1;
 
   };
-  setActiveProduct(product: ProductModel, index: number):void{
-    this.currentProduct=product;
-    this.currentIndex=index;
+  setActiveProduct(product: ProductModel, index: number): void {
+    this.currentProduct = product;
+    this.currentIndex = index;
   }
+  /*search(term: string) {
+    console.log(`value=${term}`);
+    // this.router.navigateByUrl(`/search/${term}`);
+  }*/
 }
-

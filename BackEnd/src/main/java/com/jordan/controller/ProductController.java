@@ -2,6 +2,7 @@ package com.jordan.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordan.model.Product;
-import com.jordan.model.ProductCategory;
-import com.jordan.repository.CategoryRepository;
+// import com.jordan.model.ProductCategory;
+// import com.jordan.repository.CategoryRepository;
 import com.jordan.repository.ProductRepository;
 import com.jordan.service.ProductService;
 
@@ -35,8 +36,8 @@ public class ProductController {
 	@Autowired
 	private ProductService service;
 	
-	@Autowired
-	private CategoryRepository catRepo;
+// 	@Autowired
+// 	private CategoryRepository catRepo;
 	
 	@GetMapping("/getAllProducts")
 	public List<Product> listallproducts() {
@@ -73,12 +74,12 @@ public class ProductController {
 		return product.getProductName()+ " added to Inventory!";
 	}
 	
-	@GetMapping("/get/{id}")
+	@GetMapping("/getProduct/{id}")
 	public Optional<Product> getProductId(@PathVariable Integer id) {
 		return service.getProductById(id);
 	}
 	
-	@PutMapping("/get/{id}")
+	@PutMapping("/updateProduct/{id}")
 	public void UpdateProductById(@RequestBody Product product, @PathVariable Integer id) {
 		repo.save(product);
 	}
@@ -87,25 +88,41 @@ public class ProductController {
 	public void deleteById(@PathVariable Integer id) {
 		repo.deleteById(id);
 	}
-	@GetMapping("/getAllCategories")
-	public List<ProductCategory> listallCategories() {
-		return service.getAllCategories() ;
-	}
+// 	@GetMapping("/getAllCategories")
+// 	public List<ProductCategory> listallCategories() {
+// 		return service.getAllCategories() ;
+// 	}
 
-	@PostMapping("/addCategory")
-	public String addCategory(@RequestBody ProductCategory productCategory) {
-		catRepo.save(productCategory);
-		return productCategory.getCategoryName() + " added to Categories!";
-	}
+// 	@PostMapping("/addCategory")
+// 	public String addCategory(@RequestBody ProductCategory productCategory) {
+// 		catRepo.save(productCategory);
+// 		return productCategory.getCategoryName() + " added to Categories!";
+// 	}
 	
-	@GetMapping("/category/{id}")
-	public Optional<ProductCategory> getProductCategoryById(@PathVariable Integer id) {
-		return service.getCategoryById(id);
-	}
+	//get product category
+        @GetMapping("/category/{catName}")
+        private List<Product> getCategory(@PathVariable String catName) {
+              return repo.getByCategoryName(catName);
+           }
 	
-	@PutMapping("/category/{id}")
-	public void UpdateCategoryById(@RequestBody ProductCategory productCategory, @PathVariable Integer id) {
-		catRepo.save(productCategory);
+// 	@GetMapping("/category/{id}")
+// 	public Optional<ProductCategory> getProductCategoryById(@PathVariable Integer id) {
+// 		return service.getCategoryById(id);
+// 	}
+	
+// 	@PutMapping("/category/{id}")
+// 	public void UpdateCategoryById(@RequestBody ProductCategory productCategory, @PathVariable Integer id) {
+// 		catRepo.save(productCategory);
+// 	}
+	
+	@PutMapping("/restock/{id}/{quantity}")
+	public String restockProduct(@PathVariable Map<String, String> pathVariables) {
+		Integer id = Integer.valueOf(pathVariables.get("id"));
+		Integer quantity = Integer.valueOf(pathVariables.get("quantity"));
+		Product toChange = service.getProductById(id).get();
+		toChange.setQuantityOnHand(toChange.getQuantityOnHand() + quantity);
+		repo.save(toChange);
+		return "Product " + toChange.getProductName()+" restocked. Current stock: "+toChange.getQuantityOnHand();
 	}
 	
 

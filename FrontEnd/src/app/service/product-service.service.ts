@@ -1,15 +1,21 @@
+
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 //import
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, of, tap } from 'rxjs';
-import { ProductModel } from '../model/product-model.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {ProductModel} from '../model/product-model.model';
 
 @Injectable({
   providedIn: 'root',
 })
+//Step 1 //step 2 in component
 export class ProductServiceService {
+
+  items: ProductModel[] = [];
   //to invoke as parameter inside get method
-  private baseUrl = 'http://localhost:8282';
+  private baseUrl = 'http://localhost:8080';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -17,40 +23,33 @@ export class ProductServiceService {
 
   constructor(private http: HttpClient) {} //inject
 
-  //Step 1 Get: list method //step 2 in component
   listAllProducts(): Observable<ProductModel[]> {
-    //return type observables
     return this.http.get<ProductModel[]>(
       `${this.baseUrl}/products/getAllProducts`
-    ); //returns array of products
+    );
   }
 
-  //Step 1 Post: add method //step 2 in component
+  //add product
   addProduct(productModel: ProductModel) {
-    this.http
-      .post<ProductModel>(`${this.baseUrl}/products/addProduct`, productModel)
+    this.http.post<ProductModel>(`${this.baseUrl}/products/addProduct`, productModel)
       .subscribe((response) => console.log(response));
   }
 
-  //In progress: update
-  updateProductById(productModel: ProductModel | undefined): Observable<any> {
-    return this.http.put(`${this.baseUrl}/updateproduct`, productModel);
+  //update product
+  update(updateProduct: ProductModel) {
+    return this.http.put<ProductModel>(`${this.baseUrl}/products/updateProduct/`,
+      updateProduct)
+      .subscribe((data) => console.log(data));
   }
 
-  //In progress: search method//
- /* searchByProductName(term: string): Observable<ProductModel[]> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
-    return this.http.get<ProductModel[]>(
-      `${this.baseUrl}/products/getproduct/?productName=${term}`
-    );
-  }*/
-  //delete
+  //get product by id
+  getById(id: number): Observable<ProductModel> {
+    return this.http.get<ProductModel>(`${this.baseUrl}/products/getProduct/${id}`);
+  }
+
+  //delete product
   deleteById(id: number): void {
-    this.http
-      .delete<ProductModel>(`${this.baseUrl}/products/delete/${id}`)
+    this.http.delete<ProductModel>(`${this.baseUrl}/products/delete/${id}`)
       .subscribe((response) => {
         console.log(response);
       });
@@ -59,6 +58,38 @@ export class ProductServiceService {
   //search
   findByName(name: any): Observable<ProductModel[]>{
     return this.http.get<ProductModel[]>(`${this.baseUrl}/products/Search/${name}`);
+  }
+
+  
+  //get category
+  getCategory(category: string): Observable<ProductModel> {
+    return this.http.get<ProductModel>(`${this.baseUrl}/category/${category}`);
+
+  }
+
+  //add items to cart
+
+  addToCart(id: number, productModel: ProductModel): void {
+    this.http
+    .post<ProductModel>(`${this.baseUrl}/cart/add/${id}`, productModel)
+    .subscribe((response) => {
+      console.log(response);
+    })
+  }
+
+  checkout(){
+    this.http.post(`${this.baseUrl}/cart/checkout`,"").subscribe((response) => {
+      console.log(response);
+    })
+  }
+  getItems() {
+    return this.items;
+  }
+
+  clearCart() {
+    this.items = [];
+    return this.items;
+
   }
   
 }

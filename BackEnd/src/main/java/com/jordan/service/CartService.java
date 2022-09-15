@@ -3,11 +3,13 @@ package com.jordan.service;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -19,76 +21,100 @@ import com.jordan.service.OrdersService;
 @Component
 public class CartService {
 	private Logger logger = LoggerFactory.getLogger(CartService.class);
-	
+
 	@Autowired
 	CartRepository cartRepo;
-	
+
 	@Autowired
 	OrdersService orderService;
-	
+
 	@Autowired
 	ProductService productService;
-	
+
 	@Autowired
 	EmailService emailService;
 	
 	@Autowired
-	UserService userService;
-	
-	public Optional<Cart> getCartById(int id){
+	AddressService addressService;
+
+	public Optional<Cart> getCartById(int id) {
 		return cartRepo.findById(id);
 	}
-	
+
 	public void save(Cart cart) {
 		cartRepo.save(cart);
 	}
-	
-	public void addToCart(String username, int id) {
-		User user = userService.getUserByUsername(username).get();
-		user.getCart().addToCart(productService.getProductById(id).get());
-		userService.save(user);
+
+	public void addToCart(Principal user, int id) {
+		Cart cart = getCart(user);
+		cart.addToCart(productService.getProductById(id).get());
+		logger.info("added to "+user.getName()+"'s cart with id "+cart.getId());
+		save(cart);
+
+	}
+
+	public List<Product> viewCart(Principal user) {
+		return getCart(user).getProducts();
+
+	}
+
+	public void removeFromCart(Principal user, int id) {
+		Cart cart = getCart(user);
+		cart.removeFromCart(productService.getProductById(id).get());
+		save(cart);
 	}
 	
-	public List<Product> viewCart(String username) {
-		User user = userService.getUserByUsername(username).get();
-		logger.debug("Getting cart of user "+user);
-		return user.getCart().getProducts();
-		
-	}
-	
-	public void removeFromCart(String username, int id) {
-		User user = userService.getUserByUsername(username).get();
-		user.getCart().removeFromCart(productService.getProductById(id).get());
-		userService.save(user);
-	}
-	
-	public void checkout(String username) {
-		User user = userService.getUserByUsername(username).get();
-		Cart cart = user.getCart();
+
+	public void checkout(Principal user) {
+		Cart cart = getCart(user);
+		if(cart.getProducts().isEmpty()) {
+			logger.error("Cart is empty, cannot check out");
+			return;
+		}
 		Orders order = new Orders();
-		//build order from cart
 
 		cart.getProducts().forEach(product -> order.addProduct(product));
 
-		logger.warn("Getting products "+cart.getProducts().get(0).getProductName());
-		logger.warn("Set products to "+order.getProducts().get(0).getProductName());
+		logger.warn("Getting products " + cart.getProducts().get(0).getProductName());
+		logger.warn("Set products to " + order.getProducts().get(0).getProductName());
 		order.setTotalPrice(cart.getTotalPrice());
 		order.setOrderStatus("Order Placed");
-		//TODO let the user select their address on the front end
-		order.setBillingAddress(user.getAddresses().iterator().next());
-		order.setShippingAddress(user.getAddresses().iterator().next());	
-		//lower stock of each item - works
-		order.getProducts().forEach(product ->{ 
+		// TODO let the user select their address on the front end
+		//on the frontend, user should have input addresses on initial checkout page before hitting button
+		//and it should be saved in the addressService (and in the repository)
+		//frontend calls /setBillingAddress and /setCheckingAddress on a form in checkout to do this
+	
+		if(addressService.getBillingAddress() == null || addressService.getShippingAddress() == null) {
+			logger.error("User tried to check out without setting addresses");
+			return;
+		}
+		order.setBillingAddress(addressService.getBillingAddress());
+		order.setShippingAddress(addressService.getShippingAddress());
+
+		// lower stock of each item - works
+		order.getProducts().forEach(product -> {
 			product.decreaseStock();
 			productService.save(product);
-		} );
+		});
 		logger.warn("lowered product stock");
-		user.getCart().emptyCart();
-		user.addOrder(order);
-		userService.save(user);
-		emailService.sendConfirmationEmail(user,order);
-		logger.warn("finished checkout");
-		
-	}
-}
+		cart.emptyCart();
+		order.setUser(user.getName());
+		orderService.save(order);
+		save(cart);
+		emailService.sendConfirmationEmail(user.getName(), order);
+		return;
 
+	}
+
+	private Cart getCart(Principal user) {
+		Optional<Cart> maybeCart = cartRepo.findByUsername(user.getName());
+		if (maybeCart.isEmpty()) {
+			Cart newCart = new Cart();
+			newCart.setUsername(user.getName());
+			return newCart;
+		} else
+			return maybeCart.get();
+	}
+	
+	
+}

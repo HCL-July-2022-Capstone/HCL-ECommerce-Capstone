@@ -1,5 +1,5 @@
-
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductModel } from '../../model/product-model.model';
 import { ProductServiceService } from '../../service/product-service.service';
 
@@ -13,7 +13,6 @@ export class ProductAddComponent implements OnInit {
   //for adding
   newProduct: ProductModel = {
     productId: 0,
-
     productName: '',
     productDescription: '',
     productPrice: 0,
@@ -23,11 +22,30 @@ export class ProductAddComponent implements OnInit {
   };
   added = false;
 
-  constructor(private productService: ProductServiceService) {}
+  update = false;
 
-  ngOnInit(): void {}
+  constructor(
+    private productService: ProductServiceService,
+    private route: ActivatedRoute
+  ) {}
 
-  // //step 2: function add product from service //step 1 is in service
+  ngOnInit(): void {
+    var id = this.route.snapshot.params['id'];
+
+    if (id != null) {
+      this.productService
+        .getById(id)
+        .subscribe(
+          (response) => (
+            (this.newProduct = response),
+            console.log(response),
+            (this.update = true)
+          )
+        );
+    }
+  }
+
+  //step 2: function add product from service //step 1 is in service
   saveProduct(): void {
     const data = {
       productId: this.newProduct.productId,
@@ -43,4 +61,3 @@ export class ProductAddComponent implements OnInit {
     this.productService.addProduct(data);
   }
 }
-

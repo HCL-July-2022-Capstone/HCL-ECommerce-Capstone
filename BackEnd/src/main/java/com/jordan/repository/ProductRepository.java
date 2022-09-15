@@ -12,4 +12,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 //	@Query("update User u set u.firstname = ?1, u.lastname = ?2 where u.id = ?3")
 //	void setUserInfoById(String firstname, String lastname, Integer userId);
 	public List<Product> findByproductNameContaining(String productName);
+
+	List<Product> getByCategoryName(String categoryName);
 }

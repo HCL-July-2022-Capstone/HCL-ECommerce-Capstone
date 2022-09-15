@@ -1,6 +1,5 @@
 package com.jordan.common;
 
-import com.jordan.model.User;
 
 public class UserConstants {
 
