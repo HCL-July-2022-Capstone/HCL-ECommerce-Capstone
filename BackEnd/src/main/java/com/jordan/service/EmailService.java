@@ -84,7 +84,7 @@ public class EmailService {
 		msg.setFrom("your.techshop@techshop.com");
 		msg.setTo("admin@gmail.com");
 		msg.setSubject("Inventory Status");
-		msg.setText("Hello " + prod + ", out!");
+		msg.setText( prod);
 		mailSender.send(msg);
 	}
 }

@@ -36,6 +36,9 @@ public class CartService {
 	
 	@Autowired
 	AddressService addressService;
+	
+	@Autowired
+	RestService restService;
 
 	public Optional<Cart> getCartById(int id) {
 		return cartRepo.findById(id);
@@ -91,6 +94,7 @@ public class CartService {
 		order.setBillingAddress(addressService.getBillingAddress());
 		order.setShippingAddress(addressService.getShippingAddress());
 
+		restService.checkStock();
 		// lower stock of each item - works
 		order.getProducts().forEach(product -> {
 			product.decreaseStock();
