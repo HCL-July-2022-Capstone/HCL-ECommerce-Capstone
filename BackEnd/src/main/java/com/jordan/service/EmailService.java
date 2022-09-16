@@ -78,4 +78,13 @@ public class EmailService {
 
 		mailSender.send(msg);
 	}
+
+	public void sendInventoryStatustEmail(String prod) {
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setFrom("your.techshop@techshop.com");
+		msg.setTo("admin@gmail.com");
+		msg.setSubject("Inventory Status");
+		msg.setText( prod);
+		mailSender.send(msg);
+	}
 }

@@ -25,18 +25,26 @@ public class AddressService {
 		return addressRepository.findAllByUsername(user).get();
 	}
 	
-	public void setShippingAddress(Address address, String userId) {
+	public void addAddress(Address address, String username) {
+		address.setUsername(username);
+		if(addressRepository.findById(address.getId()).isEmpty())addressRepository.save(address);
+		logger.warn("Added new address with ID "+address.getId());
+	}
+	
+	//selects address
+	public void setShippingAddress(Address address) {
 		shippingAddress = address;
-		shippingAddress.setUsername(userId);
-		addressRepository.save(shippingAddress);
 		logger.warn("SET shipping address");
 	}
 	
-	public void setBillingAddress(Address address, String userId) {
+	public void setBillingAddress(Address address) {
 		billingAddress = address;
-		billingAddress.setUsername(userId);
-		addressRepository.save(billingAddress);
 		logger.warn("set billing address");
+	}
+	
+	public void deleteAddress(Address address) {
+		addressRepository.delete(address);
+		logger.warn("deleted address with id "+address.getId());
 	}
 	
 	public Address getShippingAddress() {

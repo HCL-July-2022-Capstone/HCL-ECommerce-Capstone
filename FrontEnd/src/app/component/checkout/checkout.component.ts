@@ -9,7 +9,7 @@ import { ProductServiceService } from 'src/app/service/product-service.service';
 export class CheckoutComponent implements OnInit {
 
    items = this.productService.getItems();
-
+   toggleNewAddress: Boolean = false;
   constructor(
     private productService: ProductServiceService
   ) { }
