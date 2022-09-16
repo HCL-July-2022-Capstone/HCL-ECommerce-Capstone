@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jordan.model.Product;
-import com.jordan.model.ProductCategory;
-import com.jordan.repository.CategoryRepository;
+// import com.jordan.model.ProductCategory;
+// import com.jordan.repository.CategoryRepository;
 import com.jordan.repository.ProductRepository;
 
 @Service
@@ -17,8 +17,8 @@ public class ProductService {
 	@Autowired
 	ProductRepository repo;
 	
-	@Autowired
-	CategoryRepository CatRepo;
+// 	@Autowired
+// 	CategoryRepository CatRepo;
 	
 	public List<Product> getAllProducts() {
 		return repo.findAll();
@@ -32,17 +32,17 @@ public class ProductService {
 		repo.deleteById(id);
 	}
 	
-	public List<ProductCategory> getAllCategories() {
-		return CatRepo.findAll();
-	}
+// 	public List<ProductCategory> getAllCategories() {
+// 		return CatRepo.findAll();
+// 	}
 	
-	public Optional<ProductCategory> getCategoryById(int id) {
-		return CatRepo.findById(id);
-	}
+// 	public Optional<ProductCategory> getCategoryById(int id) {
+// 		return CatRepo.findById(id);
+// 	}
 
-	public void deleteCategory(int id) {
-		CatRepo.deleteById(id);
-	}
+// 	public void deleteCategory(int id) {
+// 		CatRepo.deleteById(id);
+// 	}
 	
 	public void save(Product product) {
 		repo.save(product);

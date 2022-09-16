@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "spring.mvc.path",
+      "type": "java.lang.String",
+      "description": "mvc."
+    },
+    {
+      "name": "spring.jpa.format-sql",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.format-sql."
+    },
+  ] }
