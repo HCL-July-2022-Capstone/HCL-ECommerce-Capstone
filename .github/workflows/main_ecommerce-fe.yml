@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - main
+    paths: 
+      - 'FrontEnd/**'
   workflow_dispatch:
 
 jobs:
@@ -23,15 +25,15 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          cd FrontEnd
+          npm install --force
+          npm run build --prod
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: ./FrontEnd/dist/FrontEnd
 
   deploy:
     runs-on: ubuntu-latest
