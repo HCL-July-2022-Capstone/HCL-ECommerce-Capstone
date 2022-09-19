@@ -51,32 +51,41 @@ public class EmailService {
 		msg.setText("Your order has been placed. Total: "+order.getTotalPrice());
 		mailSender.send(msg);
 	}
-//	public void sendEmailWithAttachment() throws MessagingException, IOException {
-//
-//		MimeMessage msg = mailSender.createMimeMessage();
-//
-//		// true = multipart message
-//		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-//		helper.setTo("1@gmail.com");
-//
-//		helper.setSubject("Testing from Spring Boot");
-//
-//		// default = text/plain
-//		// helper.setText("Check attachment for image!");
-//
-//		// true = text/html
-//		helper.setText("<h1>Check attachment for image!</h1>", true);
-//
-//		// FileSystemResource file = new FileSystemResource(new
-//		// File("classpath:android.png"));
-//
-//		// Resource resource = new ClassPathResource("android.png");
-//		// InputStream input = resource.getInputStream();
-//
-//		// ResourceUtils.getFile("classpath:android.png");
-//
-//		helper.addAttachment("my_photo.png", new ClassPathResource("ms1.png"));
-//
-//		mailSender.send(msg);
-//	}
+	public void sendEmailWithAttachment() throws MessagingException, IOException {
+
+		MimeMessage msg = mailSender.createMimeMessage();
+
+		// true = multipart message
+		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+		helper.setTo("1@gmail.com");
+
+		helper.setSubject("Testing from Spring Boot");
+
+		// default = text/plain
+		// helper.setText("Check attachment for image!");
+
+		// true = text/html
+		helper.setText("<h1>Check attachment for image!</h1>", true);
+
+		// FileSystemResource file = new FileSystemResource(new
+		// File("classpath:android.png"));
+
+		// Resource resource = new ClassPathResource("android.png");
+		// InputStream input = resource.getInputStream();
+
+		// ResourceUtils.getFile("classpath:android.png");
+
+		helper.addAttachment("my_photo.png", new ClassPathResource("ms1.png"));
+
+		mailSender.send(msg);
+	}
+	
+	public void sendInventoryStatustEmail(String prod) {
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setFrom("your.techshop@techshop.com");
+		msg.setTo("admin@gmail.com");
+		msg.setSubject("Inventory Status");
+		msg.setText( prod);
+		mailSender.send(msg);
+	}
 }

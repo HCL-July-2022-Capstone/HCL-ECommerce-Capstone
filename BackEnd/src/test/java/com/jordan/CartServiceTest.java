@@ -156,11 +156,14 @@ public class CartServiceTest {
 		Cart cart = new Cart(1, products, "TEST_USERNAME");
 		Optional<Cart> optionalCart = Optional.of(cart);
 	
-		Address shippingAddress = addressService.addAddress(new Address(1, "123 Test Blvd", "Test City", "Test State", "12345", "United States", "TEST_USERNAME"), "TEST_USERNAME");
-		Address billingAddress = addressService.addAddress(new Address(2, "456 Test Blvd", "Test City", "Test State", "67890", "United States", "TEST_USERNAME"), "TEST_USERNAME");
+		Address shippingAddress = new Address(1, "123 Test Blvd", "Test City", "Test State", "12345", "United States", "TEST_USERNAME"); 
+		Address billingAddress = new Address(2, "456 Test Blvd", "Test City", "Test State", "67890", "United States", "TEST_USERNAME"); 
 		
-		addressService.setBillingAddress(billingAddress, "TEST_USERNAME");
-		addressService.setShippingAddress(shippingAddress, "TEST_USERNAME");
+		addressService.addAddress(shippingAddress, "TEST_USERNAME");
+		addressService.addAddress(billingAddress, "TEST_USERNAME");
+
+		addressService.setBillingAddress(billingAddress);
+		addressService.setShippingAddress(shippingAddress);
 		
 		Orders order = new Orders(1, 2399.98f, "TEST_ORDERSTATUS", "TEST_USERNAME", products, shippingAddress, billingAddress );
 		

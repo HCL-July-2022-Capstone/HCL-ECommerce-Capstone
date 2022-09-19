@@ -5,6 +5,7 @@ import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
 import { ProfileComponent } from './profile/profile.component';
 
 
+
 import { ProductComponentComponent } from './component/product/product-component.component';
 import { ProductAddComponent } from './component/product-add/product-add.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
@@ -18,6 +19,12 @@ import { CheckoutComponent } from './component/checkout/checkout.component';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full',
+    component: HomepageComponent,
+  }, //homepage
   {
     path: 'login/callback',
     component: OktaCallbackComponent,
@@ -33,7 +40,12 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [OktaAuthGuard],
   },
-
+    {path:'', redirectTo: 'products/getallproducts', pathMatch:'full'},
+    {path:'getallproducts', component: ProductComponentComponent },
+    {path:'updateproduct', component: ProductComponentComponent},
+    {path:'addproduct', component: ProductAddComponent},
+    {path:'Search', component: ProductSearchComponent}
+  ,
   {
     path: 'products/:id',
     component: ProductDetailsComponent,
@@ -42,10 +54,10 @@ const routes: Routes = [
     path: 'category/:cat',
     component: CategoriesComponent,
   },
-  {
+  /*{
     path: 'search/:term',
     component: ProductSearchComponent,
-  },
+  },*/
   {
     path: 'addProduct',
     component: ProductAddComponent,
@@ -62,12 +74,7 @@ const routes: Routes = [
     path: 'products',
     component: ProductsListComponent, //grid list
   },
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-    component: HomepageComponent,
-  }, //homepage
+
   {path: 'checkout', component: CheckoutComponent},
   {
     path: '**',

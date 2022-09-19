@@ -20,8 +20,8 @@ export class ProductServiceService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) {
-  }
+
+  constructor(private http: HttpClient) {} //inject
 
   listAllProducts(): Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(
@@ -55,10 +55,15 @@ export class ProductServiceService {
       });
   }
 
+  //search
+  findByName(name: any): Observable<ProductModel[]>{
+    return this.http.get<ProductModel[]>(`${this.baseUrl}/products/Search/${name}`);
+  }
 
+  
   //get category
   getCategory(category: string): Observable<ProductModel> {
-    return this.http.get<ProductModel>(`${this.baseUrl}/category/${category}`);
+    return this.http.get<ProductModel>(`${this.baseUrl}/products/category/${category}`);
 
   }
 
@@ -86,4 +91,5 @@ export class ProductServiceService {
     return this.items;
 
   }
+  
 }

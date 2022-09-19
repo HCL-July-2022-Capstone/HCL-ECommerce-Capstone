@@ -53,7 +53,7 @@ public class AddressServiceTest {
 	@Test
 	void setShippingAddressTest() {
 		Address shippingAddress = new Address(1, "123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
-		addressService.setShippingAddress(shippingAddress, "TEST_USERNAME");
+		addressService.setShippingAddress(shippingAddress);
 		
 		assertEquals("123 Test Blvd", shippingAddress.getStreet());
 
@@ -62,7 +62,7 @@ public class AddressServiceTest {
 	@Test
 	void setBillingAddressTest() {
 		Address billingAddress = new Address(2, "456 Test Blvd", "Test City", "TEST", "67890", "United States", "TEST_USERNAME");
-		addressService.setBillingAddress(billingAddress, "TEST_USERNAME");
+		addressService.setBillingAddress(billingAddress);
 		
 		assertEquals("456 Test Blvd", billingAddress.getStreet());
 	}

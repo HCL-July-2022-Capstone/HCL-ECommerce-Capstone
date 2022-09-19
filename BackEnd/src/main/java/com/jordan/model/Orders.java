@@ -48,7 +48,7 @@ public class Orders {
 	private int orderId;
 	private float totalPrice;
 	private String orderStatus;
-	@Column(unique = true)
+	@Column
 	private String username;
 
 

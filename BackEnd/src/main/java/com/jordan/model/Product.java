@@ -34,21 +34,18 @@ public class Product {
 	private String categoryName;
 	private String image;
 		
+	
 	public void decreaseStock(int n) {
 		this.quantityOnHand -= n;
 	}
 	public void decreaseStock() {
 		this.quantityOnHand -= 1;
 	}
-	public Product(String productName, String productDescription, Float productPrice, int quantityOnHand,
-			String categoryName, String image) {
-		super();
-		this.productName = productName;
-		this.productDescription = productDescription;
-		this.productPrice = productPrice;
-		this.quantityOnHand = quantityOnHand;
-		this.categoryName = categoryName;
-		this.image = image;
+	@Override
+	public String toString(){
+		return "Product [id =" +productId+", productName ="+productName+", productDescription="+productDescription+","
+				+ "productPrice=" +productPrice+", quantityOnHand="+quantityOnHand+", categoryName="+categoryName+", image="+image+"]";
+				
 	}
 
 }
