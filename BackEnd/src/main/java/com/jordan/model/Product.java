@@ -40,5 +40,15 @@ public class Product {
 	public void decreaseStock() {
 		this.quantityOnHand -= 1;
 	}
-	
+	public Product(String productName, String productDescription, Float productPrice, int quantityOnHand,
+			String categoryName, String image) {
+		super();
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+		this.quantityOnHand = quantityOnHand;
+		this.categoryName = categoryName;
+		this.image = image;
+	}
+
 }

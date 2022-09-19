@@ -108,7 +108,7 @@ public class CartService {
 
 	private Cart getCart(Principal user) {
 		Optional<Cart> maybeCart = cartRepo.findByUsername(user.getName());
-		if (maybeCart.isEmpty()) {
+		if (!maybeCart.isPresent()) {
 			Cart newCart = new Cart();
 			newCart.setUsername(user.getName());
 			return newCart;

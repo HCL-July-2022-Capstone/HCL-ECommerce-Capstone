@@ -22,22 +22,29 @@ public class AddressService {
 	private Logger logger = LoggerFactory.getLogger(AddressService.class);
 	
 	public List<Address> getAddressesByUsername(String user){
-		return addressRepository.findAllByUsername(user).get();
+		return addressRepository.findAllByUsername(user);
 	}
 	
 	public void setShippingAddress(Address address, String userId) {
 		shippingAddress = address;
 		shippingAddress.setUsername(userId);
-		addressRepository.save(shippingAddress);
+		//addressRepository.save(shippingAddress);
 		logger.warn("SET shipping address");
 	}
 	
 	public void setBillingAddress(Address address, String userId) {
 		billingAddress = address;
 		billingAddress.setUsername(userId);
-		addressRepository.save(billingAddress);
+		//addressRepository.save(billingAddress);
 		logger.warn("set billing address");
 	}
+	
+    public Address addAddress(Address address, String username) {
+        address.setUsername(username);
+        if(!addressRepository.findById(address.getId()).isPresent()) addressRepository.save(address);
+        logger.warn("Added new address with ID "+address.getId());
+        return address;
+    }
 	
 	public Address getShippingAddress() {
 		return shippingAddress;
