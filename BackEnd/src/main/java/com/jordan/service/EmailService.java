@@ -44,13 +44,14 @@ public class EmailService {
 		mailSender.send(msg);
 	}
 	
-	void sendConfirmationEmail(String user, Orders order) {
+	public void sendConfirmationEmail(String user, Orders order) {
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(user);
 		msg.setSubject("Order #"+order.getOrderId());
 		msg.setText("Your order has been placed. Total: "+order.getTotalPrice());
+		mailSender.send(msg);
 	}
-	void sendEmailWithAttachment() throws MessagingException, IOException {
+	public void sendEmailWithAttachment() throws MessagingException, IOException {
 
 		MimeMessage msg = mailSender.createMimeMessage();
 
@@ -78,7 +79,7 @@ public class EmailService {
 
 		mailSender.send(msg);
 	}
-
+	
 	public void sendInventoryStatustEmail(String prod) {
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setFrom("your.techshop@techshop.com");

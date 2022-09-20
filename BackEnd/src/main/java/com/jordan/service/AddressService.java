@@ -22,7 +22,7 @@ public class AddressService {
 	private Logger logger = LoggerFactory.getLogger(AddressService.class);
 	
 	public List<Address> getAddressesByUsername(String user){
-		return addressRepository.findAllByUsername(user).get();
+		return addressRepository.findAllByUsername(user);
 	}
 	
 	public void addAddress(Address address, String username) {
