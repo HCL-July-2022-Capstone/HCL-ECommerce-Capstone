@@ -166,7 +166,7 @@ public class CartServiceTest {
 		addressService.setShippingAddress(shippingAddress);
 		
 		Orders order = new Orders(1, 2399.98f, "TEST_ORDERSTATUS", "TEST_USERNAME", products, shippingAddress, billingAddress );
-		
+			
 		when(mockPrincipal.getName()).thenReturn("TEST_USERNAME");
 		when(cartRepository.findByUsername("TEST_USERNAME")).thenReturn(optionalCart);
 		

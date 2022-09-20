@@ -79,4 +79,13 @@ public class AddressServiceTest {
 		verify(addressRepository, times(1)).save(address);
 	}
 	
+	@Test
+	void deleteAddressTest() {
+		Address address = new Address(1, "123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
+		
+		addressService.deleteAddress(address);
+		
+		verify(addressRepository, times(1)).delete(address);
+	}
+	
 }

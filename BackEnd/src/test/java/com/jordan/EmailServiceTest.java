@@ -88,15 +88,16 @@ public class EmailServiceTest {
 		assertEquals("Your order has been placed. Total: "+order.getTotalPrice(), inbox.get(0).getContent());
 	}
 	
-//	@Test
-//	void sendEmailWithAttachmentTest() throws MessagingException, IOException {
-//		emailService.sendEmailWithAttachment();
-//		
-//		List<Message> inbox = Mailbox.get("1@gmail.com");
-//		
-//		assertEquals(1, inbox.size());
-//		
-//	}
-
-
+	@Test
+	void sendInventoryStatusEmailTest() throws MessagingException, IOException {
+		String prod = "TEST_PROD";
+		
+		emailService.sendInventoryStatustEmail(prod);
+		
+		List<Message> inbox = Mailbox.get("admin@gmail.com");
+		
+		assertEquals(1, inbox.size());
+		assertEquals("Inventory Status" ,inbox.get(0).getSubject());
+		assertEquals(prod, inbox.get(0).getContent());
+	}
 }
