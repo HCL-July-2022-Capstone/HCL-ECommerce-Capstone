@@ -52,6 +52,10 @@ public class Address {
 	@Column
 	private String username;
 	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Orders order;
+	
 	public static final Address toCustomAddress(AddressStandardClaim standardAddress) {
 		Address newAddress = new Address();
 		newAddress.setStreet(standardAddress.getStreetAddress());

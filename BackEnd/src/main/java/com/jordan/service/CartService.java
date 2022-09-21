@@ -19,7 +19,8 @@ import com.jordan.service.OrdersService;
 
 @Service("cartService")
 @Component
-public class CartService {
+public class CartService
+{
 	private Logger logger = LoggerFactory.getLogger(CartService.class);
 
 	@Autowired
@@ -33,41 +34,47 @@ public class CartService {
 
 	@Autowired
 	EmailService emailService;
-	
+
 	@Autowired
 	AddressService addressService;
 
-	public Optional<Cart> getCartById(int id) {
+	public Optional<Cart> getCartById(int id)
+	{
 		return cartRepo.findById(id);
 	}
 
-	public void save(Cart cart) {
+	public void save(Cart cart)
+	{
 		cartRepo.save(cart);
 	}
 
-	public void addToCart(Principal user, int id) {
+	public void addToCart(Principal user, int id)
+	{
 		Cart cart = getCart(user);
 		cart.addToCart(productService.getProductById(id).get());
-		logger.info("added to "+user.getName()+"'s cart with id "+cart.getId());
+		logger.info("added to " + user.getName() + "'s cart with id " + cart.getId());
 		save(cart);
 
 	}
 
-	public List<Product> viewCart(Principal user) {
+	public List<Product> viewCart(Principal user)
+	{
 		return getCart(user).getProducts();
 
 	}
 
-	public void removeFromCart(Principal user, int id) {
+	public void removeFromCart(Principal user, int id)
+	{
 		Cart cart = getCart(user);
 		cart.removeFromCart(productService.getProductById(id).get());
 		save(cart);
 	}
-	
 
-	public void checkout(Principal user) {
+	public void checkout(Principal user)
+	{
 		Cart cart = getCart(user);
-		if(cart.getProducts().isEmpty()) {
+		if (cart.getProducts().isEmpty())
+		{
 			logger.error("Cart is empty, cannot check out");
 			return;
 		}
@@ -80,11 +87,14 @@ public class CartService {
 		order.setTotalPrice(cart.getTotalPrice());
 		order.setOrderStatus("Order Placed");
 		// TODO let the user select their address on the front end
-		//on the frontend, user should have input addresses on initial checkout page before hitting button
-		//and it should be saved in the addressService (and in the repository)
-		//frontend calls /setBillingAddress and /setCheckingAddress on a form in checkout to do this
-	
-		if(addressService.getBillingAddress() == null || addressService.getShippingAddress() == null) {
+		// on the frontend, user should have input addresses on initial checkout page
+		// before hitting button
+		// and it should be saved in the addressService (and in the repository)
+		// frontend calls /setBillingAddress and /setCheckingAddress on a form in
+		// checkout to do this
+
+		if (addressService.getBillingAddress() == null || addressService.getShippingAddress() == null)
+		{
 			logger.error("User tried to check out without setting addresses");
 			return;
 		}
@@ -92,7 +102,8 @@ public class CartService {
 		order.setShippingAddress(addressService.getShippingAddress());
 
 		// lower stock of each item - works
-		order.getProducts().forEach(product -> {
+		order.getProducts().forEach(product ->
+		{
 			product.decreaseStock();
 			productService.save(product);
 		});
@@ -103,18 +114,18 @@ public class CartService {
 		save(cart);
 		emailService.sendConfirmationEmail(user.getName(), order);
 		return;
-
 	}
 
-	private Cart getCart(Principal user) {
+	private Cart getCart(Principal user)
+	{
 		Optional<Cart> maybeCart = cartRepo.findByUsername(user.getName());
-		if (maybeCart.isEmpty()) {
+		if (maybeCart.isEmpty())
+		{
 			Cart newCart = new Cart();
 			newCart.setUsername(user.getName());
 			return newCart;
 		} else
 			return maybeCart.get();
 	}
-	
-	
+
 }
