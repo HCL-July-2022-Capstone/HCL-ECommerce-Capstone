@@ -20,6 +20,12 @@ import { CheckoutComponent } from './component/checkout/checkout.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full',
+    component: HomepageComponent,
+  }, //homepage
+  {
     path: 'login/callback',
     component: OktaCallbackComponent,
   },
@@ -68,12 +74,7 @@ const routes: Routes = [
     path: 'products',
     component: ProductsListComponent, //grid list
   },
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-    component: HomepageComponent,
-  }, //homepage
+
   {path: 'checkout', component: CheckoutComponent},
   {
     path: '**',
