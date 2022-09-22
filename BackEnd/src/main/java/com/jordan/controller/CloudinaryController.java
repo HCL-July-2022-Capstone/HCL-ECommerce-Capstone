@@ -13,10 +13,11 @@ import com.jordan.service.CloudinaryService;
 public class CloudinaryController {
 	private final CloudinaryService CloudinaryService = new CloudinaryService();
 
-//	@PostMapping("/upload")
-//	public String uploadFile(@RequestParam("file") MultipartFile f) {
-//        String url = CloudinaryService.uploadFile(f);
-//        return "File uploaded successfully: File path :  " + url;
-//    }
+
+	@PostMapping("/upload")
+	public String uploadFile(@RequestParam("file") MultipartFile f) {
+        String url = CloudinaryService.uploadFile(f);
+        return "File uploaded successfully: File path :  " + url;
+    }
 
 }

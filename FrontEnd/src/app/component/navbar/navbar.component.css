@@ -141,6 +141,7 @@ a:hover {
   line-height: 0 !important;
   padding-left: 85%;
   padding-right: 5%;
+  /*background-color: white;*/
 }
 
 .navbar-expand-lg {

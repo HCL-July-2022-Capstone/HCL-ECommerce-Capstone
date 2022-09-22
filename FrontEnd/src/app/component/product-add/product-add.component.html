@@ -87,21 +87,15 @@
         (click)="saveProduct()"
         class="{{
           update
-            ? 'btn btn-success'
-            : 'btn btn-primary'
+            ? 'w-100 btn btn-success btn-lg'
+            : 'w-100 btn btn-primary btn-lg'
         }}"
+        routerLink="/getAllProducts"
         type="submit"
       >
         {{ update ? "Update Product" : "Add Product" }}
       </button>
-
-      <button (click)="myfunc()" class="btn btn-primary">
-        Products List
-      </button>
     </form>
   </div>
 </div>
-
-<!-- ? 'w-100 btn btn-success btn-lg' -->
-<!-- : 'w-100 btn btn-primary btn-lg' <-&#45;&#45;add product button -->
 <!-- </div> -->
