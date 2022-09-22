@@ -40,7 +40,7 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [OktaAuthGuard],
   },
-    {path:'', redirectTo: 'products/getallproducts', pathMatch:'full'},
+    //{path:'', redirectTo: 'products/getallproducts', pathMatch:'full'},
     {path:'getallproducts', component: ProductComponentComponent },
     {path:'updateproduct', component: ProductComponentComponent},
     {path:'addproduct', component: ProductAddComponent},

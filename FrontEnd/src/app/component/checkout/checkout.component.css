@@ -124,7 +124,6 @@ input:focus::-webkit-input-placeholder
 .btn:focus{
     box-shadow: none;
     outline: none;
-    box-shadow: none;
     color: white;
     -webkit-box-shadow: none;
     -webkit-user-select: none;
@@ -146,3 +145,4 @@ a:hover{
     background-position-x: 95%;
     background-position-y: center;
 }
+
