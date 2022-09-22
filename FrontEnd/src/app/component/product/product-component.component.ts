@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ProductServiceService } from '../../service/product-service.service';
 import { ProductModel } from '../../model/product-model.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-product-component',
@@ -67,11 +68,16 @@ export class ProductComponentComponent implements OnInit {
 
 
    //addToCart
-    addToCart(product: ProductModel): void {
-      this.productService.addToCart(product.productId, product);
-      window.alert('product has been added to the cart!');
+    addItem(id): void {
+       let payload = {
+            productId: id
+          };
+           this.productService.addToCart(payload).subscribe(() => {
+                this.listAllProducts();
+                alert('Product Added');
+              });
     }
-    
+
 
 
 }

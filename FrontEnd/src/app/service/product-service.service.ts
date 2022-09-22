@@ -21,7 +21,7 @@ export class ProductServiceService {
   };
 
 
-  constructor(private http: HttpClient) {} //inject
+  constructor(public http: HttpClient) {} //inject
 
   listAllProducts(): Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(
@@ -60,7 +60,7 @@ export class ProductServiceService {
     return this.http.get<ProductModel[]>(`${this.baseUrl}/products/Search/${name}`);
   }
 
-  
+
   //get category
   getCategory(category: string): Observable<ProductModel> {
     return this.http.get<ProductModel>(`${this.baseUrl}/products/category/${category}`);
@@ -68,14 +68,16 @@ export class ProductServiceService {
   }
 
   //add items to cart
-
-  addToCart(id: number, productModel: ProductModel): void {
+ addToCart(payload) {
+    return this.http.post(`${this.baseUrl}/checkout`, payload);
+  }
+ /* addToCart(id: number, productModel: ProductModel): void {
     this.http
     .post<ProductModel>(`${this.baseUrl}/cart/add/${id}`, productModel)
     .subscribe((response) => {
       console.log(response);
     })
-  }
+  }*/
 
   checkout(){
     this.http.post(`${this.baseUrl}/cart/checkout`,"").subscribe((response) => {
@@ -83,13 +85,13 @@ export class ProductServiceService {
     })
   }
   getItems() {
-    return this.items;
+    return this.http.get(`${this.baseUrl}/checkout`);
   }
-
+increaseQty(payload) {
+    return this.http.post(`${this.baseUrl}/cart`, payload);
+  }
   clearCart() {
-    this.items = [];
-    return this.items;
-
+        return this.http.delete(`${this.baseUrl}/checkout/empty-cart`);
   }
-  
+
 }

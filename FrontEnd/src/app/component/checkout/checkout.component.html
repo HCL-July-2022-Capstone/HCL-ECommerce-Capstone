@@ -1,8 +1,42 @@
 <head></head>
-<div class="cart-item" *ngFor="let item of items">
-  <span>{{ item.productName }}</span>
-  <span>{{ item.productPrice | currency }}</span>
-</div>
+<section>
+  <div class="spacer">
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-lg-9">
+          <div class="row shop-listing">
+            <table class="table shop-table" *ngIf="carts">
+              <tr>
+                <th class="b-0">Name</th>
+                <th class="b-0">Price</th>
+                <th class="b-0">Quantity</th>
+                <th class="b-0 text-right">Total Price</th>
+              </tr>
+              <tr *ngFor="let item of carts.items">
+                <td>{{ item.productId.name }}</td>
+                <td>{{ item.productId.price }}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm" (click)="incQTY(item.productId._id,1)">+</button>
+                  {{ item.quantity }}
+                  <button class="btn btn-primary btn-sm">-</button>
+                </td>
+                <td class="text-right">
+                  <h5 class="font-medium m-b-30">{{ item.total }}</h5>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3" align="right">Subtotal :{{ carts.subTotal }}</td>
+                <td colspan="4" align="right">
+                  <button class="btn btn-danger" (click)="emptyCart()">Empty Cart</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <div class = "row align-items start">
   <div id = "col">
     <app-address-list (onAddNewAddress)="toggleNewAddress = ! toggleNewAddress"></app-address-list>
