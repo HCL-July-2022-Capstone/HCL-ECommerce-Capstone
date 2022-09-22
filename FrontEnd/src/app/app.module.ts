@@ -1,8 +1,6 @@
-
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
-
 
 import {OKTA_CONFIG, OktaAuthModule} from '@okta/okta-angular';
 import {OktaAuth} from '@okta/okta-auth-js';
@@ -13,8 +11,6 @@ import {ProfileComponent} from './profile/profile.component';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth.interceptor';
-
-
 
 import {ProductComponentComponent} from './component/product/product-component.component';
 import {ProductSearchComponent} from './component/product-search/product-search.component';
@@ -33,11 +29,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxScrollTopModule} from "ngx-scrolltop";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { CheckoutComponent } from './component/checkout/checkout.component';
-import { AddressAddComponent } from './component/address/address-add.component';
-import { AddressListComponent } from './component/address/address-list.component';
 
-
+import {CheckoutComponent} from './component/checkout/checkout.component';
+import {AddressAddComponent} from './component/address/address-add.component';
+import {AddressListComponent} from './component/address/address-list.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -77,13 +74,13 @@ const oktaAuth = new OktaAuth({
     MatInputModule,
     MatButtonToggleModule,
     ReactiveFormsModule,
-        RouterModule.forRoot([
-          { path: '', component: ProductComponentComponent },
-          { path: 'product/:ProductModel', component: ProductComponentComponent },
-          { path: 'checkout', component: CheckoutComponent },
-          { path: 'addAddress', component: AddressAddComponent}
-        ])
-    ],
+    RouterModule.forRoot([
+      {path: '', component: ProductComponentComponent},
+      {path: 'product/:ProductModel', component: ProductComponentComponent},
+      {path: 'checkout', component: CheckoutComponent},
+      {path: 'addAddress', component: AddressAddComponent}
+    ])
+  ],
 
   providers: [
     {
