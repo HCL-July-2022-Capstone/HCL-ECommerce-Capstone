@@ -30,10 +30,22 @@ p {
   /*margin: 0 16px;*/
 }
 
+img {
+  height: 45px;
+  width: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 0!important;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding-top: 12px;
+}
+
 .content {
   display: flex;
   /*margin: 32px auto;*/
-  padding: 0 16px;
+  /*padding: 0 16px;*/
   max-width: 960px;
   flex-direction: column;
   align-items: center;
@@ -104,7 +116,7 @@ a,
 a:visited,
 a:hover {
   /*color: #095661;*/
-  color: whitesmoke!important;
+  color: whitesmoke !important;
   text-decoration: none;
 }
 
@@ -112,30 +124,27 @@ a:hover {
   color: #2d8c9e;
 }
 
-.cart{
+.cart {
   margin-top: 6px;
 }
 
-.navbar{
-  padding: 0!important;
-  margin: 0!important;
-  min-width: 100%!important;
+.navbar {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 100% !important;
 }
 
-.navbar-toggler{
+.navbar-toggler {
   outline: none;
   border: none;
   color: transparent;
-  line-height: 0!important;
+  line-height: 0 !important;
   padding-left: 85%;
   padding-right: 5%;
 }
 
 .navbar-expand-lg {
-  display: inline-block!important;
-  /*background-color: white;*/
-  /*font-weight: 500;*/
-  /*text-align: center;*/
+  display: inline-block !important;
   -webkit-transition: all 0.4s ease-out 0s;
   transition: all 0.4s ease-out 0s;
   background: -webkit-gradient(linear, left top, right top, from(#33c8c1), color-stop(50%, #119bd2), to(#33c8c1));
