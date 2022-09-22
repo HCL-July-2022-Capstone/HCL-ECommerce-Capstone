@@ -65,15 +65,5 @@ public class Address {
 		newAddress.setCountry(standardAddress.getCountry());
 		return newAddress;
 	}
-
-	public Address(String street, String city, String state, String zipcode, String country, String username) {
-		super();
-		this.street = street;
-		this.city = city;
-		this.state = state;
-		this.zipcode = zipcode;
-		this.country = country;
-		this.username = username;
-	}
 		
 }

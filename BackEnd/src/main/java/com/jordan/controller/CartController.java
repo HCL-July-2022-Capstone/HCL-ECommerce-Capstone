@@ -65,5 +65,24 @@ public class CartController {
 		cartService.checkout(user);
 	}
 	
-
+	@PostMapping("/setBillingAddress")
+	public void setBillingAddress(@RequestBody Address address, Principal user) {
+		addressService.setBillingAddress(address, user.getName());
+	}
+	
+	@PostMapping("/setShippingAddress")
+	public void setShippingAddress(@RequestBody Address address, Principal user) {
+		addressService.setShippingAddress(address, user.getName());
+	}
+	
+	@PostMapping("/setAddress")
+	public void setAddress(@RequestBody Address address, Principal user) {
+		addressService.setShippingAddress(address, user.getName());
+		addressService.setBillingAddress(address, user.getName());
+	}
+	
+	@GetMapping("/getAddresses")
+	public List<Address> getAddresses(Principal user){
+		return addressService.getAddressesByUsername(user.getName());
+	}
 }
