@@ -1,25 +1,19 @@
-
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 //import
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ProductModel} from '../model/product-model.model';
 
 @Injectable({
   providedIn: 'root',
 })
-//Step 1 //step 2 in component
+
 export class ProductServiceService {
 
   items: ProductModel[] = [];
-  //to invoke as parameter inside get method
-  private baseUrl = 'http://localhost:8080';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
 
+  private baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {} //inject
 
@@ -60,15 +54,12 @@ export class ProductServiceService {
     return this.http.get<ProductModel[]>(`${this.baseUrl}/products/Search/${name}`);
   }
 
-  
   //get category
   getCategory(category: string): Observable<ProductModel> {
     return this.http.get<ProductModel>(`${this.baseUrl}/products/category/${category}`);
-
   }
 
   //add items to cart
-
   addToCart(id: number, productModel: ProductModel): void {
     this.http
     .post<ProductModel>(`${this.baseUrl}/cart/add/${id}`, productModel)
@@ -82,6 +73,7 @@ export class ProductServiceService {
       console.log(response);
     })
   }
+
   getItems() {
     return this.items;
   }
@@ -89,7 +81,5 @@ export class ProductServiceService {
   clearCart() {
     this.items = [];
     return this.items;
-
   }
-  
 }

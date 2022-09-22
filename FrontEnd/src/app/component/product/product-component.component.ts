@@ -1,9 +1,9 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { ProductServiceService } from '../../service/product-service.service';
 import { ProductModel } from '../../model/product-model.model';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-component',
@@ -12,7 +12,6 @@ import { ProductModel } from '../../model/product-model.model';
 })
 //step 2 function: all products from service //step 1 is in service
 export class ProductComponentComponent implements OnInit {
-  // @Input() viewMode = false;
 
   @Input() currentProduct: ProductModel = {
     categoryName: '',
@@ -28,7 +27,7 @@ export class ProductComponentComponent implements OnInit {
   data: ProductModel | undefined;
 
   constructor(private productService: ProductServiceService,
-  private route: ActivatedRoute) {}
+  private snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.listAllProducts(); //only for void methods
@@ -43,14 +42,21 @@ export class ProductComponentComponent implements OnInit {
 
   //delete
   deleteProductById(product: ProductModel): void {
-    this.productModel = this.productModel.filter((data) => data !== product);
+    this.productModel = this.productModel
+      .filter((data) =>
+        data !== product);
     this.productService.deleteById(product.productId);
-  }
 
+    //pop up message
+    this.snackbar.open(
+      'Product has been deleted!', '',
+      {
+        duration: 1500
+      });
+  }
 
   // save update
   save(): void {
-    //body
     const data = {
       productId: this.currentProduct.productId,
       productName: this.currentProduct.productName,
@@ -65,14 +71,17 @@ export class ProductComponentComponent implements OnInit {
     this.productService.update(data);
   }
 
-
    //addToCart
     addToCart(product: ProductModel): void {
       this.productService.addToCart(product.productId, product);
-      window.alert('product has been added to the cart!');
+      // window.alert('product has been added to the cart!');
+
+      //pop up message
+      this.snackbar.open(
+        'Product has been added to the cart!', '',
+        {
+          duration: 1500
+        });
     }
-    
-
-
 }
 

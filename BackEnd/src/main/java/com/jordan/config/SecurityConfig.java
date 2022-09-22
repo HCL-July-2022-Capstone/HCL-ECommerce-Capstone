@@ -16,7 +16,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
-import com.google.common.base.Predicates;
+//import com.google.common.base.Predicates;
 import com.jordan.service.EmailService;
 import com.okta.spring.boot.oauth.Okta;
 
@@ -35,18 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 
 	
-	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
-				.build();
-	}
+//	@Bean
+//	public Docket api() {
+//		return new Docket(DocumentationType.SWAGGER_2).select()
+//				.apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
+//				.build();
+//	}
 	
-	public void addResourceHandler(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources");
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars");
-		
-	}
+//	public void addResourceHandler(ResourceHandlerRegistry registry) {
+//		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources");
+//		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars");
+//		
+//	}
 	
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
@@ -75,20 +75,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //         .antMatchers("/user/**").authenticated().and().httpBasic().and().formLogin();
 	}
 	
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+//        return source;
+//    }
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 	@Bean
 	public EmailService emailService() {
 		return new EmailService();
 	}
-
-	
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductModel } from '../../model/product-model.model';
 import { ProductServiceService } from '../../service/product-service.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {refreshSession} from "@okta/okta-auth-js/lib/session";
 
 @Component({
   selector: 'app-product-add',
@@ -26,7 +28,8 @@ export class ProductAddComponent implements OnInit {
 
   constructor(
     private productService: ProductServiceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -59,5 +62,17 @@ export class ProductAddComponent implements OnInit {
 
     console.log(data);
     this.productService.addProduct(data);
+
+    //pop up message
+    this.snackbar.open(
+      'Product list has been updated!', '',
+      {
+      duration: 1500
+    });
   }
+
+  myfunc() {
+    location.replace("http://localhost:4200/getAllProducts");
+  }
+
 }

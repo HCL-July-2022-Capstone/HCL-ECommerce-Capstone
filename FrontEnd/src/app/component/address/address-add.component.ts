@@ -7,7 +7,8 @@ import { ProductServiceService } from '../../service/product-service.service';
 
 @Component({
   selector: 'app-address-add',
-  templateUrl: './address-add.component.html'
+  templateUrl: './address-add.component.html',
+  styleUrls: ['./address.component.css'] //newly added
 })
 export class AddressAddComponent implements OnInit {
   addressModel: AddressModel[] = [];

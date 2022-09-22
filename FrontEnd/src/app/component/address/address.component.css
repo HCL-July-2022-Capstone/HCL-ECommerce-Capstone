@@ -1,0 +1,31 @@
+/*newly created css*/
+/*checkout button*/
+.main-btn {
+  text-decoration: none;
+  background: -webkit-gradient(linear, left top, right top, from(#fe8464), color-stop(50%, #fe6e9a), to(#fe8464));
+  background: linear-gradient(to right, #fe8464 0%, #fe6e9a 50%, #fe8464 100%);
+  background-size: 200%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  margin-top: 40px;
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 0;
+  color: #fff!important;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/*checkout button hover*/
+.main-btn:hover {
+  background-position: right center;
+  text-decoration: none;
+}

@@ -4,7 +4,7 @@ import { ProductServiceService } from 'src/app/service/product-service.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  //styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'] //previously commented out
 })
 export class CheckoutComponent implements OnInit {
 
@@ -20,5 +20,4 @@ export class CheckoutComponent implements OnInit {
   checkout(): void{
     this.productService.checkout();
   }
-
 }

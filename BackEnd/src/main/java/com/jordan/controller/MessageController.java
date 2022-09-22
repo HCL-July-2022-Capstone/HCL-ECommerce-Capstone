@@ -1,17 +1,17 @@
 package com.jordan.controller;
 
-import com.jordan.model.Product;
-import com.jordan.repository.ProductRepository;
-import com.jordan.service.EmailService;
+import java.util.List;
+
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.jordan.model.Product;
+import com.jordan.repository.ProductRepository;
+import com.jordan.service.EmailService;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -31,15 +31,6 @@ public class MessageController {
     private MessageController(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
-
-//    @GetMapping("hello")
-//    public void hello() {
-//        System.out.println("Sending message...");
-//        rabbitTemplate.convertAndSend(topicExchangeName,
-//                "foo.bar.baz",
-//                "Hello from RabbitMQ!");
-//    }
-
 
     @GetMapping("/messages")
     public void inventory() {
