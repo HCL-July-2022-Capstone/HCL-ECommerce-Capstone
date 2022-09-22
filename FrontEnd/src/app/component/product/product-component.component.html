@@ -1,5 +1,4 @@
-<!-- <div *ngIf="Admin"> -->
-<h3 class="text-center">Products List</h3>
+<h2 class="text-center">Products List</h2>
 
 <div class="container">
   <div class="col-12">
@@ -30,7 +29,6 @@
           <td><img alt="image" src="{{ productModel.image }}" /></td>
           <td>
             <div *ngIf="productModel">
-<!--               <a href="http://localhost:4200/getAllProducts"> -->
                 <button
                   (click)="deleteProductById(productModel)"
                   class="delete"
@@ -39,7 +37,6 @@
                 >
                   Delete
                 </button>
-<!--               </a> -->
             </div>
           </td>
           <td>
@@ -69,6 +66,5 @@
       </tbody>
     </table>
   </div>
-
 </div>
 

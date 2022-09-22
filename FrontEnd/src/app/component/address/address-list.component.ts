@@ -1,4 +1,4 @@
-import {Component, EventEmitter, NgModule, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { AddressModel } from 'src/app/model/address.model';
 import { AddressService } from 'src/app/service/address.service';
 

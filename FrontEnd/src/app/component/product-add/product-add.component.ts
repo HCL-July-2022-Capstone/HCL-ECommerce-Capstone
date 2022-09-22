@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductModel } from '../../model/product-model.model';
 import { ProductServiceService } from '../../service/product-service.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {refreshSession} from "@okta/okta-auth-js/lib/session";
 
 @Component({
   selector: 'app-product-add',
