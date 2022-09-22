@@ -2,8 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AddressModel } from 'src/app/model/address.model';
 import { AddressService } from 'src/app/service/address.service';
-import { ProductModel } from '../../model/product-model.model';
-import { ProductServiceService } from '../../service/product-service.service';
 
 @Component({
   selector: 'app-address-add',
