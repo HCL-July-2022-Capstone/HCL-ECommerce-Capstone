@@ -104,7 +104,7 @@ a,
 a:visited,
 a:hover {
   /*color: #095661;*/
-  color: whitesmoke!important;
+  color: whitesmoke;
   text-decoration: none;
 }
 
@@ -125,10 +125,9 @@ a:hover {
 .navbar-toggler{
   outline: none;
   border: none;
-  color: transparent;
-  line-height: 0!important;
   padding-left: 85%;
   padding-right: 5%;
+  /*background-color: white;*/
 }
 
 .navbar-expand-lg {

@@ -752,7 +752,7 @@ h2.title {
 }
 
 .footer-about .text {
-  color: #fff!important;
+  color: #fff;
   line-height: 30px;
   margin-top: 30px;
 }
@@ -761,7 +761,7 @@ h2.title {
   font-size: 24px;
   font-weight: 700;
   /*color: #fff;*/
-  color: #2E2E2E!important;
+  color: #2E2E2E;
 }
 
 .link-wrapper {
@@ -790,13 +790,13 @@ h2.title {
 
 .link-wrapper .link li a {
   font-size: 16px;
-  /*color: #2E2E2E!important;*/
+  color: #2E2E2E;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
 
 .link-wrapper .link li a:hover {
-  color: #eeeeee!important;
+  color: #eeeeee;
 }
 
 .footer-contact .contact, h4.name {
@@ -832,36 +832,36 @@ h2.title {
   transition: all 0.3s ease-out 0s;
 }
 
-/*!*===== BACK TO TOP =====*!*/
-/*.back-to-top {*/
-/*  font-size: 20px;*/
-/*  color: #fff;*/
-/*  position: fixed;*/
-/*  right: 20px;*/
-/*  bottom: 20px;*/
-/*  width: 40px;*/
-/*  height: 40px;*/
-/*  border-radius: 5px;*/
-/*  background: -webkit-gradient(linear, left top, right top, from(#fe8464), color-stop(50%, #fe6e9a), to(#fe8464));*/
-/*  background: linear-gradient(to right, #fe8464 0%, #fe6e9a 50%, #fe8464 100%);*/
-/*  background-size: 200%;*/
-/*  text-align: center;*/
-/*  z-index: 99;*/
-/*  -webkit-transition: all 0.3s ease-out 0s;*/
-/*  transition: all 0.3s ease-out 0s;*/
-/*  display: none;*/
-/*  -webkit-box-align: center;*/
-/*  -ms-flex-align: center;*/
-/*  align-items: center;*/
-/*  -webkit-box-pack: center;*/
-/*  -ms-flex-pack: center;*/
-/*  justify-content: center;*/
-/*}*/
+/*===== BACK TO TOP =====*/
+.back-to-top {
+  font-size: 20px;
+  color: #fff;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background: -webkit-gradient(linear, left top, right top, from(#fe8464), color-stop(50%, #fe6e9a), to(#fe8464));
+  background: linear-gradient(to right, #fe8464 0%, #fe6e9a 50%, #fe8464 100%);
+  background-size: 200%;
+  text-align: center;
+  z-index: 99;
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  display: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
 
-/*.back-to-top:hover {*/
-/*  color: #fff;*/
-/*  background-position: right center;*/
-/*}*/
+.back-to-top:hover {
+  color: #fff;
+  background-position: right center;
+}
 
 /* ======================
     DEFAULT CSS
