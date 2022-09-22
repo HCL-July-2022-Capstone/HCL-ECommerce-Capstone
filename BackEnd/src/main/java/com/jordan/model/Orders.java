@@ -48,12 +48,12 @@ public class Orders {
 	private int orderId;
 	private float totalPrice;
 	private String orderStatus;
-	@Column(unique = true)
+	@Column
 	private String username;
 
 
 
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "orders_products",	
 	joinColumns = @JoinColumn(name = "orderId"),
 	inverseJoinColumns = @JoinColumn(name = "productId")

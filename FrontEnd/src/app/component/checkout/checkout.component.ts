@@ -21,7 +21,8 @@ export class CheckoutComponent implements OnInit {
   totalQuantity: number = 0;
 
   items = this.productService.getItems();
-
+  toggleNewAddress: Boolean = false;
+  
   stripe = Stripe(environment.stripePublishableKey);
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
