@@ -9,7 +9,7 @@
           <th>Id</th>
           <th>Name</th>
           <th>Description</th>
-          <th>Price</th>
+          <th>Price($)</th>
           <th>Quantity</th>
           <th>Category</th>
           <th>Image</th>
@@ -23,12 +23,16 @@
           <td>{{ productModel.productId }}</td>
           <td>{{ productModel.productName }}</td>
           <td>{{ productModel.productDescription }}</td>
-          <td>${{ productModel.productPrice }}</td>
+          <td>{{ productModel.productPrice }}</td>
           <td>{{ productModel.quantityOnHand }}</td>
           <td>{{ productModel.categoryName }}</td>
           <td><img alt="image" src="{{ productModel.image }}" /></td>
           <td>
             <div *ngIf="productModel">
+<<<<<<< HEAD
+=======
+              <a href="http://localhost:4200/getAllProducts">
+>>>>>>> parent of 3f49945 (Search, Styling)
                 <button
                   (click)="deleteProductById(productModel)"
                   class="delete"
@@ -37,6 +41,10 @@
                 >
                   Delete
                 </button>
+<<<<<<< HEAD
+=======
+              </a>
+>>>>>>> parent of 3f49945 (Search, Styling)
             </div>
           </td>
           <td>
