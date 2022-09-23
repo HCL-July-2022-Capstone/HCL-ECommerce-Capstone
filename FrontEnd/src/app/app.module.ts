@@ -35,6 +35,13 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { AddressAddComponent } from './component/address/address-add.component';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { AddressListComponent } from './component/address/address-list.component';
+=======
+>>>>>>> parent of 3019b0f (Revert "Merge pull request #28 from HCL-July-2022-Capstone/Stripe")
+=======
+>>>>>>> parent of eeba47b (Merge branch 'main' into Stripe)
 
 
 
