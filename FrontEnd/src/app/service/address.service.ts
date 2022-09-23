@@ -22,31 +22,21 @@ export class AddressService {
  
   getAddresses(): Observable<AddressModel[]> {
     return this.http.get<AddressModel[]>(
-      `${this.baseUrl}/address/getAddresses`
+      `${this.baseUrl}/cart/getAddresses`
     ); 
   }
 
-  addAddress(addressModel: AddressModel){
-    this.http.post<AddressModel>(`${this.baseUrl}/address/addAddress`, addressModel).subscribe((response) => console.log(response))
-  }
-
   //add new addresses and set it. must be done before checkout
-  setShippingAddress(addressModel: AddressModel) {
+  addShippingAddress(addressModel: AddressModel) {
     this.http
-      .post<AddressModel>(`${this.baseUrl}/address/setShippingAddress`, addressModel)
+      .post<AddressModel>(`${this.baseUrl}/cart/setShippingAddress`, addressModel)
       .subscribe((response) => console.log(response));
   }
 
-  setBillingAddress(addressModel: AddressModel) {
+  addBillingAddress(addressModel: AddressModel) {
     this.http
-      .post<AddressModel>(`${this.baseUrl}/address/setBillingAddress`, addressModel)
+      .post<AddressModel>(`${this.baseUrl}/cart/setBillingAddress`, addressModel)
       .subscribe((response) => console.log(response));
   }
-
-  deleteAddress(addressModel: AddressModel){
-    this.http.post<AddressModel>(`${this.baseUrl}/address/delete`, addressModel).subscribe((response) => console.log(response));
-  }
-
-
 
 }

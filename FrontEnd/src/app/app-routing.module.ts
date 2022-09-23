@@ -4,8 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
 import { ProfileComponent } from './profile/profile.component';
 
-
-
 import { ProductComponentComponent } from './component/product/product-component.component';
 import { ProductAddComponent } from './component/product-add/product-add.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
@@ -16,7 +14,6 @@ import { CategoriesComponent } from './component/categories/categories.component
 import { HomepageComponent } from './component/homepage/homepage.component';
 
 import { CheckoutComponent } from './component/checkout/checkout.component';
-
 
 const routes: Routes = [
   {
@@ -40,12 +37,17 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [OktaAuthGuard],
   },
-    //{path:'', redirectTo: 'products/getallproducts', pathMatch:'full'},
-    {path:'getallproducts', component: ProductComponentComponent },
-    {path:'updateproduct', component: ProductComponentComponent},
-    {path:'addproduct', component: ProductAddComponent},
-    {path:'Search', component: ProductSearchComponent}
-  ,
+  { path: '', redirectTo: 'products/getallproducts', pathMatch: 'full' },
+  { path: 'getallproducts', component: ProductComponentComponent },
+  { path: 'updateproduct', component: ProductComponentComponent },
+  { path: 'addproduct', component: ProductAddComponent },
+  { path: 'Search', component: ProductSearchComponent },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full',
+    component: HomepageComponent,
+  }, //homepage
   {
     path: 'products/:id',
     component: ProductDetailsComponent,
@@ -74,16 +76,11 @@ const routes: Routes = [
     path: 'products',
     component: ProductsListComponent, //grid list
   },
-
-  {path: 'checkout', component: CheckoutComponent},
+  { path: 'checkout', component: CheckoutComponent },
   {
     path: '**',
     component: PagenotfoundComponent, //Wild Card Route for 404 request
   },
-
-
-    
-
 ];
 
 @NgModule({

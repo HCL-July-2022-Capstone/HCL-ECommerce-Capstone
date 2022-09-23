@@ -1,4 +1,5 @@
-<h2 class="text-center">Products List</h2>
+<!-- <div *ngIf="Admin"> -->
+<h3 class="text-center">Products List</h3>
 
 <div class="container">
   <div class="col-12">
@@ -9,7 +10,7 @@
           <th>Id</th>
           <th>Name</th>
           <th>Description</th>
-          <th>Price</th>
+          <th>Price($)</th>
           <th>Quantity</th>
           <th>Category</th>
           <th>Image</th>
@@ -23,12 +24,13 @@
           <td>{{ productModel.productId }}</td>
           <td>{{ productModel.productName }}</td>
           <td>{{ productModel.productDescription }}</td>
-          <td>${{ productModel.productPrice }}</td>
+          <td>{{ productModel.productPrice }}</td>
           <td>{{ productModel.quantityOnHand }}</td>
           <td>{{ productModel.categoryName }}</td>
           <td><img alt="image" src="{{ productModel.image }}" /></td>
           <td>
             <div *ngIf="productModel">
+              <a href="http://localhost:4200/getAllProducts">
                 <button
                   (click)="deleteProductById(productModel)"
                   class="delete"
@@ -37,6 +39,7 @@
                 >
                   Delete
                 </button>
+              </a>
             </div>
           </td>
           <td>
@@ -66,5 +69,6 @@
       </tbody>
     </table>
   </div>
+
 </div>
 

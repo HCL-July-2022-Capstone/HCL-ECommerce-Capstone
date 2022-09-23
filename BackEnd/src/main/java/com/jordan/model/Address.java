@@ -52,6 +52,10 @@ public class Address {
 	@Column
 	private String username;
 	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Orders order;
+	
 	public static final Address toCustomAddress(AddressStandardClaim standardAddress) {
 		Address newAddress = new Address();
 		newAddress.setStreet(standardAddress.getStreetAddress());
@@ -60,16 +64,6 @@ public class Address {
 		newAddress.setZipcode(standardAddress.getPostalCode());
 		newAddress.setCountry(standardAddress.getCountry());
 		return newAddress;
-	}
-
-	public Address(String street, String city, String state, String zipcode, String country, String username) {
-		super();
-		this.street = street;
-		this.city = city;
-		this.state = state;
-		this.zipcode = zipcode;
-		this.country = country;
-		this.username = username;
 	}
 		
 }

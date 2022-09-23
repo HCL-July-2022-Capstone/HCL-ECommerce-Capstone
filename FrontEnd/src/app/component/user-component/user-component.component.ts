@@ -1,21 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {UserModel} from "../../model/user-model.model";
-import {UserServiceService} from "../../service/user-service.service";
-import {ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { UserModel } from '../../model/user-model.model';
+import { UserServiceService } from '../../service/user-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-component',
   templateUrl: './user-component.component.html',
-  styleUrls: ['./user-component.component.css']
+  styleUrls: ['./user-component.component.css'],
 })
 export class UserComponentComponent implements OnInit {
-
   userModel!: UserModel[];
   data: UserModel | undefined;
 
-  constructor(private userService: UserServiceService,
-              private route: ActivatedRoute) {
-  }
+  constructor(
+    private userService: UserServiceService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -31,8 +31,7 @@ export class UserComponentComponent implements OnInit {
   //get by id
   getById(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.userService.getUserId(id)
-      .subscribe((data) => this.data = data)
+    this.userService.getUserId(id).subscribe((data) => (this.data = data));
   }
 
   //update
@@ -42,5 +41,4 @@ export class UserComponentComponent implements OnInit {
     this.userModel = this.userModel.filter((data) => data !== userModel);
     this.userService.deleteUser(userModel.id);
   }
-
 }

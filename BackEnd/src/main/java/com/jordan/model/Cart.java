@@ -82,6 +82,6 @@ public class Cart {
 		return products.stream().map(i -> i.getProductPrice()).reduce((float)0, (a,b) -> a+b);
 	}
 	
-	
+
 
 }
