@@ -11,5 +11,5 @@ import com.jordan.model.Cart;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address,Integer> {
-	 Optional<List<Address>> findAllByUsername(String username);
+	 List<Address> findAllByUsername(String username);
 }
