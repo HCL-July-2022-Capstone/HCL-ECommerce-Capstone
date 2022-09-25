@@ -1,10 +1,9 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProductServiceService } from '../../service/product-service.service';
 import { ProductModel } from '../../model/product-model.model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-component',
@@ -28,8 +27,10 @@ export class ProductComponentComponent implements OnInit {
   productModel!: ProductModel[];
   data: ProductModel | undefined;
 
-  constructor(private productService: ProductServiceService,
-  private route: ActivatedRoute) {}
+  constructor(
+    private productService: ProductServiceService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.listAllProducts(); //only for void methods
@@ -48,7 +49,6 @@ export class ProductComponentComponent implements OnInit {
     this.productService.deleteById(product.productId);
   }
 
-
   // save update
   save(): void {
     //body
@@ -66,19 +66,8 @@ export class ProductComponentComponent implements OnInit {
     this.productService.update(data);
   }
 
-
-   //addToCart
-    addItem(id): void {
-       let payload = {
-            productId: id
-          };
-           this.productService.addToCart(payload).subscribe(() => {
-                this.listAllProducts();
-                alert('Product Added');
-              });
-    }
-
-
-
+  //addToCart
+  addItem(product): void {
+    this.productService.addToCart(product);
+  }
 }
-

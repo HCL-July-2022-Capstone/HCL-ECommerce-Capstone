@@ -48,9 +48,9 @@ public class CartService {
 		cartRepo.save(cart);
 	}
 
-	public void addToCart(Principal user, int id) {
+	public void addToCart(Principal user, Product prod) {
 		Cart cart = getCart(user);
-		cart.addToCart(productService.getProductById(id).get());
+		cart.addToCart(prod);
 		logger.info("added to "+user.getName()+"'s cart with id "+cart.getId());
 		save(cart);
 

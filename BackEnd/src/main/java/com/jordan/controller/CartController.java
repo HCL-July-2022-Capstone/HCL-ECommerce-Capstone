@@ -50,9 +50,10 @@ public class CartController {
 		return cartService.viewCart(user);
 	}
 	
-	@PostMapping("/add/{id}")
-	public void addToCart(Principal user, @PathVariable int id) {
-		cartService.addToCart(user, id);
+	@PostMapping("/add")
+	public void addToCart(Principal user, @RequestBody Product product) {
+		System.out.println(product);
+		cartService.addToCart(user, product);
 	}
 	
 	@DeleteMapping("/remove/{id}")
