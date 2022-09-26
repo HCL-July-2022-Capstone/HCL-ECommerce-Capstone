@@ -57,7 +57,7 @@ export class ProductServiceService {
 
   //get category
   getCategory(category: string): Observable<ProductModel> {
-    return this.http.get<ProductModel>(`${this.baseUrl}/category/${category}`);
+    return this.http.get<ProductModel>(`${this.baseUrl}/products/category/${category}`);
 
   }
 

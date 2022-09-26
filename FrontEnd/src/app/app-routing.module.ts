@@ -43,12 +43,6 @@ const routes: Routes = [
   { path: 'addproduct', component: ProductAddComponent },
   { path: 'Search', component: ProductSearchComponent },
   {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-    component: HomepageComponent,
-  }, //homepage
-  {
     path: 'products/:id',
     component: ProductDetailsComponent,
   },
@@ -77,6 +71,12 @@ const routes: Routes = [
     component: ProductsListComponent, //grid list
   },
   { path: 'checkout', component: CheckoutComponent },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full',
+    component: HomepageComponent,
+  }, //homepage
   {
     path: '**',
     component: PagenotfoundComponent, //Wild Card Route for 404 request

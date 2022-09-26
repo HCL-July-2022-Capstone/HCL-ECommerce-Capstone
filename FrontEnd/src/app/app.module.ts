@@ -30,14 +30,11 @@ import {HomepageComponent} from './component/homepage/homepage.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {NgxScrollTopModule} from "ngx-scrolltop";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { AddressAddComponent } from './component/address/address-add.component';
 import { StripePaymentComponent } from './component/stripe-payment/stripe-payment.component';
-
-
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -73,7 +70,6 @@ const oktaAuth = new OktaAuth({
     MatIconModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    NgxScrollTopModule,
     MatInputModule,
     MatButtonToggleModule,
     ReactiveFormsModule,

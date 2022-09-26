@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
       filter((s: AuthState) => !!s),
       map((s: AuthState) => s.isAuthenticated ?? false)
     );
+
   }
 
   public async signIn(): Promise<void> {
@@ -42,5 +43,6 @@ export class NavbarComponent implements OnInit {
   public async checkout(): Promise<void>{
     this._router.navigate(['/checkout']);
   }
+
 }
 
