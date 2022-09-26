@@ -5,7 +5,7 @@ import { AddressService } from 'src/app/service/address.service';
 @Component({
   selector: 'app-address-list',
   templateUrl: './address-list.component.html',
-  styleUrls: ['./address.component.css'] //newly added
+  // styleUrls: ['./address.component.css'] //newly added
 })
 
 

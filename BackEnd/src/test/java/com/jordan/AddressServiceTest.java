@@ -39,8 +39,8 @@ public class AddressServiceTest {
 	@Test
 	void getAddressesByUsernameTest() {
 		String username = "TEST_USERNAME";
-		Address address1 = new Address(1, "123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
-		Address address2 = new Address(2, "456 Test Blvd", "Test City", "TEST", "67890", "United States", "TEST_USERNAME");
+		Address address1 = new Address("123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
+		Address address2 = new Address("456 Test Blvd", "Test City", "TEST", "67890", "United States", "TEST_USERNAME");
 		List<Address> addressList = new ArrayList<>();
 		addressList.add(address1);
 		addressList.add(address2);
@@ -52,7 +52,7 @@ public class AddressServiceTest {
 	
 	@Test
 	void setShippingAddressTest() {
-		Address shippingAddress = new Address(1, "123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
+		Address shippingAddress = new Address("123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
 		addressService.setShippingAddress(shippingAddress);
 		
 		assertEquals("123 Test Blvd", shippingAddress.getStreet());
@@ -61,7 +61,7 @@ public class AddressServiceTest {
 	
 	@Test
 	void setBillingAddressTest() {
-		Address billingAddress = new Address(2, "456 Test Blvd", "Test City", "TEST", "67890", "United States", "TEST_USERNAME");
+		Address billingAddress = new Address("456 Test Blvd", "Test City", "TEST", "67890", "United States", "TEST_USERNAME");
 		addressService.setBillingAddress(billingAddress);
 		
 		assertEquals("456 Test Blvd", billingAddress.getStreet());
@@ -69,7 +69,7 @@ public class AddressServiceTest {
 	
 	@Test
 	void addAddressTest() {
-		Address address = new Address(1, "123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
+		Address address = new Address("123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
 		String username = "TEST_USERNAME";
 		addressService.addAddress(address, username);
 		
@@ -81,7 +81,7 @@ public class AddressServiceTest {
 	
 	@Test
 	void deleteAddressTest() {
-		Address address = new Address(1, "123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
+		Address address = new Address("123 Test Blvd", "Test City", "TEST", "12345", "United States", "TEST_USERNAME");
 		
 		addressService.deleteAddress(address);
 		

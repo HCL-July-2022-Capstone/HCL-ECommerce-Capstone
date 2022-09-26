@@ -25,7 +25,6 @@ import {CategoriesComponent} from './component/categories/categories.component';
 import {HomepageComponent} from './component/homepage/homepage.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxScrollTopModule} from "ngx-scrolltop";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";

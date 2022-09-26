@@ -74,8 +74,8 @@ public class EmailServiceTest {
 		products.add(product1);
 		products.add(product2);
 		
-		Address shippingAddress = new Address(1, "123 Test Blvd", "Test City", "Test State", "12345", "United States", "TEST_USER@jordan.com");
-		Address billingAddress = new Address(2, "456 Test Blvd", "Test City", "TEST", "67890", "United States", "TEST_USER@jordan.com");
+		Address shippingAddress = new Address("123 Test Blvd", "Test City", "Test State", "12345", "United States", "TEST_USER@jordan.com");
+		Address billingAddress = new Address("456 Test Blvd", "Test City", "TEST", "67890", "United States", "TEST_USER@jordan.com");
 		
 		Orders order = new Orders(1, 2399.98f, "TEST_ORDERSTATUS", "TEST_USER@jordan.com", products, shippingAddress, billingAddress);
 		
