@@ -35,6 +35,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { AddressAddComponent } from './component/address/address-add.component';
 import { StripePaymentComponent } from './component/stripe-payment/stripe-payment.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -72,6 +73,7 @@ const oktaAuth = new OktaAuth({
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonToggleModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: ProductComponentComponent },
