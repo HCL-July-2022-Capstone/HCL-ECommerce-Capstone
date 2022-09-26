@@ -19,7 +19,6 @@ export class CheckoutComponent implements OnInit {
   toggleNewAddress: Boolean = false;
   items: any;
   carts: any;
-  private totalItems: any;
 
   constructor(private productService: ProductServiceService) {
   }
