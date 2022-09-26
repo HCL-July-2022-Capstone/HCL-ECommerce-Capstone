@@ -1,9 +1,7 @@
-
-import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Injectable, Input} from '@angular/core';
 
 //import
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ProductModel} from '../model/product-model.model';
 
@@ -13,13 +11,11 @@ import {ProductModel} from '../model/product-model.model';
 //Step 1 //step 2 in component
 export class ProductServiceService {
 
-  items: ProductModel[] = [];
-  //to invoke as parameter inside get method
-  private baseUrl = 'http://localhost:8080';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
+  @Input()
+  quantity: number = 0;
 
+  private baseUrl = 'http://localhost:8080';
+  total: number = 0;
 
   constructor(private http: HttpClient) {} //inject
 
@@ -60,36 +56,54 @@ export class ProductServiceService {
     return this.http.get<ProductModel[]>(`${this.baseUrl}/products/Search/${name}`);
   }
 
-  
   //get category
   getCategory(category: string): Observable<ProductModel> {
-    return this.http.get<ProductModel>(`${this.baseUrl}/category/${category}`);
-
+    return this.http.get<ProductModel>(`${this.baseUrl}/products/category/${category}`);
   }
 
   //add items to cart
+  addItems(payload: any) {
+    this.http.post(`${this.baseUrl}/cart/`, payload)
+      .subscribe((data) => {
+        console.log(data);
+      });
+
+  }
 
   addToCart(id: number, productModel: ProductModel): void {
     this.http
-    .post<ProductModel>(`${this.baseUrl}/cart/add/${id}`, productModel)
-    .subscribe((response) => {
-      console.log(response);
-    })
+      .post<ProductModel>(`${this.baseUrl}/cart/add/${id}`, productModel)
+      .subscribe((response) => {
+        console.log(response);
+      })
   }
 
-  checkout(){
-    this.http.post(`${this.baseUrl}/cart/checkout`,"").subscribe((response) => {
-      console.log(response);
-    })
+  checkout() {
+    this.http
+      .post(`${this.baseUrl}/cart/checkout`, '')
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
+
   getItems() {
-    return this.items;
+    return this.http.get(`${this.baseUrl}/cart/view`);
+  }
+
+  increaseQty(payload: { productId: number; quantityOnHand: number; }) {
+    return this.http.post(`${this.baseUrl}/cart`, payload);
   }
 
   clearCart() {
-    this.items = [];
-    return this.items;
-
+    return this.http.delete(`${this.baseUrl}/checkout/empty-cart`);
   }
-  
+
+  // remove a single product
+  removeFromCart(id: number) {
+    this.http.delete<ProductModel>(`${this.baseUrl}/cart/remove/${id}`)
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
 }
