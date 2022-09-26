@@ -25,51 +25,55 @@ import com.jordan.service.ProductService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductServiceTest {
-	
+public class ProductServiceTest
+{
 	@Autowired
 	ProductService productService;
-	
+
 	@MockBean
 	ProductRepository productRepository;
-	
-	
+
 	@BeforeEach
-	public void setUp() {
+	public void setUp()
+	{
 		MockitoAnnotations.openMocks(this);
 	}
-	
+
 	@Test
-	void getAllProductsTest() {
-		when(productRepository.findAll()).thenReturn(Stream.of(
-				new Product(1, "Apple Laptop", "Apple Laptop Next Gen", 1099.99f, 20, "Laptop", "Image"),
-				new Product(2, "Dell Laptop", "Dell Laptop Next Gen", 1299.99f, 20, "Laptop", "Image"))
+	void getAllProductsTest()
+	{
+		when(productRepository.findAll()).thenReturn(Stream
+				.of(new Product(1, "Apple Laptop", "Apple Laptop Next Gen", 1099.99f, 20, "Laptop", "Image"),
+						new Product(2, "Dell Laptop", "Dell Laptop Next Gen", 1299.99f, 20, "Laptop", "Image"))
 				.collect(Collectors.toList()));
 		assertEquals(2, productService.getAllProducts().size());
 	}
-	
+
 	@Test
-	void getProductByIdTest() {
+	void getProductByIdTest()
+	{
 		int id = 1;
 		Product product1 = new Product(1, "Apple Laptop", "Apple Laptop Next Gen", 1099.99f, 20, "Laptop", "Image");
-		Optional<Product> product = Optional.of(product1); 
+		Optional<Product> product = Optional.of(product1);
 		when(productRepository.findById(id)).thenReturn(product);
 		assertThat(product).isNotNull();
 		assertEquals(product1, productService.getProductById(id).get());
 	}
-	
+
 	@Test
-	void saveProductTest() {
+	void saveProductTest()
+	{
 		Product product = new Product(1, "Apple Laptop", "Apple Laptop Next Gen", 1099.99f, 20, "Laptop", "Image");
-		
+
 		productService.save(product);
 		verify(productRepository, times(1)).save(product);
 	}
-	
+
 	@Test
-	void deleteProductTest() {
+	void deleteProductTest()
+	{
 		Product product = new Product(1, "Apple Laptop", "Apple Laptop Next Gen", 1099.99f, 20, "Laptop", "Image");
-		
+
 		productService.deleteProduct(1);
 		verify(productRepository, times(1)).deleteById(1);
 	}

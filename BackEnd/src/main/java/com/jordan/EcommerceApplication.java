@@ -1,6 +1,5 @@
 package com.jordan;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,36 +21,35 @@ import com.cloudinary.Cloudinary;
 
 @ServletComponentScan
 @SpringBootApplication
-public class EcommerceApplication{
-	
+public class EcommerceApplication
+{
 	static final String topicExchangeName = "inventory-exchange";
 	static final String queueName = "inventory";
 
 	@Bean
-	Queue queue() {
-
+	Queue queue()
+	{
 		return new Queue(queueName, false);
 	}
 
 	@Bean
-	TopicExchange exchange() {
-
+	TopicExchange exchange()
+	{
 		return new TopicExchange(topicExchangeName);
 	}
 
-	//    binds queues and exchanges
-//    defines the behavior that occurs when RabbitTemplate publishes to an exchange
+	// binds queues and exchanges
+	// defines the behavior that occurs when RabbitTemplate publishes to an exchange
 	@Bean
-	Binding binding(Queue queue, TopicExchange exchange) {
-		return BindingBuilder
-				.bind(queue).to(exchange)
-				.with("foo.bar.#");
+	Binding binding(Queue queue, TopicExchange exchange)
+	{
+		return BindingBuilder.bind(queue).to(exchange).with("foo.bar.#");
 	}
 
 	@Bean
 	SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-											 MessageListenerAdapter listenerAdapter) {
-
+			MessageListenerAdapter listenerAdapter)
+	{
 		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 
 		container.setConnectionFactory(connectionFactory);
@@ -61,15 +59,16 @@ public class EcommerceApplication{
 	}
 
 	@Bean
-	MessageListenerAdapter listenerAdapter(Receiver receiver) {
+	MessageListenerAdapter listenerAdapter(Receiver receiver)
+	{
 		return new MessageListenerAdapter(receiver, "receiveMessage");
 	}
 
-
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		SpringApplication.run(EcommerceApplication.class, args);
 	}
-	
+
 	@Value("${cloudinary.cloud_name}")
 	private String cloudName;
 
@@ -79,9 +78,9 @@ public class EcommerceApplication{
 	@Value("${cloudinary.api_secret}")
 	private String apiSecret;
 
-
 	@Bean
-	public Cloudinary cloudinaryConfig() {
+	public Cloudinary cloudinaryConfig()
+	{
 		Cloudinary cloudinary = null;
 		Map config = new HashMap();
 		config.put("cloud_name", cloudName);
@@ -90,5 +89,4 @@ public class EcommerceApplication{
 		cloudinary = new Cloudinary(config);
 		return cloudinary;
 	}
-
 }

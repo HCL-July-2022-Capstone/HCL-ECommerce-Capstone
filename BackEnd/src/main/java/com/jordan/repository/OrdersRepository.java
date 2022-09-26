@@ -7,6 +7,7 @@ import com.jordan.model.Orders;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrdersRepository extends JpaRepository <Orders, Integer>{
+public interface OrdersRepository extends JpaRepository<Orders, Integer>
+{
 
 }

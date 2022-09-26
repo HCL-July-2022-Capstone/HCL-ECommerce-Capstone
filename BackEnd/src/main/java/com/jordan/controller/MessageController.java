@@ -15,47 +15,46 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
-public class MessageController {
+public class MessageController
+{
+	@Autowired
+	ProductRepository repo;
+	@Autowired
+	EmailService emailService;
 
-    @Autowired
-    ProductRepository repo;
-    @Autowired
-    EmailService emailService;
+	private JavaMailSenderImpl mailSender;
 
-    private JavaMailSenderImpl mailSender;
+	private final RabbitTemplate rabbitTemplate;
 
-    private final RabbitTemplate rabbitTemplate;
+	static final String topicExchangeName = "inventory-exchange";
 
-    static final String topicExchangeName = "inventory-exchange";
+	private MessageController(RabbitTemplate rabbitTemplate)
+	{
+		this.rabbitTemplate = rabbitTemplate;
+	}
 
-    private MessageController(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-    }
+	// @GetMapping("hello")
+	// public void hello() {
+	// System.out.println("Sending message...");
+	// rabbitTemplate.convertAndSend(topicExchangeName,
+	// "foo.bar.baz",
+	// "Hello from RabbitMQ!");
+	// }
 
-//    @GetMapping("hello")
-//    public void hello() {
-//        System.out.println("Sending message...");
-//        rabbitTemplate.convertAndSend(topicExchangeName,
-//                "foo.bar.baz",
-//                "Hello from RabbitMQ!");
-//    }
+	@GetMapping("/messages")
+	public void inventory()
+	{
+		List<Product> lowStock = repo.findByQuantityOnHandLessThan(10);
 
+		lowStock.forEach((product1) ->
+		{
+			rabbitTemplate.convertAndSend(topicExchangeName, "foo.bar.#",
+					"Only " + product1.getQuantityOnHand() + " " + product1.getProductName() + " left in inventory!");
 
-    @GetMapping("/messages")
-    public void inventory() {
+			System.out.println("Message sent successfully!");
 
-        List<Product> lowStock = repo.findByQuantityOnHandLessThan(10);
-
-        lowStock.forEach((product1)-> {
-                    rabbitTemplate.convertAndSend(topicExchangeName,
-                            "foo.bar.#",
-                             "Only " + product1.getQuantityOnHand() + " " +
-                                     product1.getProductName() + " left in inventory!");
-
-                    System.out.println("Message sent successfully!");
-
-//                    this.emailService.sendInventoryStatustEmail
-//                            (product1.getQuantityOnHand(), product1.getProductName());
-        });
-    }
+			// this.emailService.sendInventoryStatustEmail
+			// (product1.getQuantityOnHand(), product1.getProductName());
+		});
+	}
 }

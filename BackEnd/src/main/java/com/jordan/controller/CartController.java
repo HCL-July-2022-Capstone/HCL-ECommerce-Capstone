@@ -32,38 +32,40 @@ import com.jordan.service.UserService;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cart")
-
-public class CartController {
+public class CartController
+{
 	@Autowired
 	CartService cartService;
-	
-	@Autowired 
+
+	@Autowired
 	AddressService addressService;
-	
+
 	@Autowired
 	private OAuth2AuthorizedClientService authorizedClientService;
-	
+
 	private Logger logger = LoggerFactory.getLogger(CartController.class);
-	
+
 	@GetMapping("/view")
-	public List<Product> viewCart(Principal user) {
+	public List<Product> viewCart(Principal user)
+	{
 		return cartService.viewCart(user);
 	}
-	
+
 	@PostMapping("/add/{id}")
-	public void addToCart(Principal user, @PathVariable int id) {
+	public void addToCart(Principal user, @PathVariable int id)
+	{
 		cartService.addToCart(user, id);
 	}
-	
+
 	@DeleteMapping("/remove/{id}")
-	public void removeFromCart(Principal user, @PathVariable int id) {
+	public void removeFromCart(Principal user, @PathVariable int id)
+	{
 		cartService.removeFromCart(user, id);
 	}
-	
+
 	@PostMapping("/checkout")
-	public void checkout(Principal user) {
+	public void checkout(Principal user)
+	{
 		cartService.checkout(user);
 	}
-	
-
 }

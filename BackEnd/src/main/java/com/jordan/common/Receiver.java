@@ -7,25 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Receiver { // responds to published messages
+public class Receiver
+{ // responds to published messages
 
-    private CountDownLatch latch = new CountDownLatch(1);
+	private CountDownLatch latch = new CountDownLatch(1);
 
-    @Autowired
-    EmailService emailService;
+	@Autowired
+	EmailService emailService;
 
+	// method for receiving messages
+	public void receiveMessage(String message)
+	{
+		System.out.println("Received <" + message + ">");
+		this.emailService.sendInventoryStatustEmail(message);
+		latch.countDown();
+	}
 
-    // method for receiving messages
-    public void receiveMessage(String message) {
-        System.out.println("Received <" + message + ">");
-        this.emailService.sendInventoryStatustEmail
-                (message);
-        latch.countDown();
-    }
-
-    public CountDownLatch getLatch() {
-
-        return latch;
-    }
-
+	public CountDownLatch getLatch()
+	{
+		return latch;
+	}
 }

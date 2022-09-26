@@ -11,51 +11,60 @@ import com.jordan.model.Address;
 import com.jordan.repository.AddressRepository;
 
 @Service
-public class AddressService {
+public class AddressService
+{
 	@Autowired
 	AddressRepository addressRepository;
-	
+
 	private Address shippingAddress;
 	private Address billingAddress;
-	
-	
+
 	private Logger logger = LoggerFactory.getLogger(AddressService.class);
-	
-	public List<Address> getAddressesByUsername(String user){
+
+	public List<Address> getAddressesByUsername(String user)
+	{
 		return addressRepository.findAllByUsername(user);
 	}
-	
-	public void addAddress(Address address, String username) {
+
+	public void addAddress(Address address, String username)
+	{
 		address.setUsername(username);
-		if(addressRepository.findById(address.getId()).isEmpty())addressRepository.save(address);
-		logger.warn("Added new address with ID "+address.getId());
+		if (addressRepository.findById(address.getId()).isEmpty())
+			addressRepository.save(address);
+		logger.warn("Added new address with ID " + address.getId());
 	}
-	
-	//selects address
-	public void setShippingAddress(Address address) {
+
+	// selects address
+	public void setShippingAddress(Address address)
+	{
 		shippingAddress = address;
 		logger.warn("SET shipping address");
 	}
-	
-	public void setBillingAddress(Address address) {
+
+	public void setBillingAddress(Address address)
+	{
 		billingAddress = address;
 		logger.warn("set billing address");
 	}
-	
-	public void deleteAddress(Address address) {
+
+	public void deleteAddress(Address address)
+	{
 		addressRepository.delete(address);
-		logger.warn("deleted address with id "+address.getId());
+		logger.warn("deleted address with id " + address.getId());
 	}
-	
-	public Address getShippingAddress() {
+
+	public Address getShippingAddress()
+	{
 		return shippingAddress;
 	}
-	
-	public Address getBillingAddress() {
+
+	public Address getBillingAddress()
+	{
 		return billingAddress;
 	}
-	
-	public Address getAddress() {
+
+	public Address getAddress()
+	{
 		return shippingAddress;
 	}
 }

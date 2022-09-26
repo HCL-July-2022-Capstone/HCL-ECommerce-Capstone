@@ -37,7 +37,7 @@ public class CartService
 
 	@Autowired
 	AddressService addressService;
-	
+
 	@Autowired
 	RestService restService;
 
@@ -57,13 +57,11 @@ public class CartService
 		cart.addToCart(productService.getProductById(id).get());
 		logger.info("added to " + user.getName() + "'s cart with id " + cart.getId());
 		save(cart);
-
 	}
 
 	public List<Product> viewCart(Principal user)
 	{
 		return getCart(user).getProducts();
-
 	}
 
 	public void removeFromCart(Principal user, int id)
@@ -123,7 +121,7 @@ public class CartService
 	private Cart getCart(Principal user)
 	{
 		Optional<Cart> maybeCart = cartRepo.findByUsername(user.getName());
-    
+
 		if (maybeCart.isEmpty())
 		{
 			Cart newCart = new Cart();
