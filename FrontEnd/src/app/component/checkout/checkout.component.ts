@@ -11,11 +11,8 @@ import {CartModel} from "../../model/cart.model";
 export class CheckoutComponent implements OnInit {
 
   cartModel: CartModel[] = [];
-  // cartModel = [];
   productModel!: ProductModel[];
-  // items: any;
   product!: ProductModel;
-  // cartDetails: any;
   toggleNewAddress: Boolean = false;
   items!: CartModel[];
 
@@ -92,7 +89,6 @@ export class CheckoutComponent implements OnInit {
   checkout(): void {
     this.productService.checkout();
   }
-
 
     removeFromDatabase(product: ProductModel): void {
       this.productModel = this.productModel.filter((data) =>

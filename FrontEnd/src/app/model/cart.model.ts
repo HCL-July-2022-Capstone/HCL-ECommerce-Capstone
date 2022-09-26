@@ -1,4 +1,5 @@
 import {ProductModel} from "./product-model.model";
+
 export class CartModel {
   productId: number;
   productName: string;

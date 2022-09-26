@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
-import { ProfileComponent } from './profile/profile.component';
+import {OktaAuthGuard, OktaCallbackComponent} from '@okta/okta-angular';
+import {ProfileComponent} from './profile/profile.component';
 
-import { ProductComponentComponent } from './component/product/product-component.component';
-import { ProductAddComponent } from './component/product-add/product-add.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { ProductsListComponent } from './component/products-list/products-list.component';
-import { ProductDetailsComponent } from './component/product-details/product-details.component';
-import { ProductSearchComponent } from './component/product-search/product-search.component';
-import { CategoriesComponent } from './component/categories/categories.component';
-import { HomepageComponent } from './component/homepage/homepage.component';
+import {ProductComponentComponent} from './component/product/product-component.component';
+import {ProductAddComponent} from './component/product-add/product-add.component';
+import {PagenotfoundComponent} from './pagenotfound/pagenotfound.component';
+import {ProductsListComponent} from './component/products-list/products-list.component';
+import {ProductDetailsComponent} from './component/product-details/product-details.component';
+import {ProductSearchComponent} from './component/product-search/product-search.component';
+import {CategoriesComponent} from './component/categories/categories.component';
+import {HomepageComponent} from './component/homepage/homepage.component';
 
-import { CheckoutComponent } from './component/checkout/checkout.component';
+import {CheckoutComponent} from './component/checkout/checkout.component';
 
 const routes: Routes = [
   {

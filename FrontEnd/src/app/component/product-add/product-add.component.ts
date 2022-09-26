@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductModel } from '../../model/product-model.model';
-import { ProductServiceService } from '../../service/product-service.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ProductModel} from '../../model/product-model.model';
+import {ProductServiceService} from '../../service/product-service.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({

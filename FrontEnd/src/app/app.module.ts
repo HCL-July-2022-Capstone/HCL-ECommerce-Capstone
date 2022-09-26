@@ -1,6 +1,5 @@
-
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 
 
@@ -13,7 +12,6 @@ import {ProfileComponent} from './profile/profile.component';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth.interceptor';
-
 
 
 import {ProductComponentComponent} from './component/product/product-component.component';
@@ -32,9 +30,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { CheckoutComponent } from './component/checkout/checkout.component';
-import { AddressAddComponent } from './component/address/address-add.component';
-import { StripePaymentComponent } from './component/stripe-payment/stripe-payment.component';
+import {CheckoutComponent} from './component/checkout/checkout.component';
+import {AddressAddComponent} from './component/address/address-add.component';
+import {StripePaymentComponent} from './component/stripe-payment/stripe-payment.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 const oktaAuth = new OktaAuth({
