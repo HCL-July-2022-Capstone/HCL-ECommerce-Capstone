@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProductServiceService} from 'src/app/service/product-service.service';
 import {ProductModel} from "../../model/product-model.model";
 import {CartModel} from "../../model/cart.model";
@@ -12,107 +12,33 @@ export class CheckoutComponent implements OnInit {
 
   cartModel: CartModel[] = [];
   // cartModel = [];
-  productModel: ProductModel[] = [];
+  productModel!: ProductModel[];
   // items: any;
   product!: ProductModel;
   // cartDetails: any;
   toggleNewAddress: Boolean = false;
-  items: any;
-  carts: any;
+  items!: CartModel[];
+
+  @Input()
+  quantity: number = 0;
+  total: number = 0;
+
+  priceList:any[] = [];
 
   constructor(private productService: ProductServiceService) {
   }
 
   subTotal = 0;
+  price = 0;
 
   ngOnInit(): void {
     this.getCart();
-    this.cartTotal();
   }
 
   getCart(): void {
     this.productService.getItems().subscribe((data: any) => {
       this.items = data;
       console.log(data);
-
-      //   data.push({
-      //     image: this.items.image,
-      //   // productId
-      //   //   :
-      //   //   undefined
-      //   // productName
-      //   //   :
-      //   //   undefined
-      //   // productPrice
-      //   //   :
-      //   //   undefined
-      //   // quantity
-      //   //   :
-      //   //   1
-      //   // totalPrice
-      //   //   :
-      //   //   NaN
-      // })
-      //   ;
-      // this.cartModel.push({
-      //         productId: data.productId,
-      //         productName: data.productName,
-      //         image: data.image,
-      //         productPrice: data.productPrice,
-      //         quantity: 1,
-      //         totalPrice: this.items.quantity * data.productPrice
-      //       });
-      //     console.log(this.cartModel)
-      //
-      // if (this.cartModel.length === 0) { // empty cart
-      //   // create an array
-      //   this.cartModel.push({
-      //     productId: data.productId,
-      //     productName: data.productName,
-      //     image: data.image,
-      //     productPrice: data.productPrice,
-      //     quantity: 1,
-      //     totalPrice: this.items.quantity * data.productPrice
-      //   });
-      // } else {
-      //   // loop when cart is not empty
-      //   for (let i in this.cartModel) {
-      //     // increment quantity if a product is repeated
-      //     if (this.cartModel[i].productId === data.productId) {
-      //       this.cartModel[i].quantity++;
-      //       break;
-      //     } else {
-      //       // create an array
-      //       this.cartModel.push({
-      //         productId: data.productId,
-      //         productName: data.productName,
-      //         image: data.image,
-      //         productPrice: data.productPrice,
-      //         quantity: 1,
-      //         totalPrice: this.items.quantity * data.productPrice
-      //       });
-      //     }
-      //   }
-      //   console.log(this.cartModel)
-      // }
-      //
-      // // calculate subtotal
-      // this.subTotal = 0;
-      // this.items.forEach((item: any) => {
-      //   this.subTotal += (item.quantity * item.productPrice)
-      // })
-
-      //pop up message
-      // this.snackbar.open(
-      //   'Product has been added to the cart!', '',
-      //   {
-      //     duration: 1500
-      //   });
-
-      // this.carts.push(data);
-      // this.cartDetails = data.data;
-      // console.log(this.cartModel);
-      // console.log(this.cartTotal());
     });
 
     // this.cartModel.push({
@@ -127,55 +53,15 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  updateCartItems(quantity: number) {
-    this.items.next(quantity);
-  }
+  // remove from cart
+  removeItem(cart: CartModel) {
+    this.cartModel = this.cartModel
+      .filter((data) => data !== cart);
+    this.productService.removeFromCart(cart.productId);
 
-  // addToCartModel(data: ProductModel): void {
-  //   // this.productService.addToCart(product);
-  //
-  //   if (this.cartModel.length === 0) { // empty cart
-  //     // create an array
-  //     this.cartModel.push({
-  //       productId: data.productId,
-  //       productName: data.productName,
-  //       image: data.image,
-  //       productPrice: data.productPrice,
-  //       quantity: 1,
-  //       totalPrice: this.items.quantity * data.productPrice
-  //     });
-  //   } else {
-  //     // loop when cart is not empty
-  //     for (let i in this.cartModel) {
-  //       // increment quantity if a product is repeated
-  //       if (this.cartModel[i].productId === data.productId) {
-  //         this.cartModel[i].quantity++;
-  //       } else {
-  //         // create an array
-  //         this.cartModel.push({
-  //           productId: data.productId,
-  //           productName: data.productName,
-  //           image: data.image,
-  //           productPrice: data.productPrice,
-  //           quantity: 1,
-  //           totalPrice: this.items.quantity * data.productPrice
-  //         });
-  //       }
-  //     }
-  //   }
-  //
-  //   // calculate subtotal
-  //   this.items.forEach((item: any) => {
-  //     this.subTotal += (item.quantity * item.productPrice)
-  //   })
-  //
-  //   //pop up message
-  //   // this.snackbar.open(
-  //   //   'Product has been added to the cart!', '',
-  //   //   {
-  //   //     duration: 1500
-  //   //   });
-  // }
+    //remove from database
+    this.removeFromDatabase(this.product);
+  }
 
   incQTY(id: number, quantityOnHand: number): void {
     const payload = {
@@ -188,12 +74,12 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  // total price of all items in the cart
-  cartTotal() {
+  totalPrice(quantity: number, price: number) {
+   this.total = quantity * price;
+
     this.items.forEach((item: any) => {
-      this.subTotal += (item.quantity * item.productPrice)
+      this.subTotal += (quantity * price)
     })
-    console.log(this.subTotal);
   }
 
   emptyCart(): void {
@@ -207,4 +93,10 @@ export class CheckoutComponent implements OnInit {
     this.productService.checkout();
   }
 
+
+    removeFromDatabase(product: ProductModel): void {
+      this.productModel = this.productModel.filter((data) =>
+        data !== product);
+      this.productService.removeFromCart(product.productId);
+    }
 }

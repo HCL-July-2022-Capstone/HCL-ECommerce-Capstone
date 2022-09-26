@@ -1,5 +1,5 @@
 
-import { Injectable } from '@angular/core';
+import {Injectable, Input} from '@angular/core';
 
 //import
 import {HttpClient} from '@angular/common/http';
@@ -12,9 +12,11 @@ import {ProductModel} from '../model/product-model.model';
 //Step 1 //step 2 in component
 export class ProductServiceService {
 
-  // items: ProductModel[] = [];
+  @Input()
+  quantity: number = 0;
 
   private baseUrl = 'http://localhost:8080';
+  total: number = 0;
 
   constructor(private http: HttpClient) {} //inject
 
@@ -58,12 +60,15 @@ export class ProductServiceService {
   //get category
   getCategory(category: string): Observable<ProductModel> {
     return this.http.get<ProductModel>(`${this.baseUrl}/products/category/${category}`);
-
   }
 
-  // //add items to cart
+  //add items to cart
   addItems(payload: any) {
-    this.http.post(`${this.baseUrl}/cart/`, payload);
+    this.http.post(`${this.baseUrl}/cart/`, payload)
+      .subscribe((data) => {
+        console.log(data);
+      });
+
   }
 
   addToCart(id: number, productModel: ProductModel): void {
@@ -93,4 +98,13 @@ export class ProductServiceService {
   clearCart() {
     return this.http.delete(`${this.baseUrl}/checkout/empty-cart`);
   }
+
+  // remove a single product
+  removeFromCart(id: number) {
+    this.http.delete<ProductModel>(`${this.baseUrl}/cart/remove/${id}`)
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
 }

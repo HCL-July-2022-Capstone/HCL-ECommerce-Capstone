@@ -25,6 +25,7 @@ export class ProductComponentComponent implements OnInit {
   productModel!: ProductModel[];
   data: ProductModel | undefined;
 
+
   constructor(private productService: ProductServiceService,
               private snackbar: MatSnackBar) {
   }
@@ -42,7 +43,8 @@ export class ProductComponentComponent implements OnInit {
 
   //delete
   deleteProductById(product: ProductModel): void {
-    this.productModel = this.productModel.filter((data) => data !== product);
+    this.productModel = this.productModel
+      .filter((data) => data !== product);
     this.productService.deleteById(product.productId);
   }
 
@@ -67,7 +69,6 @@ export class ProductComponentComponent implements OnInit {
   //addToCart
   addToCart(product: ProductModel): void {
     this.productService.addToCart(product.productId, product);
-
     this.snackbar.open(
       'Product has been added to cart!', '',
       {
