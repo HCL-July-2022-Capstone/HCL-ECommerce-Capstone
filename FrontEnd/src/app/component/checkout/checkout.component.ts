@@ -1,124 +1,211 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ProductServiceService } from 'src/app/service/product-service.service';
-import { CheckoutService } from 'src/app/service/checkout.service';
-import { PaymentInfo } from 'src/app/common/payment-info';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {ProductServiceService} from 'src/app/service/product-service.service';
+import {ProductModel} from "../../model/product-model.model";
+import {CartModel} from "../../model/cart.model";
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  //styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  checkoutFormGroup!: FormGroup;
-  totalPrice: number = 0;
-  totalQuantity: number = 0;
 
-  items = this.productService.getItems();
+  cartModel: CartModel[] = [];
+  // cartModel = [];
+  productModel: ProductModel[] = [];
+  // items: any;
+  product!: ProductModel;
+  // cartDetails: any;
+  toggleNewAddress: Boolean = false;
+  items: any;
+  carts: any;
+  private totalItems: any;
 
-  stripe = Stripe(environment.stripePublishableKey);
-  paymentInfo: PaymentInfo = new PaymentInfo();
-  cardElement: any;
-  displayError: any = '';
+  constructor(private productService: ProductServiceService) {
+  }
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private productService: ProductServiceService,
-    private checkoutService: CheckoutService
-  ) {}
+  subTotal = 0;
 
   ngOnInit(): void {
-    this.setupStripePaymentForm();
+    this.getCart();
+    this.cartTotal();
+  }
 
-    this.checkoutFormGroup = this.formBuilder.group({
-      creditCardDetails: this.formBuilder.group({}),
+  getCart(): void {
+    this.productService.getItems().subscribe((data: any) => {
+      this.items = data;
+      console.log(data);
+
+      //   data.push({
+      //     image: this.items.image,
+      //   // productId
+      //   //   :
+      //   //   undefined
+      //   // productName
+      //   //   :
+      //   //   undefined
+      //   // productPrice
+      //   //   :
+      //   //   undefined
+      //   // quantity
+      //   //   :
+      //   //   1
+      //   // totalPrice
+      //   //   :
+      //   //   NaN
+      // })
+      //   ;
+      // this.cartModel.push({
+      //         productId: data.productId,
+      //         productName: data.productName,
+      //         image: data.image,
+      //         productPrice: data.productPrice,
+      //         quantity: 1,
+      //         totalPrice: this.items.quantity * data.productPrice
+      //       });
+      //     console.log(this.cartModel)
+      //
+      // if (this.cartModel.length === 0) { // empty cart
+      //   // create an array
+      //   this.cartModel.push({
+      //     productId: data.productId,
+      //     productName: data.productName,
+      //     image: data.image,
+      //     productPrice: data.productPrice,
+      //     quantity: 1,
+      //     totalPrice: this.items.quantity * data.productPrice
+      //   });
+      // } else {
+      //   // loop when cart is not empty
+      //   for (let i in this.cartModel) {
+      //     // increment quantity if a product is repeated
+      //     if (this.cartModel[i].productId === data.productId) {
+      //       this.cartModel[i].quantity++;
+      //       break;
+      //     } else {
+      //       // create an array
+      //       this.cartModel.push({
+      //         productId: data.productId,
+      //         productName: data.productName,
+      //         image: data.image,
+      //         productPrice: data.productPrice,
+      //         quantity: 1,
+      //         totalPrice: this.items.quantity * data.productPrice
+      //       });
+      //     }
+      //   }
+      //   console.log(this.cartModel)
+      // }
+      //
+      // // calculate subtotal
+      // this.subTotal = 0;
+      // this.items.forEach((item: any) => {
+      //   this.subTotal += (item.quantity * item.productPrice)
+      // })
+
+      //pop up message
+      // this.snackbar.open(
+      //   'Product has been added to the cart!', '',
+      //   {
+      //     duration: 1500
+      //   });
+
+      // this.carts.push(data);
+      // this.cartDetails = data.data;
+      // console.log(this.cartModel);
+      // console.log(this.cartTotal());
+    });
+
+    // this.cartModel.push({
+    //   productId: this.items.productId,
+    //   productName: this.items.productName,
+    //   image: this.items.image,
+    //   productPrice: this.items.productPrice,
+    //   quantity: 1,
+    //   totalPrice: this.items.quantity * this.items.productPrice
+    // });
+    // console.log(this.cartModel);
+
+  }
+
+  updateCartItems(quantity: number) {
+    this.items.next(quantity);
+  }
+
+  // addToCartModel(data: ProductModel): void {
+  //   // this.productService.addToCart(product);
+  //
+  //   if (this.cartModel.length === 0) { // empty cart
+  //     // create an array
+  //     this.cartModel.push({
+  //       productId: data.productId,
+  //       productName: data.productName,
+  //       image: data.image,
+  //       productPrice: data.productPrice,
+  //       quantity: 1,
+  //       totalPrice: this.items.quantity * data.productPrice
+  //     });
+  //   } else {
+  //     // loop when cart is not empty
+  //     for (let i in this.cartModel) {
+  //       // increment quantity if a product is repeated
+  //       if (this.cartModel[i].productId === data.productId) {
+  //         this.cartModel[i].quantity++;
+  //       } else {
+  //         // create an array
+  //         this.cartModel.push({
+  //           productId: data.productId,
+  //           productName: data.productName,
+  //           image: data.image,
+  //           productPrice: data.productPrice,
+  //           quantity: 1,
+  //           totalPrice: this.items.quantity * data.productPrice
+  //         });
+  //       }
+  //     }
+  //   }
+  //
+  //   // calculate subtotal
+  //   this.items.forEach((item: any) => {
+  //     this.subTotal += (item.quantity * item.productPrice)
+  //   })
+  //
+  //   //pop up message
+  //   // this.snackbar.open(
+  //   //   'Product has been added to the cart!', '',
+  //   //   {
+  //   //     duration: 1500
+  //   //   });
+  // }
+
+  incQTY(id: number, quantityOnHand: number): void {
+    const payload = {
+      productId: id,
+      quantityOnHand,
+    };
+    this.productService.increaseQty(payload).subscribe(() => {
+      this.getCart();
+      alert('Product Added');
     });
   }
 
-  setupStripePaymentForm() {
-    // Stripe payment handler.
-    var elements = this.stripe.elements();
+  // total price of all items in the cart
+  cartTotal() {
+    this.items.forEach((item: any) => {
+      this.subTotal += (item.quantity * item.productPrice)
+    })
+    console.log(this.subTotal);
+  }
 
-    // Create custom card elements with a hidden ZipCode field.
-    this.cardElement = elements.create('card', { hidePostalCode: true });
-
-    // Add card UI component into the 'card-element' <div>.
-    this.cardElement.mount('#card-element');
-
-    // Add event binding for 'change' in the 'card-element'.
-    this.cardElement.on('change', (event: { complete: any; error: { message: any; }; }) => {
-      // 'card-errors' element handler.
-      this.displayError = document.getElementById('card-errors');
-
-      if (event.complete) {
-        this.displayError.textContent = '';
-      } else if (event.error) {
-        this.displayError.textContent = event.error.message;
-      }
+  emptyCart(): void {
+    this.productService.clearCart().subscribe(() => {
+      this.getCart();
+      alert('Cart Emptied');
     });
   }
 
-  get creditCardType() {
-    return this.checkoutFormGroup.get('creditCardDetails.cardType');
+  checkout(): void {
+    this.productService.checkout();
   }
 
-  get creditCardNameOnCard() {
-    return this.checkoutFormGroup.get('creditCardDetails.nameOnCard');
-  }
-
-  get creditCardNumber() {
-    return this.checkoutFormGroup.get('creditCardDetails.cardNumber');
-  }
-
-  get creditCardSecurityCode() {
-    return this.checkoutFormGroup.get('creditCardDetails.securityCode');
-  }
-
-  checkout() {
-    // this.productService.checkout();
-
-    if (this.checkoutFormGroup.invalid) {
-      this.checkoutFormGroup.markAllAsTouched();
-      return;
-    }
-
-    // Payment info
-    this.paymentInfo.amount = this.totalPrice * 100;
-    this.paymentInfo.currency = 'USD';
-
-    if (
-      !this.checkoutFormGroup.invalid &&
-      this.displayError.textContent === ''
-    ) {
-      this.checkoutService
-        .createPaymentIntent(this.paymentInfo)
-        .subscribe((paymentIntentResponse) => {
-          this.stripe
-            .confirmCardPayment(
-              paymentIntentResponse.client_secret,
-              {
-                payment_method: {
-                  card: this.cardElement
-                }
-              },
-              { handleActions: false }
-            )
-            .then((result: { error: { message: any; }; }) => {
-              if (result.error) {
-                // show error
-                alert(`An error occurred: ${result.error.message}`);
-              }
-            });
-        });
-    } else {
-      this.checkoutFormGroup.markAllAsTouched();
-      return;
-    }
-  }
 }

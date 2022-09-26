@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductServiceService} from "../../service/product-service.service";
 import {ActivatedRoute} from "@angular/router";
 import {ProductModel} from "../../model/product-model.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-details',
@@ -13,8 +14,8 @@ export class ProductDetailsComponent implements OnInit {
   productModel!: ProductModel;
 
   constructor(private productService: ProductServiceService,
-              private activatedRoute: ActivatedRoute) {
-  }
+              private activatedRoute: ActivatedRoute,
+              private  snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
     // access the ActivatedRoute and track the id parameter
@@ -27,5 +28,16 @@ export class ProductDetailsComponent implements OnInit {
     const id = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!, 10);
     this.productService.getById(id)
       .subscribe((product) => this.productModel = product);
+  }
+
+  //addToCart
+  addToCart(product: ProductModel): void {
+    this.productService.addToCart(product.productId, product);
+
+    this.snackbar.open(
+      'Product has been added to cart!', '',
+      {
+        duration: 1500
+      });
   }
 }

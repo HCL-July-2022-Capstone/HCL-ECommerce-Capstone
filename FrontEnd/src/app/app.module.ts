@@ -21,7 +21,7 @@ import {ProductSearchComponent} from './component/product-search/product-search.
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductAddComponent} from './component/product-add/product-add.component';
 import {NavbarComponent} from './component/navbar/navbar.component';
-import {UserComponentComponent} from './component/user-component/user-component.component';
+// import {UserComponentComponent} from './component/user-component/user-component.component';
 import {ProductDetailsComponent} from './component/product-details/product-details.component';
 import {ProductsListComponent} from './component/products-list/products-list.component';
 import {PagenotfoundComponent} from './pagenotfound/pagenotfound.component';
@@ -35,6 +35,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { AddressAddComponent } from './component/address/address-add.component';
+import { StripePaymentComponent } from './component/stripe-payment/stripe-payment.component';
 
 
 
@@ -52,14 +53,15 @@ const oktaAuth = new OktaAuth({
     ProductSearchComponent,
     ProductAddComponent,
     NavbarComponent,
-    UserComponentComponent,
+    // UserComponentComponent,
     ProductDetailsComponent,
     ProductsListComponent,
     PagenotfoundComponent,
     CategoriesComponent,
     HomepageComponent,
     CheckoutComponent,
-    AddressAddComponent
+    AddressAddComponent,
+    StripePaymentComponent
   ],
 
   imports: [
@@ -75,13 +77,13 @@ const oktaAuth = new OktaAuth({
     MatInputModule,
     MatButtonToggleModule,
     ReactiveFormsModule,
-        RouterModule.forRoot([
-          { path: '', component: ProductComponentComponent },
-          { path: 'product/:ProductModel', component: ProductComponentComponent },
-          { path: 'checkout', component: CheckoutComponent },
-          { path: 'addAddress', component: AddressAddComponent}
-        ])
-    ],
+    RouterModule.forRoot([
+      { path: '', component: ProductComponentComponent },
+      { path: 'product/:ProductModel', component: ProductComponentComponent },
+      { path: 'checkout', component: CheckoutComponent },
+      { path: 'addAddress', component: AddressAddComponent}
+    ])
+  ],
 
   providers: [
     {

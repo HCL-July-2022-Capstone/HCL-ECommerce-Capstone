@@ -18,6 +18,7 @@ export class CategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     // access the ActivatedRoute and track the id parameter
     this.activatedRoute.paramMap.subscribe((params) => {
       this.categoryList();
@@ -26,8 +27,9 @@ export class CategoriesComponent implements OnInit {
 
   categoryList() {
     const cat = this.activatedRoute.snapshot.paramMap.get('cat')!;
-    this.productService
-      .getCategory(cat)
-      .subscribe((product) => (this.data = product));
+    this.productService.getCategory(cat)
+      .subscribe((product) => {
+        this.data = product
+      });
   }
 }
