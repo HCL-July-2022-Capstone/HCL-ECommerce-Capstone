@@ -1,4 +1,4 @@
-//////////////////////////////////////////////// Stripe
+/*************************** Stripe *************************/
 body{
     background: #ddd;
     min-height: 100vh;
@@ -123,10 +123,10 @@ input:focus::-webkit-input-placeholder
     border-radius: 0;
 }
 .btn:focus{
-    box-shadow: none;
+    -webkit-box-shadow: none;
     outline: none;
     color: white;
-    -webkit-box-shadow: none;
+    box-shadow: none;
     -webkit-user-select: none;
     transition: none;
 }
@@ -146,7 +146,7 @@ a:hover{
     background-position-x: 95%;
     background-position-y: center;
 }
-=============================================================================================
+/*=============================================================================================*/
 h5 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -415,4 +415,4 @@ a, a:hover {
 /*  background-position-x: 95%;*/
 /*  background-position-y: center;*/
 /*}*/
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////// main
+/****************************************************** main ***************************************/

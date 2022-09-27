@@ -25,7 +25,6 @@ public class HttpSessionListenerConfig implements HttpSessionListener
 	{
 		super();
 		activeSessions = new AtomicInteger();
-
 	}
 
 	/**

@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ProductModel} from '../../model/product-model.model';
-import {ProductServiceService} from '../../service/product-service.service';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductModel } from '../../model/product-model.model';
+import { ProductServiceService } from '../../service/product-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.css'],
 })
+
 export class ProductAddComponent implements OnInit {
   productModel: ProductModel[] = [];
   //for adding
@@ -61,26 +62,21 @@ export class ProductAddComponent implements OnInit {
 
     console.log(data);
     this.productService.addProduct(data);
-/////////////////////////////////////////////////////////////////CHECK HERE TO
-////////////// Stripe
+    /////////////////////////////////////////////////////////////////CHECK HERE TO
+    ////////////// Stripe
     //pop up message
-    this.snackbar.open(
-      'Product list has been updated!', '',
-      {
-      duration: 1500
+    this.snackbar.open('Product list has been updated!', '', {
+      duration: 1500,
     });
   }
 
   myfunc() {
-    location.replace("http://localhost:4200/getAllProducts");
-===============================
-    this.snackbar.open(
-      'Product has been added to cart!', '',
-      {
-        duration: 1500
-      });
-/////////// main
-////////////////////////////////////////////////////////////////HERE
+    location.replace('http://localhost:4200/getAllProducts');
+    /*===============================*/
+    this.snackbar.open('Product has been added to cart!', '', {
+      duration: 1500,
+    });
+    /////////// main
+    ////////////////////////////////////////////////////////////////HERE
   }
-
 }

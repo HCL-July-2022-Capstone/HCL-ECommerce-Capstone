@@ -25,9 +25,9 @@ export class AddressService {
     //////////////////////////////////////////////////NOT SURE WHICH OF THESE TO GO WITH
     
 //////////// Stripe
-      `${this.baseUrl}/address/getAddresses`
-    ); 
-=================
+    //   `${this.baseUrl}/address/getAddresses`
+    // ); 
+/*=================*/
       `${this.baseUrl}/cart/getAddresses`
     );
 //////////// main

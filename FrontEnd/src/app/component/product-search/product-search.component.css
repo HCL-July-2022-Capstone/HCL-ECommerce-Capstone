@@ -1,15 +1,13 @@
-//////////////////////////////////////////////////////////////////CHECK FROM HERE TO
-/////////////// Stripe
 label {
   display: block;
   font-weight: bold;
   font-size: 1.2rem;
   margin-top: 1rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 input {
-  padding: .5rem;
+  padding: 0.5rem;
   width: 100%;
   max-width: 600px;
   box-sizing: border-box;
@@ -31,61 +29,14 @@ li {
   display: inline-block;
   width: 100%;
   max-width: 600px;
-  padding: .5rem;
+  padding: 0.5rem;
   box-sizing: border-box;
   text-decoration: none;
   color: black;
 }
 
 .search-result li a:hover {
-  background-color: #435A60;
-  color: white;
-}
-
-ul.search-result {
-  margin-top: 0;
-  padding-left: 0;
-}
-==================================================
-label {
-  display: block;
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  margin-bottom: .5rem;
-}
-
-input {
-  padding: .5rem;
-  width: 100%;
-  max-width: 600px;
-  box-sizing: border-box;
-  display: block;
-}
-
-input:focus {
-  outline: #336699 auto 1px;
-}
-
-li {
-  list-style-type: none;
-}
-
-.search-result li a {
-  border-bottom: 1px solid gray;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  display: inline-block;
-  width: 100%;
-  max-width: 600px;
-  padding: .5rem;
-  box-sizing: border-box;
-  text-decoration: none;
-  color: black;
-}
-
-.search-result li a:hover {
-  background-color: #435A60;
+  background-color: #435a60;
   color: white;
 }
 
@@ -97,7 +48,14 @@ ul.search-result {
 /*search button*/
 .main-btn {
   text-decoration: none;
-  background: -webkit-gradient(linear, left top, right top, from(#33c8c1), color-stop(50%, #119bd2), to(#33c8c1));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#33c8c1),
+    color-stop(50%, #119bd2),
+    to(#33c8c1)
+  );
   background: linear-gradient(to right, #33c8c1 0%, #119bd2 50%, #33c8c1 100%);
   background-size: 200%;
   height: 50px;
@@ -114,7 +72,7 @@ ul.search-result {
   font-size: 20px;
   border-radius: 8px;
   border: 0;
-  color: #fff!important;
+  color: #fff !important;
   cursor: pointer;
   z-index: 5;
 }
@@ -125,12 +83,16 @@ ul.search-result {
   text-decoration: none;
 }
 
-
 /*grid list styling*/
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Lato", sans-serif;
   font-weight: 700;
-  color: #2E2E2E;
+  color: #2e2e2e;
   margin: 0;
 }
 
@@ -160,16 +122,22 @@ h6 {
   horiz-align: center;
 }
 
-.prod-container h5, h6 {
+.prod-container h5,
+h6 {
   font-family: "Lato", sans-serif;
   font-weight: 500;
-  color: #2E2E2E;
+  color: #2e2e2e;
   cursor: pointer;
 }
 
-.prod-container h1, h2, h3, h4, h5, h6 {
+.prod-container h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Lato", sans-serif;
-  color: #2E2E2E;
+  color: #2e2e2e;
 }
 
 .prod-container h5 {
@@ -204,7 +172,6 @@ h6 {
   height: 300px;
   horiz-align: center;
   justify-content: center;
-
 }
 
 .pro img {
@@ -225,5 +192,3 @@ a {
 .des .fa-cart-shopping {
   size: 50px;
 }
-/////// main
-////////////////////////////////////////////////////////////////////////////HERE
