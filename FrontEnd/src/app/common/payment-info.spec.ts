@@ -1,4 +1,4 @@
-import { PaymentInfo } from './payment-info';
+import {PaymentInfo} from './payment-info';
 
 describe('PaymentInfo', () => {
   it('should create an instance', () => {

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductModel} from "../../model/product-model.model";
 import {ProductServiceService} from "../../service/product-service.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-products-list',
@@ -11,7 +12,8 @@ export class ProductsListComponent implements OnInit {
 
   productModel!: ProductModel[];
 
-  constructor(private productService: ProductServiceService) {
+  constructor(private productService: ProductServiceService,
+              private  snackbar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -22,6 +24,17 @@ export class ProductsListComponent implements OnInit {
     this.productService.listAllProducts()
       .subscribe((products) => {
         this.productModel = products
+      });
+  }
+
+  //addToCart
+  addToCart(product: ProductModel): void {
+    this.productService.addToCart(product.productId, product);
+
+    this.snackbar.open(
+      'Product has been added to cart!', '',
+      {
+        duration: 1500
       });
   }
 }

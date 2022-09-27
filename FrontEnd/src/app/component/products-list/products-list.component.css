@@ -5,10 +5,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-.container {
-  justify-content: center;
-}
-
 .section-title .line {
   background: -webkit-gradient(linear, left top, left bottom, from(#fe8464), to(#fe6e9a));
   background: linear-gradient(#fe8464 0%, #fe6e9a 100%);
@@ -36,7 +32,6 @@ h6 {
   flex-wrap: wrap;
   margin-left: 50px;
   justify-content: space-evenly;
-  horiz-align: center;
 }
 
 .prod-container h5, h6 {
@@ -83,9 +78,7 @@ h6 {
 
 .img-container {
   height: 300px;
-  horiz-align: center;
   justify-content: center;
-
 }
 
 .pro img {

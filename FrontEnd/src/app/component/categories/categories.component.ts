@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductServiceService} from "../../service/product-service.service";
-import {ProductModel} from "../../model/product-model.model";
-import {ActivatedRoute} from "@angular/router";
+import {ProductServiceService} from '../../service/product-service.service';
+import {ProductModel} from '../../model/product-model.model';
+import {ActivatedRoute} from '@angular/router';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-categories',
@@ -13,20 +14,38 @@ export class CategoriesComponent implements OnInit {
   productModel!: ProductModel;
   data: any;
 
-  constructor(private productService: ProductServiceService,
-              private activatedRoute: ActivatedRoute) {
-  }
+  constructor(
+    private productService: ProductServiceService,
+    private activatedRoute: ActivatedRoute,
+    private  snackbar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
+
     // access the ActivatedRoute and track the id parameter
-    this.activatedRoute.paramMap.subscribe((params) => {
+    this.activatedRoute.paramMap.subscribe(() => {
       this.categoryList();
     });
+
+    this.productService.listAllProducts();
   }
 
   categoryList() {
     const cat = this.activatedRoute.snapshot.paramMap.get('cat')!;
     this.productService.getCategory(cat)
-      .subscribe((product) => this.data = product);
+      .subscribe((product) => {
+        this.data = product
+      });
+  }
+
+  //addToCart
+  addToCart(product: ProductModel): void {
+    this.productService.addToCart(product.productId, product);
+
+    this.snackbar.open(
+      'Product has been added to cart!', '',
+      {
+        duration: 1500
+      });
   }
 }

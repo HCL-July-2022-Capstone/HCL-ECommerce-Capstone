@@ -1,3 +1,5 @@
+//////////////////////////////////////////////////////////////////CHECK FROM HERE TO
+/////////////// Stripe
 label {
   display: block;
   font-weight: bold;
@@ -44,3 +46,184 @@ ul.search-result {
   margin-top: 0;
   padding-left: 0;
 }
+==================================================
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
+}
+
+input {
+  padding: .5rem;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  display: block;
+}
+
+input:focus {
+  outline: #336699 auto 1px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.search-result li a {
+  border-bottom: 1px solid gray;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  display: inline-block;
+  width: 100%;
+  max-width: 600px;
+  padding: .5rem;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: black;
+}
+
+.search-result li a:hover {
+  background-color: #435A60;
+  color: white;
+}
+
+ul.search-result {
+  margin-top: 0;
+  padding-left: 0;
+}
+
+/*search button*/
+.main-btn {
+  text-decoration: none;
+  background: -webkit-gradient(linear, left top, right top, from(#33c8c1), color-stop(50%, #119bd2), to(#33c8c1));
+  background: linear-gradient(to right, #33c8c1 0%, #119bd2 50%, #33c8c1 100%);
+  background-size: 200%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  /*margin-top: 40px;*/
+  display: inline-block;
+  /*font-weight: 500;*/
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 0;
+  color: #fff!important;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/*button hover*/
+.main-btn:hover {
+  background-position: right center;
+  text-decoration: none;
+}
+
+
+/*grid list styling*/
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  color: #2E2E2E;
+  margin: 0;
+}
+
+.container {
+  justify-content: center;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 30px !important;
+}
+
+h5 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+h6 {
+  margin-bottom: 10px;
+}
+
+.prod-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 50px;
+  justify-content: space-evenly;
+  horiz-align: center;
+}
+
+.prod-container h5, h6 {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  color: #2E2E2E;
+  cursor: pointer;
+}
+
+.prod-container h1, h2, h3, h4, h5, h6 {
+  font-family: "Lato", sans-serif;
+  color: #2E2E2E;
+}
+
+.prod-container h5 {
+  font-size: 18px;
+}
+
+.prod-container h6 {
+  font-size: 16px;
+}
+
+.pro {
+  margin-right: 50px;
+  padding: 30px;
+  text-align: center;
+  margin-top: 100px;
+  width: 15%;
+  min-width: 300px;
+  border: 1px solid lightgray;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 1px 2px 3px 4px lightgray;
+  position: relative;
+  justify-content: center;
+  text-underline: none;
+}
+
+.pro:hover {
+  box-shadow: 1px 2px 3px 4px lightblue;
+}
+
+.img-container {
+  height: 300px;
+  horiz-align: center;
+  justify-content: center;
+
+}
+
+.pro img {
+  /*height: auto;*/
+  width: 100%;
+  padding: 0;
+}
+
+a {
+  color: #333333;
+  text-decoration: none;
+}
+
+.des {
+  height: 110px;
+}
+
+.des .fa-cart-shopping {
+  size: 50px;
+}
+/////// main
+////////////////////////////////////////////////////////////////////////////HERE

@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Injectable} from '@angular/core';
 
 //import
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, of, tap } from 'rxjs';
-import { AddressModel } from '../model/address.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {AddressModel} from '../model/address.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +18,22 @@ export class AddressService {
 
   constructor(private http: HttpClient) {} //inject
 
- 
+
   getAddresses(): Observable<AddressModel[]> {
     return this.http.get<AddressModel[]>(
+    
+    //////////////////////////////////////////////////NOT SURE WHICH OF THESE TO GO WITH
+    
+//////////// Stripe
       `${this.baseUrl}/address/getAddresses`
     ); 
+=================
+      `${this.baseUrl}/cart/getAddresses`
+    );
+//////////// main
+///////////////////////////////////////////////////////////
+
+
   }
 
   addAddress(addressModel: AddressModel){

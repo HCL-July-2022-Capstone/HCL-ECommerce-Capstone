@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AddressModel } from 'src/app/model/address.model';
-import { AddressService } from 'src/app/service/address.service';
+import {Component, OnInit} from '@angular/core';
+import {AddressModel} from 'src/app/model/address.model';
+import {AddressService} from 'src/app/service/address.service';
 
 @Component({
   selector: 'app-address-add',
