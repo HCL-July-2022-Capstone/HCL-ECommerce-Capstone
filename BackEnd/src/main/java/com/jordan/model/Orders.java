@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,18 +19,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import com.jordan.service.CartService;
-
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,26 +31,20 @@ import lombok.Setter;
 @Table(name = "orders")
 @Getter
 @Setter
-public class Orders {
+public class Orders
+{
 	@Id
 	@GeneratedValue
 	@Column
 	private int orderId;
 	private float totalPrice;
 	private String orderStatus;
-	@Column(unique = true)
+	@Column
 	private String username;
 
-
-
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "orders_products",	
-	joinColumns = @JoinColumn(name = "orderId"),
-	inverseJoinColumns = @JoinColumn(name = "productId")
-	)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "orders_products", joinColumns = @JoinColumn(name = "orderId"), inverseJoinColumns = @JoinColumn(name = "productId"))
 	private List<Product> products = new ArrayList<Product>();
-
-
 
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "shippingAddressId", referencedColumnName = "addressId")
@@ -69,26 +53,26 @@ public class Orders {
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "billingAddressId", referencedColumnName = "addressId")
 	private Address billingAddress;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="user_id")
-//	@JsonBackReference
-//	private User user;
-	
-	
+	//
+	// @ManyToOne
+	// @JoinColumn(name="user_id")
+	// @JsonBackReference
+	// private User user;
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(List<Product> products)
+	{
 		Logger logger = LoggerFactory.getLogger(Orders.class);
 		this.products = products;
 		logger.warn("Set Products");
 	}
 
-	public void addProduct(Product product) {
+	public void addProduct(Product product)
+	{
 		products.add(product);
 	}
-	
-	public void setUser(String username) {
+
+	public void setUser(String username)
+	{
 		this.username = username;
 	}
-
 }

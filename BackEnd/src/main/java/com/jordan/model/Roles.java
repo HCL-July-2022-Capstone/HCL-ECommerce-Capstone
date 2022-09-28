@@ -1,13 +1,9 @@
 package com.jordan.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -23,14 +19,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @Component
 @Entity
-@Table(name="roles")
+@Table(name = "roles")
 @Getter
 @Setter
-public class Roles {
-	@Id @GeneratedValue
+public class Roles
+{
+	@Id
+	@GeneratedValue
 	@Column(name = "role_id")
 	private int roleId;
 	@Column
 	private String roleName;
-
 }

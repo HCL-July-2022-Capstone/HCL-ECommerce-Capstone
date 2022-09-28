@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Injectable} from '@angular/core';
 
 //import
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, of, tap } from 'rxjs';
-import { AddressModel } from '../model/address.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {AddressModel} from '../model/address.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,24 +18,45 @@ export class AddressService {
 
   constructor(private http: HttpClient) {} //inject
 
- 
+
   getAddresses(): Observable<AddressModel[]> {
     return this.http.get<AddressModel[]>(
+    
+    //////////////////////////////////////////////////NOT SURE WHICH OF THESE TO GO WITH
+    
+//////////// Stripe
+    //   `${this.baseUrl}/address/getAddresses`
+    // ); 
+/*=================*/
       `${this.baseUrl}/cart/getAddresses`
-    ); 
+    );
+//////////// main
+///////////////////////////////////////////////////////////
+
+
+  }
+
+  addAddress(addressModel: AddressModel){
+    this.http.post<AddressModel>(`${this.baseUrl}/address/addAddress`, addressModel).subscribe((response) => console.log(response))
   }
 
   //add new addresses and set it. must be done before checkout
-  addShippingAddress(addressModel: AddressModel) {
+  setShippingAddress(addressModel: AddressModel) {
     this.http
-      .post<AddressModel>(`${this.baseUrl}/cart/setShippingAddress`, addressModel)
+      .post<AddressModel>(`${this.baseUrl}/address/setShippingAddress`, addressModel)
       .subscribe((response) => console.log(response));
   }
 
-  addBillingAddress(addressModel: AddressModel) {
+  setBillingAddress(addressModel: AddressModel) {
     this.http
-      .post<AddressModel>(`${this.baseUrl}/cart/setBillingAddress`, addressModel)
+      .post<AddressModel>(`${this.baseUrl}/address/setBillingAddress`, addressModel)
       .subscribe((response) => console.log(response));
   }
+
+  deleteAddress(addressModel: AddressModel){
+    this.http.post<AddressModel>(`${this.baseUrl}/address/delete`, addressModel).subscribe((response) => console.log(response));
+  }
+
+
 
 }

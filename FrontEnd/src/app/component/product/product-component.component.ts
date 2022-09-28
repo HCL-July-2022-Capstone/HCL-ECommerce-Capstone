@@ -1,9 +1,8 @@
+import {Component, Input, OnInit} from '@angular/core';
 
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-import { ProductServiceService } from '../../service/product-service.service';
-import { ProductModel } from '../../model/product-model.model';
+import {ProductServiceService} from '../../service/product-service.service';
+import {ProductModel} from '../../model/product-model.model';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-component',
@@ -12,7 +11,6 @@ import { ProductModel } from '../../model/product-model.model';
 })
 //step 2 function: all products from service //step 1 is in service
 export class ProductComponentComponent implements OnInit {
-  // @Input() viewMode = false;
 
   @Input() currentProduct: ProductModel = {
     categoryName: '',
@@ -27,8 +25,10 @@ export class ProductComponentComponent implements OnInit {
   productModel!: ProductModel[];
   data: ProductModel | undefined;
 
+
   constructor(private productService: ProductServiceService,
-  private route: ActivatedRoute) {}
+              private snackbar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
     this.listAllProducts(); //only for void methods
@@ -43,7 +43,8 @@ export class ProductComponentComponent implements OnInit {
 
   //delete
   deleteProductById(product: ProductModel): void {
-    this.productModel = this.productModel.filter((data) => data !== product);
+    this.productModel = this.productModel
+      .filter((data) => data !== product);
     this.productService.deleteById(product.productId);
   }
 
@@ -65,14 +66,26 @@ export class ProductComponentComponent implements OnInit {
     this.productService.update(data);
   }
 
+  //addToCart
+  addToCart(product: ProductModel): void {
+    this.productService.addToCart(product.productId, product);
+    this.snackbar.open(
+      'Product has been added to cart!', '',
+      {
+        duration: 1500
+      });
+  }
 
-   //addToCart
-    addToCart(product: ProductModel): void {
-      this.productService.addToCart(product.productId, product);
-      window.alert('product has been added to the cart!');
-    }
-    
-
+  //addToCart
+  // addItem(id): void {
+  //   let payload = {
+  //     productId: id
+  //   };
+  //   this.productService.addItem(payload).subscribe(() => {
+  //     this.listAllProducts();
+  //     alert('Product Added');
+  //   });
+  // }
 
 }
 

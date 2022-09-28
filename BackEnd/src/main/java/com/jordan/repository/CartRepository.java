@@ -8,6 +8,7 @@ import com.jordan.model.Cart;
 import java.util.Optional;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart,Integer> {
-   Optional<Cart> findByUsername(String username);
+public interface CartRepository extends JpaRepository<Cart, Integer>
+{
+	Optional<Cart> findByUsername(String username);
 }

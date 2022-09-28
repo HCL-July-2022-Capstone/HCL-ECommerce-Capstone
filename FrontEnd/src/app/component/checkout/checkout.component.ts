@@ -1,124 +1,115 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ProductServiceService } from 'src/app/service/product-service.service';
-import { CheckoutService } from 'src/app/service/checkout.service';
-import { PaymentInfo } from 'src/app/common/payment-info';
-import { environment } from 'src/environments/environment';
+import {Component, Input, OnInit} from '@angular/core';
+import {ProductServiceService} from 'src/app/service/product-service.service';
+import {ProductModel} from "../../model/product-model.model";
+import {CartModel} from "../../model/cart.model";
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  //styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  checkoutFormGroup!: FormGroup;
-  totalPrice: number = 0;
-  totalQuantity: number = 0;
 
-  items = this.productService.getItems();
 
-  stripe = Stripe(environment.stripePublishableKey);
-  paymentInfo: PaymentInfo = new PaymentInfo();
-  cardElement: any;
-  displayError: any = '';
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private productService: ProductServiceService,
-    private checkoutService: CheckoutService
-  ) {}
+
+
+  //items = this.productService.getItems();
+  //toggleNewAddress: Boolean = false;
+  
+  //stripe = Stripe(environment.stripePublishableKey);
+  //paymentInfo: PaymentInfo = new PaymentInfo();
+  //cardElement: any;
+  //displayError: any = '';
+
+
+
+
+
+
+  cartModel: CartModel[] = [];
+  productModel!: ProductModel[];
+  product!: ProductModel;
+  toggleNewAddress: Boolean = false;
+  items!: CartModel[];
+
+  @Input()
+  quantity: number = 0;
+  total: number = 0;
+
+  priceList:any[] = [];
+
+  constructor(private productService: ProductServiceService) {
+  }
+
+  subTotal = 0;
+  price = 0;
 
   ngOnInit(): void {
-    this.setupStripePaymentForm();
+    this.getCart();
+  }
 
-    this.checkoutFormGroup = this.formBuilder.group({
-      creditCardDetails: this.formBuilder.group({}),
+  getCart(): void {
+    this.productService.getItems().subscribe((data: any) => {
+      this.items = data;
+      console.log(data);
+    });
+
+    // this.cartModel.push({
+    //   productId: this.items.productId,
+    //   productName: this.items.productName,
+    //   image: this.items.image,
+    //   productPrice: this.items.productPrice,
+    //   quantity: 1,
+    //   totalPrice: this.items.quantity * this.items.productPrice
+    // });
+    // console.log(this.cartModel);
+
+  }
+
+  // remove from cart
+  removeItem(cart: CartModel) {
+    this.cartModel = this.cartModel
+      .filter((data) => data !== cart);
+    this.productService.removeFromCart(cart.productId);
+
+    //remove from database
+    this.removeFromDatabase(this.product);
+  }
+
+  incQTY(id: number, quantityOnHand: number): void {
+    const payload = {
+      productId: id,
+      quantityOnHand,
+    };
+    this.productService.increaseQty(payload).subscribe(() => {
+      this.getCart();
+      alert('Product Added');
     });
   }
 
-  setupStripePaymentForm() {
-    // Stripe payment handler.
-    var elements = this.stripe.elements();
+  totalPrice(quantity: number, price: number) {
+   this.total = quantity * price;
 
-    // Create custom card elements with a hidden ZipCode field.
-    this.cardElement = elements.create('card', { hidePostalCode: true });
+    this.items.forEach((item: any) => {
+      this.subTotal += (quantity * price)
+    })
+  }
 
-    // Add card UI component into the 'card-element' <div>.
-    this.cardElement.mount('#card-element');
-
-    // Add event binding for 'change' in the 'card-element'.
-    this.cardElement.on('change', (event: { complete: any; error: { message: any; }; }) => {
-      // 'card-errors' element handler.
-      this.displayError = document.getElementById('card-errors');
-
-      if (event.complete) {
-        this.displayError.textContent = '';
-      } else if (event.error) {
-        this.displayError.textContent = event.error.message;
-      }
+  emptyCart(): void {
+    this.productService.clearCart().subscribe(() => {
+      this.getCart();
+      alert('Cart Emptied');
     });
   }
 
-  get creditCardType() {
-    return this.checkoutFormGroup.get('creditCardDetails.cardType');
+  checkout(): void {
+    this.productService.checkout();
   }
 
-  get creditCardNameOnCard() {
-    return this.checkoutFormGroup.get('creditCardDetails.nameOnCard');
-  }
-
-  get creditCardNumber() {
-    return this.checkoutFormGroup.get('creditCardDetails.cardNumber');
-  }
-
-  get creditCardSecurityCode() {
-    return this.checkoutFormGroup.get('creditCardDetails.securityCode');
-  }
-
-  checkout() {
-    // this.productService.checkout();
-
-    if (this.checkoutFormGroup.invalid) {
-      this.checkoutFormGroup.markAllAsTouched();
-      return;
+    removeFromDatabase(product: ProductModel): void {
+      this.productModel = this.productModel.filter((data) =>
+        data !== product);
+      this.productService.removeFromCart(product.productId);
     }
-
-    // Payment info
-    this.paymentInfo.amount = this.totalPrice * 100;
-    this.paymentInfo.currency = 'USD';
-
-    if (
-      !this.checkoutFormGroup.invalid &&
-      this.displayError.textContent === ''
-    ) {
-      this.checkoutService
-        .createPaymentIntent(this.paymentInfo)
-        .subscribe((paymentIntentResponse) => {
-          this.stripe
-            .confirmCardPayment(
-              paymentIntentResponse.client_secret,
-              {
-                payment_method: {
-                  card: this.cardElement
-                }
-              },
-              { handleActions: false }
-            )
-            .then((result: { error: { message: any; }; }) => {
-              if (result.error) {
-                // show error
-                alert(`An error occurred: ${result.error.message}`);
-              }
-            });
-        });
-    } else {
-      this.checkoutFormGroup.markAllAsTouched();
-      return;
-    }
-  }
 }

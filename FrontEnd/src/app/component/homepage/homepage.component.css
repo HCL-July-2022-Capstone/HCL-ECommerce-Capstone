@@ -1,7 +1,7 @@
 /*===========================
   COMMON css
 ===========================*/
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,700|Lato:300,400,700&display=swap");
+/*@import url("https://fonts.googleapis.com/css?family=Poppins:400,700|Lato:300,400,700&display=swap");*/
 
 body {
   font-family: "Lato", sans-serif;
@@ -833,35 +833,35 @@ h2.title {
 }
 
 /*===== BACK TO TOP =====*/
-.back-to-top {
-  font-size: 20px;
-  color: #fff;
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  background: -webkit-gradient(linear, left top, right top, from(#fe8464), color-stop(50%, #fe6e9a), to(#fe8464));
-  background: linear-gradient(to right, #fe8464 0%, #fe6e9a 50%, #fe8464 100%);
-  background-size: 200%;
-  text-align: center;
-  z-index: 99;
-  -webkit-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
-  display: none;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
+/*.back-to-top {*/
+/*  font-size: 20px;*/
+/*  color: #fff;*/
+/*  position: fixed;*/
+/*  right: 20px;*/
+/*  bottom: 20px;*/
+/*  width: 40px;*/
+/*  height: 40px;*/
+/*  border-radius: 5px;*/
+/*  background: -webkit-gradient(linear, left top, right top, from(#fe8464), color-stop(50%, #fe6e9a), to(#fe8464));*/
+/*  background: linear-gradient(to right, #fe8464 0%, #fe6e9a 50%, #fe8464 100%);*/
+/*  background-size: 200%;*/
+/*  text-align: center;*/
+/*  z-index: 99;*/
+/*  -webkit-transition: all 0.3s ease-out 0s;*/
+/*  transition: all 0.3s ease-out 0s;*/
+/*  display: none;*/
+/*  -webkit-box-align: center;*/
+/*  -ms-flex-align: center;*/
+/*  align-items: center;*/
+/*  -webkit-box-pack: center;*/
+/*  -ms-flex-pack: center;*/
+/*  justify-content: center;*/
+/*}*/
 
-.back-to-top:hover {
-  color: #fff;
-  background-position: right center;
-}
+/*.back-to-top:hover {*/
+/*  color: #fff;*/
+/*  background-position: right center;*/
+/*}*/
 
 /* ======================
     DEFAULT CSS

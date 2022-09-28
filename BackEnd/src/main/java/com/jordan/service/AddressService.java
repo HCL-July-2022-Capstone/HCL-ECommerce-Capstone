@@ -11,43 +11,60 @@ import com.jordan.model.Address;
 import com.jordan.repository.AddressRepository;
 
 @Service
-public class AddressService {
+public class AddressService
+{
 	@Autowired
 	AddressRepository addressRepository;
-	
+
 	private Address shippingAddress;
 	private Address billingAddress;
-	
-	
+
 	private Logger logger = LoggerFactory.getLogger(AddressService.class);
-	
-	public List<Address> getAddressesByUsername(String user){
-		return addressRepository.findAllByUsername(user).get();
+
+	public List<Address> getAddressesByUsername(String user)
+	{
+		return addressRepository.findAllByUsername(user);
 	}
-	
-	public void setShippingAddress(Address address, String userId) {
+
+	public void addAddress(Address address, String username)
+	{
+		address.setUsername(username);
+		if (addressRepository.findById(address.getId()).isEmpty())
+			addressRepository.save(address);
+		logger.warn("Added new address with ID " + address.getId());
+	}
+
+	// selects address
+	public void setShippingAddress(Address address)
+	{
 		shippingAddress = address;
-		shippingAddress.setUsername(userId);
-		addressRepository.save(shippingAddress);
 		logger.warn("SET shipping address");
 	}
-	
-	public void setBillingAddress(Address address, String userId) {
+
+	public void setBillingAddress(Address address)
+	{
 		billingAddress = address;
-		billingAddress.setUsername(userId);
-		addressRepository.save(billingAddress);
 		logger.warn("set billing address");
 	}
-	
-	public Address getShippingAddress() {
+
+	public void deleteAddress(Address address)
+	{
+		addressRepository.delete(address);
+		logger.warn("deleted address with id " + address.getId());
+	}
+
+	public Address getShippingAddress()
+	{
 		return shippingAddress;
 	}
-	
-	public Address getBillingAddress() {
+
+	public Address getBillingAddress()
+	{
 		return billingAddress;
 	}
-	
-	public Address getAddress() {
+
+	public Address getAddress()
+	{
 		return shippingAddress;
 	}
 }

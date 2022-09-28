@@ -38,6 +38,9 @@ public class CartService
 	@Autowired
 	AddressService addressService;
 
+	@Autowired
+	RestService restService;
+
 	public Optional<Cart> getCartById(int id)
 	{
 		return cartRepo.findById(id);
@@ -54,13 +57,11 @@ public class CartService
 		cart.addToCart(productService.getProductById(id).get());
 		logger.info("added to " + user.getName() + "'s cart with id " + cart.getId());
 		save(cart);
-
 	}
 
 	public List<Product> viewCart(Principal user)
 	{
 		return getCart(user).getProducts();
-
 	}
 
 	public void removeFromCart(Principal user, int id)
@@ -101,6 +102,7 @@ public class CartService
 		order.setBillingAddress(addressService.getBillingAddress());
 		order.setShippingAddress(addressService.getShippingAddress());
 
+		restService.checkStock();
 		// lower stock of each item - works
 		order.getProducts().forEach(product ->
 		{
@@ -119,6 +121,7 @@ public class CartService
 	private Cart getCart(Principal user)
 	{
 		Optional<Cart> maybeCart = cartRepo.findByUsername(user.getName());
+
 		if (maybeCart.isEmpty())
 		{
 			Cart newCart = new Cart();
@@ -127,5 +130,4 @@ public class CartService
 		} else
 			return maybeCart.get();
 	}
-
 }

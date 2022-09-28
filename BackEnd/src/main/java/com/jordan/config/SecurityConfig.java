@@ -42,12 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	{
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars");
-
 	}
 
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception
 	{
-
 		// auth.userDetailsService(userService);
 		// auth.inMemoryAuthentication().withUser("Jordan").password("123").roles("USER")
 		// .and().withUser("Admin").password("123").roles("ADMIN");
@@ -90,5 +88,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	{
 		return new EmailService();
 	}
-
 }
