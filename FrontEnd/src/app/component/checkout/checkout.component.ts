@@ -10,6 +10,23 @@ import {CartModel} from "../../model/cart.model";
 })
 export class CheckoutComponent implements OnInit {
 
+
+
+
+
+  //items = this.productService.getItems();
+  //toggleNewAddress: Boolean = false;
+  
+  //stripe = Stripe(environment.stripePublishableKey);
+  //paymentInfo: PaymentInfo = new PaymentInfo();
+  //cardElement: any;
+  //displayError: any = '';
+
+
+
+
+
+
   cartModel: CartModel[] = [];
   productModel!: ProductModel[];
   product!: ProductModel;

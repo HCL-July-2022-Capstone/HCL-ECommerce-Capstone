@@ -6,52 +6,53 @@ import java.util.Properties;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import com.jordan.model.Cart;
 import com.jordan.model.Orders;
 
-public class EmailService {
-	
+public class EmailService
+{
 	private JavaMailSenderImpl mailSender;
-	
-	public EmailService() {
-    	mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.mailtrap.io");
-        mailSender.setPort(2525);
-          
-        mailSender.setUsername("c45a8580e274fc");
-        mailSender.setPassword("0393150e31cfd8");
-          
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
-        
+
+	public EmailService()
+	{
+		mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.mailtrap.io");
+		mailSender.setPort(2525);
+
+		mailSender.setUsername("c45a8580e274fc");
+		mailSender.setPassword("0393150e31cfd8");
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
 	}
 
-	public void sendRegistrationEmail(String user) {
+	public void sendRegistrationEmail(String user)
+	{
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(user);
 		msg.setSubject("Welcome to our super cool ecommerce app!");
-		msg.setText("Hello "+user+", welcome!");
+		msg.setText("Hello " + user + ", welcome!");
 		mailSender.send(msg);
 	}
-	
-	void sendConfirmationEmail(String user, Orders order) {
+
+	public void sendConfirmationEmail(String user, Orders order)
+	{
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(user);
-		msg.setSubject("Order #"+order.getOrderId());
-		msg.setText("Your order has been placed. Total: "+order.getTotalPrice());
+		msg.setSubject("Order #" + order.getOrderId());
+		msg.setText("Your order has been placed. Total: " + order.getTotalPrice());
+		mailSender.send(msg);
 	}
-	void sendEmailWithAttachment() throws MessagingException, IOException {
 
+	public void sendEmailWithAttachment() throws MessagingException, IOException
+	{
 		MimeMessage msg = mailSender.createMimeMessage();
 
 		// true = multipart message
@@ -76,6 +77,16 @@ public class EmailService {
 
 		helper.addAttachment("my_photo.png", new ClassPathResource("ms1.png"));
 
+		mailSender.send(msg);
+	}
+
+	public void sendInventoryStatustEmail(String prod)
+	{
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setFrom("your.techshop@techshop.com");
+		msg.setTo("admin@gmail.com");
+		msg.setSubject("Inventory Status");
+		msg.setText(prod);
 		mailSender.send(msg);
 	}
 }

@@ -4,13 +4,13 @@ import {AddressService} from 'src/app/service/address.service';
 
 @Component({
   selector: 'app-address-add',
-  templateUrl: './address-add.component.html'
+  templateUrl: './address-add.component.html',
 })
 export class AddressAddComponent implements OnInit {
   addressModel: AddressModel[] = [];
   //for adding
   newShippingAddress: AddressModel = {
-    id:0,
+    id: 0,
     street: '',
     city: '',
     state: '',
@@ -25,7 +25,7 @@ export class AddressAddComponent implements OnInit {
     state: '',
     zipcode: '',
     country: '',
-    username: ''
+    username: '',
   };
 
   added = false;
@@ -43,11 +43,11 @@ export class AddressAddComponent implements OnInit {
       state: this.newShippingAddress.state,
       zipcode: this.newShippingAddress.zipcode,
       country: this.newShippingAddress.country,
-      username: this.newShippingAddress.username
+      username: this.newShippingAddress.username,
     };
 
     console.log(data);
-    this.addressService.addShippingAddress(data);
+    this.addressService.setShippingAddress(data);
   }
   addBillingAddress(): void {
     const data = {
@@ -57,11 +57,11 @@ export class AddressAddComponent implements OnInit {
       state: this.newBillingAddress.state,
       zipcode: this.newBillingAddress.zipcode,
       country: this.newBillingAddress.country,
-      username: this.newBillingAddress.username
+      username: this.newBillingAddress.username,
     };
 
     console.log(data);
-    this.addressService.addBillingAddress(data);
+    this.addressService.setBillingAddress(data);
   }
 
   addAddresses(): void {
@@ -69,8 +69,7 @@ export class AddressAddComponent implements OnInit {
     this.addBillingAddress();
   }
 
-  sameShippingAndBilling(): void{
+  sameShippingAndBilling(): void {
     this.newBillingAddress = this.newShippingAddress;
   }
 }
-

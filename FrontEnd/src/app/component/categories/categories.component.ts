@@ -7,9 +7,10 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css'],
+  styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+
   productModel!: ProductModel;
   data: any;
 

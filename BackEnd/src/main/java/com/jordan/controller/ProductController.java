@@ -28,102 +28,90 @@ import com.jordan.service.ProductService;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/products")
-public class ProductController {
-	
+public class ProductController
+{
 	@Autowired
 	private ProductRepository repo;
-	
+
 	@Autowired
 	private ProductService service;
-	
-// 	@Autowired
-// 	private CategoryRepository catRepo;
-	
+
+	// @Autowired
+	// private CategoryRepository catRepo;
+
 	@GetMapping("/getAllProducts")
-	public List<Product> listallproducts() {
-		
+	public List<Product> listallproducts()
+	{
 		return service.getAllProducts();
 	}
-	
+
 	@GetMapping("/Search/{productName}")
-	public ResponseEntity<List<Product>> searchProducts(@PathVariable String productName){
-		try {
+	public ResponseEntity<List<Product>> searchProducts(@PathVariable String productName)
+	{
+		try
+		{
 			List<Product> products = new ArrayList<Product>();
-			
-			if(productName == null) {
+
+			if (productName == null)
+			{
 				repo.findAll().forEach(products::add);
-			}
-			
-			else {
+			} else
+			{
 				repo.findByproductNameContaining(productName).forEach(products::add);
 			}
-			
-			if(products.isEmpty()) {
+
+			if (products.isEmpty())
+			{
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 			return new ResponseEntity<>(products, HttpStatus.OK);
-		}catch(Exception e) {
+		} catch (Exception e)
+		{
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PostMapping("/addProduct")
-	public String addProduct(@RequestBody Product product) {
+	public String addProduct(@RequestBody Product product)
+	{
 		product = repo.save(product);
 
-		return product.getProductName()+ " added to Inventory!";
+		return product.getProductName() + " added to Inventory!";
 	}
-	
+
 	@GetMapping("/getProduct/{id}")
-	public Optional<Product> getProductId(@PathVariable Integer id) {
+	public Optional<Product> getProductId(@PathVariable Integer id)
+	{
 		return service.getProductById(id);
 	}
-	
+
 	@PutMapping("/updateProduct/{id}")
-	public void UpdateProductById(@RequestBody Product product, @PathVariable Integer id) {
+	public void UpdateProductById(@RequestBody Product product, @PathVariable Integer id)
+	{
 		repo.save(product);
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
-	public void deleteById(@PathVariable Integer id) {
+	public void deleteById(@PathVariable Integer id)
+	{
 		repo.deleteById(id);
 	}
-// 	@GetMapping("/getAllCategories")
-// 	public List<ProductCategory> listallCategories() {
-// 		return service.getAllCategories() ;
-// 	}
 
-// 	@PostMapping("/addCategory")
-// 	public String addCategory(@RequestBody ProductCategory productCategory) {
-// 		catRepo.save(productCategory);
-// 		return productCategory.getCategoryName() + " added to Categories!";
-// 	}
-	
-	//get product category
-        @GetMapping("/category/{catName}")
-        private List<Product> getCategory(@PathVariable String catName) {
-              return repo.getByCategoryName(catName);
-           }
-	
-// 	@GetMapping("/category/{id}")
-// 	public Optional<ProductCategory> getProductCategoryById(@PathVariable Integer id) {
-// 		return service.getCategoryById(id);
-// 	}
-	
-// 	@PutMapping("/category/{id}")
-// 	public void UpdateCategoryById(@RequestBody ProductCategory productCategory, @PathVariable Integer id) {
-// 		catRepo.save(productCategory);
-// 	}
-	
+	// get product category
+	@GetMapping("/category/{catName}")
+	private List<Product> getCategory(@PathVariable String catName)
+	{
+		return repo.getByCategoryName(catName);
+	}
+
 	@PutMapping("/restock/{id}/{quantity}")
-	public String restockProduct(@PathVariable Map<String, String> pathVariables) {
+	public String restockProduct(@PathVariable Map<String, String> pathVariables)
+	{
 		Integer id = Integer.valueOf(pathVariables.get("id"));
 		Integer quantity = Integer.valueOf(pathVariables.get("quantity"));
 		Product toChange = service.getProductById(id).get();
 		toChange.setQuantityOnHand(toChange.getQuantityOnHand() + quantity);
 		repo.save(toChange);
-		return "Product " + toChange.getProductName()+" restocked. Current stock: "+toChange.getQuantityOnHand();
+		return "Product " + toChange.getProductName() + " restocked. Current stock: " + toChange.getQuantityOnHand();
 	}
-	
-
 }
