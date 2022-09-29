@@ -11,7 +11,6 @@ import {CheckoutService} from "../../service/checkout.service";
   // styleUrls: ['./stripe-payment.component.css']
 })
 export class StripePaymentComponent implements OnInit {
-
   checkoutFormGroup!: FormGroup;
   totalPrice: number = 0;
   totalQuantity: number = 0;
@@ -48,16 +47,19 @@ export class StripePaymentComponent implements OnInit {
     this.cardElement.mount('#card-element');
 
     // Add event binding for 'change' in the 'card-element'.
-    this.cardElement.on('change', (event: { complete: any; error: { message: any; }; }) => {
-      // 'card-errors' element handler.
-      this.displayError = document.getElementById('card-errors');
+    this.cardElement.on(
+      'change',
+      (event: { complete: any; error: { message: any } }) => {
+        // 'card-errors' element handler.
+        this.displayError = document.getElementById('card-errors');
 
-      if (event.complete) {
-        this.displayError.textContent = '';
-      } else if (event.error) {
-        this.displayError.textContent = event.error.message;
+        if (event.complete) {
+          this.displayError.textContent = '';
+        } else if (event.error) {
+          this.displayError.textContent = event.error.message;
+        }
       }
-    });
+    );
   }
 
   get creditCardType() {
@@ -100,12 +102,12 @@ export class StripePaymentComponent implements OnInit {
               paymentIntentResponse.client_secret,
               {
                 payment_method: {
-                  card: this.cardElement
-                }
+                  card: this.cardElement,
+                },
               },
               { handleActions: false }
             )
-            .then((result: { error: { message: any; }; }) => {
+            .then((result: { error: { message: any } }) => {
               if (result.error) {
                 // show error
                 alert(`An error occurred: ${result.error.message}`);
@@ -117,5 +119,4 @@ export class StripePaymentComponent implements OnInit {
       return;
     }
   }
-
 }
