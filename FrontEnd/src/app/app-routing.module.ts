@@ -14,6 +14,7 @@ import {CategoriesComponent} from './component/categories/categories.component';
 import {HomepageComponent} from './component/homepage/homepage.component';
 
 import {CheckoutComponent} from './component/checkout/checkout.component';
+import {StripePaymentComponent} from "./component/stripe-payment/stripe-payment.component";
 
 const routes: Routes = [
   {
@@ -50,10 +51,6 @@ const routes: Routes = [
     path: 'category/:cat',
     component: CategoriesComponent,
   },
-  /*{
-    path: 'search/:term',
-    component: ProductSearchComponent,
-  },*/
   {
     path: 'addProduct',
     component: ProductAddComponent,
@@ -71,6 +68,7 @@ const routes: Routes = [
     component: ProductsListComponent, //grid list
   },
   { path: 'checkout', component: CheckoutComponent },
+  // { path: '/api/payment-intent', component: StripePaymentComponent},
   {
     path: '',
     redirectTo: '',
