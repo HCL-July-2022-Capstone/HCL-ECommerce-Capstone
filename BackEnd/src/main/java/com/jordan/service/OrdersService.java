@@ -13,9 +13,6 @@ import com.jordan.repository.OrdersRepository;
 public class OrdersService
 {
 	@Autowired
-	private EmailService emailService;
-
-	@Autowired
 	private OrdersRepository repo;
 
 	public List<Orders> getOrders()

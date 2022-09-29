@@ -5,8 +5,6 @@ import com.jordan.repository.ProductRepository;
 import com.jordan.service.EmailService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +17,9 @@ public class MessageController
 {
 	@Autowired
 	ProductRepository repo;
+	
 	@Autowired
 	EmailService emailService;
-
-	private JavaMailSenderImpl mailSender;
 
 	private final RabbitTemplate rabbitTemplate;
 
