@@ -15,13 +15,7 @@
   <!--               <img width="75" alt="Okta logo" -->
   <!--                    src="https://cdn.brandfolder.io/2VK5Y09C/at/c8nxgg3ptt6zmrggjt85hshg/Logo_Okta_Blue_RGB.png?width=117&height=40"/> -->
   <!--             </a> -->
-<<<<<<< HEAD
-  <button aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation"
-          class="navbar-toggler"
-          data-bs-target="#navbarSupportedContent"
-          data-bs-toggle="collapse" type="button">
-=======
+
   <button
     aria-controls="navbarSupportedContent"
     aria-expanded="false"
@@ -31,7 +25,7 @@
     data-bs-toggle="collapse"
     type="button"
   >
->>>>>>> parent of 3019b0f (Revert "Merge pull request #28 from HCL-July-2022-Capstone/Stripe")
+
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -52,6 +46,7 @@
         </a>
       </a>
     </div>
+
     <ul class="navbar-nav ml-auto" id="nav">
       <br />
       <li class="nav-item">
@@ -60,8 +55,19 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link px-2 active page-scroll" routerLink="Search"
-          >Search Products</a
+        <a
+          *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
+          class="nav-link px-2 active page-scroll"
+          routerLink="/getAllProducts"
+        >Products Table</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
+          class="nav-link px-2 active page-scroll"
+          routerLink="/addProduct"
+        >Add Products</a
         >
       </li>
       <li class="nav-item">
@@ -93,7 +99,7 @@
           >Monitors</a
         >
       </li>
-      
+
       <li class="nav-item">
         <a
           class="nav-link px-2 active page-scroll"
@@ -101,30 +107,35 @@
           >Accessories</a
         >
       </li>
+      <li class="nav-item">
+        <a class="nav-link px-2 active page-scroll" routerLink="Search"
+        >Search Products</a
+        >
+      </li>
+
+<!--       <li class="nav-item"> -->
+<!--         <a -->
+<!--           *oktaHasAnyGroup="['HCL ECommerce', 'admins']" -->
+<!--           class="nav-link px-2 active page-scroll" -->
+<!--           routerLink="/getAllProducts" -->
+<!--           >Products Table</a -->
+<!--         > -->
+<!--       </li> -->
+
+<!--       <li> -->
+<!--         <a -->
+<!--           *oktaHasAnyGroup="['HCL ECommerce', 'admins']" -->
+<!--           class="nav-link px-2 active page-scroll" -->
+<!--           routerLink="/addProduct" -->
+<!--           >Add Products</a -->
+<!--         > -->
+<!--       </li> -->
 
       <li class="nav-item">
         <a
           *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
-          class="nav-link px-2 active page-scroll"
-          routerLink="/getAllProducts"
-          >Products Table</a
-        >
-      </li>
-
-      <li>
-        <a
-          *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
-          class="nav-link px-2 active page-scroll"
-          routerLink="/addProduct"
-          >Add Products</a
-        >
-      </li>
-
-      <li>
-        <a
-          *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
           routerLink="/editprofile"
-          class="nav-link px-2 link-dark"
+          class="nav-link px-2 active page-scroll"
           >Edit Profile</a
         >
       </li>

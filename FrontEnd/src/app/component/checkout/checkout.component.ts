@@ -10,22 +10,13 @@ import {CartModel} from "../../model/cart.model";
 })
 export class CheckoutComponent implements OnInit {
 
-
-
-
-
-  //items = this.productService.getItems();
+//items = this.productService.getItems();
   //toggleNewAddress: Boolean = false;
-  
+
   //stripe = Stripe(environment.stripePublishableKey);
   //paymentInfo: PaymentInfo = new PaymentInfo();
   //cardElement: any;
   //displayError: any = '';
-
-
-
-
-
 
   cartModel: CartModel[] = [];
   productModel!: ProductModel[];
@@ -77,15 +68,17 @@ export class CheckoutComponent implements OnInit {
     this.removeFromDatabase(this.product);
   }
 
-  incQTY(id: number, quantityOnHand: number): void {
-    const payload = {
-      productId: id,
-      quantityOnHand,
-    };
-    this.productService.increaseQty(payload).subscribe(() => {
-      this.getCart();
-      alert('Product Added');
-    });
+  incQTY(items: CartModel[]) {
+    for (let item of items)  {
+      item.quantity = item.quantity + 1;
+    }
+    // const payload = {
+    //   productId: id,
+    //   quantityOnHand,
+    // };
+    // this.productService.increaseQty(payload).subscribe(() => {
+    //   this.getCart();
+    // });
   }
 
   totalPrice(quantity: number, price: number) {
