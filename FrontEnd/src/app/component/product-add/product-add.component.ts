@@ -62,8 +62,7 @@ export class ProductAddComponent implements OnInit {
 
     console.log(data);
     this.productService.addProduct(data);
-    /////////////////////////////////////////////////////////////////CHECK HERE TO
-    ////////////// Stripe
+
     //pop up message
     this.snackbar.open('Product list has been updated!', '', {
       duration: 1500,
@@ -72,11 +71,9 @@ export class ProductAddComponent implements OnInit {
 
   myfunc() {
     location.replace('http://localhost:4200/getAllProducts');
-    /*===============================*/
+
     this.snackbar.open('Product has been added to cart!', '', {
       duration: 1500,
     });
-    /////////// main
-    ////////////////////////////////////////////////////////////////HERE
   }
 }

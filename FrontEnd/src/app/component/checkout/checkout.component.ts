@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductServiceService} from 'src/app/service/product-service.service';
-import {ProductModel} from "../../model/product-model.model";
 import {CartModel} from "../../model/cart.model";
+import {BehaviorSubject, Subject} from "rxjs";
+import {ProductModel} from "../../model/product-model.model";
 
 @Component({
   selector: 'app-checkout',
@@ -10,27 +11,29 @@ import {CartModel} from "../../model/cart.model";
 })
 export class CheckoutComponent implements OnInit {
 
-//items = this.productService.getItems();
-  //toggleNewAddress: Boolean = false;
-
-  //stripe = Stripe(environment.stripePublishableKey);
-  //paymentInfo: PaymentInfo = new PaymentInfo();
-  //cardElement: any;
-  //displayError: any = '';
-
-  cartModel: CartModel[] = [];
-  productModel!: ProductModel[];
-  product!: ProductModel;
+  localCart: CartModel[] = [];
+  // newCart: CartModel = {
+  //   image: "",
+  //   productId: 0, productName: "", productPrice: 0, quantity: 0, totalPrice: 0
+  //
+  // };
+  // localItems!: CartModel;
+  // productModel!: ProductModel[];
+  // product!: ProductModel;
+  // cart: any;
   toggleNewAddress: Boolean = false;
-  items!: CartModel[];
+  items: any;
 
-  @Input()
-  quantity: number = 0;
-  total: number = 0;
-
-  priceList:any[] = [];
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
   constructor(private productService: ProductServiceService) {
+
+    // let data = JSON.plocalStorage.getItem('localCart');
+    //
+    // if (data != null) {
+    //   this.localCart = data;
+    // }
   }
 
   subTotal = 0;
@@ -43,51 +46,115 @@ export class CheckoutComponent implements OnInit {
   getCart(): void {
     this.productService.getItems().subscribe((data: any) => {
       this.items = data;
-      console.log(data);
-    });
 
-    // this.cartModel.push({
-    //   productId: this.items.productId,
-    //   productName: this.items.productName,
-    //   image: this.items.image,
-    //   productPrice: this.items.productPrice,
-    //   quantity: 1,
-    //   totalPrice: this.items.quantity * this.items.productPrice
-    // });
-    // console.log(this.cartModel);
-
-  }
-
-  // remove from cart
-  removeItem(cart: CartModel) {
-    this.cartModel = this.cartModel
-      .filter((data) => data !== cart);
-    this.productService.removeFromCart(cart.productId);
-
-    //remove from database
-    this.removeFromDatabase(this.product);
-  }
-
-  incQTY(items: CartModel[]) {
-    for (let item of items)  {
-      item.quantity = item.quantity + 1;
-    }
-    // const payload = {
-    //   productId: id,
-    //   quantityOnHand,
-    // };
-    // this.productService.increaseQty(payload).subscribe(() => {
-    //   this.getCart();
-    // });
-  }
-
-  totalPrice(quantity: number, price: number) {
-   this.total = quantity * price;
-
-    this.items.forEach((item: any) => {
-      this.subTotal += (quantity * price)
+      localStorage.setItem('localCart', JSON.stringify(this.items));
     })
   }
+
+  // addItem(cart: CartModel) {
+  //
+  //   // this.productService.addToCart(this.items.productId, this.items);
+  //
+  //   // check if we already have the item in our cart
+  //   let alreadyExistsInCart: boolean = false;
+  //
+  //   if (this.localCart.length > 0) {
+  //     // find the item in the cart based on item id
+  //     this.localCart.find( tempCartItem =>
+  //       tempCartItem.productId === cart.productId);
+  //
+  //     // check if we found it
+  //     alreadyExistsInCart = true
+  //   }
+  //   if (alreadyExistsInCart) {
+  //     // increment the quantity
+  //     cart.quantity += 1;
+  //   }
+  //   else {
+  //     // just add the item to the array
+  //     this.localCart.push(cart);
+  //   }
+  //   // compute cart total price and total quantity
+  //
+  // }
+
+  addToCart(product: ProductModel) {
+    this.productService.addToCart(product.productId, product);
+
+    // const dataCart = {
+    //   productId: this.newCart.productId,
+    //   productName: this.newCart.productName,
+    //   image: this.newCart.image,
+    //   productPrice: this.newCart.productPrice,
+    //   quantity: 1,
+    //   totalPrice: this.newCart.quantity * this.newCart.productPrice,
+    // }
+
+    this.productService.getItems().subscribe((data: any) => {
+      this.localCart = data;
+
+      //set item in localstorage
+      localStorage.setItem('localCart', JSON.stringify(this.localCart));
+
+      // @ts-ignore
+    //   let cartData = JSON.parse(localStorage.getItem('localCart'));
+    //   if (cartData == null) {
+    //     let storeData: any = [];
+    //     storeData.push(this.localCart)
+    //     localStorage.setItem('Cart', JSON.stringify(storeData));
+    //   } else {
+    //     var id = product.productId;
+    //     let index: number = -1;
+    //
+    //     // @ts-ignore
+    //     this.items = JSON.parse(localStorage.getItem('localCart'));
+    //
+    //     for (let i = 0; i < this.items.length; i++) {
+    //       if (id === parseInt(this.items[i].productId)) {
+    //         this.items[i].quantity = this.localItems.quantity;
+    //         index = i;
+    //         break;
+    //       }
+    //     }
+    //   if (index == -1) {
+    //     this.items.push(this.localCart);
+    //     localStorage.setItem('localCart', JSON.stringify(this.localCart))
+    //
+    //   }
+    // }
+    });
+  }
+
+  // addItems(localCart: CartModel) {
+  //   console.log(localCart);
+  //
+  //   this.productService.getItems().subscribe((data: any) => {
+  //     this.localCart = data;
+  //     //set item in localstorage
+  //     localStorage.setItem('localCart', JSON.stringify(data));
+  //   })
+  //   // localStorage.setItem('Cart', JSON.stringify(localCart));
+  // }
+
+  // increase quantity
+  incQTY(){
+  }
+
+  decQTY(items: CartModel[]) {
+    for (let item of items) {
+      if (item.quantity != 1) {
+        item.quantity -= 1;
+      }
+    }
+  }
+
+  // totalPrice(quantity: number, price: number) {
+  //   this.total = quantity * price;
+  //
+  //   this.items.forEach((item: any) => {
+  //     this.subTotal += (quantity * price)
+  //   })
+  // }
 
   emptyCart(): void {
     this.productService.clearCart().subscribe(() => {
@@ -100,9 +167,4 @@ export class CheckoutComponent implements OnInit {
     this.productService.checkout();
   }
 
-    removeFromDatabase(product: ProductModel): void {
-      this.productModel = this.productModel.filter((data) =>
-        data !== product);
-      this.productService.removeFromCart(product.productId);
-    }
 }

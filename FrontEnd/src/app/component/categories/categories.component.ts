@@ -11,14 +11,16 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class CategoriesComponent implements OnInit {
 
-  productModel!: ProductModel;
+  // productModel!: ProductModel;
   data: any;
+  items: any[] = [];
 
   constructor(
     private productService: ProductServiceService,
     private activatedRoute: ActivatedRoute,
-    private  snackbar: MatSnackBar
-  ) {}
+    private snackbar: MatSnackBar
+  ) {
+  }
 
   ngOnInit(): void {
 
@@ -42,6 +44,7 @@ export class CategoriesComponent implements OnInit {
   addToCart(product: ProductModel): void {
     this.productService.addToCart(product.productId, product);
 
+    //popup message
     this.snackbar.open(
       'Product has been added to cart!', '',
       {
