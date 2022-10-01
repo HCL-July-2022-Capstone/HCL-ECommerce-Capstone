@@ -80,17 +80,6 @@
     <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BackEnd" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="HCL-ECommerce-Capstone" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="EcommerceApplication.java" />
@@ -159,6 +148,7 @@
       <workItem from="1661974407824" duration="13000" />
       <workItem from="1661988305141" duration="788000" />
       <workItem from="1662095810044" duration="3473000" />
+      <workItem from="1664408117509" duration="17000" />
     </task>
     <servers />
   </component>
