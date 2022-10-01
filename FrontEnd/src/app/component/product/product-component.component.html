@@ -23,7 +23,7 @@
           <td>{{ productModel.productId }}</td>
           <td>{{ productModel.productName }}</td>
           <td>{{ productModel.productDescription }}</td>
-          <td>${{ productModel.productPrice }}</td>
+          <td>{{ productModel.productPrice  | currency}}</td>
           <td>{{ productModel.quantityOnHand }}</td>
           <td>{{ productModel.categoryName }}</td>
           <td><img alt="image" src="{{ productModel.image }}" /></td>

@@ -36,7 +36,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {StripePaymentComponent} from './component/stripe-payment/stripe-payment.component';
 import {MatRadioModule} from "@angular/material/radio";
-import { CartComponent } from './component/cart/cart.component';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -52,7 +51,6 @@ const oktaAuth = new OktaAuth({
     ProductSearchComponent,
     ProductAddComponent,
     NavbarComponent,
-    // UserComponentComponent,
     ProductDetailsComponent,
     ProductsListComponent,
     PagenotfoundComponent,
@@ -61,8 +59,7 @@ const oktaAuth = new OktaAuth({
     CheckoutComponent,
     AddressAddComponent,
     AddressListComponent,
-    StripePaymentComponent,
-    CartComponent
+    StripePaymentComponent
   ],
 
   imports: [
@@ -71,11 +68,11 @@ const oktaAuth = new OktaAuth({
     OktaAuthModule,
     HttpClientModule,
     FormsModule,
-    MatIconModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonToggleModule,
+    // MatIconModule,
+    // MatButtonModule,
+    // BrowserAnimationsModule,
+    // MatInputModule,
+    // MatButtonToggleModule,
     MatSnackBarModule,
     ReactiveFormsModule,
     RouterModule.forRoot([

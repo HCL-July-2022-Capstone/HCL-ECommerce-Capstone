@@ -30,14 +30,19 @@ export class CartService {
   }
 
   addToCart(theCartItem: CartModel) {
-
+    let alreadyExistsInCart: boolean = false;
+    let existingCartItem = undefined;
     // check if we already have the item in our cart
     if (this.cartItems.length > 0) {
       // find the item in the cart based on item id
-      this.cartItems.find( tempCartItem => tempCartItem.productId === theCartItem.productId);
+      existingCartItem =  this.cartItems.find( tempCartItem => tempCartItem.productId === theCartItem.productId);
+
+      alreadyExistsInCart = (existingCartItem != undefined);
+
+      console.log(existingCartItem)
     }
 
-    if (this.cartItems.find( tempCartItem => tempCartItem.productId === theCartItem.productId)) {
+    if (alreadyExistsInCart) {
       // increment the quantity
       theCartItem.quantity++;
     }
@@ -54,11 +59,13 @@ export class CartService {
 
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
+    let cartItemQuantity: number = 0;
 
     for (let currentCartItem of this.cartItems) {
       totalPriceValue += currentCartItem.quantity * currentCartItem.productPrice;
       totalQuantityValue += currentCartItem.quantity;
     }
+
 
     // publish the new values ... all subscribers will receive the new data
     this.totalPrice.next(totalPriceValue);
@@ -112,7 +119,5 @@ export class CartService {
       this.computeCartTotals();
     }
   }
-
-
 
 }

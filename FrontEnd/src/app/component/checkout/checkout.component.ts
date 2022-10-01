@@ -12,10 +12,10 @@ export class CheckoutComponent implements OnInit {
 
   localCart: CartModel[] = [];
 
-  localItems!: CartModel;
+  // localItems!: CartModel;
 
   toggleNewAddress: Boolean = false;
-  items: any;
+  // items: any;
 
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
@@ -25,35 +25,57 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  subTotal = 0;
-  price = 0;
+  // price: any[] = [];
+  //
+  // subTotal = 0;
+  // price = 0;
 
   ngOnInit(): void {
-    this.getCart();
     this.updateCartStatus();
     this.listCartDetails();
   }
 
-  getCart(): void {
-    this.productService.getItems().subscribe((data: any) => {
-      this.items = data;
-
-      localStorage.setItem('localCart', JSON.stringify(data));
-      console.log(data)
-    })
-  }
-
+  // getCart(): void {
+  //   this.productService.getItems().subscribe((data: any) => {
+  //     this.localCart = data;
+  //
+  //     localStorage.setItem('localCart', JSON.stringify(this.localCart));
+  //   })
+  // }
+  //
   // addToCart(product: ProductModel) {
   //   this.productService.addToCart(product.productId, product);
   //
   //   this.productService.getItems().subscribe((data: any) => {
-  //     this.items = data;
+  //     this.localCart = data;
   //
   //     //set item in localstorage
   //     localStorage.setItem('localCart', JSON.stringify(this.localCart));
+  //
+  //
+  //     for(let i=0; i<this.localCart.length; i++) {
+  //       console.log(i)
+  //       if(this.localCart[i].productId === product.productId ) {
+  //         this.localCart[i].quantity = i + 1;
+  //         this.price.push({
+  //           id: product.productId,
+  //           n:i,
+  //           qu: this.localCart[i].quantity,
+  //           pr: product.productPrice,
+  //           p: product.productPrice * (this.localCart[i].quantity)
+  //         });
+  //       }
+  //       else {
+  //         break;
+  //       }
+  //     }
+  //     console.log(this.price)
+  //     console.log(this.price.length)
   //   });
+  //   //set item in localstorage
+  //   // localStorage.setItem('price', JSON.stringify(this.price));
   // }
-
+  //
   // addItems(localCart: CartModel) {
   //   console.log(localCart);
   //
@@ -65,29 +87,8 @@ export class CheckoutComponent implements OnInit {
   //   // localStorage.setItem('Cart', JSON.stringify(localCart));
   // }
 
-  // increase quantity
-  incQTY(){
-  }
-
-  decQTY(items: CartModel[]) {
-    for (let item of items) {
-      if (item.quantity != 1) {
-        item.quantity -= 1;
-      }
-    }
-  }
-
-  // totalPrice(quantity: number, price: number) {
-  //   this.total = quantity * price;
-  //
-  //   this.items.forEach((item: any) => {
-  //     this.subTotal += (quantity * price)
-  //   })
-  // }
-
   emptyCart(): void {
     this.productService.clearCart().subscribe(() => {
-      this.getCart();
       alert('Cart Emptied');
     });
   }
@@ -97,7 +98,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   updateCartStatus() {
-
     // subscribe to the cart totalPrice
     this.cartService.totalPrice.subscribe(
       (data: any) => this.totalPrice = data
@@ -105,9 +105,9 @@ export class CheckoutComponent implements OnInit {
 
     // subscribe to the cart totalQuantity
     this.cartService.totalQuantity.subscribe(
-      (data: any) => this.totalQuantity = data
+      (data: any) =>
+        this.totalQuantity = data
     );
-
   }
 
   listCartDetails() {
@@ -131,6 +131,8 @@ export class CheckoutComponent implements OnInit {
 
   incrementQuantity(theCartItem: CartModel) {
     this.cartService.addToCart(theCartItem);
+    console.log(theCartItem)
+    console.log(theCartItem.quantity)
   }
 
   decrementQuantity(theCartItem: CartModel) {

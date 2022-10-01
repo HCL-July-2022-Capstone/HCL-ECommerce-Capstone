@@ -76,16 +76,5 @@ export class ProductComponentComponent implements OnInit {
       });
   }
 
-  //addToCart
-  // addItem(id): void {
-  //   let payload = {
-  //     productId: id
-  //   };
-  //   this.productService.addItem(payload).subscribe(() => {
-  //     this.listAllProducts();
-  //     alert('Product Added');
-  //   });
-  // }
-
 }
 
