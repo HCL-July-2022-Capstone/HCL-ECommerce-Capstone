@@ -46,8 +46,13 @@ export class ProductComponentComponent implements OnInit {
     this.productModel = this.productModel
       .filter((data) => data !== product);
     this.productService.deleteById(product.productId);
-  }
 
+    this.snackbar.open(
+      'Product has been deleted!', '',
+      {
+        duration: 1500
+      });
+  }
 
   // save update
   save(): void {
@@ -64,11 +69,18 @@ export class ProductComponentComponent implements OnInit {
 
     console.log(data);
     this.productService.update(data);
+
+    this.snackbar.open(
+      'Product list has been updated!', '',
+      {
+        duration: 1500
+      });
   }
 
   //addToCart
   addToCart(product: ProductModel): void {
     this.productService.addToCart(product.productId, product);
+
     this.snackbar.open(
       'Product has been added to cart!', '',
       {

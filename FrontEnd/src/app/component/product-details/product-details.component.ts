@@ -39,21 +39,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   //addToCart
-  addToCart(product: ProductModel, quantity: number) {
-    console.log(this.cartModel);
+  addToCart(product: ProductModel) {
+
     this.productService.addToCart(product.productId, product);
-
-    this.cartModel.push({
-            productId: product.productId,
-            productName: product.productName,
-            image: product.image,
-            productPrice: product.productPrice,
-            quantity: quantity,
-            totalPrice: quantity * product.productPrice
-          });
-
-    console.log(this.cartModel);
-
 
     this.snackbar.open(
       'Product has been added to cart!', '',

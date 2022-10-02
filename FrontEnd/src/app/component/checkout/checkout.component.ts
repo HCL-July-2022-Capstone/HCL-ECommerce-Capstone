@@ -15,15 +15,13 @@ export class CheckoutComponent implements OnInit {
   // localItems!: CartModel;
 
   toggleNewAddress: Boolean = false;
-  // items: any;
+  items: any;
 
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
 
   constructor(private productService: ProductServiceService,
-              private cartService: CartService) {
-
-  }
+              private cartService: CartService) { }
 
   // price: any[] = [];
   //
@@ -31,18 +29,19 @@ export class CheckoutComponent implements OnInit {
   // price = 0;
 
   ngOnInit(): void {
+    this.getCart();
     this.updateCartStatus();
     this.listCartDetails();
   }
 
-  // getCart(): void {
-  //   this.productService.getItems().subscribe((data: any) => {
-  //     this.localCart = data;
-  //
-  //     localStorage.setItem('localCart', JSON.stringify(this.localCart));
-  //   })
-  // }
-  //
+  getCart(): void {
+    this.productService.getItems().subscribe((data: any) => {
+      this.items = data;
+
+      localStorage.setItem('localCart', JSON.stringify(this.items));
+    })
+  }
+
   // addToCart(product: ProductModel) {
   //   this.productService.addToCart(product.productId, product);
   //
@@ -91,10 +90,6 @@ export class CheckoutComponent implements OnInit {
     this.productService.clearCart().subscribe(() => {
       alert('Cart Emptied');
     });
-  }
-
-  checkout(): void {
-    this.productService.checkout();
   }
 
   updateCartStatus() {

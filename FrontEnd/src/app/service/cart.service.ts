@@ -9,6 +9,7 @@ import {CartModel} from "../model/cart.model";
 export class CartService {
 
   cartItems: CartModel[] = [];
+  cart!: CartModel;
 
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
@@ -26,7 +27,6 @@ export class CartService {
       // compute totals based on the data that is read from storage
       this.computeCartTotals();
     }
-
   }
 
   addToCart(theCartItem: CartModel) {
@@ -59,20 +59,18 @@ export class CartService {
 
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
-    let cartItemQuantity: number = 0;
 
     for (let currentCartItem of this.cartItems) {
       totalPriceValue += currentCartItem.quantity * currentCartItem.productPrice;
       totalQuantityValue += currentCartItem.quantity;
     }
 
-
     // publish the new values ... all subscribers will receive the new data
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
 
     // log cart data just for debugging purposes
-    this.logCartData(totalPriceValue, totalQuantityValue);
+    // this.logCartData(totalPriceValue, totalQuantityValue);
 
     // persist cart data
     this.persistCartItems();
@@ -82,18 +80,18 @@ export class CartService {
     this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
-  logCartData(totalPriceValue: number, totalQuantityValue: number) {
-
-    console.log('Contents of the cart');
-    for (let tempCartItem of this.cartItems) {
-      const subTotalPrice = tempCartItem.quantity * tempCartItem.productPrice;
-      console.log(`name: ${tempCartItem.productName}, quantity=${tempCartItem.quantity},
-      productPrice=${tempCartItem.productPrice}, subTotalPrice=${subTotalPrice}`);
-    }
-
-    console.log(`totalPrice: ${totalPriceValue.toFixed(2)}, totalQuantity: ${totalQuantityValue}`);
-    console.log('----');
-  }
+  // logCartData(totalPriceValue: number, totalQuantityValue: number) {
+  //
+  //   console.log('Contents of the cart');
+  //   for (let tempCartItem of this.cartItems) {
+  //     const subTotalPrice = tempCartItem.quantity * tempCartItem.productPrice;
+  //     console.log(`name: ${tempCartItem.productName}, quantity=${tempCartItem.quantity},
+  //     productPrice=${tempCartItem.productPrice}, subTotalPrice=${subTotalPrice}`);
+  //   }
+  //
+  //   console.log(`totalPrice: ${totalPriceValue.toFixed(2)}, totalQuantity: ${totalQuantityValue}`);
+  //   console.log('----');
+  // }
 
   decrementQuantity(theCartItem: CartModel) {
 

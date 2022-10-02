@@ -3,6 +3,8 @@ import {ProductServiceService} from '../../service/product-service.service';
 import {ProductModel} from '../../model/product-model.model';
 import {ActivatedRoute} from '@angular/router';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {CartService} from "../../service/cart.service";
+import {CartModel} from "../../model/cart.model";
 
 @Component({
   selector: 'app-categories',
@@ -18,7 +20,8 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private productService: ProductServiceService,
     private activatedRoute: ActivatedRoute,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private cartService: CartService
   ) {
   }
 

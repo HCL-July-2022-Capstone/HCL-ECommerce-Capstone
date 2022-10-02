@@ -14,11 +14,11 @@
       <div class="col-10">
 
         <div class="card rounded-3 mb-4">
-          <div *ngFor="let item of localCart" >
+          <div *ngFor="let item of localCart">
             <div class="card-body p-4">
 
               <div class="row d-flex justify-content-between align-items-center">
-                <div class="col-md-2 col-lg-2 col-xl-2">
+                <div class="col-md-2 col-md-3 col-lg-2">
                   <img
                     src="{{item.image}}"
                     class="img-fluid rounded-3" alt="img">
@@ -29,9 +29,11 @@
                       {{item.productName}}
                     </a>
                   </p>
-                  <span class="text-muted">Price:{{item.productPrice | currency}} </span>
+                  <span class="text-muted text-lg-end">Price:{{item.productPrice | currency}} </span>
                 </div>
-                <div class="col-md-3 col-lg-3 col-xl-2 d-flex align-content-md-between">
+                <div
+                  class="mat-h3 d-flex justify-content-center align-items-center col-md-3 col-lg-3 col-xl-2 d-flex
+                     align-content-md-between">
                   <!--                   <button class="btn btn-link px-2" -->
                   <!--                           onclick="this.parentNode.querySelector('input[type=number]').stepDown()"> -->
                   <!--                     <i class="fas fa-minus"></i> -->
@@ -41,8 +43,8 @@
                     <i class="fas fa-minus"></i>
                   </button>
 
-<!--                   <input #q min="1"  type="number" value="1" (keyup)="addToCart(localCart, q.valueAsNumber )"/> -->
-                 <h3>{{item.quantity}}</h3>
+                  <!--                   <input #q min="1"  type="number" value="1" (keyup)="addToCart(localCart, q.valueAsNumber )"/> -->
+                  {{item.quantity}}
 
                   <button class="btn btn-link px-2"
                           (click)="incrementQuantity(item)">
@@ -56,20 +58,33 @@
                 </div>
 
                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                  <h3 class="mb-0">
+                  <h3 class="fw-semibold mb-0">
                     {{item.quantity * item.productPrice | currency}}
                   </h3>
                 </div>
 
                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                 </div>
-                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                  <a (click)=remove(item) class="text-danger">
-                                    <i class="fas fa-trash fa-lg"></i></a>
-                                </div>
+                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                  <a (click)=remove(item) class="text-danger">
+                    <i class="fas fa-trash fa-lg"></i></a>
+                </div>
               </div>
             </div>
           </div>
+          <div class="card mb-4">
+            <div class="card-body p-4 d-flex flex-row align-content-end">
+              <div class="col text-sm-end">
+                <h3 class="text-muted">Total Price: </h3>
+                <h3 class="text-muted">Total Quantity: </h3>
+              </div>
+              <div class="col-md-2 col-lg-2 col-xl-2 ">
+                <h3 class="fw-semibold">{{totalPrice | currency}}</h3>
+                <h3 class="fw-semibold">{{totalQuantity}}</h3>
+              </div>
+            </div>
+          </div>
+
 
           <app-stripe-payment></app-stripe-payment>
 
