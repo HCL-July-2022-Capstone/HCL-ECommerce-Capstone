@@ -1,0 +1,156 @@
+<script>
+  $("#fnamebox").click(function(){
+    console.log("clickk")
+
+    if( $('#fnamebox').is(':checked') ){
+      $("#fname").prop('disabled', false);
+      } else {
+        $("#fname").prop('disabled', true);
+      } 
+    });
+
+$("#fbox").change(function(){
+
+  console.log("testing th")
+
+}); 
+
+
+</script>
+
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="col-md-5 col-lg-5">
+      <h3 class="mb-3"> <b>Edit Profile </b></h3>
+
+      <form class="needs-validation" onsubmit>
+        <div class="row g-3">
+          <div class="col-12"></div>
+  
+          <div class="col-12">
+            <p *ngIf="firstName "> Your current First Name is:<b> {{firstName}} </b></p>
+            <label for="firstName" class="form-label">Edit First Name: </label> 
+            <input type="checkbox" id="fBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="fname"
+              value="testing 1 "
+              name="fname"
+              [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}" disabled
+            />       
+
+          </div>
+          <div class="col-12">
+            <p *ngIf="middleName "> Your current Middle Name is:<b> {{middleName}} </b></p>
+            <label for="middleName" class="form-label">Edit Middle Name: </label>
+            <input type="checkbox" id="mBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="midname"
+           
+              name="mname"
+              [(ngModel)]="middleName" [ngModelOptions]="{standalone: true}" disabled
+            />
+          </div>
+  
+          <div class="col-12">
+            <p *ngIf="lastName "> Your current Last Name is:<b> {{lastName}} </b></p>
+            <label for="lastName" class="form-label">Edit Last Name: </label>
+            <input type="checkbox" id="lBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="lname"
+              name="lname"
+              [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}" disabled
+            />
+          </div>
+
+         
+          <div class="col-12">
+            <p *ngIf="email$ | async as email"> Your current Email: <b> {{email}} </b></p>
+            <label for="email" class="form-label">Edit Email: </label>
+            <input type="checkbox" id="emailBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              [(ngModel)]="email" [ngModelOptions]="{standalone: true}" disabled
+            />
+          </div>
+
+          
+
+          <div class="col-12">
+            <p *ngIf="phoneNum "> Your current Phone Number is:<b> {{phoneNum}} </b></p>
+            <label for="phonenumber" class="form-label">Edit Phone Number: </label>
+            <input type="checkbox" id="phoneBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              [(ngModel)]="phoneNum" [ngModelOptions]="{standalone: true}" disabled
+              
+            />
+          </div>
+
+          <div class="col-12">
+            <p *ngIf="street "> Your current Street is:<b> {{street}} </b></p>
+            <label for="streetAddress" class="form-label">Edit Street Address: </label>
+            <input type="checkbox" id="addressBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="streetAddress"
+              [(ngModel)]="street" [ngModelOptions]="{standalone: true}" disabled
+            />
+          </div>
+
+          <div class="col-12">
+            <p *ngIf="city "> Your current City is:<b> {{city}} </b></p>
+            <label for="city" class="form-label">Edit City: </label>
+            <input type="checkbox" id="cityBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              [(ngModel)]="city" [ngModelOptions]="{standalone: true}" disabled
+            />
+          </div>
+
+          <div class="col-12">
+            <p *ngIf="state "> Your current State is:<b> {{state}} </b></p>
+            <label for="state" class="form-label"> Edit State: </label>
+            <input type="checkbox" id="stateBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="state"
+              [(ngModel)]="state" [ngModelOptions]="{standalone: true}" disabled
+            />
+          </div>
+
+          <div class="col-12">
+            <p *ngIf="zip "> Your current Zip Code is:<b> {{zip}} </b></p>
+            <label for="zipCode" class="form-label">Edit Zip Code: </label>
+            <input type="checkbox" id="zipBox"  />
+            <input
+              type="text"
+              class="form-control"
+              id="zipCode"
+              [(ngModel)]="zip" [ngModelOptions]="{standalone: true}" disabled
+            />
+          </div>
+
+          <button class = "w-100 btn btn-primary btn-lg" type="submit" (click) = "save()" >Update Profile</button>
+
+
+        </div>
+        <hr class="my-4" />     
+      </form>
+    </div>
+  </div>
+  
+  
+ 
