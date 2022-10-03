@@ -1,0 +1,39 @@
+<div class="container">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search by Product Name"
+    [(ngModel)]="searchTerms"
+  />
+
+  <div class="input-group-append">
+    <button
+      class="main-btn"
+      (click)="searchProductName()"
+    >Search
+    </button>
+  </div>
+</div>
+
+<!-- grid style -->
+<div class="prod-list-container">
+  <div class="prod-container">
+    <ng-container *ngFor="let products of products">
+      <div class="pro">
+        <div class="img-container">
+          <a routerLink="/products/{{products.productId}}">
+            <img alt="" src="{{products.image}}">
+          </a>
+        </div>
+        <div class="des">
+          <a routerLink="/products/{{products.productId}}">
+            <h5>{{products.productName}}</h5>
+          </a>
+
+          <h6>${{products.productPrice}}</h6>
+          <!--          <i (click)="addToCart(products)" class="fas fa-cart-shopping"></i> -->
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
