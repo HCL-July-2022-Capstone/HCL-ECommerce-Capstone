@@ -39,9 +39,15 @@ import {StripePaymentComponent} from './component/stripe-payment/stripe-payment.
 import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 
 const oktaAuth = new OktaAuth({
-  issuer: 'https://dev-32668171.okta.com/oauth2/default',
+  issuer: 'https://dev-32668171.okta.com',
   clientId: '0oa6c5xmfdMgOsl3P5d7',
   redirectUri: window.location.origin + '/login/callback',
+  responseType: ['id_token', 'token'],
+  scopes: ['openid', 'profile', 'email', 'address', 'phone', 'groups', 'okta.users.manage.self'], //, 'groups' need to configure this
+  tokenManager: {
+    storage: 'sessionStorage',
+    autoRenew: true
+  } 
 });
 
 @NgModule({
