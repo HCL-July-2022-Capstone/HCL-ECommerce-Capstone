@@ -36,6 +36,7 @@ import {AddressListComponent} from './component/address/address-list.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {StripePaymentComponent} from './component/stripe-payment/stripe-payment.component';
+import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -60,7 +61,8 @@ const oktaAuth = new OktaAuth({
     CheckoutComponent,
     AddressAddComponent,
     AddressListComponent,
-    StripePaymentComponent
+    StripePaymentComponent,
+    EditProfileComponent
   ],
 
   imports: [

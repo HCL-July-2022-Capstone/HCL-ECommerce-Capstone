@@ -14,6 +14,7 @@ import {CategoriesComponent} from './component/categories/categories.component';
 import {HomepageComponent} from './component/homepage/homepage.component';
 
 import {CheckoutComponent} from './component/checkout/checkout.component';
+import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'updateproduct', component: ProductComponentComponent },
   { path: 'addproduct', component: ProductAddComponent },
   { path: 'Search', component: ProductSearchComponent },
+  { path: 'editprofile', component: EditProfileComponent},
   {
     path: 'products/:id',
     component: ProductDetailsComponent,
