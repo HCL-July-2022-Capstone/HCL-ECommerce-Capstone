@@ -116,7 +116,7 @@ a,
 a:visited,
 a:hover {
   /*color: #095661;*/
-  color: whitesmoke;
+  color: whitesmoke!important;
   text-decoration: none;
 }
 
