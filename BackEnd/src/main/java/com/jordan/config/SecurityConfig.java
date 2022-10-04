@@ -1,16 +1,15 @@
 package com.jordan.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -48,39 +47,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 	}
 	
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
 //		auth.userDetailsService(userService);
 //		auth.inMemoryAuthentication().withUser("Jordan").password("123").roles("USER")
 //		.and().withUser("Admin").password("123").roles("ADMIN");
-	}
+//	}
 	
 	protected void configure(HttpSecurity http) throws Exception{
 //		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN")
 //		.antMatchers("/user").hasAnyRole("ADMIN", "USER")
 //		.and().formLogin();
-		http.cors().and()
-        .csrf().disable()
+		http.csrf().disable()
+		.headers()
+        .frameOptions()
+        .disable().and()
         .oauth2ResourceServer().jwt();
 		Okta.configureResourceServer401ResponseBody(http);
-		
-		
-//		http.authorizeRequests().antMatchers("/user/getAllUsers").hasRole("ADMIN")
-//		.and().formLogin().defaultSuccessUrl("/create-new-session");
-				
-//		http.authorizeRequests()//.antMatchers("/user/getAll")
-//		.antMatchers("/user/getAll","/user/join","/user/get/{id}").permitAll();
-//		
-//		 http.authorizeRequests().antMatchers("/user/join").permitAll().and().authorizeRequests()
-//         .antMatchers("/user/**").authenticated().and().httpBasic().and().formLogin();
+}
+	
+	
+//	disable cors policy
+	
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+	    CorsConfiguration configuration = new CorsConfiguration();
+	    configuration.setAllowedOrigins(Collections.singletonList("*"));
+	    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
+	    configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
+	    configuration.setAllowCredentials(true);
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", configuration);
+	    return source;
 	}
 	
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -90,5 +90,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new EmailService();
 	}
 
-	
 }
