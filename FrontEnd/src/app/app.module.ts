@@ -1,5 +1,5 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 
 import {OKTA_CONFIG, OktaAuthModule} from '@okta/okta-angular';
@@ -17,7 +17,6 @@ import {ProductSearchComponent} from './component/product-search/product-search.
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductAddComponent} from './component/product-add/product-add.component';
 import {NavbarComponent} from './component/navbar/navbar.component';
-// import {UserComponentComponent} from './component/user-component/user-component.component';
 import {ProductDetailsComponent} from './component/product-details/product-details.component';
 import {ProductsListComponent} from './component/products-list/products-list.component';
 import {PagenotfoundComponent} from './pagenotfound/pagenotfound.component';
@@ -26,7 +25,6 @@ import {HomepageComponent} from './component/homepage/homepage.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 
-import {NgxScrollTopModule} from "ngx-scrolltop";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
@@ -51,8 +49,7 @@ const oktaAuth = new OktaAuth({
     ProductSearchComponent,
     ProductAddComponent,
     NavbarComponent,
-    // UserComponentComponent,
-    ProductDetailsComponent,
+   ProductDetailsComponent,
     ProductsListComponent,
     PagenotfoundComponent,
     CategoriesComponent,
@@ -77,10 +74,10 @@ const oktaAuth = new OktaAuth({
     MatSnackBarModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: ProductComponentComponent },
-      { path: 'product/:ProductModel', component: ProductComponentComponent },
-      { path: 'checkout', component: CheckoutComponent },
-      { path: 'addAddress', component: AddressAddComponent}
+      {path: '', component: ProductComponentComponent},
+      {path: 'product/:ProductModel', component: ProductComponentComponent},
+      {path: 'checkout', component: CheckoutComponent},
+      {path: 'addAddress', component: AddressAddComponent}
     ])
   ],
 

@@ -158,81 +158,41 @@ h5 {
 .p-4 {
   padding: 15px!important;
 }
-.card-body {
-  flex: 1 1 auto;
-  /*padding: 1.5rem;*/
+.title{
+    margin-bottom: 5vh;
 }
-*, :after, :before {
-  box-sizing: border-box;
-  border: none;
+.card{
+    margin: auto;
+    max-width: 950px;
+    width: 90%;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: transparent;
 }
-
-a, a:hover {
-  text-decoration: none;
-  color: inherit;
+@media(max-width:767px){
+    .card{
+        margin: 3vh auto;
+    }
 }
-
-/*div {*/
-/*  display: flex;*/
-/*  text-emphasis: none;*/
-/*}*/
-
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  /*background-clip: border-box;*/
-  /*border: 1px solid rgba(0,0,0,.125);*/
-  /*border-radius: 0.5rem;*/
+.cart{
+    background-color: #fff;
+    padding: 4vh 5vh;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
 }
-.row {
-  --mdb-gutter-x: 1.5rem;
-  --mdb-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--mdb-gutter-y)*-1);
-  margin-right: calc(var(--mdb-gutter-x)*-0.5);
-  margin-left: calc(var(--mdb-gutter-x)*-0.5);
+@media(max-width:767px){
+    .cart{
+        padding: 4vh;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: 1rem;
+    }
 }
-
-/*h1, h2, h3, h4, h5, h6 {*/
-/*  font-family: "Lato", sans-serif;*/
-/*  !*font-weight: 700;*!*/
-/*  color: #2E2E2E;*/
-/*  margin: 0;*/
-/*}*/
-
-/*.container {*/
-/*  justify-content: center;*/
-/*}*/
-
-.section-title .line {
-  background: -webkit-gradient(linear, left top, left bottom, from(#fe8464), to(#fe6e9a));
-  background: linear-gradient(#fe8464 0%, #fe6e9a 100%);
-  width: 150px;
-  height: 5px;
-  margin-top: 50px !important;
-  margin-bottom: 20px;
-}
-
-.card-body {
-  display: flex;
-  /*margin-right: 50px;*/
-  /*padding: 30px;*/
-  text-align: center;
-  margin-top: 20px;
-  /*width: 15%;*/
-  /*min-width: 300px;*/
-  border: 1px solid lightgray;
-  /*border-radius: 25px;*/
-  cursor: pointer;
-  box-shadow: 1px 2px 3px 4px lightgray;
-  /*position: relative;*/
-  /*justify-content: center;*/
-  /*text-underline: none;*/
+.summary{
+    background-color: #ddd;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 4vh;
+    color: rgb(65, 65, 65);
 }
 
 /*!*checkout button*!*/
