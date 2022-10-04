@@ -44,10 +44,22 @@ export class CategoriesComponent implements OnInit {
   }
 
   //addToCart
-  addToCart(product: ProductModel): void {
-    this.productService.addToCart(product.productId, product);
+  // addToCart(product: ProductModel): void {
+  //   this.productService.addToCart(product.productId, product);
+  //
+  //   //popup message
+  //   this.snackbar.open(
+  //     'Product has been added to cart!', '',
+  //     {
+  //       duration: 1500
+  //     });
+  // }
 
-    //popup message
+  addToCart(theProduct: ProductModel) {
+
+    const theCartItem = new CartModel(theProduct);
+    this.cartService.addToCart(theCartItem);
+
     this.snackbar.open(
       'Product has been added to cart!', '',
       {

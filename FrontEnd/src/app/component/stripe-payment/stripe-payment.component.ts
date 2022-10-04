@@ -4,6 +4,8 @@ import {environment} from "../../../environments/environment";
 import {PaymentInfo} from "../../common/payment-info";
 import {ProductServiceService} from "../../service/product-service.service";
 import {CheckoutService} from "../../service/checkout.service";
+import {CartService} from "../../service/cart.service";
+import {CartModel} from "../../model/cart.model";
 
 @Component({
   selector: 'app-stripe-payment',
@@ -13,7 +15,7 @@ import {CheckoutService} from "../../service/checkout.service";
 export class StripePaymentComponent implements OnInit {
 
   checkoutFormGroup!: FormGroup;
-  totalPrice: number = 0;
+  totalPrice: number = 0.00;
   totalQuantity: number = 0;
 
   items = this.productService.getItems();
@@ -23,10 +25,13 @@ export class StripePaymentComponent implements OnInit {
   cardElement: any;
   displayError: any = '';
 
+  localCart: CartModel[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductServiceService,
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +40,8 @@ export class StripePaymentComponent implements OnInit {
     this.checkoutFormGroup = this.formBuilder.group({
       creditCardDetails: this.formBuilder.group({}),
     });
+
+    this.listCartDetails();
   }
 
   setupStripePaymentForm() {
@@ -116,6 +123,26 @@ export class StripePaymentComponent implements OnInit {
       this.checkoutFormGroup.markAllAsTouched();
       return;
     }
+  }
+
+  // quantity, price, and total
+  listCartDetails() {
+
+    // get a handle to the cart items
+    this.localCart = this.cartService.cartItems;
+
+    // subscribe to the cart totalPrice
+    this.cartService.totalPrice.subscribe(
+      data => this.totalPrice = data
+    );
+
+    // subscribe to the cart totalQuantity
+    this.cartService.totalQuantity.subscribe(
+      data => this.totalQuantity = data
+    );
+
+    // compute cart total price and quantity
+    this.cartService.computeCartTotals();
   }
 
 }

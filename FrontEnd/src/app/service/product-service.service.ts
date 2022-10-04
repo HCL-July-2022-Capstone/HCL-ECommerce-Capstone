@@ -1,4 +1,4 @@
-import {Injectable, Input} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 //import
 import {HttpClient} from '@angular/common/http';
@@ -11,11 +11,7 @@ import {ProductModel} from '../model/product-model.model';
 //Step 1 //step 2 in component
 export class ProductServiceService {
 
-  @Input()
-  quantity: number = 0;
-
   private baseUrl = 'http://localhost:8080';
-  total: number = 0;
 
   constructor(private http: HttpClient) {} //inject
 
@@ -90,20 +86,19 @@ export class ProductServiceService {
     return this.http.get(`${this.baseUrl}/cart/view`);
   }
 
-  increaseQty(payload: { productId: number; quantityOnHand: number; }) {
-    return this.http.post(`${this.baseUrl}/cart`, payload);
-  }
+  // increaseQty(payload: { productId: number; quantityOnHand: number; }) {
+  //   return this.http.post(`${this.baseUrl}/cart`, payload);
+  // }
 
-  clearCart() {
-    return this.http.delete(`${this.baseUrl}/checkout/empty-cart`);
-  }
+  // clearCart() {
+  //   return this.http.delete(`${this.baseUrl}/checkout/empty-cart`);
+  // }
 
   // remove a single product
-  removeFromCart(id: number) {
-    this.http.delete<ProductModel>(`${this.baseUrl}/cart/remove/${id}`)
-      .subscribe((response) => {
-        console.log(response);
-      });
-  }
-
+  // removeFromCart(id: number) {
+  //   this.http.delete<ProductModel>(`${this.baseUrl}/cart/remove/${id}`)
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //     });
+  // }
 }

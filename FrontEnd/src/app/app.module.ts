@@ -9,7 +9,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ProfileComponent} from './profile/profile.component';
 
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth.interceptor';
 
 import {ProductComponentComponent} from './component/product/product-component.component';
@@ -17,7 +17,6 @@ import {ProductSearchComponent} from './component/product-search/product-search.
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductAddComponent} from './component/product-add/product-add.component';
 import {NavbarComponent} from './component/navbar/navbar.component';
-// import {UserComponentComponent} from './component/user-component/user-component.component';
 import {ProductDetailsComponent} from './component/product-details/product-details.component';
 import {ProductsListComponent} from './component/products-list/products-list.component';
 import {PagenotfoundComponent} from './pagenotfound/pagenotfound.component';
@@ -68,6 +67,7 @@ const oktaAuth = new OktaAuth({
     OktaAuthModule,
     HttpClientModule,
     FormsModule,
+    HttpClientJsonpModule,
     MatIconModule,
     MatButtonModule,
     BrowserAnimationsModule,

@@ -6,10 +6,11 @@ import {CartModel} from "../model/cart.model";
 @Injectable({
   providedIn: 'root'
 })
+
 export class CartService {
 
   cartItems: CartModel[] = [];
-  cart!: CartModel;
+  // cart!: CartModel;
 
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
@@ -23,19 +24,20 @@ export class CartService {
 
     if (data != null) {
       this.cartItems = data;
+      console.log(this.cartItems);
 
       // compute totals based on the data that is read from storage
       this.computeCartTotals();
     }
   }
 
-  addToCart(theCartItem: CartModel) {
+  addToCart(cart: CartModel) {
     let alreadyExistsInCart: boolean = false;
     let existingCartItem = undefined;
     // check if we already have the item in our cart
     if (this.cartItems.length > 0) {
       // find the item in the cart based on item id
-      existingCartItem =  this.cartItems.find( tempCartItem => tempCartItem.productId === theCartItem.productId);
+      existingCartItem =  this.cartItems.find(tempCartItem => tempCartItem.productId === cart.productId);
 
       alreadyExistsInCart = (existingCartItem != undefined);
 
@@ -44,11 +46,11 @@ export class CartService {
 
     if (alreadyExistsInCart) {
       // increment the quantity
-      theCartItem.quantity++;
+      cart.quantity++;
     }
     else {
       // just add the item to the array
-      this.cartItems.push(theCartItem);
+      this.cartItems.push(cart);
     }
 
     // compute cart total price and total quantity
@@ -69,9 +71,6 @@ export class CartService {
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
 
-    // log cart data just for debugging purposes
-    // this.logCartData(totalPriceValue, totalQuantityValue);
-
     // persist cart data
     this.persistCartItems();
   }
@@ -80,35 +79,23 @@ export class CartService {
     this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
-  // logCartData(totalPriceValue: number, totalQuantityValue: number) {
-  //
-  //   console.log('Contents of the cart');
-  //   for (let tempCartItem of this.cartItems) {
-  //     const subTotalPrice = tempCartItem.quantity * tempCartItem.productPrice;
-  //     console.log(`name: ${tempCartItem.productName}, quantity=${tempCartItem.quantity},
-  //     productPrice=${tempCartItem.productPrice}, subTotalPrice=${subTotalPrice}`);
-  //   }
-  //
-  //   console.log(`totalPrice: ${totalPriceValue.toFixed(2)}, totalQuantity: ${totalQuantityValue}`);
-  //   console.log('----');
-  // }
+  decrementQuantity(cart: CartModel) {
 
-  decrementQuantity(theCartItem: CartModel) {
+    cart.quantity--;
 
-    theCartItem.quantity--;
-
-    if (theCartItem.quantity === 0) {
-      this.remove(theCartItem);
+    if (cart.quantity === 0) {
+      this.remove(cart);
     }
     else {
       this.computeCartTotals();
     }
   }
 
-  remove(theCartItem: CartModel) {
+  remove(cart: CartModel) {
 
     // get index of item in the array
-    const itemIndex = this.cartItems.findIndex( tempCartItem => tempCartItem.productId === theCartItem.productId );
+    const itemIndex = this.cartItems.findIndex(tempCartItem =>
+      tempCartItem.productId === cart.productId);
 
     // if found, remove the item from the array at the given index
     if (itemIndex > -1) {

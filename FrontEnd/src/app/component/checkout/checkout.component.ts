@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductServiceService} from 'src/app/service/product-service.service';
 import {CartModel} from "../../model/cart.model";
 import {CartService} from "../../service/cart.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-checkout',
@@ -12,84 +13,24 @@ export class CheckoutComponent implements OnInit {
 
   localCart: CartModel[] = [];
 
-  // localItems!: CartModel;
-
   toggleNewAddress: Boolean = false;
-  items: any;
+  // items: any;
 
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
 
   constructor(private productService: ProductServiceService,
-              private cartService: CartService) { }
-
-  // price: any[] = [];
-  //
-  // subTotal = 0;
-  // price = 0;
+              private cartService: CartService,
+              private snackbar: MatSnackBar) {  }
 
   ngOnInit(): void {
-    this.getCart();
     this.updateCartStatus();
     this.listCartDetails();
   }
 
-  getCart(): void {
-    this.productService.getItems().subscribe((data: any) => {
-      this.items = data;
-
-      localStorage.setItem('localCart', JSON.stringify(this.items));
-    })
-  }
-
-  // addToCart(product: ProductModel) {
-  //   this.productService.addToCart(product.productId, product);
-  //
-  //   this.productService.getItems().subscribe((data: any) => {
-  //     this.localCart = data;
-  //
-  //     //set item in localstorage
-  //     localStorage.setItem('localCart', JSON.stringify(this.localCart));
-  //
-  //
-  //     for(let i=0; i<this.localCart.length; i++) {
-  //       console.log(i)
-  //       if(this.localCart[i].productId === product.productId ) {
-  //         this.localCart[i].quantity = i + 1;
-  //         this.price.push({
-  //           id: product.productId,
-  //           n:i,
-  //           qu: this.localCart[i].quantity,
-  //           pr: product.productPrice,
-  //           p: product.productPrice * (this.localCart[i].quantity)
-  //         });
-  //       }
-  //       else {
-  //         break;
-  //       }
-  //     }
-  //     console.log(this.price)
-  //     console.log(this.price.length)
-  //   });
-  //   //set item in localstorage
-  //   // localStorage.setItem('price', JSON.stringify(this.price));
-  // }
-  //
-  // addItems(localCart: CartModel) {
-  //   console.log(localCart);
-  //
-  //   this.productService.getItems().subscribe((data: any) => {
-  //     this.localCart = data;
-  //     //set item in localstorage
-  //     localStorage.setItem('localCart', JSON.stringify(data));
-  //   })
-  //   // localStorage.setItem('Cart', JSON.stringify(localCart));
-  // }
-
-  emptyCart(): void {
-    this.productService.clearCart().subscribe(() => {
-      alert('Cart Emptied');
-    });
+  incQTY(cart: CartModel) {
+    // increase quantity in cart by adding
+    this.cartService.addToCart(cart);
   }
 
   updateCartStatus() {
@@ -124,18 +65,18 @@ export class CheckoutComponent implements OnInit {
     this.cartService.computeCartTotals();
   }
 
-  incrementQuantity(theCartItem: CartModel) {
-    this.cartService.addToCart(theCartItem);
-    console.log(theCartItem)
-    console.log(theCartItem.quantity)
+  decQTY(cart: CartModel) {
+    this.cartService.decrementQuantity(cart);
   }
 
-  decrementQuantity(theCartItem: CartModel) {
-    this.cartService.decrementQuantity(theCartItem);
-  }
+  removeItem(cart: CartModel) {
+    this.cartService.remove(cart);
 
-  remove(theCartItem: CartModel) {
-    this.cartService.remove(theCartItem);
+    //popup message
+    this.snackbar.open(
+      'Product has been removed from the cart!', '',
+      {
+        duration: 1500
+      });
   }
-
 }
