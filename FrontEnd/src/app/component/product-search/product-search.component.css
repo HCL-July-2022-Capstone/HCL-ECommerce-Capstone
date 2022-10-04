@@ -119,7 +119,6 @@ h6 {
   flex-wrap: wrap;
   margin-left: 50px;
   justify-content: space-evenly;
-  horiz-align: center;
 }
 
 .prod-container h5,
@@ -170,7 +169,6 @@ h6 {
 
 .img-container {
   height: 300px;
-  horiz-align: center;
   justify-content: center;
 }
 

@@ -13,8 +13,8 @@ import {CartModel} from "../../model/cart.model";
   // styleUrls: ['./stripe-payment.component.css']
 })
 export class StripePaymentComponent implements OnInit {
-
   checkoutFormGroup!: FormGroup;
+
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
 
@@ -34,7 +34,8 @@ export class StripePaymentComponent implements OnInit {
     // private productService: ProductServiceService,
     private checkoutService: CheckoutService,
     private cartService: CartService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.setupStripePaymentForm();
@@ -50,13 +51,14 @@ export class StripePaymentComponent implements OnInit {
     // Stripe payment handler.
     var elements = this.stripe.elements();
 
-    // Create custom card elements with a hidden Zip-Code field.
-    this.cardElement = elements.create('card', { hidePostalCode: true });
+    // Create custom card elements with a hidden ZipCode field.
+    this.cardElement = elements.create('card', {hidePostalCode: true});
 
     // Add card UI component into the 'card-element' <div>.
     this.cardElement.mount('#card-element');
 
     // Add event binding for 'change' in the 'card-element'.
+
     this.cardElement.on('change', (event: { complete: any; error: { message: any; }; }) => {
       // 'card-errors' element handler.
       this.displayError = document.getElementById('card-errors');
@@ -66,7 +68,7 @@ export class StripePaymentComponent implements OnInit {
       } else if (event.error) {
         this.displayError.textContent = event.error.message;
       }
-    });
+    );
   }
 
   get creditCardType() {
@@ -109,12 +111,12 @@ export class StripePaymentComponent implements OnInit {
               paymentIntentResponse.client_secret,
               {
                 payment_method: {
-                  card: this.cardElement
-                }
+                  card: this.cardElement,
+                },
               },
-              { handleActions: false }
+              {handleActions: false}
             )
-            .then((result: { error: { message: any; }; }) => {
+            .then((result: { error: { message: any } }) => {
               if (result.error) {
                 // show error
                 alert(`An error occurred: ${result.error.message}`);

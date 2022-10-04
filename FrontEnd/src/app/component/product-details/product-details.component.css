@@ -45,7 +45,7 @@ caption {
   display: flex;
 }
 
-container {
+.container {
   display: flex;
   justify-content: center;
 }

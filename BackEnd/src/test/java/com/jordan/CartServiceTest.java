@@ -21,9 +21,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.jordan.model.Address;
+//import com.jordan.model.Address;
 import com.jordan.model.Cart;
-import com.jordan.model.Orders;
 import com.jordan.model.Product;
 import com.jordan.repository.CartRepository;
 import com.jordan.repository.OrdersRepository;
@@ -148,6 +147,14 @@ public class CartServiceTest
 		assertEquals(products.get(0), cart.getProducts().get(0));
 	}
 
+	/*
+	 * Uncomment this test case and the related import 'com.jordan.model.Address;'
+	 * only once the BackEnd application is running to get proper results.
+	 * 
+	 * This test needs the backend application to be running in order for it to run properly.
+	 * If it's not running the test will first fail at 'cartService.checkout(mockPrincipal);'
+	 * then 'assertEquals(true, cart.IsEmpty());' will return false.
+	 */
 //	@Test
 //	void checkoutTest()
 //	{

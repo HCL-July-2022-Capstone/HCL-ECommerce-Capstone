@@ -15,46 +15,47 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
-public class MessageController
-{
-	@Autowired
-	ProductRepository repo;
-	@Autowired
-	EmailService emailService;
+public class MessageController {
 
-	private JavaMailSenderImpl mailSender;
+    @Autowired
+    ProductRepository repo;
+    @Autowired
+    EmailService emailService;
 
-	private final RabbitTemplate rabbitTemplate;
+    private JavaMailSenderImpl mailSender;
 
-	static final String topicExchangeName = "inventory-exchange";
+    private final RabbitTemplate rabbitTemplate;
 
-	private MessageController(RabbitTemplate rabbitTemplate)
-	{
-		this.rabbitTemplate = rabbitTemplate;
-	}
+    static final String topicExchangeName = "inventory-exchange";
 
-	// @GetMapping("hello")
-	// public void hello() {
-	// System.out.println("Sending message...");
-	// rabbitTemplate.convertAndSend(topicExchangeName,
-	// "foo.bar.baz",
-	// "Hello from RabbitMQ!");
-	// }
+    private MessageController(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
-	@GetMapping("/messages")
-	public void inventory()
-	{
-		List<Product> lowStock = repo.findByQuantityOnHandLessThan(10);
+//    @GetMapping("hello")
+//    public void hello() {
+//        System.out.println("Sending message...");
+//        rabbitTemplate.convertAndSend(topicExchangeName,
+//                "foo.bar.baz",
+//                "Hello from RabbitMQ!");
+//    }
 
-		lowStock.forEach((product1) ->
-		{
-			rabbitTemplate.convertAndSend(topicExchangeName, "foo.bar.#",
-					"Only " + product1.getQuantityOnHand() + " " + product1.getProductName() + " left in inventory!");
 
-			System.out.println("Message sent successfully!");
+    @GetMapping("/messages")
+    public void inventory() {
 
-			// this.emailService.sendInventoryStatustEmail
-			// (product1.getQuantityOnHand(), product1.getProductName());
-		});
-	}
+        List<Product> lowStock = repo.findByQuantityOnHandLessThan(10);
+
+        lowStock.forEach((product1)-> {
+                    rabbitTemplate.convertAndSend(topicExchangeName,
+                            "foo.bar.#",
+                             "Only " + product1.getQuantityOnHand() + " " +
+                                     product1.getProductName() + " left in inventory!");
+
+                    System.out.println("Message sent successfully!");
+
+//                    this.emailService.sendInventoryStatustEmail
+//                            (product1.getQuantityOnHand(), product1.getProductName());
+        });
+    }
 }

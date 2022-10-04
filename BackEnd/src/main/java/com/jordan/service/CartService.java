@@ -1,24 +1,18 @@
 package com.jordan.service;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.jordan.model.*;
 import com.jordan.repository.CartRepository;
-import com.jordan.service.OrdersService;
 
 @Service("cartService")
-@Component
 public class CartService
 {
 	private Logger logger = LoggerFactory.getLogger(CartService.class);
@@ -87,6 +81,7 @@ public class CartService
 		logger.warn("Set products to " + order.getProducts().get(0).getProductName());
 		order.setTotalPrice(cart.getTotalPrice());
 		order.setOrderStatus("Order Placed");
+		
 		// TODO let the user select their address on the front end
 		// on the frontend, user should have input addresses on initial checkout page
 		// before hitting button

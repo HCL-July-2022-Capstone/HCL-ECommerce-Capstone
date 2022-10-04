@@ -9,7 +9,7 @@
           <th>Id</th>
           <th>Name</th>
           <th>Description</th>
-          <th>Price</th>
+          <th>Price($)</th>
           <th>Quantity</th>
           <th>Category</th>
           <th>Image</th>
@@ -23,12 +23,13 @@
           <td>{{ productModel.productId }}</td>
           <td>{{ productModel.productName }}</td>
           <td>{{ productModel.productDescription }}</td>
-          <td>{{ productModel.productPrice  | currency}}</td>
+          <td>{{ productModel.productPrice | currency }}</td>
           <td>{{ productModel.quantityOnHand }}</td>
           <td>{{ productModel.categoryName }}</td>
-          <td><img alt="image" src="{{ productModel.image }}" /></td>
+          <td><img alt="image" src="{{ productModel.image }}"/></td>
           <td>
             <div *ngIf="productModel">
+              <a href="http://localhost:4200/getAllProducts">
                 <button
                   (click)="deleteProductById(productModel)"
                   class="delete"
@@ -37,7 +38,9 @@
                 >
                   Delete
                 </button>
+              </a>
             </div>
+
           </td>
           <td>
             <div *ngIf="productModel">
@@ -53,14 +56,14 @@
           </td>
           <td>
 
-<!--             <button -->
-<!--               class="addToCart" -->
-<!--               (click)="addToCart(productModel)" -->
-<!--               type="submit" -->
-<!--               class="btn btn-success" -->
-<!--             > -->
-<!--               Add to Cart -->
-<!--             </button> -->
+            <!--             <button -->
+            <!--               class="addToCart" -->
+            <!--               (click)="addToCart(productModel)" -->
+            <!--               type="submit" -->
+            <!--               class="btn btn-success" -->
+            <!--             > -->
+            <!--               Add to Cart -->
+            <!--             </button> -->
           </td>
         </tr>
       </tbody>

@@ -24,7 +24,6 @@ export class CheckoutComponent implements OnInit {
               private snackbar: MatSnackBar) {  }
 
   ngOnInit(): void {
-    // this.updateCartStatus();
     this.listCartDetails();
   }
 

@@ -1,3 +1,14 @@
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hcl-july-2022-capstone_HCL-ECommerce-Capstone_1)
+
 # FrontEnd
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.

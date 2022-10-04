@@ -82,7 +82,7 @@ public class EcommerceApplication
 	public Cloudinary cloudinaryConfig()
 	{
 		Cloudinary cloudinary = null;
-		Map config = new HashMap();
+		Map<String, String> config = new HashMap<String, String>();
 		config.put("cloud_name", cloudName);
 		config.put("api_key", apiKey);
 		config.put("api_secret", apiSecret);
