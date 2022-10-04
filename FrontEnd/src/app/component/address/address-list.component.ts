@@ -1,11 +1,16 @@
+<<<<<<< HEAD
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+=======
+import {Component, EventEmitter, NgModule, OnInit, Output} from '@angular/core';
+import { NgxScrollTopModule } from 'ngx-scrolltop';
+>>>>>>> parent of 3f49945 (Search, Styling)
 import { AddressModel } from 'src/app/model/address.model';
 import { AddressService } from 'src/app/service/address.service';
+import { CheckoutComponent } from '../checkout/checkout.component';
 
 @Component({
   selector: 'app-address-list',
-  templateUrl: './address-list.component.html',
-  // styleUrls: ['./address.component.css'] //newly added
+  templateUrl: './address-list.component.html'
 })
 
 
