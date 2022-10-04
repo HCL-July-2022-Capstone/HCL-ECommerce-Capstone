@@ -20,16 +20,18 @@ export class StripePaymentComponent implements OnInit {
 
   // items = this.productService.getItems();
 
+  //Initialize Stripe API
   stripe = Stripe(environment.stripePublishableKey);
+
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
-  displayError: any = '';
+  displayError: any = "";
 
   localCart: CartModel[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductServiceService,
+    // private productService: ProductServiceService,
     private checkoutService: CheckoutService,
     private cartService: CartService
   ) {}
@@ -48,7 +50,7 @@ export class StripePaymentComponent implements OnInit {
     // Stripe payment handler.
     var elements = this.stripe.elements();
 
-    // Create custom card elements with a hidden ZipCode field.
+    // Create custom card elements with a hidden Zip-Code field.
     this.cardElement = elements.create('card', { hidePostalCode: true });
 
     // Add card UI component into the 'card-element' <div>.
@@ -60,7 +62,7 @@ export class StripePaymentComponent implements OnInit {
       this.displayError = document.getElementById('card-errors');
 
       if (event.complete) {
-        this.displayError.textContent = '';
+        this.displayError.textContent = "";
       } else if (event.error) {
         this.displayError.textContent = event.error.message;
       }
@@ -93,11 +95,11 @@ export class StripePaymentComponent implements OnInit {
 
     // Payment info
     this.paymentInfo.amount = this.totalPrice * 100;
-    this.paymentInfo.currency = 'USD';
+    this.paymentInfo.currency = "USD";
 
     if (
       !this.checkoutFormGroup.invalid &&
-      this.displayError.textContent === ''
+      this.displayError.textContent === ""
     ) {
       this.checkoutService
         .createPaymentIntent(this.paymentInfo)
@@ -144,5 +146,4 @@ export class StripePaymentComponent implements OnInit {
     // compute cart total price and quantity
     this.cartService.computeCartTotals();
   }
-
 }

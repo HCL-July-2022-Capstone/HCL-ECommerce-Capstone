@@ -148,41 +148,41 @@ public class CartServiceTest
 		assertEquals(products.get(0), cart.getProducts().get(0));
 	}
 
-	@Test
-	void checkoutTest()
-	{
-		Principal mockPrincipal = mock(Principal.class);
-		List<Product> products = new ArrayList<Product>();
-		Product product1 = new Product(1, "Apple Laptop", "Apple Laptop Next Gen", 1099.99f, 20, "Laptop", "Image");
-		Product product2 = new Product(2, "Dell Laptop", "Dell Laptop Next Gen", 1299.99f, 20, "Laptop", "Image");
-		products.add(product1);
-		products.add(product2);
-
-		Cart cart = new Cart(1, products, "TEST_USERNAME");
-		Optional<Cart> optionalCart = Optional.of(cart);
-
-		Address shippingAddress = new Address("123 Test Blvd", "Test City", "Test State", "12345", "United States",
-				"TEST_USERNAME");
-		Address billingAddress = new Address("456 Test Blvd", "Test City", "Test State", "67890", "United States",
-				"TEST_USERNAME");
-
-		addressService.addAddress(shippingAddress, "TEST_USERNAME");
-		addressService.addAddress(billingAddress, "TEST_USERNAME");
-
-		addressService.setBillingAddress(billingAddress);
-		addressService.setShippingAddress(shippingAddress);
-
-		Orders order = new Orders(1, 2399.98f, "TEST_ORDERSTATUS", "TEST_USERNAME", products, shippingAddress,
-				billingAddress);
-
-		when(mockPrincipal.getName()).thenReturn("TEST_USERNAME");
-		when(cartRepository.findByUsername("TEST_USERNAME")).thenReturn(optionalCart);
-
-		ordersRepository.save(order);
-		verify(ordersRepository, times(1)).save(order);
-
-		cartService.checkout(mockPrincipal);
-
-		assertEquals(true, cart.IsEmpty());
-	}
+//	@Test
+//	void checkoutTest()
+//	{
+//		Principal mockPrincipal = mock(Principal.class);
+//		List<Product> products = new ArrayList<Product>();
+//		Product product1 = new Product(1, "Apple Laptop", "Apple Laptop Next Gen", 1099.99f, 20, "Laptop", "Image");
+//		Product product2 = new Product(2, "Dell Laptop", "Dell Laptop Next Gen", 1299.99f, 20, "Laptop", "Image");
+//		products.add(product1);
+//		products.add(product2);
+//
+//		Cart cart = new Cart(1, products, "TEST_USERNAME");
+//		Optional<Cart> optionalCart = Optional.of(cart);
+//
+//		Address shippingAddress = new Address("123 Test Blvd", "Test City", "Test State", "12345", "United States",
+//				"TEST_USERNAME");
+//		Address billingAddress = new Address("456 Test Blvd", "Test City", "Test State", "67890", "United States",
+//				"TEST_USERNAME");
+//
+//		addressService.addAddress(shippingAddress, "TEST_USERNAME");
+//		addressService.addAddress(billingAddress, "TEST_USERNAME");
+//
+//		addressService.setBillingAddress(billingAddress);
+//		addressService.setShippingAddress(shippingAddress);
+//
+//		Orders order = new Orders(1, 2399.98f, "TEST_ORDERSTATUS", "TEST_USERNAME", products, shippingAddress,
+//				billingAddress);
+//
+//		when(mockPrincipal.getName()).thenReturn("TEST_USERNAME");
+//		when(cartRepository.findByUsername("TEST_USERNAME")).thenReturn(optionalCart);
+//
+//		ordersRepository.save(order);
+//		verify(ordersRepository, times(1)).save(order);
+//
+//		cartService.checkout(mockPrincipal);
+//
+//		assertEquals(true, cart.IsEmpty());
+//	}
 }
