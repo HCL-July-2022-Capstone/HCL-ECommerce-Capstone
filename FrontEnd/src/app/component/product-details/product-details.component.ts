@@ -50,8 +50,8 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart() {
 
-    const theCartItem = new CartModel(this.productModel);
-    this.cartService.addToCart(theCartItem);
+    const cart = new CartModel(this.productModel);
+    this.cartService.addToCart(cart);
 
     this.snackbar.open(
       'Product has been added to cart!', '',

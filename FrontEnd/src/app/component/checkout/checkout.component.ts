@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit {
               private snackbar: MatSnackBar) {  }
 
   ngOnInit(): void {
-    this.updateCartStatus();
+    // this.updateCartStatus();
     this.listCartDetails();
   }
 
@@ -33,23 +33,23 @@ export class CheckoutComponent implements OnInit {
     this.cartService.addToCart(cart);
   }
 
-  updateCartStatus() {
-    // subscribe to the cart totalPrice
-    this.cartService.totalPrice.subscribe(
-      (data: any) => this.totalPrice = data
-    );
-
-    // subscribe to the cart totalQuantity
-    this.cartService.totalQuantity.subscribe(
-      (data: any) =>
-        this.totalQuantity = data
-    );
-  }
+  // updateCartStatus() {
+  //   // subscribe to the cart totalPrice
+  //   this.cartService.totalPrice.subscribe(
+  //     (data: any) => this.totalPrice = data
+  //   );
+  //
+  //   // subscribe to the cart totalQuantity
+  //   this.cartService.totalQuantity.subscribe(
+  //     (data: any) =>
+  //       this.totalQuantity = data
+  //   );
+  // }
 
   listCartDetails() {
 
     // get a handle to the cart items
-    this.localCart = this.cartService.cartItems;
+    this.localCart = this.cartService.localCart;
 
     // subscribe to the cart totalPrice
     this.cartService.totalPrice.subscribe(
@@ -66,7 +66,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   decQTY(cart: CartModel) {
-    this.cartService.decrementQuantity(cart);
+    this.cartService.decQTY(cart);
   }
 
   removeItem(cart: CartModel) {

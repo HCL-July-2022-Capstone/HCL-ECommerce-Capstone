@@ -82,9 +82,9 @@ export class ProductServiceService {
       });
   }
 
-  getItems() {
-    return this.http.get(`${this.baseUrl}/cart/view`);
-  }
+  // getItems() {
+  //   return this.http.get(`${this.baseUrl}/cart/view`);
+  // }
 
   // increaseQty(payload: { productId: number; quantityOnHand: number; }) {
   //   return this.http.post(`${this.baseUrl}/cart`, payload);
@@ -94,11 +94,4 @@ export class ProductServiceService {
   //   return this.http.delete(`${this.baseUrl}/checkout/empty-cart`);
   // }
 
-  // remove a single product
-  // removeFromCart(id: number) {
-  //   this.http.delete<ProductModel>(`${this.baseUrl}/cart/remove/${id}`)
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //     });
-  // }
 }

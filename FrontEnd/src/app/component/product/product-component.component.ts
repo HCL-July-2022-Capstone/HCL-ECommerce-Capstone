@@ -25,7 +25,6 @@ export class ProductComponentComponent implements OnInit {
   productModel!: ProductModel[];
   data: ProductModel | undefined;
 
-
   constructor(private productService: ProductServiceService,
               private snackbar: MatSnackBar) {
   }
@@ -77,7 +76,7 @@ export class ProductComponentComponent implements OnInit {
       });
   }
 
-  //addToCart
+  // addToCart
   addToCart(product: ProductModel): void {
     this.productService.addToCart(product.productId, product);
 

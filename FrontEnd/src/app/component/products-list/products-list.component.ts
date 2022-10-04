@@ -99,10 +99,10 @@ export class ProductsListComponent implements OnInit {
   //   this.cartService.addToCart(cart);
   // }
 
-  addToCart(theProduct: ProductModel) {
+  addToCart(product: ProductModel) {
 
-    const theCartItem = new CartModel(theProduct);
-    this.cartService.addToCart(theCartItem);
+    const cart = new CartModel(product);
+    this.cartService.addToCart(cart);
 
     this.snackbar.open(
       'Product has been added to cart!', '',

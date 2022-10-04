@@ -9,22 +9,21 @@ import {CartModel} from "../model/cart.model";
 
 export class CartService {
 
-  cartItems: CartModel[] = [];
-  // cart!: CartModel;
+  localCart: CartModel[] = [];
 
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-  storage: Storage = sessionStorage;
+  storage: Storage = localStorage;
 
   constructor() {
 
     // read data from storage
-    let data = JSON.parse(this.storage.getItem('cartItems') as string);
+    let data = JSON.parse(this.storage.getItem('localCart') as string);
 
     if (data != null) {
-      this.cartItems = data;
-      console.log(this.cartItems);
+      this.localCart = data;
+      console.log(this.localCart);
 
       // compute totals based on the data that is read from storage
       this.computeCartTotals();
@@ -35,9 +34,9 @@ export class CartService {
     let alreadyExistsInCart: boolean = false;
     let existingCartItem = undefined;
     // check if we already have the item in our cart
-    if (this.cartItems.length > 0) {
+    if (this.localCart.length > 0) {
       // find the item in the cart based on item id
-      existingCartItem =  this.cartItems.find(tempCartItem => tempCartItem.productId === cart.productId);
+      existingCartItem =  this.localCart.find(tempCartItem => tempCartItem.productId === cart.productId);
 
       alreadyExistsInCart = (existingCartItem != undefined);
 
@@ -50,7 +49,7 @@ export class CartService {
     }
     else {
       // just add the item to the array
-      this.cartItems.push(cart);
+      this.localCart.push(cart);
     }
 
     // compute cart total price and total quantity
@@ -62,7 +61,7 @@ export class CartService {
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
 
-    for (let currentCartItem of this.cartItems) {
+    for (let currentCartItem of this.localCart) {
       totalPriceValue += currentCartItem.quantity * currentCartItem.productPrice;
       totalQuantityValue += currentCartItem.quantity;
     }
@@ -76,10 +75,10 @@ export class CartService {
   }
 
   persistCartItems() {
-    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
+    this.storage.setItem('localCart', JSON.stringify(this.localCart));
   }
 
-  decrementQuantity(cart: CartModel) {
+  decQTY(cart: CartModel) {
 
     cart.quantity--;
 
@@ -94,12 +93,12 @@ export class CartService {
   remove(cart: CartModel) {
 
     // get index of item in the array
-    const itemIndex = this.cartItems.findIndex(tempCartItem =>
+    const itemIndex = this.localCart.findIndex(tempCartItem =>
       tempCartItem.productId === cart.productId);
 
     // if found, remove the item from the array at the given index
     if (itemIndex > -1) {
-      this.cartItems.splice(itemIndex, 1);
+      this.localCart.splice(itemIndex, 1);
 
       this.computeCartTotals();
     }

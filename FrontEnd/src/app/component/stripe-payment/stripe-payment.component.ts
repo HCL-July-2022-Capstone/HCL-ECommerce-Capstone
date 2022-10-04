@@ -18,7 +18,7 @@ export class StripePaymentComponent implements OnInit {
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
 
-  items = this.productService.getItems();
+  // items = this.productService.getItems();
 
   stripe = Stripe(environment.stripePublishableKey);
   paymentInfo: PaymentInfo = new PaymentInfo();
@@ -129,7 +129,7 @@ export class StripePaymentComponent implements OnInit {
   listCartDetails() {
 
     // get a handle to the cart items
-    this.localCart = this.cartService.cartItems;
+    this.localCart = this.cartService.localCart;
 
     // subscribe to the cart totalPrice
     this.cartService.totalPrice.subscribe(
