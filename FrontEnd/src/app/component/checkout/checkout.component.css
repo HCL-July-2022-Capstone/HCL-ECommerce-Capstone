@@ -192,18 +192,18 @@ select {
     margin-bottom: 5vh;
 }
 .card{
-    margin: auto;
-    max-width: 950px;
-    width: 90%;
-    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 1rem;
+    /*margin: auto;*/
+    /*max-width: 950px;*/
+    /*width: 90%;*/
+    /*box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+    /*border-radius: 1rem;*/
     border: transparent;
 }
-@media(max-width:767px){
-    .card{
-        margin: 3vh auto;
-    }
-}
+/*@media(max-width:767px){*/
+/*    .card{*/
+/*        margin: 3vh auto;*/
+/*    }*/
+/*}*/
 .cart{
     background-color: #fff;
     padding: 4vh 5vh;
@@ -217,38 +217,31 @@ select {
         border-top-right-radius: 1rem;
     }
 }
-.summary {
-  background-color: #ddd;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  padding: 4vh;
-  color: rgb(65, 65, 65);
-}
+
 #cart .card-body {
   flex: 1 1 auto;
   /*padding: 1.5rem;*/
 }
-#cart *, :after, :before {
-  box-sizing: border-box;
-  border: none;
-}
+/*#cart *, :after, :before {*/
+/*  box-sizing: border-box;*/
+/*  border: none;*/
+/*}*/
 
 #cart a, a:hover {
   text-decoration: none;
   color: inherit;
 }
 
-
 #cart .card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
+  /*position: relative;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*min-width: 0;*/
+  /*word-wrap: break-word;*/
+  /*background-color: #fff;*/
   /*background-clip: border-box;*/
   /*border: 1px solid rgba(0,0,0,.125);*/
-  border-radius: 0.5rem;
+  /*border-radius: 0.5rem;*/
 }
 #cart .row {
   --mdb-gutter-x: 1.5rem;
@@ -259,7 +252,6 @@ select {
   margin-right: calc(var(--mdb-gutter-x)*-0.5);
   margin-left: calc(var(--mdb-gutter-x)*-0.5);
 }
-
 
 .section-title .line {
   background: -webkit-gradient(linear, left top, left bottom, from(#fe8464), to(#fe6e9a));
@@ -288,13 +280,4 @@ select {
 
 }
 
-.btn:focus{
-  outline: none!important;
-  border: none;
-}
 
-
-/*checkout button hover*/
-.main-btn:hover {
-  text-decoration: none;
-}

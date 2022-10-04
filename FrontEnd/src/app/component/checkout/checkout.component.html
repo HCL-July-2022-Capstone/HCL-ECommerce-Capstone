@@ -46,17 +46,12 @@
                     <i class="fas fa-minus"></i>
                   </button>
 
-                  <!--                   <input #q min="1"  type="number" value="1" (keyup)="addToCart(localCart, q.valueAsNumber )"/> -->
                   {{item.quantity}}
 
                   <button class="btn btn-link px-2"
                           (click)="incQTY(item)">
                     <i class="fas fa-plus"></i>
                   </button>
-                  <!--                   <button class="btn btn-link px-2" -->
-                  <!--                           onclick="this.parentNode.querySelector('input[type=number]').stepUp()"> -->
-                  <!--                     <i class="fas fa-plus"></i> -->
-                  <!--                   </button> -->
 
                 </div>
 
@@ -74,7 +69,6 @@
                 </div>
               </div>
             </div>
-<!--             </div> -->
           </div>
 
           <div class="card mb-4">
@@ -90,23 +84,7 @@
             </div>
           </div>
 
-
           <app-stripe-payment></app-stripe-payment>
-
-          <!-- <div class="row align-items start">
-            <div id="col">
-              <app-address-add
-                (click)="toggleNewAddress = !toggleNewAddress"
-              ></app-address-add>
-            </div>
-          </div>
-
-        <div class="check-btn">
-          <div class="check">
-            <a type="button" (click)="checkout()" class="main-btn">
-              Checkout</a>
-          </div>
-        </div> -->
 
         </div>
       </div>
