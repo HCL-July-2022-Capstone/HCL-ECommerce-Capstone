@@ -1,5 +1,5 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 
 import {OKTA_CONFIG, OktaAuthModule} from '@okta/okta-angular';
@@ -9,7 +9,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ProfileComponent} from './profile/profile.component';
 
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth.interceptor';
 
 import {ProductComponentComponent} from './component/product/product-component.component';
@@ -49,8 +49,8 @@ const oktaAuth = new OktaAuth({
     ProductSearchComponent,
     ProductAddComponent,
     NavbarComponent,
-   ProductDetailsComponent,
     ProductsListComponent,
+    ProductDetailsComponent,
     PagenotfoundComponent,
     CategoriesComponent,
     HomepageComponent,
@@ -66,6 +66,7 @@ const oktaAuth = new OktaAuth({
     OktaAuthModule,
     HttpClientModule,
     FormsModule,
+    HttpClientJsonpModule,
     MatIconModule,
     MatButtonModule,
     BrowserAnimationsModule,
@@ -92,10 +93,9 @@ const oktaAuth = new OktaAuth({
     }
   ],
   bootstrap: [AppComponent],
-
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
-  ],
+  ]
 })
 export class AppModule {
 }

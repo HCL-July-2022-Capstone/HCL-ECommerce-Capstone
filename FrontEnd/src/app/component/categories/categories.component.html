@@ -17,7 +17,7 @@
             <a routerLink="/products/{{products.productId}}">
               <h5>{{products.productName}}</h5>
             </a>
-            <h6>${{products.productPrice}}</h6>
+            <h6>{{products.productPrice | currency}}</h6>
 
             <i (click)="addToCart(products)" class="fas fa-cart-shopping"></i>
           </div>

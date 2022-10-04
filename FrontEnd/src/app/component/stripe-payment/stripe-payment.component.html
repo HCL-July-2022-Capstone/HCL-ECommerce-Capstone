@@ -3,7 +3,7 @@
 <!--   <span>{{ item.productPrice | currency }}</span> -->
 <!-- </div> -->
 <app-address-add></app-address-add>
-<div class="container flex">
+<div id="stripe" class="container flex">
   <form [formGroup]="checkoutFormGroup" (ngSubmit)="checkout()">
 
     <!-- Stripe Elements card section -->
@@ -25,6 +25,7 @@
       <!-- Checkout Button -->
       <div class="text-center">
         <button
+
           class="w-100 btn btn-primary btn-lg"
           type="submit"
           (click)="checkout()"

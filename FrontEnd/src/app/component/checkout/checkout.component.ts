@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductServiceService} from 'src/app/service/product-service.service';
-import {ProductModel} from "../../model/product-model.model";
 import {CartModel} from "../../model/cart.model";
+import {CartService} from "../../service/cart.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-checkout',
@@ -10,106 +11,72 @@ import {CartModel} from "../../model/cart.model";
 })
 export class CheckoutComponent implements OnInit {
 
+  localCart: CartModel[] = [];
 
-
-
-
-  //items = this.productService.getItems();
-  //toggleNewAddress: Boolean = false;
-  
-  //stripe = Stripe(environment.stripePublishableKey);
-  //paymentInfo: PaymentInfo = new PaymentInfo();
-  //cardElement: any;
-  //displayError: any = '';
-
-
-
-
-
-
-  cartModel: CartModel[] = [];
-  productModel!: ProductModel[];
-  product!: ProductModel;
   toggleNewAddress: Boolean = false;
-  items!: CartModel[];
+  // items: any;
 
-  @Input()
-  quantity: number = 0;
-  total: number = 0;
+  totalPrice: number = 0.00;
+  totalQuantity: number = 0;
 
-  priceList:any[] = [];
-
-  constructor(private productService: ProductServiceService) {
-  }
-
-  subTotal = 0;
-  price = 0;
+  constructor(private productService: ProductServiceService,
+              private cartService: CartService,
+              private snackbar: MatSnackBar) {  }
 
   ngOnInit(): void {
-    this.getCart();
+    // this.updateCartStatus();
+    this.listCartDetails();
   }
 
-  getCart(): void {
-    this.productService.getItems().subscribe((data: any) => {
-      this.items = data;
-      console.log(data);
-    });
-
-    // this.cartModel.push({
-    //   productId: this.items.productId,
-    //   productName: this.items.productName,
-    //   image: this.items.image,
-    //   productPrice: this.items.productPrice,
-    //   quantity: 1,
-    //   totalPrice: this.items.quantity * this.items.productPrice
-    // });
-    // console.log(this.cartModel);
-
+  incQTY(cart: CartModel) {
+    // increase quantity in cart by adding
+    this.cartService.addToCart(cart);
   }
 
-  // remove from cart
+  // updateCartStatus() {
+  //   // subscribe to the cart totalPrice
+  //   this.cartService.totalPrice.subscribe(
+  //     (data: any) => this.totalPrice = data
+  //   );
+  //
+  //   // subscribe to the cart totalQuantity
+  //   this.cartService.totalQuantity.subscribe(
+  //     (data: any) =>
+  //       this.totalQuantity = data
+  //   );
+  // }
+
+  listCartDetails() {
+
+    // get a handle to the cart items
+    this.localCart = this.cartService.localCart;
+
+    // subscribe to the cart totalPrice
+    this.cartService.totalPrice.subscribe(
+      data => this.totalPrice = data
+    );
+
+    // subscribe to the cart totalQuantity
+    this.cartService.totalQuantity.subscribe(
+      data => this.totalQuantity = data
+    );
+
+    // compute cart total price and quantity
+    this.cartService.computeCartTotals();
+  }
+
+  decQTY(cart: CartModel) {
+    this.cartService.decQTY(cart);
+  }
+
   removeItem(cart: CartModel) {
-    this.cartModel = this.cartModel
-      .filter((data) => data !== cart);
-    this.productService.removeFromCart(cart.productId);
+    this.cartService.remove(cart);
 
-    //remove from database
-    this.removeFromDatabase(this.product);
+    //popup message
+    this.snackbar.open(
+      'Product has been removed from the cart!', '',
+      {
+        duration: 1500
+      });
   }
-
-  incQTY(id: number, quantityOnHand: number): void {
-    const payload = {
-      productId: id,
-      quantityOnHand,
-    };
-    this.productService.increaseQty(payload).subscribe(() => {
-      this.getCart();
-      alert('Product Added');
-    });
-  }
-
-  totalPrice(quantity: number, price: number) {
-   this.total = quantity * price;
-
-    this.items.forEach((item: any) => {
-      this.subTotal += (quantity * price)
-    })
-  }
-
-  emptyCart(): void {
-    this.productService.clearCart().subscribe(() => {
-      this.getCart();
-      alert('Cart Emptied');
-    });
-  }
-
-  checkout(): void {
-    this.productService.checkout();
-  }
-
-    removeFromDatabase(product: ProductModel): void {
-      this.productModel = this.productModel.filter((data) =>
-        data !== product);
-      this.productService.removeFromCart(product.productId);
-    }
 }

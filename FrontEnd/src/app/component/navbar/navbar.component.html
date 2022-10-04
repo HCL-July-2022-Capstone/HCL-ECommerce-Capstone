@@ -1,30 +1,20 @@
-
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
 
 <!-- navigation bar -->
-
-<!-- <nav class="navbar navbar-expand-lg navbar-light shadow"> -->
-<!--   <header class="p-3 mb-3"> -->
-<!--     <div class="container-fluid"> -->
 <nav class="navbar sticky-top navbar-expand-lg">
-<!--         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"> -->
-<!--           <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none"> -->
-<!--               <a href="/" class="d-flex mb-2 mb-lg-0 text-decoration-none"> -->
-<!--                 <img width="75" alt="Okta logo" -->
-<!--                      src="https://cdn.brandfolder.io/2VK5Y09C/at/c8nxgg3ptt6zmrggjt85hshg/Logo_Okta_Blue_RGB.png?width=117&height=40"/> -->
-<!--               </a> -->
   <button aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation"
           class="navbar-toggler"
           data-bs-target="#navbarSupportedContent"
           data-bs-toggle="collapse" type="button">
+
+
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse"
        id="navbarSupportedContent">
-    <!--           <ul class="navbar-nav nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 flex"> -->
     <!--    LOGO -->
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
@@ -34,47 +24,73 @@
         </a>
       </a>
     </div>
+
     <ul class="navbar-nav ml-auto" id="nav">
-                <br/>
+      <br/>
       <li class="nav-item">
         <a aria-current="page" class="nav-link px-2 active" routerLink="/">
           Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link px-2 active page-scroll" routerLink="/getAllProducts"
+
+      <li>
+        <a
+          *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
+          class="nav-link px-2 active page-scroll"
+          routerLink="/getAllProducts"
         >Products Table</a>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link px-2 active page-scroll" routerLink="/addProduct"
+        <a
+          *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
+          class="nav-link px-2 active page-scroll"
+          routerLink="/addProduct"
         >Add Products</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link px-2 active page-scroll" routerLink="Search"
-        >Search Products</a>
-      </li>
+
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="/products"
         >All Products</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="category/Phone"
         >Phones</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="category/Laptop"
         >Laptops</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="category/Desktop"
         >Desktops</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="category/Monitor"
         >Monitors</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="category/Accessory"
         >Accessories</a>
+
+      <li class="nav-item">
+        <a class="nav-link px-2 active page-scroll" routerLink="Search"
+        >Search Products</a
+        >
+      </li>
+
+      <li class="nav-item">
+        <a
+          *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
+          routerLink="/editprofile"
+          class="nav-link px-2 active page-scroll"
+        >Edit Profile</a
+        >
+
       </li>
     </ul>
 

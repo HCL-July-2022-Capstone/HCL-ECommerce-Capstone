@@ -12,18 +12,21 @@
         <div class="col-lg-6 col-md-12"><!--right side -->
           <div class="line"></div>
           <h2>{{productModel.productName}}</h2>
-          <h1>${{productModel.productPrice}}</h1>
-          <input #quantity min="1" type="number" value="1">
+<!--           rating -->
+          <h1>{{productModel.productPrice | currency}}</h1>
+<!--           <input #quantity min="1" type="number" value="1"> -->
           <button  class="Add to Cart"
-                   (click)="addToCart(productModel, quantity.valueAsNumber)"
+                   (click)="addToCart()"
                    id="cart">
             Add to Cart
           </button>
+          </div>
+
           <h3>Product Details</h3>
           <caption>{{productModel.productDescription}}</caption>
         </div>
 
-      </div>
+<!--       </div> -->
     </section>
     <button id="back" onclick="history.back()">Go Back</button>
   </section>

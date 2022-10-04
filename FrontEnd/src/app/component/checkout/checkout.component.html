@@ -8,53 +8,90 @@
   </div>
 </div>
 
-<section class="h-100">
+<section id="cart" class="h-100">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-10">
 
         <div class="card rounded-3 mb-4">
-          <div *ngFor="let item of items" >
-          <div class="card-body p-4">
+          <div *ngFor="let item of localCart">
+            <div class="card-body p-4">
 
-            <div class="row d-flex justify-content-between align-items-center">
-              <div class="col-md-2 col-lg-2 col-xl-2">
-                <img
-                  src="{{item.image}}"
-                  class="img-fluid rounded-3" alt="img">
-              </div>
-              <div class="col-md-3 col-lg-3 col-xl-3">
-                <p class="lead fw-normal mb-2">
+              <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-md-2 col-md-3 col-lg-2">
                   <a routerLink="/products/{{item.productId}}">
-                  {{item.productName}}
-                </a></p>
-               </div>
-              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                  <i class="fas fa-minus"></i>
-                </button>
+                  <img
+                    src="{{item.image}}"
+                    class="img-fluid rounded-3" alt="img">
+                  </a>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <p class="lead fw-normal mb-2">
+                    <a routerLink="/products/{{item.productId}}">
+                      {{item.productName}}
+                    </a>
+                  </p>
+                  <span class="text-muted text-lg-end">Price: {{item.productPrice | currency}} </span>
+                </div>
 
-                <input id="form1" min="1" name="quantity" type="number" value="1"
-                       class="form-control form-control-sm" />
+                <div
+                  class="mat-h3 d-flex justify-content-center align-items-center col-md-3 col-lg-3 col-xl-2 d-flex
+                     align-content-md-between">
+                  <!--                   <button class="btn btn-link px-2" -->
+                  <!--                           onclick="this.parentNode.querySelector('input[type=number]').stepDown()"> -->
+                  <!--                     <i class="fas fa-minus"></i> -->
+                  <!--                   </button> -->
+                  <button class="btn btn-link px-2"
+                          (click)="decQTY(item)">
+                    <i class="fas fa-minus"></i>
+                  </button>
 
-                <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                  <i class="fas fa-plus"></i>
-                </button>
+                  <!--                   <input #q min="1"  type="number" value="1" (keyup)="addToCart(localCart, q.valueAsNumber )"/> -->
+                  {{item.quantity}}
+
+                  <button class="btn btn-link px-2"
+                          (click)="incQTY(item)">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <!--                   <button class="btn btn-link px-2" -->
+                  <!--                           onclick="this.parentNode.querySelector('input[type=number]').stepUp()"> -->
+                  <!--                     <i class="fas fa-plus"></i> -->
+                  <!--                   </button> -->
+
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                  <h3 class="fw-semibold mb-0">
+                    {{item.quantity * item.productPrice | currency}}
+                  </h3>
+                </div>
+
+                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                </div>
+                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                  <a (click)=removeItem(item) class="text-danger">
+                    <i class="fas fa-trash fa-lg"></i></a>
+                </div>
               </div>
-              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                <h2 class="mb-0">${{item.productPrice}}</h2>
+            </div>
+<!--             </div> -->
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body p-4 d-flex flex-row align-content-end">
+              <div class="col text-sm-end">
+                <h3 class="text-muted">Total Price: </h3>
+                <h3 class="text-muted">Total Quantity: </h3>
               </div>
-              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                <a (click)="removeFromDatabase(product)" class="text-danger">
-                  <i class="fas fa-trash fa-lg"></i></a>
+              <div class="col-md-2 col-lg-2 col-xl-2 ">
+                <h3 class="fw-semibold">{{totalPrice | currency}}</h3>
+                <h3 class="fw-semibold">{{totalQuantity}}</h3>
               </div>
             </div>
           </div>
-        </div>
 
-        <app-stripe-payment></app-stripe-payment>
+
+          <app-stripe-payment></app-stripe-payment>
 
           <!-- <div class="row align-items start">
             <div id="col">
@@ -71,93 +108,8 @@
           </div>
         </div> -->
 
-      </div>
         </div>
+      </div>
     </div>
   </div>
 </section>
-<!-- <head> -->
-<!--   <title></title> -->
-<!-- </head> -->
-<!-- <div class="row justify-content-center"> -->
-<!--   <div class="col-lg-10"> -->
-<!--     <div class="section-title text-center pb-40"> -->
-<!--       <div class="line m-auto"></div> -->
-<!--       <h2 class="title"> -->
-<!--         CART </h2> -->
-<!--     </div> -->
-<!--   </div> -->
-<!-- </div> -->
-<!-- <section> -->
-<!--   <div class="spacer"> -->
-<!--     <div class="container"> -->
-<!--       <div class="row mt-5"> -->
-<!--         <div class="col-lg-9"> -->
-<!--           <div class="row shop-listing"> -->
-<!--             <table class="table shop-table" *ngIf="items"> -->
-<!--               <tr> -->
-<!--                 <th class="b-0">Name</th> -->
-<!--                 <th class="b-0">Price</th> -->
-<!--                 <th class="b-0">Quantity</th> -->
-<!--                 <th class="b-0 text-right">Total Price</th> -->
-<!--               </tr> -->
-<!--               <tr *ngFor="let item of items"> -->
-<!--                 <td>{{ item.productName }}</td> -->
-<!--                 <td>${{ item.productPrice }}</td> -->
-<!--                 <td> -->
-<!--                   &lt;!&ndash;                   <button &ndash;&gt; -->
-<!--                   &lt;!&ndash;                     class="btn btn-primary btn-sm" &ndash;&gt; -->
-<!--                   &lt;!&ndash;                     (click)="incQTY(item.productId._id, 1)" &ndash;&gt; -->
-<!--                   &lt;!&ndash;                   > &ndash;&gt; -->
-<!--                   &lt;!&ndash;                     + &ndash;&gt; -->
-<!--                   &lt;!&ndash;                   </button> &ndash;&gt; -->
-<!--                    {{ item.quantity }} -->
-<!--                   </td> -->
-<!--                 <button -->
-<!--                 (click)="removeItem(item)" -->
-<!--                 class="delete" -->
-<!--                 class="btn btn-danger" -->
-<!--                 type="button" -->
-<!--               > -->
-<!--                 Delete -->
-<!--               </button> -->
-<!--                 <td> -->
-<!--                  <input #quantity (click)="totalPrice(quantity.valueAsNumber, item.productPrice)" min="1" type="number" -->
-<!--                         value="1"> -->
-<!-- &lt;!&ndash;                   <button class="btn btn-primary btn-sm">-</button> &ndash;&gt; -->
-<!--                 </td> -->
-<!--                 <button  class="add" -->
-<!--                          (click)="incQTY(item.productId, quantity.valueAsNumber)" -->
-<!--                          class="btn btn-danger" -->
-<!--                          type="button"> -->
-<!--                   Add -->
-<!--                 </button> -->
-
-<!--                 <td class="text-right"> -->
-<!--                   <h5 class="font-medium m-b-30"> -->
-<!--                     ${{ (quantity.valueAsNumber * item.productPrice) }} -->
-<!--                   </h5> -->
-<!--                 </td> -->
-<!--               </tr> -->
-<!--               <tr> -->
-<!--                 <td colspan="3" align="right"> -->
-                  Subtotal :{{ subTotal }}
-                  <!-- Subtotal : subTotal() -->
-<!--                 </td> -->
-<!--                 <td colspan="4" align="right"> -->
-<!--                   <button class="btn btn-danger" (click)="emptyCart()"> -->
-<!--                     Empty Cart -->
-<!--                   </button> -->
-<!--                 </td> -->
-<!--               </tr> -->
-<!--             </table> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--   </div> -->
-<!-- </section> -->
-
-<!-- <button class="w-20 btn btn-primary btn-lg" type="submit" (click)="checkout()"> -->
-<!--   Checkout -->
-<!-- </button> -->
