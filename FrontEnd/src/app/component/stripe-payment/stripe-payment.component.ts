@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {environment} from "../../../environments/environment";
-import {PaymentInfo} from "../../common/payment-info";
-import {ProductServiceService} from "../../service/product-service.service";
-import {CheckoutService} from "../../service/checkout.service";
-import {CartService} from "../../service/cart.service";
-import {CartModel} from "../../model/cart.model";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { environment } from '../../../environments/environment';
+import { PaymentInfo } from '../../common/payment-info';
+import { ProductServiceService } from '../../service/product-service.service';
+import { CheckoutService } from '../../service/checkout.service';
+import { CartService } from '../../service/cart.service';
+import { CartModel } from '../../model/cart.model';
 
 @Component({
   selector: 'app-stripe-payment',
@@ -15,7 +15,7 @@ import {CartModel} from "../../model/cart.model";
 export class StripePaymentComponent implements OnInit {
   checkoutFormGroup!: FormGroup;
 
-  totalPrice: number = 0.00;
+  totalPrice: number = 0.0;
   totalQuantity: number = 0;
 
   // items = this.productService.getItems();
@@ -25,7 +25,7 @@ export class StripePaymentComponent implements OnInit {
 
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
-  displayError: any = "";
+  displayError: any = '';
 
   localCart: CartModel[] = [];
 
@@ -34,8 +34,7 @@ export class StripePaymentComponent implements OnInit {
     // private productService: ProductServiceService,
     private checkoutService: CheckoutService,
     private cartService: CartService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.setupStripePaymentForm();
@@ -52,21 +51,24 @@ export class StripePaymentComponent implements OnInit {
     var elements = this.stripe.elements();
 
     // Create custom card elements with a hidden ZipCode field.
-    this.cardElement = elements.create('card', {hidePostalCode: true});
+    this.cardElement = elements.create('card', { hidePostalCode: true });
 
     // Add card UI component into the 'card-element' <div>.
     this.cardElement.mount('#card-element');
 
     // Add event binding for 'change' in the 'card-element'.
 
-    this.cardElement.on('change', (event: { complete: any; error: { message: any; }; }) => {
-      // 'card-errors' element handler.
-      this.displayError = document.getElementById('card-errors');
+    this.cardElement.on(
+      'change',
+      (event: { complete: any; error: { message: any } }) => {
+        // 'card-errors' element handler.
+        this.displayError = document.getElementById('card-errors');
 
-      if (event.complete) {
-        this.displayError.textContent = "";
-      } else if (event.error) {
-        this.displayError.textContent = event.error.message;
+        if (event.complete) {
+          this.displayError.textContent = '';
+        } else if (event.error) {
+          this.displayError.textContent = event.error.message;
+        }
       }
     );
   }
@@ -97,11 +99,11 @@ export class StripePaymentComponent implements OnInit {
 
     // Payment info
     this.paymentInfo.amount = this.totalPrice * 100;
-    this.paymentInfo.currency = "USD";
+    this.paymentInfo.currency = 'USD';
 
     if (
       !this.checkoutFormGroup.invalid &&
-      this.displayError.textContent === ""
+      this.displayError.textContent === ''
     ) {
       this.checkoutService
         .createPaymentIntent(this.paymentInfo)
@@ -114,7 +116,7 @@ export class StripePaymentComponent implements OnInit {
                   card: this.cardElement,
                 },
               },
-              {handleActions: false}
+              { handleActions: false }
             )
             .then((result: { error: { message: any } }) => {
               if (result.error) {
@@ -131,18 +133,15 @@ export class StripePaymentComponent implements OnInit {
 
   // quantity, price, and total
   listCartDetails() {
-
     // get a handle to the cart items
     this.localCart = this.cartService.localCart;
 
     // subscribe to the cart totalPrice
-    this.cartService.totalPrice.subscribe(
-      data => this.totalPrice = data
-    );
+    this.cartService.totalPrice.subscribe((data) => (this.totalPrice = data));
 
     // subscribe to the cart totalQuantity
     this.cartService.totalQuantity.subscribe(
-      data => this.totalQuantity = data
+      (data) => (this.totalQuantity = data)
     );
 
     // compute cart total price and quantity
