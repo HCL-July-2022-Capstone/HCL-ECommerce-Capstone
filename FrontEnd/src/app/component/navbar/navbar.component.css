@@ -8,10 +8,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-h2 {
-  /*margin: 24px 0;*/
-}
-
 p {
   margin: 0;
 }
@@ -24,10 +20,6 @@ p {
   background-color: #fff;
   color: #41414b;
   font-weight: 600;
-}
-
-.toolbar img {
-  /*margin: 0 16px;*/
 }
 
 img {
@@ -44,8 +36,6 @@ img {
 
 .content {
   display: flex;
-  /*margin: 32px auto;*/
-  /*padding: 0 16px;*/
   max-width: 960px;
   flex-direction: column;
   align-items: center;
@@ -74,7 +64,6 @@ svg.material-icons:not(:last-child) {
 .card {
   all: unset;
   border-radius: 4px;
-  /*border: 1px solid #eee;*/
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -90,7 +79,6 @@ svg.material-icons:not(:last-child) {
 .card.card-small {
   height: 20px;
   width: 100px;
-  /*margin: 0 8px 16px 20px;*/
   padding: 8px;
   justify-content: center;
 }
@@ -98,8 +86,6 @@ svg.material-icons:not(:last-child) {
 .card.card-resource {
   height: 40px;
   width: 200px;
-  /*margin: 0 8px 16px;*/
-  /*padding: 16px;*/
   line-height: 24px;
 }
 
@@ -115,7 +101,6 @@ svg.material-icons:not(:last-child) {
 a,
 a:visited,
 a:hover {
-  /*color: #095661;*/
   color: whitesmoke!important;
   text-decoration: none;
 }
@@ -141,7 +126,6 @@ a:hover {
   line-height: 0 !important;
   padding-left: 85%;
   padding-right: 5%;
-  /*background-color: white;*/
 }
 
 .navbar-expand-lg {

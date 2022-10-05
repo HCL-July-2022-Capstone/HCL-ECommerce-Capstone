@@ -13,7 +13,6 @@ import {CartModel} from "../../model/cart.model";
 })
 export class CategoriesComponent implements OnInit {
 
-  // productModel!: ProductModel;
   data: any;
   items: any[] = [];
 
@@ -42,18 +41,6 @@ export class CategoriesComponent implements OnInit {
         this.data = product
       });
   }
-
-  //addToCart
-  // addToCart(product: ProductModel): void {
-  //   this.productService.addToCart(product.productId, product);
-  //
-  //   //popup message
-  //   this.snackbar.open(
-  //     'Product has been added to cart!', '',
-  //     {
-  //       duration: 1500
-  //     });
-  // }
 
   addToCart(theProduct: ProductModel) {
 

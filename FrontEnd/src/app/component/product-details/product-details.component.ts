@@ -36,18 +36,6 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe((product) => this.productModel = product);
   }
 
-  // addToCart
-  // addToCart(product: ProductModel) {
-  //
-  //   this.productService.addToCart(product.productId, product);
-  //
-  //   this.snackbar.open(
-  //     'Product has been added to cart!', '',
-  //     {
-  //       duration: 1500
-  //     });
-  // }
-
   addToCart() {
 
     const cart = new CartModel(this.productModel);

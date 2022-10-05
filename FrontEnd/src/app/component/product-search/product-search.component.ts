@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductModel} from "../../model/product-model.model";
-//import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from "rxjs";
 import {ProductServiceService} from "../../service/product-service.service";
-
-//import { ProductComponentComponent } from '../product/product-component.component';
 
 @Component({
   selector: 'app-product-search',
@@ -11,8 +8,7 @@ import {ProductServiceService} from "../../service/product-service.service";
   styleUrls: ['./product-search.component.css']
 })
 export class ProductSearchComponent implements OnInit {
-  //private baseUrl = 'http://localhost:8080';
-  //productModel$!: Observable<ProductModel[]>;
+
   products?: ProductModel[];
   currentProduct: ProductModel = {
     productId: 0,
@@ -92,8 +88,5 @@ export class ProductSearchComponent implements OnInit {
     this.currentProduct = product;
     this.currentIndex = index;
   }
-  /*search(term: string) {
-    console.log(`value=${term}`);
-    // this.router.navigateByUrl(`/search/${term}`);
-  }*/
+
 }

@@ -29,17 +29,6 @@ export class ProductsListComponent implements OnInit {
       });
   }
 
-  //add To Cart
-  // addToCart(product: ProductModel): void {
-  //   this.productService.addToCart(product.productId, product);
-  //
-  //   this.snackbar.open(
-  //     'Product has been added to cart!', '',
-  //     {
-  //       duration: 1500
-  //     });
-  // }
-
 
   addToCart(product: ProductModel) {
 

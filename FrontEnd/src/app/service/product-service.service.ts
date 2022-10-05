@@ -82,16 +82,16 @@ export class ProductServiceService {
       });
   }
 
-  // getItems() {
-  //   return this.http.get(`${this.baseUrl}/cart/view`);
-  // }
+  getItems() {
+    return this.http.get(`${this.baseUrl}/cart/view`);
+  }
 
-  // increaseQty(payload: { productId: number; quantityOnHand: number; }) {
-  //   return this.http.post(`${this.baseUrl}/cart`, payload);
-  // }
+  increaseQty(payload: { productId: number; quantityOnHand: number; }) {
+    return this.http.post(`${this.baseUrl}/cart`, payload);
+  }
 
-  // clearCart() {
-  //   return this.http.delete(`${this.baseUrl}/checkout/empty-cart`);
-  // }
+  clearCart() {
+    return this.http.delete(`${this.baseUrl}/checkout/empty-cart`);
+  }
 
 }

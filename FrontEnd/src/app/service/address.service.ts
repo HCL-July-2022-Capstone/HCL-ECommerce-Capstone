@@ -21,20 +21,10 @@ export class AddressService {
 
   getAddresses(): Observable<AddressModel[]> {
     return this.http.get<AddressModel[]>(
-    
-    //////////////////////////////////////////////////NOT SURE WHICH OF THESE TO GO WITH
-    
-//////////// Stripe
-    //   `${this.baseUrl}/address/getAddresses`
-    // ); 
-/*=================*/
+
       `${this.baseUrl}/cart/getAddresses`
     );
-//////////// main
-///////////////////////////////////////////////////////////
-
-
-  }
+}
 
   addAddress(addressModel: AddressModel){
     this.http.post<AddressModel>(`${this.baseUrl}/address/addAddress`, addressModel).subscribe((response) => console.log(response))
@@ -56,7 +46,5 @@ export class AddressService {
   deleteAddress(addressModel: AddressModel){
     this.http.post<AddressModel>(`${this.baseUrl}/address/delete`, addressModel).subscribe((response) => console.log(response));
   }
-
-
 
 }
