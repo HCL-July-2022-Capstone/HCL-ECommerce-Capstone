@@ -22,11 +22,11 @@
   border: transparent;
 }
 
-#stripe @media (max-width: 767px) {
-  .card {
-    margin: 3vh auto;
-  }
-}
+/*#stripe @media (max-width: 767px) {*/
+/*  .card {*/
+/*    margin: 3vh auto;*/
+/*  }*/
+/*}*/
 
 #stripe .cart {
   background-color: #fff;
@@ -35,13 +35,13 @@
   border-top-left-radius: 1rem;
 }
 
-#stripe @media (max-width: 767px) {
-  .cart {
-    padding: 4vh;
-    border-bottom-left-radius: unset;
-    border-top-right-radius: 1rem;
-  }
-}
+/*#stripe @media (max-width: 767px) {*/
+/*  .cart {*/
+/*    padding: 4vh;*/
+/*    border-bottom-left-radius: unset;*/
+/*    border-top-right-radius: 1rem;*/
+/*  }*/
+/*}*/
 
 .summary {
   background-color: #ddd;
@@ -51,12 +51,12 @@
   color: rgb(65, 65, 65);
 }
 
-@media (max-width: 767px) {
-  .summary {
-    border-top-right-radius: unset;
-    border-bottom-left-radius: 1rem;
-  }
-}
+/*@media (max-width: 767px) {*/
+/*  .summary {*/
+/*    border-top-right-radius: unset;*/
+/*    border-bottom-left-radius: 1rem;*/
+/*  }*/
+/*}*/
 
 .summary .col-2 {
   padding: 0;
@@ -190,6 +190,7 @@ select {
 
 .title{
     margin-bottom: 5vh;
+
 }
 .card{
     /*margin: auto;*/
@@ -210,17 +211,19 @@ select {
     border-bottom-left-radius: 1rem;
     border-top-left-radius: 1rem;
 }
-@media(max-width:767px){
-    .cart{
-        padding: 4vh;
-        border-bottom-left-radius: unset;
-        border-top-right-radius: 1rem;
-    }
-}
+/*@media(max-width:767px){*/
+/*    .cart{*/
+/*        padding: 4vh;*/
+/*        border-bottom-left-radius: unset;*/
+/*        border-top-right-radius: 1rem;*/
+/*    }*/
+/*}*/
 
 #cart .card-body {
-  flex: 1 1 auto;
+  /*flex: 1 1 auto;*/
   /*padding: 1.5rem;*/
+  /*height: 189px;*/
+  max-width: 867px!important;
 }
 /*#cart *, :after, :before {*/
 /*  box-sizing: border-box;*/
@@ -248,9 +251,13 @@ select {
   --mdb-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(var(--mdb-gutter-y)*-1);
-  margin-right: calc(var(--mdb-gutter-x)*-0.5);
-  margin-left: calc(var(--mdb-gutter-x)*-0.5);
+  /*margin-top: calc(var(--mdb-gutter-y)*-1);*/
+  /*margin-right: calc(var(--mdb-gutter-x)*-0.5);*/
+  /*margin-left: calc(var(--mdb-gutter-x)*-0.5);*/
+  /*margin-top: 0.5rem;*/
+  margin-right: 1rem;
+  margin-left: 1rem;
+;
 }
 
 .section-title .line {
