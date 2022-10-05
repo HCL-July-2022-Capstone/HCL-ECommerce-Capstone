@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { PaymentInfo } from '../../common/payment-info';
-import { ProductServiceService } from '../../service/product-service.service';
 import { CheckoutService } from '../../service/checkout.service';
 import { CartService } from '../../service/cart.service';
 import { CartModel } from '../../model/cart.model';
@@ -69,8 +68,7 @@ export class StripePaymentComponent implements OnInit {
         } else if (event.error) {
           this.displayError.textContent = event.error.message;
         }
-      }
-    );
+    });
   }
 
   get creditCardType() {

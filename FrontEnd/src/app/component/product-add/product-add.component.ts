@@ -71,9 +71,5 @@ export class ProductAddComponent implements OnInit {
 
   myfunc() {
     location.replace('http://localhost:4200/getAllProducts');
-
-    this.snackbar.open('Product has been added to cart!', '', {
-      duration: 1500,
-    });
   }
 }

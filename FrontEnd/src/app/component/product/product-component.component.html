@@ -29,7 +29,6 @@
           <td><img alt="image" src="{{ productModel.image }}"/></td>
           <td>
             <div *ngIf="productModel">
-              <a href="http://localhost:4200/getAllProducts">
                 <button
                   (click)="deleteProductById(productModel)"
                   class="delete"
@@ -38,7 +37,7 @@
                 >
                   Delete
                 </button>
-              </a>
+
             </div>
 
           </td>

@@ -35,9 +35,6 @@ public class ProductController
 	@Autowired
 	private ProductService service;
 
-	// @Autowired
-	// private CategoryRepository catRepo;
-
 	@GetMapping("/getAllProducts")
 	public List<Product> listallproducts()
 	{
