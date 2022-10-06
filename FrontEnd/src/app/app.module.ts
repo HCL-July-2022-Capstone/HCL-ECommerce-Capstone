@@ -34,6 +34,7 @@ import {AddressListComponent} from './component/address/address-list.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {StripePaymentComponent} from './component/stripe-payment/stripe-payment.component';
+import {NgxScrollTopModule} from "ngx-scrolltop";
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-32668171.okta.com/oauth2/default',
@@ -79,7 +80,8 @@ const oktaAuth = new OktaAuth({
       {path: 'product/:ProductModel', component: ProductComponentComponent},
       {path: 'checkout', component: CheckoutComponent},
       {path: 'addAddress', component: AddressAddComponent}
-    ])
+    ]),
+    NgxScrollTopModule
   ],
 
   providers: [

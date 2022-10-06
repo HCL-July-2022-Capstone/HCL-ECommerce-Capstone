@@ -3,6 +3,7 @@ import {ProductServiceService} from 'src/app/service/product-service.service';
 import {CartModel} from "../../model/cart.model";
 import {CartService} from "../../service/cart.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ProductModel} from "../../model/product-model.model";
 
 @Component({
   selector: 'app-checkout',
@@ -12,6 +13,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class CheckoutComponent implements OnInit {
 
   localCart: CartModel[] = [];
+  productModel!: ProductModel;
 
   toggleNewAddress: Boolean = false;
 
@@ -27,7 +29,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   incQTY(cart: CartModel) {
-    // increase quantity in cart by adding
+    // increase quantity in ca
     this.cartService.addToCart(cart);
   }
 

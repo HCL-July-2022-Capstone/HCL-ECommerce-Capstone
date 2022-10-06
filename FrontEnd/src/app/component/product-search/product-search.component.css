@@ -61,9 +61,7 @@ ul.search-result {
   height: 50px;
   line-height: 50px;
   padding: 0 20px;
-  /*margin-top: 40px;*/
   display: inline-block;
-  /*font-weight: 500;*/
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -97,7 +95,9 @@ h6 {
 }
 
 .container {
+  margin-top: 80px!important;
   justify-content: center;
+  display: -webkit-inline-flex;
 }
 
 h2 {
@@ -118,7 +118,7 @@ h6 {
   display: flex;
   flex-wrap: wrap;
   margin-left: 50px;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .prod-container h5,
@@ -148,7 +148,7 @@ h6 {
 }
 
 .pro {
-  margin-right: 50px;
+  margin-right: 68px;
   padding: 30px;
   text-align: center;
   margin-top: 100px;
@@ -173,7 +173,6 @@ h6 {
 }
 
 .pro img {
-  /*height: auto;*/
   width: 100%;
   padding: 0;
 }

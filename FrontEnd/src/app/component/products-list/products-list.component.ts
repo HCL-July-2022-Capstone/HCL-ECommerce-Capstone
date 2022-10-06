@@ -46,6 +46,9 @@ export class ProductsListComponent implements OnInit {
     const cart = new CartModel(product);
     this.cartService.addToCart(cart);
 
+    this.productService.addToCart(product.productId, product);
+    console.log(product.productId);
+
     this.snackbar.open(
       'Product has been added to cart!', '',
       {
