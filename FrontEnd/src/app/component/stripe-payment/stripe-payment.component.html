@@ -5,7 +5,6 @@
 <app-address-add></app-address-add>
 <div id="stripe" class="container flex">
   <form [formGroup]="checkoutFormGroup" (ngSubmit)="checkout()">
-
     <!-- Stripe Elements card section -->
     <div formGroupName="creditCardDetails" class="col-md-5 col-lg-5">
       <hr class="my-4" />
@@ -16,7 +15,6 @@
         id="card-errors"
         class="displayError.textContent!== '': 'alert alert-danger mt-1'"
       ></div>
-
 
       <!-- order details -->
       <div class="form-area">
@@ -31,7 +29,6 @@
       <!-- Checkout Button -->
       <div class="text-center">
         <button
-
           class="w-100 btn btn-primary btn-lg"
           type="submit"
           (click)="checkout()"

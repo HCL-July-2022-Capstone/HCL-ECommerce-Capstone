@@ -83,14 +83,6 @@ export class ProductServiceService {
       });
   }
 
-  //delete product from backend
-  removeById(id: number): void {
-    this.http.delete<CartModel>(`${this.baseUrl}/cart/remove/${id}`)
-      .subscribe((response) => {
-        console.log(response);
-      });
-  }
-
   // getItems() {
   //   return this.http.get(`${this.baseUrl}/cart/view`);
   // }

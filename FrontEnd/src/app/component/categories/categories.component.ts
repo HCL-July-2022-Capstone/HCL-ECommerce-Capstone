@@ -13,7 +13,6 @@ import {CartModel} from "../../model/cart.model";
 })
 export class CategoriesComponent implements OnInit {
 
-  // productModel!: ProductModel;
   data: any;
   items: any[] = [];
 
@@ -43,10 +42,12 @@ export class CategoriesComponent implements OnInit {
       });
   }
 
+
   addToCart(product: ProductModel) {
 
     this.productService.addToCart(product.productId, product);
     console.log(product.productId);
+
 
     const theCartItem = new CartModel(product);
     this.cartService.addToCart(theCartItem);

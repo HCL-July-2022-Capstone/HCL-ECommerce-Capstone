@@ -47,7 +47,7 @@ export class ProductComponentComponent implements OnInit {
     this.productService.deleteById(product.productId);
 
     this.snackbar.open(
-      'Product has been deleted!', '',
+      'Product has been deleted!', 'http://localhost:4200/getAllProducts',
       {
         duration: 1500
       });
@@ -87,5 +87,8 @@ export class ProductComponentComponent implements OnInit {
       });
   }
 
+  myfunc() {
+    location.replace('http://localhost:4200/getAllProducts');
+  }
 }
 

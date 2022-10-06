@@ -11,8 +11,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./product-search.component.css']
 })
 export class ProductSearchComponent implements OnInit {
-  //private baseUrl = 'http://localhost:8080';
-  //productModel$!: Observable<ProductModel[]>;
+
   products?: ProductModel[];
   currentProduct: ProductModel = {
     productId: 0,

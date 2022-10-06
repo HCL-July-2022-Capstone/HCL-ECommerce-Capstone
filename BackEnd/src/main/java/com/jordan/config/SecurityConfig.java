@@ -1,5 +1,8 @@
 package com.jordan.config;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -52,18 +55,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //	}
 	
 	protected void configure(HttpSecurity http) throws Exception{
-    http.csrf().disable()
+//		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN")
+//		.antMatchers("/user").hasAnyRole("ADMIN", "USER")
+//		.and().formLogin();
+		http.csrf().disable()
+		.headers()
+        .frameOptions()
+        .disable().and()
         .oauth2ResourceServer().jwt();
 		Okta.configureResourceServer401ResponseBody(http);
-    }
+}
 	
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }
-    
+	
+//	disable cors policy
+	
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+	    CorsConfiguration configuration = new CorsConfiguration();
+	    configuration.setAllowedOrigins(Collections.singletonList("*"));
+	    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
+	    configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
+	    configuration.setAllowCredentials(true);
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", configuration);
+	    return source;
+	}
+	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -73,5 +90,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new EmailService();
 	}
 
-	
 }
