@@ -82,7 +82,6 @@ public class CartService
 		order.setTotalPrice(cart.getTotalPrice());
 		order.setOrderStatus("Order Placed");
 		
-		// TODO let the user select their address on the front end
 		// on the frontend, user should have input addresses on initial checkout page
 		// before hitting button
 		// and it should be saved in the addressService (and in the repository)

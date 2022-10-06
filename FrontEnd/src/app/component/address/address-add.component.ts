@@ -19,15 +19,6 @@ export class AddressAddComponent implements OnInit {
     country: '',
     username: '',
   };
-  newBillingAddress: AddressModel = {
-    id:0,
-    street: '',
-    city: '',
-    state: '',
-    zipcode: '',
-    country: '',
-    username: '',
-  }
 
   added = false;
 
@@ -50,44 +41,6 @@ export class AddressAddComponent implements OnInit {
     this.addressService.addAddress(data);
   }
 
-  addBillingAddress(): void {
-    const data = {
-      id: this.newBillingAddress.id,
-      street: this.newBillingAddress.street,
-      city: this.newBillingAddress.city,
-      state: this.newBillingAddress.state,
-      zipcode: this.newBillingAddress.zipcode,
-      country: this.newBillingAddress.country,
-      username: this.newBillingAddress.username,
-    };
-
-    console.log(data);
-    this.addressService.setBillingAddress(data);
-  }
-
-  addShippingAddress(): void {
-    const data = {
-      id: this.newShippingAddress.id,
-      street: this.newShippingAddress.street,
-      city: this.newShippingAddress.city,
-      state: this.newShippingAddress.state,
-      zipcode: this.newShippingAddress.zipcode,
-      country: this.newShippingAddress.country,
-      username: this.newShippingAddress.username,
-    };
-
-    console.log(data);
-    this.addressService.setShippingAddress(data);
-  }
-
-  addAddresses(): void {
-    this.addShippingAddress();
-    this.addBillingAddress();
-  }
-
-  sameShippingAndBilling(): void {
-    this.newBillingAddress = this.newShippingAddress;
-  }
 
 }
 

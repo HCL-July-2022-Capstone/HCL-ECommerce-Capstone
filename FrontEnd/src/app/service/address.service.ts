@@ -22,7 +22,7 @@ export class AddressService {
   getAddresses(): Observable<AddressModel[]> {
     return this.http.get<AddressModel[]>(
 
-      `${this.baseUrl}/cart/getAddresses`
+      `${this.baseUrl}/address/getAddresses`
     );
 }
 
