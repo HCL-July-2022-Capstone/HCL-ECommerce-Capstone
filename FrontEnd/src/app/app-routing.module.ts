@@ -15,6 +15,7 @@ import {HomepageComponent} from './component/homepage/homepage.component';
 
 import {CheckoutComponent} from './component/checkout/checkout.component';
 import {StripePaymentComponent} from "./component/stripe-payment/stripe-payment.component";
+import {EditProfileComponent} from "./component/edit-profile/edit-profile.component";
 
 const routes: Routes = [
   {
@@ -75,6 +76,8 @@ const routes: Routes = [
     pathMatch: 'full',
     component: HomepageComponent,
   }, //homepage
+  { path: 'editprofile',
+    component: EditProfileComponent},
   {
     path: '**',
     component: PagenotfoundComponent, //Wild Card Route for 404 request

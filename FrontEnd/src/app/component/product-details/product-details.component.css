@@ -75,23 +75,6 @@ caption {
   background-size: 200%;
 }
 
-/*input {*/
-/*  width: 20%;*/
-/*  padding: 3px 5px;*/
-/*  margin-bottom: 10px;*/
-/*  border: 1px solid whitesmoke;*/
-/*  cursor: pointer;*/
-/*  box-shadow: 1px 1px 6px 6px lightgray;*/
-/*  margin-top: 50px;*/
-/*  !*margin-left: 20px;*!*/
-/*  font-size: small;*/
-/*  color: #212529;*/
-/*}*/
-
-/*input:focus {*/
-/*  outline: none;*/
-/*}*/
-
 img {
   justify-content: center;
 }

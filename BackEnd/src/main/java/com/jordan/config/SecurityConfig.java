@@ -52,11 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //	}
 	
 	protected void configure(HttpSecurity http) throws Exception{
-http.cors().and()
-        .csrf().disable()
+    http.csrf().disable()
         .oauth2ResourceServer().jwt();
 		Okta.configureResourceServer401ResponseBody(http);
-}
+    }
 	
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
@@ -64,6 +63,7 @@ http.cors().and()
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
     }
+    
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
