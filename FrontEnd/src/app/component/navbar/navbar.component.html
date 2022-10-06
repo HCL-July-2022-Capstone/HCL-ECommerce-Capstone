@@ -1,19 +1,17 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
-
 <!-- navigation bar -->
-<nav class="navbar sticky-top navbar-expand-lg">
+<nav class="navbar fixed-top navbar-expand-lg">
+
   <button aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation"
           class="navbar-toggler"
           data-bs-target="#navbarSupportedContent"
           data-bs-toggle="collapse" type="button">
-
-
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse"
+
+  <div class="collapse sticky-top navbar-collapse"
        id="navbarSupportedContent">
     <!--    LOGO -->
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -76,11 +74,11 @@
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="category/Accessory"
         >Accessories</a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="Search"
-        >Search Products</a
-        >
+        >Search Products</a>
       </li>
 
       <li class="nav-item">
@@ -88,9 +86,7 @@
           *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
           routerLink="/editprofile"
           class="nav-link px-2 active page-scroll"
-        >Edit Profile</a
-        >
-
+        >Edit Profile</a>
       </li>
     </ul>
 
@@ -120,7 +116,7 @@
 
       <div class="cart">
         <h2><a routerLink="/checkout">
-          <i class="fas fa-cart-shopping"></i>
+          <em class="fas fa-cart-shopping"></em>
         </a></h2>
       </div>
     </div>
