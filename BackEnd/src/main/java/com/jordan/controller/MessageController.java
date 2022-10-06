@@ -32,14 +32,6 @@ public class MessageController {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-//    @GetMapping("hello")
-//    public void hello() {
-//        System.out.println("Sending message...");
-//        rabbitTemplate.convertAndSend(topicExchangeName,
-//                "foo.bar.baz",
-//                "Hello from RabbitMQ!");
-//    }
-
 
     @GetMapping("/messages")
     public void inventory() {
