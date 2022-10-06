@@ -26,7 +26,6 @@ export class ProductDetailsComponent implements OnInit {
       this.productDetails();
     });
 
-
     this.productDetails();
   }
 
@@ -36,22 +35,13 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe((product) => this.productModel = product);
   }
 
-  // addToCart
-  // addToCart(product: ProductModel) {
-  //
-  //   this.productService.addToCart(product.productId, product);
-  //
-  //   this.snackbar.open(
-  //     'Product has been added to cart!', '',
-  //     {
-  //       duration: 1500
-  //     });
-  // }
-
   addToCart() {
 
     const cart = new CartModel(this.productModel);
     this.cartService.addToCart(cart);
+
+    const p = new ProductModel(this.productModel);
+    this.productService.addToCart(p.productId, p);
 
     this.snackbar.open(
       'Product has been added to cart!', '',
