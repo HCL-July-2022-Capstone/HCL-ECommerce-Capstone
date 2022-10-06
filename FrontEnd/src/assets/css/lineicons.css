@@ -17,7 +17,7 @@ Author: lineicons.com
 -------------------------*/
 .lni {
   display: inline-block;
-  font: normal normal normal 1em/1 'LineIcons';
+  font: normal normal normal 1em/1 'LineIcons', sans-serif;
   color: inherit;
   flex-shrink: 0;
   speak: none;

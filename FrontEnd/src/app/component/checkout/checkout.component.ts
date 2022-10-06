@@ -14,9 +14,6 @@ export class CheckoutComponent implements OnInit {
 
   localCart: CartModel[] = [];
   productModel!: ProductModel;
-
-  toggleNewAddress: Boolean = false;
-
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
 

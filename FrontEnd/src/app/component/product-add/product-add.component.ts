@@ -33,18 +33,17 @@ export class ProductAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    var id = this.route.snapshot.params['id'];
+    const id = this.route.snapshot.params['id'];
 
     if (id != null) {
       this.productService
         .getById(id)
         .subscribe(
-          (response) => (
-            (this.newProduct = response),
-            console.log(response),
-            (this.update = true)
-          )
-        );
+          (response) => {
+            this.newProduct = response;
+              console.log(response);
+              this.update = true;
+          });
     }
   }
 

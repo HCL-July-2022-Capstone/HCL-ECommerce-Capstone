@@ -21,7 +21,7 @@ export class ProductSearchComponent implements OnInit {
     quantityOnHand: 0,
     categoryName: '',
     image: ''
-  };
+  }
   currentIndex = -1;
   searchTerms = "";
 

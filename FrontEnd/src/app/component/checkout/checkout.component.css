@@ -159,11 +159,7 @@ select {
   color: white;
 }
 
-#stripe .a {
-  color: black;
-}
-
-#stripe .a:hover {
+#stripe .a, .a:hover {
   color: black;
   text-decoration: none;
 }
@@ -219,11 +215,6 @@ select {
 /*    }*/
 /*}*/
 
-#cart .card-body {
-  flex: 1 1 auto;
-  max-width: 867px!important;
-}
-
 #cart a, a:hover {
   text-decoration: none;
   color: inherit;
@@ -254,6 +245,8 @@ select {
   border: 1px solid lightgray;
   cursor: pointer;
   box-shadow: 1px 2px 3px 4px lightgray;
+  flex: 1 1 auto;
+  max-width: 867px!important;
 }
 
 

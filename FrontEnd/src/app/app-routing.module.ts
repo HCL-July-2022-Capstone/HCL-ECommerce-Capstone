@@ -14,7 +14,6 @@ import {CategoriesComponent} from './component/categories/categories.component';
 import {HomepageComponent} from './component/homepage/homepage.component';
 
 import {CheckoutComponent} from './component/checkout/checkout.component';
-import {StripePaymentComponent} from "./component/stripe-payment/stripe-payment.component";
 import {EditProfileComponent} from "./component/edit-profile/edit-profile.component";
 
 const routes: Routes = [
