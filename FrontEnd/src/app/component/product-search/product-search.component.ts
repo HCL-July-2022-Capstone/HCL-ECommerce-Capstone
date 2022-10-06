@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductModel} from "../../model/product-model.model";
 import {ProductServiceService} from "../../service/product-service.service";
+import {CartModel} from "../../model/cart.model";
+import {CartService} from "../../service/cart.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-search',
@@ -22,8 +25,9 @@ export class ProductSearchComponent implements OnInit {
   currentIndex = -1;
   searchTerms = "";
 
-  constructor(private productService: ProductServiceService) { }
-
+  constructor(private productService: ProductServiceService,
+              private cartService: CartService,
+              private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.listAllProducts();
@@ -87,6 +91,21 @@ export class ProductSearchComponent implements OnInit {
   setActiveProduct(product: ProductModel, index: number): void {
     this.currentProduct = product;
     this.currentIndex = index;
+  }
+
+  addToCart(product: ProductModel) {
+
+    const cart = new CartModel(product);
+    this.cartService.addToCart(cart);
+
+    this.productService.addToCart(product.productId, product);
+    console.log(product.productId);
+
+    this.snackbar.open(
+      'Product has been added to cart!', '',
+      {
+        duration: 1500
+      })
   }
 
 }

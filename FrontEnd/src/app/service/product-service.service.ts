@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ProductModel} from '../model/product-model.model';
+import {CartModel} from "../model/cart.model";
 
 @Injectable({
   providedIn: 'root',
@@ -82,9 +83,9 @@ export class ProductServiceService {
       });
   }
 
-  getItems() {
-    return this.http.get(`${this.baseUrl}/cart/view`);
-  }
+  // getItems() {
+  //   return this.http.get(`${this.baseUrl}/cart/view`);
+  // }
 
   increaseQty(payload: { productId: number; quantityOnHand: number; }) {
     return this.http.post(`${this.baseUrl}/cart`, payload);

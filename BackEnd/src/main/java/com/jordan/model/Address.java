@@ -13,16 +13,14 @@ import org.springframework.security.oauth2.core.oidc.AddressStandardClaim;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Table(name = "addresses")
 public class Address
 {

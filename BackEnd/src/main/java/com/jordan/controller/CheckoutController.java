@@ -17,6 +17,7 @@ public class CheckoutController
 {
 	@Autowired
 	private CheckoutService checkoutService;
+	
 
 	@PostMapping("/api/payment-intent")
 	public ResponseEntity<String> createPaymentIntent(@RequestBody PaymentInfo payInfo) throws StripeException
@@ -24,6 +25,7 @@ public class CheckoutController
 		PaymentIntent paymentIntent = checkoutService.createPaymentIntent(payInfo);
 
 		String paymentStr = paymentIntent.toJson();
+	
 
 		return new ResponseEntity<>(paymentStr, HttpStatus.OK);
 	}

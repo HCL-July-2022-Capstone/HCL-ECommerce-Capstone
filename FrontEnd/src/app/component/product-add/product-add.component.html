@@ -89,15 +89,16 @@
             ? 'w-100 btn btn-success btn-lg'
             : 'w-100 btn btn-primary btn-lg'
         }}"
-        routerLink="/getAllProducts"
         type="submit"
       >
         {{ update ? "Update Product" : "Add Product" }}
       </button>
       <button
         (click)="myfunc()"
-        class="w-100 btn btn-success btn-lg"
-        type="submit">
+        class='w-100 btn btn-primary btn-lg'
+        type="submit"
+      >
+
         View Products List
       </button>
     </form>

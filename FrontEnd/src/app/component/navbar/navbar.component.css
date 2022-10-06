@@ -116,7 +116,7 @@ a:hover {
 .navbar {
   padding: 0 !important;
   margin: 0 !important;
-  min-width: 100% !important;
+  width: 100% !important;
 }
 
 .navbar-toggler {
@@ -136,6 +136,6 @@ a:hover {
   background: linear-gradient(to right, #33c8c1 0%, #119bd2 50%, #33c8c1 100%);
 }
 
-.navbar-expand-lg:focus {
-  outline: none;
-}
+/*.navbar-expand-lg:focus {*/
+/*  outline: none;*/
+/*}*/

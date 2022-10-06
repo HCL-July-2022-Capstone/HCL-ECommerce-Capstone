@@ -2,16 +2,16 @@
 
 <!-- navigation bar -->
 <nav class="navbar sticky-top navbar-expand-lg">
+
   <button aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation"
           class="navbar-toggler"
           data-bs-target="#navbarSupportedContent"
           data-bs-toggle="collapse" type="button">
-
-
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse"
+
+  <div class="collapse sticky-top navbar-collapse"
        id="navbarSupportedContent">
     <!--    LOGO -->
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -23,14 +23,14 @@
       </a>
     </div>
 
-    <ul class="navbar-nav ml-auto" id="nav">
+    <ul class="sticky-top navbar-nav ml-auto" id="nav">
       <br/>
       <li class="nav-item">
-        <a aria-current="page" class="nav-link px-2 active" routerLink="/">
+        <a aria-current="page" class="nav-link px-2 active page-scroll" routerLink="/">
           Home</a>
       </li>
 
-      <li>
+      <li class="nav-item">
         <a
           *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
           class="nav-link px-2 active page-scroll"
@@ -74,11 +74,11 @@
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="category/Accessory"
         >Accessories</a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link px-2 active page-scroll" routerLink="Search"
-        >Search Products</a
-        >
+        >Search Products</a>
       </li>
 
       <li class="nav-item">
@@ -86,9 +86,7 @@
           *oktaHasAnyGroup="['HCL ECommerce', 'admins']"
           routerLink="/editprofile"
           class="nav-link px-2 active page-scroll"
-        >Edit Profile</a
-        >
-
+        >Edit Profile</a>
       </li>
     </ul>
 

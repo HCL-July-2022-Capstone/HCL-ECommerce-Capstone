@@ -35,18 +35,6 @@ public class ProductService
 		repo.deleteById(id);
 	}
 
-	// public List<ProductCategory> getAllCategories() {
-	// return CatRepo.findAll();
-	// }
-
-	// public Optional<ProductCategory> getCategoryById(int id) {
-	// return CatRepo.findById(id);
-	// }
-
-	// public void deleteCategory(int id) {
-	// CatRepo.deleteById(id);
-	// }
-
 	public void save(Product product)
 	{
 		repo.save(product);

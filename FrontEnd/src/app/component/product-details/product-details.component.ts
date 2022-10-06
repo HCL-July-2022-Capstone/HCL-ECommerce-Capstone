@@ -26,7 +26,6 @@ export class ProductDetailsComponent implements OnInit {
       this.productDetails();
     });
 
-
     this.productDetails();
   }
 
@@ -38,8 +37,13 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart() {
 
+    // add to local
     const cart = new CartModel(this.productModel);
     this.cartService.addToCart(cart);
+
+    // add to backend
+    const p = new ProductModel(this.productModel);
+    this.productService.addToCart(p.productId, p);
 
     this.snackbar.open(
       'Product has been added to cart!', '',

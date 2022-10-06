@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jordan.model.Product;
-// import com.jordan.model.ProductCategory;
-// import com.jordan.repository.CategoryRepository;
 import com.jordan.repository.ProductRepository;
 import com.jordan.service.ProductService;
 
@@ -34,10 +32,16 @@ public class ProductController
 
 	@Autowired
 	private ProductService service;
+	
+	@Autowired
+	private MessageController msgCtrl;
+
 
 	@GetMapping("/getAllProducts")
 	public List<Product> listallproducts()
 	{
+		msgCtrl.inventory();
+		
 		return service.getAllProducts();
 	}
 

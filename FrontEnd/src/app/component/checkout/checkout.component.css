@@ -192,8 +192,10 @@ select {
     margin-bottom: 5vh;
 
 }
+
 .card {
     border: transparent;
+  max-width: 919px!important;
 }
 
 /*@media(max-width:767px){*/
@@ -218,6 +220,7 @@ select {
 /*}*/
 
 #cart .card-body {
+  flex: 1 1 auto;
   max-width: 867px!important;
 }
 
@@ -227,8 +230,8 @@ select {
 }
 
 #cart .row {
-  --mdb-gutter-x: 1.5rem;
-  --mdb-gutter-y: 0;
+  /*--mdb-gutter-x: 1.5rem;*/
+  /*--mdb-gutter-y: 0;*/
   display: flex;
   flex-wrap: wrap;
   margin-right: 1rem;
@@ -252,5 +255,6 @@ select {
   cursor: pointer;
   box-shadow: 1px 2px 3px 4px lightgray;
 }
+
 
 

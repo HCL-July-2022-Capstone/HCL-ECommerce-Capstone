@@ -21,7 +21,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-//import com.jordan.model.Address;
 import com.jordan.model.Cart;
 import com.jordan.model.Product;
 import com.jordan.repository.CartRepository;

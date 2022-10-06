@@ -237,6 +237,12 @@ p {
 /*  }*/
 /*}*/
 
+/*@media only screen and (min-width: 576px) and (max-width: 767px) {*/
+/*  .header-hero-content .header-title {*/
+/*    font-size: 30px;*/
+/*  }*/
+/*}*/
+
 .header-hero-content .text {
   color: #fff;
   margin-top: 30px;

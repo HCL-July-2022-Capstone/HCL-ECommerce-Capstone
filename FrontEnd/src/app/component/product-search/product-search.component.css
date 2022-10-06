@@ -95,7 +95,9 @@ h6 {
 }
 
 .container {
+  margin-top: 80px!important;
   justify-content: center;
+  display: -webkit-inline-flex;
 }
 
 h2 {
@@ -116,7 +118,7 @@ h6 {
   display: flex;
   flex-wrap: wrap;
   margin-left: 50px;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .prod-container h5,
@@ -146,7 +148,7 @@ h6 {
 }
 
 .pro {
-  margin-right: 50px;
+  margin-right: 68px;
   padding: 30px;
   text-align: center;
   margin-top: 100px;

@@ -17,7 +17,6 @@ import javax.persistence.Table;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +25,6 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 @Entity
 @Table(name = "orders")
 @Getter

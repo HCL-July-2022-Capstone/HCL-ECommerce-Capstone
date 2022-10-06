@@ -42,9 +42,14 @@ export class CategoriesComponent implements OnInit {
       });
   }
 
-  addToCart(theProduct: ProductModel) {
 
-    const theCartItem = new CartModel(theProduct);
+  addToCart(product: ProductModel) {
+
+    this.productService.addToCart(product.productId, product);
+    console.log(product.productId);
+
+
+    const theCartItem = new CartModel(product);
     this.cartService.addToCart(theCartItem);
 
     this.snackbar.open(
