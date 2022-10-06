@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
-import { AuthState, AuthStateManager, getUserInfo, validateClaims, OktaAuth } from '@okta/okta-auth-js';
+import { AuthState, OktaAuth } from '@okta/okta-auth-js';
 import { Observable, filter, map } from 'rxjs';
 
 
@@ -68,15 +68,15 @@ export class EditProfileComponent implements OnInit {
   //method to save the information from the form and then get passed on to the okta side
   async save(){
 
-    this.firstName = this.firstName
-    this.middleName = this.middleName
-    this.lastName = this.lastName
-    this.email = this.email
-    this.phoneNum = this.phoneNum
-    this.street = this.street
-    this.city = this.city
-    this.state = this.state
-    this.zip = this.zip
+    // this.firstName = this.firstName
+    // this.middleName = this.middleName
+    // this.lastName = this.lastName
+    // this.email = this.email
+    // this.phoneNum = this.phoneNum
+    // this.street = this.street
+    // this.city = this.city
+    // this.state = this.state
+    // this.zip = this.zip
 
 
     console.log(this.email)

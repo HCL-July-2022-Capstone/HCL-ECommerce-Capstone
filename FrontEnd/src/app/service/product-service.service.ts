@@ -4,7 +4,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ProductModel} from '../model/product-model.model';
-import {CartModel} from "../model/cart.model";
 
 @Injectable({
   providedIn: 'root',
