@@ -33,10 +33,16 @@ public class CloudinaryService
 
 	private File convertMultiPartToFile(MultipartFile file) throws IOException
 	{
-		File convFile = new File(file.getOriginalFilename());
+		try{
+			File convFile = new File(file.getOriginalFilename());
+		
 		FileOutputStream fos = new FileOutputStream(convFile);
 		fos.write(file.getBytes());
 		fos.close();
 		return convFile;
+		} catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 }

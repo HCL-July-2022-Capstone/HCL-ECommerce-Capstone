@@ -31,7 +31,6 @@ import lombok.NoArgsConstructor;
 public class Cart
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "cart_id")
 	private int id;
 
